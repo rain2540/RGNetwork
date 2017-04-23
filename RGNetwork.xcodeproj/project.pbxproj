@@ -14,7 +14,7 @@
 		B7E684181EAA03CC004E9667 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7E684171EAA03CC004E9667 /* Assets.xcassets */; };
 		B7E6841B1EAA03CC004E9667 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7E684191EAA03CC004E9667 /* LaunchScreen.storyboard */; };
 		B7E684271EAA08C7004E9667 /* RGNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E684231EAA08C7004E9667 /* RGNetwork.swift */; };
-		B7E684281EAA08C7004E9667 /* TKAlertCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E684261EAA08C7004E9667 /* TKAlertCenter.m */; };
+		B7E9DDEE1EAA197C0061868C /* RGToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E9DDED1EAA197C0061868C /* RGToast.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,9 +29,7 @@
 		B7E6841A1EAA03CC004E9667 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B7E6841C1EAA03CC004E9667 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B7E684231EAA08C7004E9667 /* RGNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGNetwork.swift; sourceTree = "<group>"; };
-		B7E684251EAA08C7004E9667 /* TKAlertCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAlertCenter.h; sourceTree = "<group>"; };
-		B7E684261EAA08C7004E9667 /* TKAlertCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAlertCenter.m; sourceTree = "<group>"; };
-		B7E6842A1EAA0984004E9667 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		B7E9DDED1EAA197C0061868C /* RGToast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGToast.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,18 +95,9 @@
 			isa = PBXGroup;
 			children = (
 				B7E684231EAA08C7004E9667 /* RGNetwork.swift */,
-				B7E684241EAA08C7004E9667 /* TKAlertCenter */,
+				B7E9DDED1EAA197C0061868C /* RGToast.swift */,
 			);
 			path = RGNetwork;
-			sourceTree = "<group>";
-		};
-		B7E684241EAA08C7004E9667 /* TKAlertCenter */ = {
-			isa = PBXGroup;
-			children = (
-				B7E684251EAA08C7004E9667 /* TKAlertCenter.h */,
-				B7E684261EAA08C7004E9667 /* TKAlertCenter.m */,
-			);
-			path = TKAlertCenter;
 			sourceTree = "<group>";
 		};
 		B7E684291EAA0944004E9667 /* Supporting Files */ = {
@@ -117,7 +106,6 @@
 				B7E684141EAA03CC004E9667 /* Main.storyboard */,
 				B7E684191EAA03CC004E9667 /* LaunchScreen.storyboard */,
 				B7E6841C1EAA03CC004E9667 /* Info.plist */,
-				B7E6842A1EAA0984004E9667 /* Bridging-Header.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -246,9 +234,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7E9DDEE1EAA197C0061868C /* RGToast.swift in Sources */,
 				B7E684131EAA03CC004E9667 /* ViewController.swift in Sources */,
 				B7E684111EAA03CC004E9667 /* AppDelegate.swift in Sources */,
-				B7E684281EAA08C7004E9667 /* TKAlertCenter.m in Sources */,
 				B7E684271EAA08C7004E9667 /* RGNetwork.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -375,10 +363,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 76U7MFBQ83;
 				INFOPLIST_FILE = RGNetwork/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.smartech.RGNetwork;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "RGNetwork/Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -390,10 +379,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 76U7MFBQ83;
 				INFOPLIST_FILE = RGNetwork/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.smartech.RGNetwork;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "RGNetwork/Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

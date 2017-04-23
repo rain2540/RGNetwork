@@ -126,7 +126,7 @@ struct RGNetwork {
     {
         let network = RGNetwork.shared
         if network.reachabilityManager?.networkReachabilityStatus == .notReachable {
-            TKAlertCenter.default().postAlert(withMessage: "当前无网络")
+            RGToast.shared.toast(message: "当前无网络")
         } else {
             if showProgress == true {
                 RGNetwork.showProgress()
@@ -180,7 +180,7 @@ struct RGNetwork {
     {
         let network = RGNetwork.shared
         if network.reachabilityManager?.networkReachabilityStatus == .notReachable {
-            TKAlertCenter.default().postAlert(withMessage: "当前无网络")
+            RGToast.shared.toast(message: "当前无网络")
         } else {
             if showProgress == true {
                 RGNetwork.showProgress()
@@ -198,7 +198,7 @@ struct RGNetwork {
                     } else {
                         fail(response.result.error, requestString)
                         RGNetwork.hideProgress()
-//                        TKAlertCenter.default().postAlert(withMessage: "网络访问失败")
+                        RGToast.shared.toast(message: "网络访问失败")
                     }
             }
         }
