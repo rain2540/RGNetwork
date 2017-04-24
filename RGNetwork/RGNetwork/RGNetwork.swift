@@ -24,16 +24,16 @@ struct RGNetwork {
         self.reachabilityManager?.listener = { status in
             switch status {
             case .unknown:
-                NSLog("============ 未知网络 ============")
+                print("============ 未知网络 ============")
 
             case .notReachable:
-                NSLog("============ 没有网络(断网) ============")
+                print("============ 没有网络(断网) ============")
 
             case .reachable(.wwan):
-                NSLog("============ 手机自带网络 ============")
+                print("============ 手机自带网络 ============")
 
             case .reachable(.ethernetOrWiFi):
-                NSLog("============ WIFI ============")
+                print("============ WIFI ============")
             }
         }
         self.reachabilityManager?.startListening()
@@ -138,7 +138,7 @@ struct RGNetwork {
             do {
                 request = try URLEncoding(destination: .httpBody).encode(request, with: parameters)
             } catch let error as NSError {
-                print("HNMNetwork delete request parameters encoding error: \n", error)
+                print("RGNetwork delete request parameters encoding error: \n", error)
             }
             let requestString = RGNetwork.requestURL(urlString, parameters: parameters)
             do {
@@ -151,7 +151,7 @@ struct RGNetwork {
                             .jsonObject(with: data,
                                         options: JSONSerialization.ReadingOptions.allowFragments) as! [String: Any]
                     guard let jsonString = String(data: data, encoding: String.Encoding.utf8) else {
-                        print("HNMNetwork delete request get JSON string failed.")
+                        print("RGNetwork delete request get JSON string failed.")
                         RGNetwork.hideProgress()
                         return
                     }
@@ -185,10 +185,11 @@ struct RGNetwork {
             if showProgress == true {
                 RGNetwork.showProgress()
             }
+
             let requestString = RGNetwork.requestURL(urlString, parameters: parameters)
             Alamofire.request(urlString, method: method, parameters: parameters)
                 .responseJSON { (response) in
-                    print("HNMNetwork \(method.rawValue) request debugDescription: \n" + response.debugDescription)
+                    print("RGNetwork \(method.rawValue) request debugDescription: \n", response.debugDescription)
                     let httpStatusCode = response.response?.statusCode
                     let data = response.data
                     let jsonString = String(data: data!, encoding: String.Encoding.utf8)
