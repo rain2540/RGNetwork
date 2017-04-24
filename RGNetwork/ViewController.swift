@@ -22,7 +22,20 @@ class ViewController: UIViewController {
     }
 
     @IBAction func toast(_ sender: UIButton) {
-        RGToast.shared.toast(message: "toast string")
+        let params = ["river"   :   "松花江流域",
+                      "key"     :   "8eb77a504db4a2b3511ed3c4d0964015"]
+
+        RGNetwork.get(
+            with: "http://web.juhe.cn:8080/environment/water/river",
+            parameters: params,
+            showProgress: true,
+            success: { (json, requestString, jsonString, httpStatusCode) in
+                print(jsonString)
+        },
+            fail: { (error, requestString) in
+                print("error: \n", error ?? "get nil failed.")
+                print("request string: \n", requestString)
+        })
     }
 
 }
