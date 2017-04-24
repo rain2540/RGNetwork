@@ -8,107 +8,6 @@
 
 import UIKit
 
-//  MARK: RGToastView
-class RGToastView: UIView {
-    private var messageRect: CGRect?
-    private var _image: UIImage?
-    private var _messageText: String?
-    fileprivate var image: UIImage? {
-        get {
-            return _image
-        }
-        set {
-            _image = newValue
-            adjust()
-        }
-    }
-    fileprivate var messageText: String? {
-        get {
-            return _messageText
-        }
-        set {
-            _messageText = newValue
-            adjust()
-        }
-    }
-    
-    fileprivate init() {
-        super.init(frame: CGRect(x: 0.0, y: 0.0, width: 100.0, height: 100.0))
-        self.messageRect = bounds.insetBy(dx: 10.0, dy: 10.0)
-        self.backgroundColor = UIColor.clear
-        self.messageText = ""
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func drawRoundRectangle(in rect: CGRect, radius: CGFloat) {
-        let context = UIGraphicsGetCurrentContext()
-        let rRect = CGRect(x: rect.origin.x, y: rect.origin.y, width: rect.width, height: rect.height)
-        let minX = rRect.minX, midX = rRect.midX, maxX = rRect.maxX
-        let minY = rRect.minY, midY = rRect.midY, maxY = rRect.maxY
-        context?.move(to: CGPoint(x: minX, y: midY))
-        context?.addArc(tangent1End: CGPoint(x: minX, y: minY),
-                        tangent2End: CGPoint(x: midX, y: minY),
-                        radius: radius)
-        context?.addArc(tangent1End: CGPoint(x: maxX, y: minY),
-                        tangent2End: CGPoint(x: maxX, y: midY),
-                        radius: radius)
-        context?.addArc(tangent1End: CGPoint(x: maxX, y: maxY),
-                        tangent2End: CGPoint(x: midX, y: maxY),
-                        radius: radius)
-        context?.addArc(tangent1End: CGPoint(x: minX, y: maxY),
-                        tangent2End: CGPoint(x: minX, y: midY),
-                        radius: radius)
-        context?.closePath()
-        context?.drawPath(using: .fill)
-    }
-    
-    override func draw(_ rect: CGRect) {
-        UIColor(white: 0.0, alpha: 0.8).set()
-        drawRoundRectangle(in: rect, radius: 10.0)
-        UIColor.white.set()
-        
-        let paragraphStyle = NSMutableParagraphStyle.default.mutableCopy()
-        (paragraphStyle as! NSMutableParagraphStyle).lineBreakMode = .byWordWrapping
-        (paragraphStyle as! NSMutableParagraphStyle).alignment = .center
-        let dict = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14.0),
-                    NSParagraphStyleAttributeName: paragraphStyle,
-                    NSForegroundColorAttributeName: UIColor.white]
-        (messageText! as NSString).draw(in: messageRect!, withAttributes: dict)
-        
-        if let image = image {
-            var r = CGRect.zero
-            r.origin.y = 15.0
-            r.origin.x = (rect.width - image.size.width) / 2.0
-            r.size = image.size
-            image.draw(in: r)
-        }
-    }
-    
-    //  MARK: Setter Methods
-    private func adjust() {
-        let s = messageText?.boundingRect(with: CGSize(width: 160.0, height: 200.0),
-                          options: [.usesLineFragmentOrigin],
-                          attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14.0)],
-                          context: nil).size
-        messageText?.size(attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14.0)])
-        var imageAdjustment: CGFloat = 0.0
-        if image != nil {
-            imageAdjustment = 7.0 + (image?.size.height)!
-        }
-        bounds = CGRect(x: 0.0, y: 0.0, width: (s?.width)! + 40.0, height: (s?.height)! + 15.0 + 15.0 + imageAdjustment)
-        messageRect?.size = s!
-        messageRect?.size.height += 5
-        messageRect?.origin.x = 20.0
-        messageRect?.origin.y = 15.0 + imageAdjustment
-        
-        setNeedsLayout()
-        setNeedsDisplay()
-    }
-}
-
 //  MARK: RGToast
 class RGToast: NSObject {
     static public let shared = RGToast()
@@ -295,6 +194,107 @@ class RGToast: NSObject {
             degress = 180.0
         }
         return degress
+    }
+}
+
+//  MARK: RGToastView
+fileprivate class RGToastView: UIView {
+    private var messageRect: CGRect?
+    private var _image: UIImage?
+    private var _messageText: String?
+    fileprivate var image: UIImage? {
+        get {
+            return _image
+        }
+        set {
+            _image = newValue
+            adjust()
+        }
+    }
+    fileprivate var messageText: String? {
+        get {
+            return _messageText
+        }
+        set {
+            _messageText = newValue
+            adjust()
+        }
+    }
+
+    fileprivate init() {
+        super.init(frame: CGRect(x: 0.0, y: 0.0, width: 100.0, height: 100.0))
+        self.messageRect = bounds.insetBy(dx: 10.0, dy: 10.0)
+        self.backgroundColor = UIColor.clear
+        self.messageText = ""
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    private func drawRoundRectangle(in rect: CGRect, radius: CGFloat) {
+        let context = UIGraphicsGetCurrentContext()
+        let rRect = CGRect(x: rect.origin.x, y: rect.origin.y, width: rect.width, height: rect.height)
+        let minX = rRect.minX, midX = rRect.midX, maxX = rRect.maxX
+        let minY = rRect.minY, midY = rRect.midY, maxY = rRect.maxY
+        context?.move(to: CGPoint(x: minX, y: midY))
+        context?.addArc(tangent1End: CGPoint(x: minX, y: minY),
+                        tangent2End: CGPoint(x: midX, y: minY),
+                        radius: radius)
+        context?.addArc(tangent1End: CGPoint(x: maxX, y: minY),
+                        tangent2End: CGPoint(x: maxX, y: midY),
+                        radius: radius)
+        context?.addArc(tangent1End: CGPoint(x: maxX, y: maxY),
+                        tangent2End: CGPoint(x: midX, y: maxY),
+                        radius: radius)
+        context?.addArc(tangent1End: CGPoint(x: minX, y: maxY),
+                        tangent2End: CGPoint(x: minX, y: midY),
+                        radius: radius)
+        context?.closePath()
+        context?.drawPath(using: .fill)
+    }
+
+    override func draw(_ rect: CGRect) {
+        UIColor(white: 0.0, alpha: 0.8).set()
+        drawRoundRectangle(in: rect, radius: 10.0)
+        UIColor.white.set()
+
+        let paragraphStyle = NSMutableParagraphStyle.default.mutableCopy()
+        (paragraphStyle as! NSMutableParagraphStyle).lineBreakMode = .byWordWrapping
+        (paragraphStyle as! NSMutableParagraphStyle).alignment = .center
+        let dict = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14.0),
+                    NSParagraphStyleAttributeName: paragraphStyle,
+                    NSForegroundColorAttributeName: UIColor.white]
+        (messageText! as NSString).draw(in: messageRect!, withAttributes: dict)
+
+        if let image = image {
+            var r = CGRect.zero
+            r.origin.y = 15.0
+            r.origin.x = (rect.width - image.size.width) / 2.0
+            r.size = image.size
+            image.draw(in: r)
+        }
+    }
+
+    //  MARK: Setter Methods
+    private func adjust() {
+        let s = messageText?.boundingRect(with: CGSize(width: 160.0, height: 200.0),
+                                          options: [.usesLineFragmentOrigin],
+                                          attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14.0)],
+                                          context: nil).size
+        messageText?.size(attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14.0)])
+        var imageAdjustment: CGFloat = 0.0
+        if image != nil {
+            imageAdjustment = 7.0 + (image?.size.height)!
+        }
+        bounds = CGRect(x: 0.0, y: 0.0, width: (s?.width)! + 40.0, height: (s?.height)! + 15.0 + 15.0 + imageAdjustment)
+        messageRect?.size = s!
+        messageRect?.size.height += 5
+        messageRect?.origin.x = 20.0
+        messageRect?.origin.y = 15.0 + imageAdjustment
+
+        setNeedsLayout()
+        setNeedsDisplay()
     }
 }
 
