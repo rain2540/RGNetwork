@@ -11,178 +11,172 @@ import UIKit
 //  MARK: RGToast
 class RGToast: NSObject {
     static public let shared = RGToast()
-    
-    private var alerts: Array<[CanBeToast]> = []
+
+    private var toastContents: Array<[CanBeToast]> = []
     private var active = false
-    private var alertView: RGToastView?
-    private var alertFrame = UIScreen.main.bounds
-    
+    private var toastView: RGToastView?
+    private var toastFrame = UIScreen.main.bounds
+
     //  MARK: Lifecycle
-     override private init () {
+    override private init () {
         super.init()
         NotificationCenter.default
             .addObserver(self,
                          selector: #selector(RGToast.keyboardWillAppear(notification:)),
                          name: NSNotification.Name.UIKeyboardWillShow,
                          object: nil)
-        
+
         NotificationCenter.default
             .addObserver(self,
                          selector: #selector(RGToast.keyboardWillDisappear(notification:)),
                          name: NSNotification.Name.UIKeyboardDidHide,
                          object: nil)
-        
+
         NotificationCenter.default
             .addObserver(self,
                          selector: #selector(RGToast.orientationWillChange(notification:)),
                          name: NSNotification.Name.UIApplicationWillChangeStatusBarOrientation,
                          object: nil)
     }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
+
     //  MARK: Show Toast Message
     private func showToast() {
-        if alerts.count < 1 {
+        if toastContents.count < 1 {
             active = false
             return
         }
-        
+
         active = true
-        alertView = RGToastView()
-        let ar = alerts[0]
-        
+        toastView = RGToastView()
+        let contents = toastContents[0]
+
         var img: UIImage? = nil
-        if ar.count > 1 {
-            img = alerts[0][1] as? UIImage
-            alertView?.image = img
+        if contents.count > 1 {
+            img = toastContents[0][1] as? UIImage
+            toastView?.image = img
         }
-        
-        if ar.count > 0 {
-            alertView?.messageText = alerts[0][0] as? String
+
+        if contents.count > 0 {
+            toastView?.messageText = toastContents[0][0] as? String
         }
-        alertView?.transform = CGAffineTransform.identity
-        alertView?.alpha = 0.0
-        UIApplication.shared.keyWindow?.addSubview(alertView!)
-        
-        alertView?.center = CGPoint(x: alertFrame.midX, y: alertFrame.midY)
-        
-        var rr = alertView?.frame
-        rr?.origin.x = (rr?.origin.x)!
-        rr?.origin.y = (rr?.origin.y)!
-        alertView?.frame = rr!
-        
-        let o = UIApplication.shared.statusBarOrientation
-        let degress = rotationDegress(orientation: o)
-        alertView?.transform = CGAffineTransform(rotationAngle: degress * .pi / 180.0)
-        alertView?.transform.scaledBy(x: 2.0, y: 2.0)
-        
+        toastView?.transform = CGAffineTransform.identity
+        toastView?.alpha = 0.0
+        toastView?.center = CGPoint(x: toastFrame.midX, y: toastFrame.midY)
+        UIApplication.shared.keyWindow?.addSubview(toastView!)
+
+        let orientation = UIApplication.shared.statusBarOrientation
+        let degress = rotationDegress(orientation: orientation)
+        toastView?.transform = CGAffineTransform(rotationAngle: degress * .pi / 180.0)
+        toastView?.transform.scaledBy(x: 2.0, y: 2.0)
+
         UIView.beginAnimations(nil, context: nil)
         UIView.setAnimationDuration(0.15)
         UIView.setAnimationDelegate(self)
         UIView.setAnimationDidStop(#selector(RGToast.animationStep2))
-        alertView?.transform = CGAffineTransform(rotationAngle: degress * .pi / 180.0)
-        alertView?.frame = (alertView?.frame.integral)!
-        alertView?.alpha = 1.0
+        toastView?.transform = CGAffineTransform(rotationAngle: degress * .pi / 180.0)
+        toastView?.frame = (toastView?.frame.integral)!
+        toastView?.alpha = 1.0
         UIView.commitAnimations()
     }
-    
+
     @objc private func animationStep2() {
         UIView.beginAnimations(nil, context: nil)
-        let words = (alerts[0][0] as! String).components(separatedBy: CharacterSet.whitespaces)
+        let words = (toastContents[0][0] as! String).components(separatedBy: CharacterSet.whitespaces)
         let duration = max(Double(words.count) * 60.0 / 200.0, 1.4)
-        
+
         UIView.setAnimationDelay(duration)
         UIView.setAnimationDelegate(self)
         UIView.setAnimationDidStop(#selector(RGToast.animationStep3))
-        
-        let o = UIApplication.shared.statusBarOrientation
-        let degress = rotationDegress(orientation: o)
-        alertView?.transform = CGAffineTransform(rotationAngle: degress * .pi / 180.0)
-        alertView?.transform.scaledBy(x: 0.5, y: 0.5)
-        alertView?.alpha = 0.0
+
+        let orientation = UIApplication.shared.statusBarOrientation
+        let degress = rotationDegress(orientation: orientation)
+        toastView?.transform = CGAffineTransform(rotationAngle: degress * .pi / 180.0)
+        toastView?.transform.scaledBy(x: 0.5, y: 0.5)
+        toastView?.alpha = 0.0
         UIView.commitAnimations()
     }
-    
+
     @objc private func animationStep3() {
-        alertView?.removeFromSuperview()
-        alerts.remove(at: 0)
+        toastView?.removeFromSuperview()
+        toastContents.remove(at: 0)
         showToast()
     }
-    
+
     func toast(message: String?, image: UIImage? = nil) {
         if message != nil && image != nil  {
-            alerts.append([message!, image!])
+            toastContents.append([message!, image!])
         } else if message != nil {
-            alerts.append([message!])
+            toastContents.append([message!])
         } else if image != nil {
-            alerts.append([image!])
+            toastContents.append([image!])
         }
         if !active {
             showToast()
         }
     }
-    
+
     //  MARK: System Observation Changes
-    private func subtractRect(wf: CGRect, kf: CGRect) -> CGRect {
-        var vkf = kf
-        if CGPoint.zero != vkf.origin {
-            if vkf.origin.x > 0 {
-                vkf.size.width = kf.origin.x
+    private func subtractRect(screenFrame: CGRect, keyboardFrame: CGRect) -> CGRect {
+        var vKeyboardFrame = keyboardFrame
+        if CGPoint.zero != vKeyboardFrame.origin {
+            if vKeyboardFrame.origin.x > 0 {
+                vKeyboardFrame.size.width = keyboardFrame.origin.x
             }
-            if vkf.origin.y > 0 {
-                vkf.size.height = kf.origin.y
+            if vKeyboardFrame.origin.y > 0 {
+                vKeyboardFrame.size.height = keyboardFrame.origin.y
             }
-            vkf.origin = CGPoint.zero
+            vKeyboardFrame.origin = CGPoint.zero
         } else {
-            vkf.origin.x = fabs(kf.size.width - wf.size.width)
-            vkf.origin.y = fabs(kf.size.height - wf.size.height)
-            
-            if vkf.origin.x > 0 {
-                let temp = vkf.origin.x
-                vkf.origin.x = vkf.size.width
-                vkf.size.width = temp
-            } else if vkf.origin.y > 0 {
-                let temp = vkf.origin.y
-                vkf.origin.y = vkf.size.height
-                vkf.size.height = temp
+            vKeyboardFrame.origin.x = fabs(keyboardFrame.size.width - screenFrame.size.width)
+            vKeyboardFrame.origin.y = fabs(keyboardFrame.size.height - screenFrame.size.height)
+
+            if vKeyboardFrame.origin.x > 0 {
+                let temp = vKeyboardFrame.origin.x
+                vKeyboardFrame.origin.x = vKeyboardFrame.size.width
+                vKeyboardFrame.size.width = temp
+            } else if vKeyboardFrame.origin.y > 0 {
+                let temp = vKeyboardFrame.origin.y
+                vKeyboardFrame.origin.y = vKeyboardFrame.size.height
+                vKeyboardFrame.size.height = temp
             }
         }
-        return wf.intersection(vkf)
+        return screenFrame.intersection(vKeyboardFrame)
     }
-    
+
     //  MARK: Target - Action
     @objc private func keyboardWillAppear(notification: Notification) {
         let userInfo = notification.userInfo
         let aValue = userInfo?[UIKeyboardFrameEndUserInfoKey] as! NSValue
-        let kf = aValue.cgRectValue
-        let wf = UIScreen.main.bounds
-        
+        let keyboardFrame = aValue.cgRectValue
+        let screenFrame = UIScreen.main.bounds
+
         UIView.beginAnimations(nil, context: nil)
-        alertFrame = subtractRect(wf: wf, kf: kf)
-        alertView?.center = CGPoint(x: alertFrame.midX, y: alertFrame.midY)
+        toastFrame = subtractRect(screenFrame: screenFrame, keyboardFrame: keyboardFrame)
+        toastView?.center = CGPoint(x: toastFrame.midX, y: toastFrame.midY)
         UIView.commitAnimations()
     }
-    
+
     @objc private func keyboardWillDisappear(notification: Notification) {
-        alertFrame = UIScreen.main.bounds
+        toastFrame = UIScreen.main.bounds
     }
-    
+
     @objc private func orientationWillChange(notification: Notification) {
         let userInfo = notification.userInfo
         let v = userInfo?[UIApplicationStatusBarOrientationUserInfoKey] as! NSNumber
         let o = UIInterfaceOrientation(rawValue: v.intValue)
-        
+
         let degress = rotationDegress(orientation: o!)
-        
+
         UIView.beginAnimations(nil, context: nil)
-        alertView?.transform = CGAffineTransform(rotationAngle: degress * .pi / 180.0)
-        alertView?.frame = CGRect(x: (alertView?.frame.minX)!, y: (alertView?.frame.minY)!, width: (alertView?.frame.width)!, height: (alertView?.frame.height)!)
+        toastView?.transform = CGAffineTransform(rotationAngle: degress * .pi / 180.0)
+        toastView?.frame = CGRect(x: (toastView?.frame.minX)!, y: (toastView?.frame.minY)!, width: (toastView?.frame.width)!, height: (toastView?.frame.height)!)
         UIView.commitAnimations()
     }
-    
+
     //  MARK: Callback
     private func rotationDegress(orientation: UIInterfaceOrientation) -> CGFloat {
         var degress: CGFloat = 0.0
@@ -268,31 +262,31 @@ fileprivate class RGToastView: UIView {
         (messageText! as NSString).draw(in: messageRect!, withAttributes: dict)
 
         if let image = image {
-            var r = CGRect.zero
-            r.origin.y = 15.0
-            r.origin.x = (rect.width - image.size.width) / 2.0
-            r.size = image.size
-            image.draw(in: r)
+            var imageRect = CGRect.zero
+            imageRect.origin.y = 15.0
+            imageRect.origin.x = (rect.width - image.size.width) / 2.0
+            imageRect.size = image.size
+            image.draw(in: imageRect)
         }
     }
 
     //  MARK: Setter Methods
     private func adjust() {
-        let s = messageText?.boundingRect(with: CGSize(width: 160.0, height: 200.0),
-                                          options: [.usesLineFragmentOrigin],
-                                          attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14.0)],
-                                          context: nil).size
+        let size = messageText?.boundingRect(with: CGSize(width: 160.0, height: 200.0),
+                                             options: [.usesLineFragmentOrigin],
+                                             attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14.0)],
+                                             context: nil).size
         messageText?.size(attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14.0)])
         var imageAdjustment: CGFloat = 0.0
         if image != nil {
             imageAdjustment = 7.0 + (image?.size.height)!
         }
-        bounds = CGRect(x: 0.0, y: 0.0, width: (s?.width)! + 40.0, height: (s?.height)! + 15.0 + 15.0 + imageAdjustment)
-        messageRect?.size = s!
+        bounds = CGRect(x: 0.0, y: 0.0, width: (size?.width)! + 40.0, height: (size?.height)! + 15.0 + 15.0 + imageAdjustment)
+        messageRect?.size = size!
         messageRect?.size.height += 5
         messageRect?.origin.x = 20.0
         messageRect?.origin.y = 15.0 + imageAdjustment
-
+        
         setNeedsLayout()
         setNeedsDisplay()
     }
