@@ -31,10 +31,12 @@ class ViewController: UIViewController {
             showProgress: true,
             success: { (json, requestString, jsonString, httpStatusCode) in
                 print(jsonString)
+                RGToast.shared.toast(message: "get content success.")
         },
             fail: { (error, requestString) in
                 print("error: \n", error ?? "get nil failed.")
                 print("request string: \n", requestString)
+                RGToast.shared.toast(message: "get content failed.")
         })
     }
 
