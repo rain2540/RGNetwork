@@ -56,11 +56,11 @@ struct RGNetwork {
         fail: @escaping FailCloure)
     {
         RGNetwork.request(with: urlString,
-                           method: .get,
-                           parameters: parameters,
-                           showProgress: showProgress,
-                           success: success,
-                           fail: fail)
+                          method: .get,
+                          parameters: parameters,
+                          showProgress: showProgress,
+                          success: success,
+                          fail: fail)
     }
 
     /// POST 请求
@@ -79,11 +79,11 @@ struct RGNetwork {
         fail: @escaping FailCloure)
     {
         RGNetwork.request(with: urlString,
-                           method: .post,
-                           parameters: parameters,
-                           showProgress: showProgress,
-                           success: success,
-                           fail: fail)
+                          method: .post,
+                          parameters: parameters,
+                          showProgress: showProgress,
+                          success: success,
+                          fail: fail)
     }
 
     /// PUT 请求
@@ -102,11 +102,11 @@ struct RGNetwork {
         fail: @escaping FailCloure)
     {
         RGNetwork.request(with: urlString,
-                           method: .put,
-                           parameters: parameters,
-                           showProgress: showProgress,
-                           success: success,
-                           fail: fail)
+                          method: .put,
+                          parameters: parameters,
+                          showProgress: showProgress,
+                          success: success,
+                          fail: fail)
     }
 
     /// DELETE 请求
@@ -187,7 +187,8 @@ struct RGNetwork {
             }
 
             let requestString = RGNetwork.requestURL(urlString, parameters: parameters)
-            Alamofire.request(urlString, method: method, parameters: parameters)
+            Alamofire
+                .request(urlString, method: method, parameters: parameters)
                 .responseJSON { (response) in
                     print("RGNetwork \(method.rawValue) request debugDescription: \n", response.debugDescription)
                     let httpStatusCode = response.response?.statusCode
@@ -232,7 +233,7 @@ struct RGNetwork {
             return requestString
         }
     }
-    
+
     //  Progress View
     fileprivate static func showProgress() {
         DispatchQueue.main.async {
