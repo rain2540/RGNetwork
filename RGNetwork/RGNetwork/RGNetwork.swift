@@ -196,11 +196,15 @@ struct RGNetwork {
                     let jsonString = String(data: data!, encoding: String.Encoding.utf8)
                     if let result = response.result.value {
                         success(result as! [String : Any], requestString, jsonString!, "\(httpStatusCode!)")
-                        RGNetwork.hideProgress()
+                        DispatchQueue.main.async {
+                            RGNetwork.hideProgress()
+                        }
                     } else {
                         fail(response.result.error, requestString)
-                        RGNetwork.hideProgress()
-                        RGToast.shared.toast(message: "网络访问失败")
+                        DispatchQueue.main.async {
+                            RGNetwork.hideProgress()
+                            RGToast.shared.toast(message: "网络访问失败")
+                        }
                     }
             }
         }
