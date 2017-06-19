@@ -150,7 +150,7 @@ struct RGNetwork {
                         try JSONSerialization
                             .jsonObject(with: data,
                                         options: JSONSerialization.ReadingOptions.allowFragments) as! [String: Any]
-                    guard let jsonString = String(data: data, encoding: String.Encoding.utf8) else {
+                    guard let jsonString = String(data: data, encoding: .utf8) else {
                         print("RGNetwork delete request get JSON string failed.")
                         RGNetwork.hideProgress()
                         return
@@ -189,6 +189,24 @@ struct RGNetwork {
             let requestString = RGNetwork.requestURL(urlString, parameters: parameters)
             Alamofire
                 .request(urlString, method: method, parameters: parameters)
+                .responseString(completionHandler: { (response) in
+                    print("RGNetwork \(method.rawValue) request debugDescription: \n", response.debugDescription)
+                    let httpStatusCode = response.response?.statusCode
+                    guard let data = response.data else { return }
+                    guard let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: Any] else {
+                        fail(response.error, requestString)
+                        print("String in fact:\n", response.value!)
+                        DispatchQueue.main.async {
+                            RGNetwork.hideProgress()
+                            RGToast.shared.toast(message: "网络访问失败")
+                        }
+                        return
+                    }
+                    success(json, requestString, response.value!, "\(httpStatusCode!)")
+                    DispatchQueue.main.async {
+                        RGNetwork.hideProgress()
+                    }
+                })
                 .responseJSON { (response) in
                     print("RGNetwork \(method.rawValue) request debugDescription: \n", response.debugDescription)
                     let httpStatusCode = response.response?.statusCode
