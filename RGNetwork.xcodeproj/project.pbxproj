@@ -7,122 +7,122 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		24875B9ACAEC7DE1D36C210B /* Pods_RGNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B22C380EFEE981A579E3DFB /* Pods_RGNetwork.framework */; };
-		B7E684111EAA03CC004E9667 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E684101EAA03CC004E9667 /* AppDelegate.swift */; };
-		B7E684131EAA03CC004E9667 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E684121EAA03CC004E9667 /* ViewController.swift */; };
-		B7E684161EAA03CC004E9667 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7E684141EAA03CC004E9667 /* Main.storyboard */; };
-		B7E684181EAA03CC004E9667 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7E684171EAA03CC004E9667 /* Assets.xcassets */; };
-		B7E6841B1EAA03CC004E9667 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7E684191EAA03CC004E9667 /* LaunchScreen.storyboard */; };
-		B7E684271EAA08C7004E9667 /* RGNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E684231EAA08C7004E9667 /* RGNetwork.swift */; };
-		B7E9DDEE1EAA197C0061868C /* RGToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E9DDED1EAA197C0061868C /* RGToast.swift */; };
+		B74D9DB71F132A5100D34AE1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74D9DB61F132A5100D34AE1 /* AppDelegate.swift */; };
+		B74D9DB91F132A5100D34AE1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74D9DB81F132A5100D34AE1 /* ViewController.swift */; };
+		B74D9DBC1F132A5100D34AE1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B74D9DBA1F132A5100D34AE1 /* Main.storyboard */; };
+		B74D9DBE1F132A5100D34AE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B74D9DBD1F132A5100D34AE1 /* Assets.xcassets */; };
+		B74D9DC11F132A5100D34AE1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B74D9DBF1F132A5100D34AE1 /* LaunchScreen.storyboard */; };
+		B74D9DCA1F132BFB00D34AE1 /* RGNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74D9DC91F132BFB00D34AE1 /* RGNetwork.swift */; };
+		B74D9DCD1F134DDB00D34AE1 /* RGToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74D9DCC1F134DDB00D34AE1 /* RGToast.swift */; };
+		C920AEA058F7C0115712508C /* Pods_RGNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D55A1A9A7EEF5DE9B684171B /* Pods_RGNetwork.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3B22C380EFEE981A579E3DFB /* Pods_RGNetwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RGNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		689C9E7B8D61E99428748783 /* Pods-RGNetwork.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RGNetwork.release.xcconfig"; path = "Pods/Target Support Files/Pods-RGNetwork/Pods-RGNetwork.release.xcconfig"; sourceTree = "<group>"; };
-		7AF1A2BEAB42442E9E83774B /* Pods-RGNetwork.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RGNetwork.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RGNetwork/Pods-RGNetwork.debug.xcconfig"; sourceTree = "<group>"; };
-		B7E6840D1EAA03CC004E9667 /* RGNetwork.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RGNetwork.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B7E684101EAA03CC004E9667 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B7E684121EAA03CC004E9667 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		B7E684151EAA03CC004E9667 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		B7E684171EAA03CC004E9667 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		B7E6841A1EAA03CC004E9667 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		B7E6841C1EAA03CC004E9667 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B7E684231EAA08C7004E9667 /* RGNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGNetwork.swift; sourceTree = "<group>"; };
-		B7E9DDED1EAA197C0061868C /* RGToast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGToast.swift; sourceTree = "<group>"; };
+		3B83503293FCE07758DAA5CA /* Pods-RGNetwork.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RGNetwork.release.xcconfig"; path = "Pods/Target Support Files/Pods-RGNetwork/Pods-RGNetwork.release.xcconfig"; sourceTree = "<group>"; };
+		5A9BB35DAFC3B60F56536275 /* Pods-RGNetwork.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RGNetwork.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RGNetwork/Pods-RGNetwork.debug.xcconfig"; sourceTree = "<group>"; };
+		B74D9DB31F132A5100D34AE1 /* RGNetwork.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RGNetwork.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B74D9DB61F132A5100D34AE1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B74D9DB81F132A5100D34AE1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B74D9DBB1F132A5100D34AE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B74D9DBD1F132A5100D34AE1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B74D9DC01F132A5100D34AE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B74D9DC21F132A5100D34AE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B74D9DC91F132BFB00D34AE1 /* RGNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGNetwork.swift; sourceTree = "<group>"; };
+		B74D9DCC1F134DDB00D34AE1 /* RGToast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGToast.swift; sourceTree = "<group>"; };
+		D55A1A9A7EEF5DE9B684171B /* Pods_RGNetwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RGNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		B7E6840A1EAA03CC004E9667 /* Frameworks */ = {
+		B74D9DB01F132A5100D34AE1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24875B9ACAEC7DE1D36C210B /* Pods_RGNetwork.framework in Frameworks */,
+				C920AEA058F7C0115712508C /* Pods_RGNetwork.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3412797FFA8250CC1679A4B5 /* Pods */ = {
+		8D03D52DA4830D62638F1053 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7AF1A2BEAB42442E9E83774B /* Pods-RGNetwork.debug.xcconfig */,
-				689C9E7B8D61E99428748783 /* Pods-RGNetwork.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		742F8AB6C007E2CAC208EE14 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				3B22C380EFEE981A579E3DFB /* Pods_RGNetwork.framework */,
+				D55A1A9A7EEF5DE9B684171B /* Pods_RGNetwork.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		B7E684041EAA03CC004E9667 = {
+		B74D9DAA1F132A5100D34AE1 = {
 			isa = PBXGroup;
 			children = (
-				B7E6840F1EAA03CC004E9667 /* RGNetwork */,
-				B7E6840E1EAA03CC004E9667 /* Products */,
-				3412797FFA8250CC1679A4B5 /* Pods */,
-				742F8AB6C007E2CAC208EE14 /* Frameworks */,
+				B74D9DB51F132A5100D34AE1 /* RGNetwork */,
+				B74D9DB41F132A5100D34AE1 /* Products */,
+				BD26487FD37C2393FBC99D3B /* Pods */,
+				8D03D52DA4830D62638F1053 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		B7E6840E1EAA03CC004E9667 /* Products */ = {
+		B74D9DB41F132A5100D34AE1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B7E6840D1EAA03CC004E9667 /* RGNetwork.app */,
+				B74D9DB31F132A5100D34AE1 /* RGNetwork.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B7E6840F1EAA03CC004E9667 /* RGNetwork */ = {
+		B74D9DB51F132A5100D34AE1 /* RGNetwork */ = {
 			isa = PBXGroup;
 			children = (
-				B7E684221EAA08C7004E9667 /* RGNetwork */,
-				B7E684171EAA03CC004E9667 /* Assets.xcassets */,
-				B7E684291EAA0944004E9667 /* Supporting Files */,
-				B7E684101EAA03CC004E9667 /* AppDelegate.swift */,
-				B7E684121EAA03CC004E9667 /* ViewController.swift */,
+				B74D9DC81F132BFB00D34AE1 /* RGNetwork */,
+				B74D9DB61F132A5100D34AE1 /* AppDelegate.swift */,
+				B74D9DB81F132A5100D34AE1 /* ViewController.swift */,
+				B74D9DBD1F132A5100D34AE1 /* Assets.xcassets */,
+				B74D9DCB1F133D1300D34AE1 /* Supporting Files */,
 			);
 			path = RGNetwork;
 			sourceTree = "<group>";
 		};
-		B7E684221EAA08C7004E9667 /* RGNetwork */ = {
+		B74D9DC81F132BFB00D34AE1 /* RGNetwork */ = {
 			isa = PBXGroup;
 			children = (
-				B7E684231EAA08C7004E9667 /* RGNetwork.swift */,
-				B7E9DDED1EAA197C0061868C /* RGToast.swift */,
+				B74D9DC91F132BFB00D34AE1 /* RGNetwork.swift */,
+				B74D9DCC1F134DDB00D34AE1 /* RGToast.swift */,
 			);
 			path = RGNetwork;
 			sourceTree = "<group>";
 		};
-		B7E684291EAA0944004E9667 /* Supporting Files */ = {
+		B74D9DCB1F133D1300D34AE1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				B7E684141EAA03CC004E9667 /* Main.storyboard */,
-				B7E684191EAA03CC004E9667 /* LaunchScreen.storyboard */,
-				B7E6841C1EAA03CC004E9667 /* Info.plist */,
+				B74D9DBA1F132A5100D34AE1 /* Main.storyboard */,
+				B74D9DBF1F132A5100D34AE1 /* LaunchScreen.storyboard */,
+				B74D9DC21F132A5100D34AE1 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BD26487FD37C2393FBC99D3B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5A9BB35DAFC3B60F56536275 /* Pods-RGNetwork.debug.xcconfig */,
+				3B83503293FCE07758DAA5CA /* Pods-RGNetwork.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B7E6840C1EAA03CC004E9667 /* RGNetwork */ = {
+		B74D9DB21F132A5100D34AE1 /* RGNetwork */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B7E6841F1EAA03CC004E9667 /* Build configuration list for PBXNativeTarget "RGNetwork" */;
+			buildConfigurationList = B74D9DC51F132A5100D34AE1 /* Build configuration list for PBXNativeTarget "RGNetwork" */;
 			buildPhases = (
-				2420B1A7F611F3AA42A39832 /* [CP] Check Pods Manifest.lock */,
-				B7E684091EAA03CC004E9667 /* Sources */,
-				B7E6840A1EAA03CC004E9667 /* Frameworks */,
-				B7E6840B1EAA03CC004E9667 /* Resources */,
-				C5B1AECC8F89EC671B8739C3 /* [CP] Embed Pods Frameworks */,
-				D84797F550B4F01C8FD7920B /* [CP] Copy Pods Resources */,
+				6D89EE107DD03AB610FCE385 /* [CP] Check Pods Manifest.lock */,
+				B74D9DAF1F132A5100D34AE1 /* Sources */,
+				B74D9DB01F132A5100D34AE1 /* Frameworks */,
+				B74D9DB11F132A5100D34AE1 /* Resources */,
+				5D6E17D1F13B186A6A9A5586 /* [CP] Embed Pods Frameworks */,
+				64F06BF52725BCB8AAD1E272 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -130,27 +130,27 @@
 			);
 			name = RGNetwork;
 			productName = RGNetwork;
-			productReference = B7E6840D1EAA03CC004E9667 /* RGNetwork.app */;
+			productReference = B74D9DB31F132A5100D34AE1 /* RGNetwork.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		B7E684051EAA03CC004E9667 /* Project object */ = {
+		B74D9DAB1F132A5100D34AE1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = Smartech;
 				TargetAttributes = {
-					B7E6840C1EAA03CC004E9667 = {
-						CreatedOnToolsVersion = 8.3.2;
+					B74D9DB21F132A5100D34AE1 = {
+						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 76U7MFBQ83;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = B7E684081EAA03CC004E9667 /* Build configuration list for PBXProject "RGNetwork" */;
+			buildConfigurationList = B74D9DAE1F132A5100D34AE1 /* Build configuration list for PBXProject "RGNetwork" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -158,46 +158,31 @@
 				en,
 				Base,
 			);
-			mainGroup = B7E684041EAA03CC004E9667;
-			productRefGroup = B7E6840E1EAA03CC004E9667 /* Products */;
+			mainGroup = B74D9DAA1F132A5100D34AE1;
+			productRefGroup = B74D9DB41F132A5100D34AE1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B7E6840C1EAA03CC004E9667 /* RGNetwork */,
+				B74D9DB21F132A5100D34AE1 /* RGNetwork */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		B7E6840B1EAA03CC004E9667 /* Resources */ = {
+		B74D9DB11F132A5100D34AE1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B7E6841B1EAA03CC004E9667 /* LaunchScreen.storyboard in Resources */,
-				B7E684181EAA03CC004E9667 /* Assets.xcassets in Resources */,
-				B7E684161EAA03CC004E9667 /* Main.storyboard in Resources */,
+				B74D9DC11F132A5100D34AE1 /* LaunchScreen.storyboard in Resources */,
+				B74D9DBE1F132A5100D34AE1 /* Assets.xcassets in Resources */,
+				B74D9DBC1F132A5100D34AE1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2420B1A7F611F3AA42A39832 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		C5B1AECC8F89EC671B8739C3 /* [CP] Embed Pods Frameworks */ = {
+		5D6E17D1F13B186A6A9A5586 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -212,7 +197,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RGNetwork/Pods-RGNetwork-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D84797F550B4F01C8FD7920B /* [CP] Copy Pods Resources */ = {
+		64F06BF52725BCB8AAD1E272 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -227,35 +212,50 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RGNetwork/Pods-RGNetwork-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		6D89EE107DD03AB610FCE385 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		B7E684091EAA03CC004E9667 /* Sources */ = {
+		B74D9DAF1F132A5100D34AE1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B7E9DDEE1EAA197C0061868C /* RGToast.swift in Sources */,
-				B7E684131EAA03CC004E9667 /* ViewController.swift in Sources */,
-				B7E684111EAA03CC004E9667 /* AppDelegate.swift in Sources */,
-				B7E684271EAA08C7004E9667 /* RGNetwork.swift in Sources */,
+				B74D9DCD1F134DDB00D34AE1 /* RGToast.swift in Sources */,
+				B74D9DB91F132A5100D34AE1 /* ViewController.swift in Sources */,
+				B74D9DB71F132A5100D34AE1 /* AppDelegate.swift in Sources */,
+				B74D9DCA1F132BFB00D34AE1 /* RGNetwork.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		B7E684141EAA03CC004E9667 /* Main.storyboard */ = {
+		B74D9DBA1F132A5100D34AE1 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B7E684151EAA03CC004E9667 /* Base */,
+				B74D9DBB1F132A5100D34AE1 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		B7E684191EAA03CC004E9667 /* LaunchScreen.storyboard */ = {
+		B74D9DBF1F132A5100D34AE1 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B7E6841A1EAA03CC004E9667 /* Base */,
+				B74D9DC01F132A5100D34AE1 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -263,7 +263,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		B7E6841D1EAA03CC004E9667 /* Debug */ = {
+		B74D9DC31F132A5100D34AE1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -313,7 +313,7 @@
 			};
 			name = Debug;
 		};
-		B7E6841E1EAA03CC004E9667 /* Release */ = {
+		B74D9DC41F132A5100D34AE1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -356,34 +356,30 @@
 			};
 			name = Release;
 		};
-		B7E684201EAA03CC004E9667 /* Debug */ = {
+		B74D9DC61F132A5100D34AE1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7AF1A2BEAB42442E9E83774B /* Pods-RGNetwork.debug.xcconfig */;
+			baseConfigurationReference = 5A9BB35DAFC3B60F56536275 /* Pods-RGNetwork.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 76U7MFBQ83;
 				INFOPLIST_FILE = RGNetwork/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.smartech.RGNetwork;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
-		B7E684211EAA03CC004E9667 /* Release */ = {
+		B74D9DC71F132A5100D34AE1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 689C9E7B8D61E99428748783 /* Pods-RGNetwork.release.xcconfig */;
+			baseConfigurationReference = 3B83503293FCE07758DAA5CA /* Pods-RGNetwork.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 76U7MFBQ83;
 				INFOPLIST_FILE = RGNetwork/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.smartech.RGNetwork;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -391,25 +387,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B7E684081EAA03CC004E9667 /* Build configuration list for PBXProject "RGNetwork" */ = {
+		B74D9DAE1F132A5100D34AE1 /* Build configuration list for PBXProject "RGNetwork" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B7E6841D1EAA03CC004E9667 /* Debug */,
-				B7E6841E1EAA03CC004E9667 /* Release */,
+				B74D9DC31F132A5100D34AE1 /* Debug */,
+				B74D9DC41F132A5100D34AE1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B7E6841F1EAA03CC004E9667 /* Build configuration list for PBXNativeTarget "RGNetwork" */ = {
+		B74D9DC51F132A5100D34AE1 /* Build configuration list for PBXNativeTarget "RGNetwork" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B7E684201EAA03CC004E9667 /* Debug */,
-				B7E684211EAA03CC004E9667 /* Release */,
+				B74D9DC61F132A5100D34AE1 /* Debug */,
+				B74D9DC71F132A5100D34AE1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = B7E684051EAA03CC004E9667 /* Project object */;
+	rootObject = B74D9DAB1F132A5100D34AE1 /* Project object */;
 }
