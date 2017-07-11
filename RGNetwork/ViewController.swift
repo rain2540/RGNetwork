@@ -13,7 +13,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,7 +20,7 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func toast(_ sender: UIButton) {
+    @IBAction func loadContent(_ sender: UIButton) {
         let params = ["river"   :   "松花江流域",
                       "key"     :   "8eb77a504db4a2b3511ed3c4d0964015"]
 
@@ -30,15 +29,14 @@ class ViewController: UIViewController {
             parameters: params,
             showProgress: true,
             success: { (json, requestString, jsonString, httpStatusCode) in
-                print(jsonString)
-                RGToast.shared.toast(message: "get content success.")
+                print("jsonString: ", jsonString)
+//                RGToast.shared.toast(message: "get content success.")
         },
             fail: { (error, requestString) in
                 print("error: \n", error ?? "get nil failed.")
                 print("request string: \n", requestString)
-                RGToast.shared.toast(message: "get content failed.")
+//                RGToast.shared.toast(message: "get content failed.")
         })
     }
-
 }
 
