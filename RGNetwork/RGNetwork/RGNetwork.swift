@@ -8,7 +8,8 @@
 
 import Foundation
 import Alamofire
-import SVProgressHUD
+import AlamofireNetworkActivityIndicator
+import MBProgressHUD
 
 typealias SuccessClosure = ([String: Any], String, String, String) -> Void
 typealias FailCloure = (Error?, String) -> Void
@@ -16,29 +17,29 @@ typealias FailCloure = (Error?, String) -> Void
 struct RGNetwork {
     //  MARK: Initializations
     static let shared = RGNetwork()
-    
+
     var reachabilityManager: NetworkReachabilityManager?
-    
+
     private init() {
         self.reachabilityManager = NetworkReachabilityManager()
         self.reachabilityManager?.listener = { status in
             switch status {
             case .unknown:
                 print("============ 未知网络 ============")
-                
+
             case .notReachable:
                 print("============ 没有网络(断网) ============")
-                
+
             case .reachable(.wwan):
                 print("============ 手机自带网络 ============")
-                
+
             case .reachable(.ethernetOrWiFi):
                 print("============ WIFI ============")
             }
         }
         self.reachabilityManager?.startListening()
     }
-    
+
     //  MARK: Public Methods
     /// GET 请求
     ///
@@ -62,7 +63,7 @@ struct RGNetwork {
                           success: success,
                           fail: fail)
     }
-    
+
     /// POST 请求
     ///
     /// - Parameters:
@@ -85,7 +86,7 @@ struct RGNetwork {
                           success: success,
                           fail: fail)
     }
-    
+
     /// PUT 请求
     ///
     /// - Parameters:
@@ -108,7 +109,7 @@ struct RGNetwork {
                           success: success,
                           fail: fail)
     }
-    
+
     /// DELETE 请求
     ///
     /// - Parameters:
@@ -155,19 +156,27 @@ struct RGNetwork {
                         RGNetwork.hideProgress()
                         return
                     }
-                    RGNetwork.hideProgress()
                     success(json, requestString, jsonString, "\(httpStatusCode)")
-                } catch let error as NSError {
                     RGNetwork.hideProgress()
+                } catch let error as NSError {
                     fail(error, requestString)
+                    RGNetwork.hideProgress()
                 }
             } catch let error as NSError {
-                RGNetwork.hideProgress()
                 fail(error, requestString)
+                RGNetwork.hideProgress()
             }
         }
     }
-    
+
+    public static func showActivityIndicator(startDelay: TimeInterval = 0.0,
+                                             completionDelay: TimeInterval = 0.7)
+    {
+        NetworkActivityIndicatorManager.shared.isEnabled = true
+        NetworkActivityIndicatorManager.shared.startDelay = startDelay
+        NetworkActivityIndicatorManager.shared.completionDelay = completionDelay
+    }
+
     //  MARK: Private Methods
     //  Request
     fileprivate static func request(
@@ -185,7 +194,7 @@ struct RGNetwork {
             if showProgress == true {
                 RGNetwork.showProgress()
             }
-            
+
             let requestString = RGNetwork.requestURL(urlString, parameters: parameters)
             Alamofire
                 .request(urlString, method: method, parameters: parameters)
@@ -197,8 +206,8 @@ struct RGNetwork {
                         fail(response.error, requestString)
                         print("String in fact:\n", response.value!)
                         DispatchQueue.main.async {
-                            RGNetwork.hideProgress()
                             RGToast.shared.toast(message: "网络访问失败")
+                            RGNetwork.hideProgress()
                         }
                         return
                     }
@@ -209,7 +218,7 @@ struct RGNetwork {
                 })
         }
     }
-    
+
     //  Request String Log
     fileprivate static func requestURL(_ urlString: String, parameters: [String: Any]?) -> String {
         if parameters?.keys.count == 0 && parameters == nil {
@@ -237,17 +246,23 @@ struct RGNetwork {
             return requestString
         }
     }
-    
+
     //  Progress View
-    fileprivate static func showProgress() {
+    fileprivate static func showProgress(mode: MBProgressHUDMode = .indeterminate,
+                                         text: String = "")
+    {
         DispatchQueue.main.async {
-            SVProgressHUD.show()
+            guard let window = UIApplication.shared.keyWindow else { return }
+            let hud = MBProgressHUD.showAdded(to: window, animated: true)
+            hud.mode = mode
+            hud.label.text = text
         }
     }
-    
+
     fileprivate static func hideProgress() {
         DispatchQueue.main.async {
-            SVProgressHUD.dismiss(withDelay: 0.5)
+            guard let window = UIApplication.shared.keyWindow else { return }
+            MBProgressHUD.hide(for: window, animated: true)
         }
     }
 }
