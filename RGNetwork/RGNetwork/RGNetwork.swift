@@ -19,6 +19,10 @@ typealias HttpStatusCode = Int
 typealias SuccessTask = (ResponseJSON?, ResponseString?, ResponseData?, HttpStatusCode?) -> Void
 typealias FailureTask = (Error?) -> Void
 
+enum ResponseType {
+    case json, string, data
+}
+
 
 struct RGNetwork {
     //  MARK: Initializations
