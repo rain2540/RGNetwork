@@ -1,6 +1,14 @@
 
-# Created by https://www.gitignore.io/api/macos,xcode,swift
-# Edit at https://www.gitignore.io/?templates=macos,xcode,swift
+# Created by https://www.gitignore.io/api/macos,xcode,cocoapods,swift
+# Edit at https://www.gitignore.io/?templates=macos,xcode,cocoapods,swift
+
+### CocoaPods ###
+## CocoaPods GitIgnore Template
+
+# CocoaPods - Only use to conserve bandwidth / Save time on Pushing
+#           - Also handy if you have a large number of dependant pods
+#           - AS PER https://guides.cocoapods.org/using/using-cocoapods.html NEVER IGNORE THE LOCK FILE
+Pods/
 
 ### macOS ###
 # General
@@ -129,4 +137,4 @@ iOSInjectionProject/
 /*.gcno
 **/xcshareddata/WorkspaceSettings.xcsettings
 
-# End of https://www.gitignore.io/api/macos,xcode,swift
+# End of https://www.gitignore.io/api/macos,xcode,cocoapods,swift
