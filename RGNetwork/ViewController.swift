@@ -27,7 +27,7 @@ class ViewController: UIViewController {
         RGNetwork.get(
             with: "http://web.juhe.cn:8080/environment/water/river",
             parameters: params,
-            showProgress: true,
+            showIndicator: true,
             success: { (json, requestString, jsonString, httpStatusCode) in
                 print("jsonString: ", jsonString)
 //                RGToast.shared.toast(message: "get content success.")
