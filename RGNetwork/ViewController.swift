@@ -10,6 +10,11 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    let urlString = "http://web.juhe.cn:8080/environment/water/river"
+
+    let params = ["river"   :   "松花江流域",
+                  "key"     :   "8eb77a504db4a2b3511ed3c4d0964015"]
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -21,11 +26,9 @@ class ViewController: UIViewController {
     }
 
     @IBAction func loadContent(_ sender: UIButton) {
-        let params = ["river"   :   "松花江流域",
-                      "key"     :   "8eb77a504db4a2b3511ed3c4d0964015"]
 
         RGNetwork.get(
-            with: "http://web.juhe.cn:8080/environment/water/river",
+            with: urlString,
             parameters: params,
             showIndicator: true,
             success: { (json, requestString, jsonString, httpStatusCode) in
@@ -36,6 +39,21 @@ class ViewController: UIViewController {
                 print("error: \n", error ?? "get nil failed.")
                 print("request string: \n", requestString)
 //                RGToast.shared.toast(message: "get content failed.")
+        })
+    }
+
+    @IBAction func loadContentInfo(_ sender: UIButton) {
+        
+        RGNetwork.request(with: urlString,
+                          parameters: params,
+                          showIndicator: true,
+                          responseType: .json,
+                          success: { (json, string, data, httpStatusCode) in
+                            print("json:", json ?? "")
+                            print("string:", string ?? "")
+        },
+                          failure: { (error) in
+                            print("error: \n", error ?? "get nil failed.")
         })
     }
 }

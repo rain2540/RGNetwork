@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,21 +22,34 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eYU-qv-RLg">
-                                <rect key="frame" x="143" y="513" width="88" height="44"/>
+                                <rect key="frame" x="143.5" y="403" width="88" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="88" id="ASt-gf-1bn"/>
                                     <constraint firstAttribute="height" constant="44" id="xl6-Xl-LT6"/>
                                 </constraints>
-                                <state key="normal" title="Load"/>
+                                <state key="normal" title="Load - 1"/>
                                 <connections>
                                     <action selector="loadContent:" destination="BYZ-38-t0r" eventType="touchUpInside" id="j25-zR-I15"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hnR-kE-Abc">
+                                <rect key="frame" x="143.5" y="513" width="88" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="88" id="ecc-gc-at8"/>
+                                    <constraint firstAttribute="height" constant="44" id="ibl-4E-fbK"/>
+                                </constraints>
+                                <state key="normal" title="Load - 2"/>
+                                <connections>
+                                    <action selector="loadContentInfo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3Ke-zg-uXK"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="hnR-kE-Abc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="C4t-0m-w4o"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="hnR-kE-Abc" secondAttribute="bottom" constant="110" id="Cr1-ft-dF2"/>
                             <constraint firstItem="eYU-qv-RLg" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="V2S-bK-guI"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="eYU-qv-RLg" secondAttribute="bottom" constant="110" id="fdP-wP-pA4"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="eYU-qv-RLg" secondAttribute="bottom" constant="220" id="fdP-wP-pA4"/>
                         </constraints>
                     </view>
                 </viewController>
