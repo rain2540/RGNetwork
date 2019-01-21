@@ -19,8 +19,6 @@ typealias HttpStatusCode = Int
 typealias SuccessTask = (ResponseJSON?, ResponseString?, ResponseData?, HttpStatusCode?) -> Void
 typealias FailureTask = (Error?) -> Void
 
-typealias SuccessClosure = ([String: Any], String, String, String) -> Void
-typealias FailCloure = (Error?, String) -> Void
 
 struct RGNetwork {
     //  MARK: Initializations
@@ -49,7 +47,45 @@ struct RGNetwork {
     }
 
 
-    //  MARK: - Public Methods
+    
+}
+
+// MARK: - Indicator View
+extension RGNetwork {
+    public static func showActivityIndicator(startDelay: TimeInterval = 0.0,
+                                             completionDelay: TimeInterval = 0.7)
+    {
+        NetworkActivityIndicatorManager.shared.isEnabled = true
+        NetworkActivityIndicatorManager.shared.startDelay = startDelay
+        NetworkActivityIndicatorManager.shared.completionDelay = completionDelay
+    }
+
+    private static func showIndicator(mode: MBProgressHUDMode = .indeterminate,
+                                      text: String = "")
+    {
+        DispatchQueue.main.async {
+            guard let window = UIApplication.shared.keyWindow else { return }
+            let hud = MBProgressHUD.showAdded(to: window, animated: true)
+            hud.mode = mode
+            hud.label.text = text
+        }
+    }
+    
+    private static func hideIndicator() {
+        DispatchQueue.main.async {
+            guard let window = UIApplication.shared.keyWindow else { return }
+            MBProgressHUD.hide(for: window, animated: true)
+        }
+    }
+}
+
+
+//  MARK: -
+typealias SuccessClosure = ([String: Any], String, String, String) -> Void
+typealias FailCloure = (Error?, String) -> Void
+
+extension RGNetwork {
+    //  MARK: Public Methods
     /// GET 请求
     ///
     /// - Parameters:
@@ -246,35 +282,6 @@ struct RGNetwork {
             }
             requestString.remove(at: requestString.index(before: requestString.endIndex))
             return requestString
-        }
-    }
-}
-
-// MARK: - Indicator View
-extension RGNetwork {
-    public static func showActivityIndicator(startDelay: TimeInterval = 0.0,
-                                             completionDelay: TimeInterval = 0.7)
-    {
-        NetworkActivityIndicatorManager.shared.isEnabled = true
-        NetworkActivityIndicatorManager.shared.startDelay = startDelay
-        NetworkActivityIndicatorManager.shared.completionDelay = completionDelay
-    }
-
-    private static func showIndicator(mode: MBProgressHUDMode = .indeterminate,
-                                      text: String = "")
-    {
-        DispatchQueue.main.async {
-            guard let window = UIApplication.shared.keyWindow else { return }
-            let hud = MBProgressHUD.showAdded(to: window, animated: true)
-            hud.mode = mode
-            hud.label.text = text
-        }
-    }
-    
-    private static func hideIndicator() {
-        DispatchQueue.main.async {
-            guard let window = UIApplication.shared.keyWindow else { return }
-            MBProgressHUD.hide(for: window, animated: true)
         }
     }
 }
