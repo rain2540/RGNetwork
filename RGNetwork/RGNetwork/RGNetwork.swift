@@ -16,6 +16,9 @@ typealias ResponseString = String
 typealias ResponseData = Data
 typealias HttpStatusCode = Int
 
+typealias SuccessTask = (ResponseJSON?, ResponseString?, ResponseData?, HttpStatusCode?) -> Void
+typealias FailureTask = (Error?) -> Void
+
 typealias SuccessClosure = ([String: Any], String, String, String) -> Void
 typealias FailCloure = (Error?, String) -> Void
 
