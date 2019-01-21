@@ -11,6 +11,11 @@ import Alamofire
 import AlamofireNetworkActivityIndicator
 import MBProgressHUD
 
+typealias ResponseJSON = [String: Any]
+typealias ResponseString = String
+typealias ResponseData = Data
+typealias HttpStatusCode = Int
+
 typealias SuccessClosure = ([String: Any], String, String, String) -> Void
 typealias FailCloure = (Error?, String) -> Void
 
