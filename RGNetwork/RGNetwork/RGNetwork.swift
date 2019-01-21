@@ -51,7 +51,135 @@ struct RGNetwork {
     }
 
 
-    
+    //  MARK: - Public Methods
+    /// 通用请求方法
+    ///
+    /// - Parameters:
+    ///   - urlString: 请求地址
+    ///   - method: 请求方法
+    ///   - parameters: 请求参数
+    ///   - encoding: 请求参数编码
+    ///   - headers: 请求头
+    ///   - showIndicator: 是否显示 Indicator
+    ///   - responseType: 返回数据格式类型
+    ///   - success: 请求成功的 Task
+    ///   - failure: 请求失败的 Task
+    public static func request(
+        with urlString: String,
+        method: HTTPMethod = .get,
+        parameters: [String: Any]? = nil,
+        encoding: ParameterEncoding = URLEncoding.default,
+        headers: HTTPHeaders? = nil,
+        showIndicator: Bool = false,
+        responseType: ResponseType = .json,
+        success: @escaping SuccessTask,
+        failure: @escaping FailureTask)
+    {
+        if showIndicator == true {
+            RGNetwork.showIndicator()
+            RGNetwork.showActivityIndicator()
+        }
+
+        DispatchQueue.global().async {
+            let request = Alamofire.request(urlString, method: method, parameters: parameters, encoding: encoding, headers: headers)
+
+            switch responseType {
+            case .json:
+                RGNetwork.responseJSON(with: request, success: success, failure: failure)
+
+            case .string:
+                RGNetwork.responseString(with: request, success: success, failure: failure)
+
+            case .data:
+                RGNetwork.responseData(with: request, success: success, failure: failure)
+            }
+        }
+    }
+
+
+    //  MARK: - Private Methods
+    private static func responseJSON(
+        with request: DataRequest,
+        success: @escaping SuccessTask,
+        failure: @escaping FailureTask)
+    {
+        request.responseJSON { (responseJSON) in
+            print("RGNetwork request debugDescription: \n", RGNetwork.debugDescription(with: responseJSON), separator: "")
+
+            guard let json = responseJSON.value else {
+                failure(responseJSON.error)
+                RGNetwork.hideIndicator()
+                return
+            }
+
+            var responseData = Data()
+            if let data = responseJSON.data {
+                responseData = data
+            }
+            let string = String(data: responseData, encoding: .utf8)
+            let httpStatusCode = responseJSON.response?.statusCode
+            success(json as? [String : Any], string, responseJSON.data, httpStatusCode)
+            RGNetwork.hideIndicator()
+        }
+    }
+
+    private static func responseString(
+        with request: DataRequest,
+        success: @escaping SuccessTask,
+        failure: @escaping FailureTask)
+    {
+        request.responseString { (responseString) in
+            print("RGNetwork request debugDescription: \n", RGNetwork.debugDescription(with: responseString), separator: "")
+
+            guard let string = responseString.value else {
+                failure(responseString.error)
+                RGNetwork.hideIndicator()
+                return
+            }
+
+            let httpStatusCode = responseString.response?.statusCode
+            success(nil, string, responseString.data, httpStatusCode)
+            RGNetwork.hideIndicator()
+        }
+    }
+
+    private static func responseData(
+        with request: DataRequest,
+        success: @escaping SuccessTask,
+        failure: @escaping FailureTask)
+    {
+        request.responseData { (responseData) in
+            print("RGNetwork request debugDescription: \n", RGNetwork.debugDescription(with: responseData), separator: "")
+
+            guard let data = responseData.value else {
+                failure(responseData.error)
+                RGNetwork.hideIndicator()
+                return
+            }
+
+            let string = String(data: data, encoding: .utf8)
+            let httpStatusCode = responseData.response?.statusCode
+            success(nil, string, data, httpStatusCode)
+            RGNetwork.hideIndicator()
+        }
+    }
+
+    private static func debugDescription<T>(with response: DataResponse<T>) -> String {
+        var output: [String] = []
+
+        output.append(response.request != nil ? "[Request]: \(response.request!.httpMethod ?? "GET") \(response.request!)" : "[Request]: nil")
+        if let httpBody = response.request?.httpBody,
+            let parameters = String(data: httpBody, encoding: .utf8) {
+            output.append("[Parameters]: \n\(parameters)")
+        }
+        output.append("[Parameters]: nil")
+        output.append(response.response != nil ? "[Response]: \(response.response!)" : "[Response]: nil")
+        output.append("[Data]: \(response.data?.count ?? 0) bytes")
+        output.append("[Result]: \(response.result.debugDescription)")
+        output.append("[Timeline]: \(response.timeline.debugDescription)")
+
+        return output.joined(separator: "\n")
+    }
 }
 
 // MARK: - Indicator View
