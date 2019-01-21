@@ -47,20 +47,20 @@ struct RGNetwork {
     /// - Parameters:
     ///   - urlString: 请求地址
     ///   - parameters: 参数
-    ///   - showProgress: 是否显示 Progress
+    ///   - showIndicator: 是否显示 Indicator
     ///   - success: 请求成功的 Task
     ///   - fail: 请求失败的 Task
     public static func get(
         with urlString: String,
         parameters: [String: Any]?,
-        showProgress: Bool,
+        showIndicator: Bool,
         success: @escaping SuccessClosure,
         fail: @escaping FailCloure)
     {
         RGNetwork.request(with: urlString,
                           method: .get,
                           parameters: parameters,
-                          showProgress: showProgress,
+                          showIndicator: showIndicator,
                           success: success,
                           fail: fail)
     }
@@ -70,20 +70,20 @@ struct RGNetwork {
     /// - Parameters:
     ///   - urlString: 请求地址
     ///   - parameters: 参数
-    ///   - showProgress: 是否显示 Progress
+    ///   - showIndicator: 是否显示 Indicator
     ///   - success: 请求成功的 Task
     ///   - fail: 请求失败的 Task
     public static func post(
         with urlString: String,
         parameters: [String: Any]?,
-        showProgress: Bool,
+        showIndicator: Bool,
         success: @escaping SuccessClosure,
         fail: @escaping FailCloure)
     {
         RGNetwork.request(with: urlString,
                           method: .post,
                           parameters: parameters,
-                          showProgress: showProgress,
+                          showIndicator: showIndicator,
                           success: success,
                           fail: fail)
     }
@@ -93,20 +93,20 @@ struct RGNetwork {
     /// - Parameters:
     ///   - urlString: 请求地址
     ///   - parameters: 参数
-    ///   - showProgress: 是否显示 Progress
+    ///   - showIndicator: 是否显示 Indicator
     ///   - success: 请求成功的 Task
     ///   - fail: 请求失败的 Task
     public static func put(
         with urlString: String,
         parameters: [String: Any]?,
-        showProgress: Bool,
+        showIndicator: Bool,
         success: @escaping SuccessClosure,
         fail: @escaping FailCloure)
     {
         RGNetwork.request(with: urlString,
                           method: .put,
                           parameters: parameters,
-                          showProgress: showProgress,
+                          showIndicator: showIndicator,
                           success: success,
                           fail: fail)
     }
@@ -116,13 +116,13 @@ struct RGNetwork {
     /// - Parameters:
     ///   - urlString: 请求地址
     ///   - parameters: 参数
-    ///   - showProgress: 是否显示 Progress
+    ///   - showIndicator: 是否显示 Indicator
     ///   - success: 请求成功的 Task
     ///   - fail: 请求失败的 Task
     public static func delete(
         with urlString: String,
         parameters: [String: Any]?,
-        showProgress: Bool,
+        showIndicator: Bool,
         success: @escaping SuccessClosure,
         fail: @escaping FailCloure)
     {
@@ -130,8 +130,8 @@ struct RGNetwork {
         if network.reachabilityManager?.networkReachabilityStatus == .notReachable {
             RGToast.shared.toast(message: "当前无网络")
         } else {
-            if showProgress == true {
-                RGNetwork.showProgress()
+            if showIndicator == true {
+                RGNetwork.showIndicator()
             }
             let url = URL(string: urlString)
             var request = URLRequest(url: url!)
@@ -154,28 +154,20 @@ struct RGNetwork {
                                         options: JSONSerialization.ReadingOptions.allowFragments) as! [String: Any]
                     guard let jsonString = String(data: data, encoding: .utf8) else {
                         print("RGNetwork delete request get JSON string failed.")
-                        RGNetwork.hideProgress()
+                        RGNetwork.hideIndicator()
                         return
                     }
                     success(json, requestString, jsonString, "\(httpStatusCode)")
-                    RGNetwork.hideProgress()
+                    RGNetwork.hideIndicator()
                 } catch let error as NSError {
                     fail(error, requestString)
-                    RGNetwork.hideProgress()
+                    RGNetwork.hideIndicator()
                 }
             } catch let error as NSError {
                 fail(error, requestString)
-                RGNetwork.hideProgress()
+                RGNetwork.hideIndicator()
             }
         }
-    }
-
-    public static func showActivityIndicator(startDelay: TimeInterval = 0.0,
-                                             completionDelay: TimeInterval = 0.7)
-    {
-        NetworkActivityIndicatorManager.shared.isEnabled = true
-        NetworkActivityIndicatorManager.shared.startDelay = startDelay
-        NetworkActivityIndicatorManager.shared.completionDelay = completionDelay
     }
 
 
@@ -185,7 +177,7 @@ struct RGNetwork {
         with urlString: String,
         method: HTTPMethod,
         parameters: [String: Any]?,
-        showProgress: Bool,
+        showIndicator: Bool,
         success: @escaping SuccessClosure,
         fail: @escaping FailCloure)
     {
@@ -193,8 +185,8 @@ struct RGNetwork {
         if network.reachabilityManager?.networkReachabilityStatus == .notReachable {
             RGToast.shared.toast(message: "当前无网络")
         } else {
-            if showProgress == true {
-                RGNetwork.showProgress()
+            if showIndicator == true {
+                RGNetwork.showIndicator()
             }
 
             let requestString = RGNetwork.requestURL(urlString, parameters: parameters)
@@ -209,13 +201,13 @@ struct RGNetwork {
                         print("String in fact:\n", response.value!)
                         DispatchQueue.main.async {
                             RGToast.shared.toast(message: "网络访问失败")
-                            RGNetwork.hideProgress()
+                            RGNetwork.hideIndicator()
                         }
                         return
                     }
                     success(json, requestString, response.value!, "\(httpStatusCode!)")
                     DispatchQueue.main.async {
-                        RGNetwork.hideProgress()
+                        RGNetwork.hideIndicator()
                     }
                 })
         }
@@ -250,10 +242,18 @@ struct RGNetwork {
     }
 }
 
-// MARK: - Progress View
+// MARK: - Indicator View
 extension RGNetwork {
-    private static func showProgress(mode: MBProgressHUDMode = .indeterminate,
-                                     text: String = "")
+    public static func showActivityIndicator(startDelay: TimeInterval = 0.0,
+                                             completionDelay: TimeInterval = 0.7)
+    {
+        NetworkActivityIndicatorManager.shared.isEnabled = true
+        NetworkActivityIndicatorManager.shared.startDelay = startDelay
+        NetworkActivityIndicatorManager.shared.completionDelay = completionDelay
+    }
+
+    private static func showIndicator(mode: MBProgressHUDMode = .indeterminate,
+                                      text: String = "")
     {
         DispatchQueue.main.async {
             guard let window = UIApplication.shared.keyWindow else { return }
@@ -262,12 +262,11 @@ extension RGNetwork {
             hud.label.text = text
         }
     }
-
-    private static func hideProgress() {
+    
+    private static func hideIndicator() {
         DispatchQueue.main.async {
             guard let window = UIApplication.shared.keyWindow else { return }
             MBProgressHUD.hide(for: window, animated: true)
         }
     }
 }
-
