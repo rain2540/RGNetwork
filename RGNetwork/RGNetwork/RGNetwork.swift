@@ -48,7 +48,8 @@ struct RGNetwork {
         self.reachabilityManager?.startListening()
     }
 
-    //  MARK: Public Methods
+
+    //  MARK: - Public Methods
     /// GET 请求
     ///
     /// - Parameters:
@@ -185,9 +186,10 @@ struct RGNetwork {
         NetworkActivityIndicatorManager.shared.completionDelay = completionDelay
     }
 
-    //  MARK: Private Methods
-    //  Request
-    fileprivate static func request(
+
+    // MARK: - Private Methods
+    // Request
+    private static func request(
         with urlString: String,
         method: HTTPMethod,
         parameters: [String: Any]?,
@@ -227,8 +229,8 @@ struct RGNetwork {
         }
     }
 
-    //  Request String Log
-    fileprivate static func requestURL(_ urlString: String, parameters: [String: Any]?) -> String {
+    // Request String Log
+    private static func requestURL(_ urlString: String, parameters: [String: Any]?) -> String {
         if parameters?.keys.count == 0 && parameters == nil {
             return urlString
         } else {
@@ -254,10 +256,12 @@ struct RGNetwork {
             return requestString
         }
     }
+}
 
-    //  Progress View
-    fileprivate static func showProgress(mode: MBProgressHUDMode = .indeterminate,
-                                         text: String = "")
+// MARK: - Progress View
+extension RGNetwork {
+    private static func showProgress(mode: MBProgressHUDMode = .indeterminate,
+                                     text: String = "")
     {
         DispatchQueue.main.async {
             guard let window = UIApplication.shared.keyWindow else { return }
@@ -267,10 +271,11 @@ struct RGNetwork {
         }
     }
 
-    fileprivate static func hideProgress() {
+    private static func hideProgress() {
         DispatchQueue.main.async {
             guard let window = UIApplication.shared.keyWindow else { return }
             MBProgressHUD.hide(for: window, animated: true)
         }
     }
 }
+
