@@ -217,12 +217,12 @@ extension RGNetwork {
 }
 
 
-//  MARK: -
+//  MARK: - Deprecated
 typealias SuccessClosure = ([String: Any], String, String, String) -> Void
 typealias FailCloure = (Error?, String) -> Void
 
 extension RGNetwork {
-    //  MARK: Public Methods
+    //  MARK: ===== ===== Public Methods ===== =====
     /// GET 请求
     ///
     /// - Parameters:
@@ -352,7 +352,7 @@ extension RGNetwork {
     }
 
 
-    // MARK: - Private Methods
+    // MARK: ===== ===== Private Methods ===== =====
     // Request
     private static func request(
         with urlString: String,
