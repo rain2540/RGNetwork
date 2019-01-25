@@ -67,7 +67,7 @@ struct RGNetwork {
     public static func request(
         with urlString: String,
         method: HTTPMethod = .get,
-        parameters: [String: Any]? = nil,
+        parameters: Parameters? = nil,
         encoding: ParameterEncoding = URLEncoding.default,
         headers: HTTPHeaders? = nil,
         showIndicator: Bool = false,
@@ -233,7 +233,7 @@ extension RGNetwork {
     ///   - fail: 请求失败的 Task
     public static func get(
         with urlString: String,
-        parameters: [String: Any]?,
+        parameters: Parameters?,
         showIndicator: Bool,
         success: @escaping SuccessClosure,
         fail: @escaping FailCloure)
@@ -256,7 +256,7 @@ extension RGNetwork {
     ///   - fail: 请求失败的 Task
     public static func post(
         with urlString: String,
-        parameters: [String: Any]?,
+        parameters: Parameters?,
         showIndicator: Bool,
         success: @escaping SuccessClosure,
         fail: @escaping FailCloure)
@@ -279,7 +279,7 @@ extension RGNetwork {
     ///   - fail: 请求失败的 Task
     public static func put(
         with urlString: String,
-        parameters: [String: Any]?,
+        parameters: Parameters?,
         showIndicator: Bool,
         success: @escaping SuccessClosure,
         fail: @escaping FailCloure)
@@ -302,7 +302,7 @@ extension RGNetwork {
     ///   - fail: 请求失败的 Task
     public static func delete(
         with urlString: String,
-        parameters: [String: Any]?,
+        parameters: Parameters?,
         showIndicator: Bool,
         success: @escaping SuccessClosure,
         fail: @escaping FailCloure)
@@ -357,7 +357,7 @@ extension RGNetwork {
     private static func request(
         with urlString: String,
         method: HTTPMethod,
-        parameters: [String: Any]?,
+        parameters: Parameters?,
         showIndicator: Bool,
         success: @escaping SuccessClosure,
         fail: @escaping FailCloure)
