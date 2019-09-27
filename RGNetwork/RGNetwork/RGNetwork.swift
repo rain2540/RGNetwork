@@ -231,6 +231,10 @@ extension RGNetwork {
     ///   - showIndicator: 是否显示 Indicator
     ///   - success: 请求成功的 Task
     ///   - fail: 请求失败的 Task
+    @available(*, deprecated, message: "Use 'request(with:,method:,parameters:,encoding:,headers:,showIndicator:,responseType:,success:,failure:)' instead", renamed: "request(with:method:parameters:encoding:headers:showIndicator:responseType:success:failure:)")
+    /*
+     @available(iOS, introduced: 7.0, deprecated: 11.0, message: "Use view.safeAreaLayoutGuide.topAnchor instead of topLayoutGuide.bottomAnchor")
+     */
     public static func get(
         with urlString: String,
         parameters: Parameters?,
