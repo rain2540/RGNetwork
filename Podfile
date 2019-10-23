@@ -6,7 +6,7 @@ target 'RGNetwork' do
     use_frameworks!
 
     # Pods for RGNetwork
-    pod 'Alamofire'#, '~> 5.0.0-beta.3'
+    pod 'Alamofire', '~> 5.0.0-rc.2'
     pod 'AlamofireNetworkActivityIndicator'
     pod 'MBProgressHUD'
     
