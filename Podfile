@@ -7,7 +7,8 @@ target 'RGNetwork' do
 
     # Pods for RGNetwork
     pod 'Alamofire', '~> 5.0.0-rc.2'
-    pod 'AlamofireNetworkActivityIndicator'
+    #pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git', :tag => '5.0.0-rc.2'
+    pod 'AlamofireNetworkActivityIndicator', '~> 3.0.0-beta.3'
     pod 'MBProgressHUD'
     
 end
