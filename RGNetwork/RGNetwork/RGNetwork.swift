@@ -196,7 +196,7 @@ struct RGNetwork {
                     print("RGNetwork \(method.rawValue) request debugDescription: \n", response.debugDescription)
                     let httpStatusCode = response.response?.statusCode
                     guard let data = response.data else { return }
-                    guard let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: Any] else {
+                    guard let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any] else {
                         fail(response.error, requestString)
                         print("String in fact:\n", response.value!)
                         DispatchQueue.main.async {
