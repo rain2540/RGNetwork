@@ -10,7 +10,7 @@ DEPENDENCIES:
   - MBProgressHUD
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
     - Alamofire
     - AlamofireNetworkActivityIndicator
     - MBProgressHUD
@@ -22,4 +22,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: f15854522f1eb7b9093e130be065ae0903a68f85
 
-COCOAPODS: 1.8.0
+COCOAPODS: 1.8.4
