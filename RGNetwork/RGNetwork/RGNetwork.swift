@@ -31,7 +31,23 @@ struct RGNetwork {
     var reachabilityManager: NetworkReachabilityManager?
 
     private init() {
-        self.reachabilityManager = NetworkReachabilityManager()
+        self.reachabilityManager = NetworkReachabilityManager.default
+        self.reachabilityManager?.startListening(onUpdatePerforming: { (status) in
+            switch status {
+            case .unknown:
+                print("============ 未知网络 ============")
+
+            case .notReachable:
+                print("============ 没有网络(断网) ============")
+
+            case .reachable(.cellular):
+                print("============ 手机自带网络 ============")
+
+            case .reachable(.ethernetOrWiFi):
+                print("============ WIFI ============")
+            }
+        })
+        /*
         self.reachabilityManager?.listener = { status in
             switch status {
             case .unknown:
@@ -48,6 +64,7 @@ struct RGNetwork {
             }
         }
         self.reachabilityManager?.startListening()
+        */
     }
 
 
@@ -81,7 +98,7 @@ struct RGNetwork {
         }
 
         DispatchQueue.global().async {
-            let request = Alamofire.request(urlString, method: method, parameters: parameters, encoding: encoding, headers: headers)
+            let request = AF.request(urlString, method: method, parameters: parameters, encoding: encoding, headers: headers)
 
             switch responseType {
             case .json:
@@ -104,7 +121,7 @@ struct RGNetwork {
         failure: @escaping FailureTask)
     {
         request.responseJSON { (responseJSON) in
-            print("RGNetwork request debugDescription: \n", RGNetwork.debugDescription(with: responseJSON), separator: "")
+            print("RGNetwork request debugDescription: \n", responseJSON.debugDescription, separator: "")
 
             guard let json = responseJSON.value else {
                 failure(responseJSON.error)
@@ -129,7 +146,7 @@ struct RGNetwork {
         failure: @escaping FailureTask)
     {
         request.responseString { (responseString) in
-            print("RGNetwork request debugDescription: \n", RGNetwork.debugDescription(with: responseString), separator: "")
+            print("RGNetwork request debugDescription: \n", responseString.debugDescription, separator: "")
 
             guard let string = responseString.value else {
                 failure(responseString.error)
@@ -149,7 +166,7 @@ struct RGNetwork {
         failure: @escaping FailureTask)
     {
         request.responseData { (responseData) in
-            print("RGNetwork request debugDescription: \n", RGNetwork.debugDescription(with: responseData), separator: "")
+            print("RGNetwork request debugDescription: \n", responseData.debugDescription, separator: "")
 
             guard let data = responseData.value else {
                 failure(responseData.error)
@@ -164,6 +181,7 @@ struct RGNetwork {
         }
     }
 
+    /*
     private static func debugDescription<T>(with response: DataResponse<T>) -> String {
         var output: [String] = []
 
@@ -180,6 +198,7 @@ struct RGNetwork {
 
         return output.joined(separator: "\n")
     }
+    */
 }
 
 // MARK: - Indicator View
@@ -312,7 +331,7 @@ extension RGNetwork {
         fail: @escaping FailCloure)
     {
         let network = RGNetwork.shared
-        if network.reachabilityManager?.networkReachabilityStatus == .notReachable {
+        if network.reachabilityManager?.status == .notReachable {
             RGToast.shared.toast(message: "当前无网络")
         } else {
             if showIndicator == true {
@@ -367,7 +386,7 @@ extension RGNetwork {
         fail: @escaping FailCloure)
     {
         let network = RGNetwork.shared
-        if network.reachabilityManager?.networkReachabilityStatus == .notReachable {
+        if network.reachabilityManager?.status == .notReachable {
             RGToast.shared.toast(message: "当前无网络")
         } else {
             if showIndicator == true {
@@ -375,8 +394,7 @@ extension RGNetwork {
             }
 
             let requestString = RGNetwork.requestURL(urlString, parameters: parameters)
-            Alamofire
-                .request(urlString, method: method, parameters: parameters)
+            AF.request(urlString, method: method, parameters: parameters)
                 .responseString(completionHandler: { (response) in
                     print("RGNetwork \(method.rawValue) request debugDescription: \n", response.debugDescription)
                     let httpStatusCode = response.response?.statusCode
