@@ -6,8 +6,8 @@ target 'RGNetwork' do
     use_frameworks!
 
     # Pods for RGNetwork
-    pod 'Alamofire', '~> 5.0.0-rc.2'
-    #pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git', :tag => '5.0.0-rc.2'
+    pod 'Alamofire', '~> 5.0.0-rc.3'
+    #pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git', :tag => '5.0.0-rc.3'
     pod 'AlamofireNetworkActivityIndicator', '~> 3.0.0-beta.3'
     pod 'MBProgressHUD'
     
