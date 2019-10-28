@@ -25,6 +25,7 @@ enum ResponseType {
 
 
 struct RGNetwork {
+
     //  MARK: Initializations
     static let shared = RGNetwork()
 
@@ -47,24 +48,6 @@ struct RGNetwork {
                 print("============ WIFI ============")
             }
         })
-        /*
-        self.reachabilityManager?.listener = { status in
-            switch status {
-            case .unknown:
-                print("============ 未知网络 ============")
-
-            case .notReachable:
-                print("============ 没有网络(断网) ============")
-
-            case .reachable(.wwan):
-                print("============ 手机自带网络 ============")
-
-            case .reachable(.ethernetOrWiFi):
-                print("============ WIFI ============")
-            }
-        }
-        self.reachabilityManager?.startListening()
-        */
     }
 
 
@@ -180,25 +163,6 @@ struct RGNetwork {
             RGNetwork.hideIndicator()
         }
     }
-
-    /*
-    private static func debugDescription<T>(with response: DataResponse<T>) -> String {
-        var output: [String] = []
-
-        output.append(response.request != nil ? "[Request]: \(response.request!.httpMethod ?? "GET") \(response.request!)" : "[Request]: nil")
-        if let httpBody = response.request?.httpBody,
-            let parameters = String(data: httpBody, encoding: .utf8) {
-            output.append("[Parameters]: \n\(parameters)")
-        }
-        output.append("[Parameters]: nil")
-        output.append(response.response != nil ? "[Response]: \(response.response!)" : "[Response]: nil")
-        output.append("[Data]: \(response.data?.count ?? 0) bytes")
-        output.append("[Result]: \(response.result.debugDescription)")
-        output.append("[Timeline]: \(response.timeline.debugDescription)")
-
-        return output.joined(separator: "\n")
-    }
-    */
 }
 
 // MARK: - Indicator View
