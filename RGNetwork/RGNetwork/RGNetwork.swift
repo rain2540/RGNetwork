@@ -16,6 +16,12 @@ typealias ResponseString = String
 typealias ResponseData = Data
 typealias HttpStatusCode = Int
 
+enum DataResponsePackage {
+    case json(DataResponse<Any>)
+    case string(DataResponse<String>)
+    case data(DataResponse<Data>)
+}
+
 typealias SuccessTask = (ResponseJSON?, ResponseString?, ResponseData?, HttpStatusCode?) -> Void
 typealias FailureTask = (Error?) -> Void
 
@@ -104,20 +110,20 @@ struct RGNetwork {
         failure: @escaping FailureTask)
     {
         request.responseJSON { (responseJSON) in
-            print("RGNetwork request debugDescription: \n", RGNetwork.debugDescription(with: responseJSON), separator: "")
+            print("RGNetwork request debugDescription: \n", responseJSON.debugDescription, separator: "")
 
+            let httpStatusCode = responseJSON.response?.statusCode
             guard let json = responseJSON.value else {
                 failure(responseJSON.error)
                 RGNetwork.hideIndicator()
                 return
             }
-
             var responseData = Data()
             if let data = responseJSON.data {
                 responseData = data
             }
             let string = String(data: responseData, encoding: .utf8)
-            let httpStatusCode = responseJSON.response?.statusCode
+
             success(json as? [String : Any], string, responseJSON.data, httpStatusCode)
             RGNetwork.hideIndicator()
         }
@@ -129,15 +135,15 @@ struct RGNetwork {
         failure: @escaping FailureTask)
     {
         request.responseString { (responseString) in
-            print("RGNetwork request debugDescription: \n", RGNetwork.debugDescription(with: responseString), separator: "")
+            print("RGNetwork request debugDescription: \n", responseString.debugDescription, separator: "")
 
+            let httpStatusCode = responseString.response?.statusCode
             guard let string = responseString.value else {
                 failure(responseString.error)
                 RGNetwork.hideIndicator()
                 return
             }
 
-            let httpStatusCode = responseString.response?.statusCode
             success(nil, string, responseString.data, httpStatusCode)
             RGNetwork.hideIndicator()
         }
@@ -149,21 +155,22 @@ struct RGNetwork {
         failure: @escaping FailureTask)
     {
         request.responseData { (responseData) in
-            print("RGNetwork request debugDescription: \n", RGNetwork.debugDescription(with: responseData), separator: "")
+            print("RGNetwork request debugDescription: \n", responseData.debugDescription, separator: "")
 
+            let httpStatusCode = responseData.response?.statusCode
             guard let data = responseData.value else {
                 failure(responseData.error)
                 RGNetwork.hideIndicator()
                 return
             }
-
             let string = String(data: data, encoding: .utf8)
-            let httpStatusCode = responseData.response?.statusCode
+
             success(nil, string, data, httpStatusCode)
             RGNetwork.hideIndicator()
         }
     }
 
+    /*
     private static func debugDescription<T>(with response: DataResponse<T>) -> String {
         var output: [String] = []
 
@@ -180,6 +187,7 @@ struct RGNetwork {
 
         return output.joined(separator: "\n")
     }
+    */
 }
 
 // MARK: - Indicator View
