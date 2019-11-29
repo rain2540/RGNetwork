@@ -23,7 +23,7 @@ enum DataResponsePackage {
 }
 
 typealias SuccessTask = (ResponseJSON?, ResponseString?, ResponseData?, HttpStatusCode?) -> Void
-typealias FailureTask = (Error?) -> Void
+typealias FailureTask = (Error?, HttpStatusCode?, DataRequest, DataResponsePackage) -> Void
 
 enum ResponseType {
     case json, string, data
@@ -114,7 +114,7 @@ struct RGNetwork {
 
             let httpStatusCode = responseJSON.response?.statusCode
             guard let json = responseJSON.value else {
-                failure(responseJSON.error)
+                failure(responseJSON.error, httpStatusCode, request, .json(responseJSON))
                 RGNetwork.hideIndicator()
                 return
             }
@@ -139,7 +139,7 @@ struct RGNetwork {
 
             let httpStatusCode = responseString.response?.statusCode
             guard let string = responseString.value else {
-                failure(responseString.error)
+                failure(responseString.error, httpStatusCode, request, .string(responseString))
                 RGNetwork.hideIndicator()
                 return
             }
@@ -159,7 +159,7 @@ struct RGNetwork {
 
             let httpStatusCode = responseData.response?.statusCode
             guard let data = responseData.value else {
-                failure(responseData.error)
+                failure(responseData.error, httpStatusCode, request, .data(responseData))
                 RGNetwork.hideIndicator()
                 return
             }
