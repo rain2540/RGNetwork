@@ -87,7 +87,15 @@ struct RGNetwork {
         }
 
         DispatchQueue.global().async {
-            let request = Alamofire.request(urlString, method: method, parameters: parameters, encoding: encoding, headers: headers)
+            var urlPath = ""
+            if let host = RGNetworkConfig.shared.baseURL, host.hasHttpPrefix {
+                urlPath = host + urlString
+            } else if urlString.hasHttpPrefix {
+                urlPath = urlString
+            } else {
+                print("RGNetwork.Error.urlFormatWrong")
+            }
+            let request = Alamofire.request(urlPath, method: method, parameters: parameters, encoding: encoding, headers: headers)
 
             switch responseType {
             case .json:
