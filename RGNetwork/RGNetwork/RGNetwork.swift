@@ -95,6 +95,7 @@ struct RGNetwork {
             } else {
                 print("RGNetwork.Error.urlFormatWrong")
             }
+            
             let request = Alamofire.request(urlPath, method: method, parameters: parameters, encoding: encoding, headers: headers)
 
             switch responseType {
@@ -175,6 +176,16 @@ struct RGNetwork {
 
             success(nil, string, data, httpStatusCode, request, .data(responseData))
             RGNetwork.hideIndicator()
+        }
+    }
+
+    private static func urlPathString(by urlString: String) throws -> String {
+        if let host = RGNetworkConfig.shared.baseURL, host.hasHttpPrefix {
+            return host + urlString
+        } else if urlString.hasHttpPrefix {
+            return urlString
+        } else {
+            throw RGNetworkError.wrongURLFormat
         }
     }
 
