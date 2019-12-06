@@ -7,3 +7,7 @@
 //
 
 import Foundation
+
+enum RGNetworkError: Error {
+    case wrongURLFormat
+}
