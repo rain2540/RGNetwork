@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-platform :ios, '9.0'
+platform :ios, '10.0'
 
 install! 'cocoapods', generate_multiple_pod_projects: true
 
@@ -8,7 +8,7 @@ target 'RGNetwork' do
     use_frameworks!
 
     # Pods for RGNetwork
-    pod 'Alamofire'
+    pod 'Alamofire'#, '~> 5.0.0-beta.3'
     pod 'AlamofireNetworkActivityIndicator'
     pod 'MBProgressHUD'
     
