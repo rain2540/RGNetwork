@@ -8,8 +8,12 @@
 
 import Foundation
 
-struct RGNetworkConfig {
+class RGNetworkConfig {
 
+    static let shared = RGNetworkConfig()
 
+    var baseURL: String? = nil
+
+    private init() { }
 
 }
