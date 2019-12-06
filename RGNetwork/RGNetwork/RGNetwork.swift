@@ -434,3 +434,12 @@ extension RGNetwork {
         }
     }
 }
+
+
+fileprivate extension String {
+
+    var hasHttpPrefix: Bool {
+        return self.hasPrefix("http://") || self.hasPrefix("https://")
+    }
+
+}
