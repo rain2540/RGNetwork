@@ -16,8 +16,14 @@ typealias ResponseString = String
 typealias ResponseData = Data
 typealias HttpStatusCode = Int
 
-typealias SuccessTask = (ResponseJSON?, ResponseString?, ResponseData?, HttpStatusCode?) -> Void
-typealias FailureTask = (Error?) -> Void
+enum DataResponsePackage {
+    case json(DataResponse<Any>)
+    case string(DataResponse<String>)
+    case data(DataResponse<Data>)
+}
+
+typealias SuccessTask = (ResponseJSON?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponsePackage) -> Void
+typealias FailureTask = (Error?, HttpStatusCode?, DataRequest, DataResponsePackage) -> Void
 
 enum ResponseType {
     case json, string, data
@@ -25,15 +31,14 @@ enum ResponseType {
 
 
 struct RGNetwork {
-
     //  MARK: Initializations
     static let shared = RGNetwork()
 
     var reachabilityManager: NetworkReachabilityManager?
 
     private init() {
-        self.reachabilityManager = NetworkReachabilityManager.default
-        self.reachabilityManager?.startListening(onUpdatePerforming: { (status) in
+        self.reachabilityManager = NetworkReachabilityManager()
+        self.reachabilityManager?.listener = { status in
             switch status {
             case .unknown:
                 print("============ 未知网络 ============")
@@ -41,13 +46,14 @@ struct RGNetwork {
             case .notReachable:
                 print("============ 没有网络(断网) ============")
 
-            case .reachable(.cellular):
+            case .reachable(.wwan):
                 print("============ 手机自带网络 ============")
 
             case .reachable(.ethernetOrWiFi):
                 print("============ WIFI ============")
             }
-        })
+        }
+        self.reachabilityManager?.startListening()
     }
 
 
@@ -81,17 +87,22 @@ struct RGNetwork {
         }
 
         DispatchQueue.global().async {
-            let request = AF.request(urlString, method: method, parameters: parameters, encoding: encoding, headers: headers)
+            do {
+                let urlPath = try urlPathString(by: urlString)
+                let request = Alamofire.request(urlPath, method: method, parameters: parameters, encoding: encoding, headers: headers)
 
-            switch responseType {
-            case .json:
-                RGNetwork.responseJSON(with: request, success: success, failure: failure)
+                switch responseType {
+                    case .json:
+                        RGNetwork.responseJSON(with: request, success: success, failure: failure)
 
-            case .string:
-                RGNetwork.responseString(with: request, success: success, failure: failure)
+                    case .string:
+                        RGNetwork.responseString(with: request, success: success, failure: failure)
 
-            case .data:
-                RGNetwork.responseData(with: request, success: success, failure: failure)
+                    case .data:
+                        RGNetwork.responseData(with: request, success: success, failure: failure)
+                }
+            } catch {
+                print(error)
             }
         }
     }
@@ -106,19 +117,19 @@ struct RGNetwork {
         request.responseJSON { (responseJSON) in
             print("RGNetwork request debugDescription: \n", responseJSON.debugDescription, separator: "")
 
+            let httpStatusCode = responseJSON.response?.statusCode
             guard let json = responseJSON.value else {
-                failure(responseJSON.error)
+                failure(responseJSON.error, httpStatusCode, request, .json(responseJSON))
                 RGNetwork.hideIndicator()
                 return
             }
-
             var responseData = Data()
             if let data = responseJSON.data {
                 responseData = data
             }
             let string = String(data: responseData, encoding: .utf8)
-            let httpStatusCode = responseJSON.response?.statusCode
-            success(json as? [String : Any], string, responseJSON.data, httpStatusCode)
+
+            success(json as? [String : Any], string, responseJSON.data, httpStatusCode, request, .json(responseJSON))
             RGNetwork.hideIndicator()
         }
     }
@@ -131,14 +142,14 @@ struct RGNetwork {
         request.responseString { (responseString) in
             print("RGNetwork request debugDescription: \n", responseString.debugDescription, separator: "")
 
+            let httpStatusCode = responseString.response?.statusCode
             guard let string = responseString.value else {
-                failure(responseString.error)
+                failure(responseString.error, httpStatusCode, request, .string(responseString))
                 RGNetwork.hideIndicator()
                 return
             }
 
-            let httpStatusCode = responseString.response?.statusCode
-            success(nil, string, responseString.data, httpStatusCode)
+            success(nil, string, responseString.data, httpStatusCode, request, .string(responseString))
             RGNetwork.hideIndicator()
         }
     }
@@ -151,18 +162,47 @@ struct RGNetwork {
         request.responseData { (responseData) in
             print("RGNetwork request debugDescription: \n", responseData.debugDescription, separator: "")
 
+            let httpStatusCode = responseData.response?.statusCode
             guard let data = responseData.value else {
-                failure(responseData.error)
+                failure(responseData.error, httpStatusCode, request, .data(responseData))
                 RGNetwork.hideIndicator()
                 return
             }
-
             let string = String(data: data, encoding: .utf8)
-            let httpStatusCode = responseData.response?.statusCode
-            success(nil, string, data, httpStatusCode)
+
+            success(nil, string, data, httpStatusCode, request, .data(responseData))
             RGNetwork.hideIndicator()
         }
     }
+
+    private static func urlPathString(by urlString: String) throws -> String {
+        if let host = RGNetworkConfig.shared.baseURL, host.hasHttpPrefix {
+            return host + urlString
+        } else if urlString.hasHttpPrefix {
+            return urlString
+        } else {
+            throw RGNetworkError.wrongURLFormat
+        }
+    }
+
+    /*
+    private static func debugDescription<T>(with response: DataResponse<T>) -> String {
+        var output: [String] = []
+
+        output.append(response.request != nil ? "[Request]: \(response.request!.httpMethod ?? "GET") \(response.request!)" : "[Request]: nil")
+        if let httpBody = response.request?.httpBody,
+            let parameters = String(data: httpBody, encoding: .utf8) {
+            output.append("[Parameters]: \n\(parameters)")
+        }
+        output.append("[Parameters]: nil")
+        output.append(response.response != nil ? "[Response]: \(response.response!)" : "[Response]: nil")
+        output.append("[Data]: \(response.data?.count ?? 0) bytes")
+        output.append("[Result]: \(response.result.debugDescription)")
+        output.append("[Timeline]: \(response.timeline.debugDescription)")
+
+        return output.joined(separator: "\n")
+    }
+    */
 }
 
 // MARK: - Indicator View
@@ -295,7 +335,7 @@ extension RGNetwork {
         fail: @escaping FailCloure)
     {
         let network = RGNetwork.shared
-        if network.reachabilityManager?.status == .notReachable {
+        if network.reachabilityManager?.networkReachabilityStatus == .notReachable {
             RGToast.shared.toast(message: "当前无网络")
         } else {
             if showIndicator == true {
@@ -350,7 +390,7 @@ extension RGNetwork {
         fail: @escaping FailCloure)
     {
         let network = RGNetwork.shared
-        if network.reachabilityManager?.status == .notReachable {
+        if network.reachabilityManager?.networkReachabilityStatus == .notReachable {
             RGToast.shared.toast(message: "当前无网络")
         } else {
             if showIndicator == true {
@@ -358,7 +398,8 @@ extension RGNetwork {
             }
 
             let requestString = RGNetwork.requestURL(urlString, parameters: parameters)
-            AF.request(urlString, method: method, parameters: parameters)
+            Alamofire
+                .request(urlString, method: method, parameters: parameters)
                 .responseString(completionHandler: { (response) in
                     print("RGNetwork \(method.rawValue) request debugDescription: \n", response.debugDescription)
                     let httpStatusCode = response.response?.statusCode
@@ -407,4 +448,13 @@ extension RGNetwork {
             return requestString
         }
     }
+}
+
+
+fileprivate extension String {
+
+    var hasHttpPrefix: Bool {
+        return self.hasPrefix("http://") || self.hasPrefix("https://")
+    }
+
 }
