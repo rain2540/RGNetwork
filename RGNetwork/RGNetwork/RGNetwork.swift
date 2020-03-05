@@ -198,6 +198,7 @@ extension RGNetwork {
 }
 
 
+// MARK: - String Extension
 fileprivate extension String {
 
     var hasHttpPrefix: Bool {
