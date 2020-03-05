@@ -31,6 +31,7 @@ enum ResponseType {
 
 
 struct RGNetwork {
+    /*
     //  MARK: Initializations
     static let shared = RGNetwork()
 
@@ -55,7 +56,7 @@ struct RGNetwork {
         }
         self.reachabilityManager?.startListening()
     }
-
+*/
 
     //  MARK: - Public Methods
     /// 通用请求方法
@@ -239,7 +240,7 @@ extension RGNetwork {
     }
 }
 
-
+/*
 //  MARK: - Deprecated
 typealias SuccessClosure = ([String: Any], String, String, String) -> Void
 typealias FailCloure = (Error?, String) -> Void
@@ -449,7 +450,7 @@ extension RGNetwork {
         }
     }
 }
-
+*/
 
 fileprivate extension String {
 
