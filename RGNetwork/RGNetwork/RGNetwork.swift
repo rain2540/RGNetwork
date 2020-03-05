@@ -90,7 +90,7 @@ struct RGNetwork {
         DispatchQueue.global().async {
             do {
                 let urlPath = try urlPathString(by: urlString)
-                let request = Alamofire.request(urlPath, method: method, parameters: parameters, encoding: encoding, headers: headers)
+                let request = AF.request(urlPath, method: method, parameters: parameters, encoding: encoding, headers: headers)
 
                 switch responseType {
                     case .json:
