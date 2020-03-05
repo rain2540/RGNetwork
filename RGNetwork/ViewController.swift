@@ -28,38 +28,35 @@ class ViewController: UIViewController {
     }
 
     @IBAction func loadContent(_ sender: UIButton) {
-/*
-        RGNetwork.get(
-            with: urlString,
-            parameters: params,
-            showIndicator: true,
-            success: { (json, requestString, jsonString, httpStatusCode) in
-                print("jsonString: ", jsonString)
-                //RGToast.shared.toast(message: "get content success.")
-        },
-            fail: { (error, requestString) in
-                print("error: \n", error ?? "get nil failed.")
-                print("request string: \n", requestString)
-                //RGToast.shared.toast(message: "get content failed.")
-        })
-        */
-    }
-
-    @IBAction func loadContentInfo(_ sender: UIButton) {
-        
         RGNetwork.request(with: urlString,
                           parameters: params,
                           showIndicator: true,
                           responseType: .json,
                           success: { (json, string, data, httpStatusCode, request, response) in
-                            print("json:", json ?? "")
-                            print("string:", string ?? "")
-                            print("response package:", response)
+                            print("\n/* ***** ***** ***** ***** */\n")
+                            print("JSON:", json ?? "", separator: "\n")
+                            print("\n/* ***** ***** ***** ***** */\n")
+                            print("string:", string ?? "", separator: "\n")
+                            print("\n/* ***** ***** ***** ***** */\n")
+        },
+                          failure: { (error, httpStatusCode, request, response)  in
+                            print("error: \n", error ?? "get nil failed.")
+        })
+    }
 
+    @IBAction func loadContentInfo(_ sender: UIButton) {
+        RGNetwork.request(with: urlString,
+                          parameters: params,
+                          showIndicator: true,
+                          responseType: .json,
+                          success: { (json, string, data, httpStatusCode, request, response) in
                             switch response {
                             case let .json(responseJSON):
-                                print("response:", responseJSON)
-                                
+                                print("\n/* ***** ***** ***** ***** */\n")
+                                print("response:", responseJSON, separator: "\n")
+                                print("\n/* ***** ***** ***** ***** */\n")
+                                print("metrics:", responseJSON.metrics ?? "none", separator: "\n")
+                                print("\n/* ***** ***** ***** ***** */\n")
                             default: break
                             }
         },
