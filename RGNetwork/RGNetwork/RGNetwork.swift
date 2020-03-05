@@ -17,9 +17,9 @@ typealias ResponseData = Data
 typealias HttpStatusCode = Int
 
 enum DataResponsePackage {
-    case json(DataResponse<Any>)
-    case string(DataResponse<String>)
-    case data(DataResponse<Data>)
+    case json(DataResponse<Any, AFError>)
+    case string(DataResponse<String, AFError>)
+    case data(DataResponse<Data, AFError>)
 }
 
 typealias SuccessTask = (ResponseJSON?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponsePackage) -> Void
