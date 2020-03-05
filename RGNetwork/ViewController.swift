@@ -28,7 +28,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func loadContent(_ sender: UIButton) {
-
+/*
         RGNetwork.get(
             with: urlString,
             parameters: params,
@@ -42,6 +42,7 @@ class ViewController: UIViewController {
                 print("request string: \n", requestString)
                 //RGToast.shared.toast(message: "get content failed.")
         })
+        */
     }
 
     @IBAction func loadContentInfo(_ sender: UIButton) {
