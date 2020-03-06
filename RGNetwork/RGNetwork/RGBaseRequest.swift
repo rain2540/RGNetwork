@@ -31,3 +31,26 @@ class RGBaseRequest {
     }
     
 }
+
+
+extension RGBaseRequest {
+    
+    public func task(showIndicator: Bool = false,
+                     responseType: ResponseType = .json,
+                     success: @escaping SuccessTask,
+                     failure: @escaping FailureTask)
+    {
+        RGNetwork.request(
+            with: urlString,
+            method: method,
+            parameters: parameters,
+            encoding: encoding,
+            headers: headers,
+            showIndicator: showIndicator,
+            responseType: responseType,
+            success: success,
+            failure: failure
+        )
+    }
+    
+}
