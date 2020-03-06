@@ -7,8 +7,15 @@
 //
 
 import Foundation
+import Alamofire
 
 class RGBaseRequest {
+    
+    let urlString: String
+    let method: HTTPMethod
+    let parameters: Parameters?
+    let encoding: ParameterEncoding
+    let headers: HTTPHeaders?
     
     
     
