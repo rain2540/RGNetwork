@@ -17,6 +17,8 @@ class RGBaseRequest {
     let encoding: ParameterEncoding
     let headers: HTTPHeaders?
     
+    
+    // MARK: - Lifecycle
     init(urlString: String,
          method: HTTPMethod = .get,
          parameters: Parameters? = nil,
@@ -33,6 +35,7 @@ class RGBaseRequest {
 }
 
 
+// MARK: - Public
 extension RGBaseRequest {
     
     public func task(showIndicator: Bool = false,
