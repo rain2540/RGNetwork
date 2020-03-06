@@ -28,7 +28,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func loadContent(_ sender: UIButton) {
-        RGNetwork.request(with: urlString,
+        /*RGNetwork.request(with: urlString,
                           parameters: params,
                           showIndicator: true,
                           responseType: .json,
@@ -41,6 +41,21 @@ class ViewController: UIViewController {
         },
                           failure: { (error, httpStatusCode, request, response)  in
                             print("error: \n", error ?? "get nil failed.")
+        })
+        */
+        let request = RGBaseRequest(urlString: urlString, parameters: params)
+        request.task(
+            showIndicator: true,
+            responseType: .json,
+            success: { (json, string, data, httpStatusCode, request, response) in
+                print("\n/* ***** ***** ***** ***** */\n")
+                print("JSON:", json ?? "", separator: "\n")
+                print("\n/* ***** ***** ***** ***** */\n")
+                print("string:", string ?? "", separator: "\n")
+                print("\n/* ***** ***** ***** ***** */\n")
+        },
+            failure: { (error, httpStatusCode, request, response) in
+                print("error: \n", error ?? "get nil failed.")
         })
     }
 
