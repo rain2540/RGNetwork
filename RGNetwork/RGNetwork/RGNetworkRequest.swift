@@ -1,5 +1,5 @@
 //
-//  RGBaseRequest.swift
+//  RGNetworkRequest.swift
 //  RGNetwork
 //
 //  Created by Rain on 2020/3/6.
@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-class RGBaseRequest {
+class RGNetworkRequest {
     
     let urlString: String
     let method: HTTPMethod
@@ -36,7 +36,7 @@ class RGBaseRequest {
 
 
 // MARK: - Public
-extension RGBaseRequest {
+extension RGNetworkRequest {
     
     public func task(showIndicator: Bool = false,
                      responseType: ResponseType = .json,
