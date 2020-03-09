@@ -12,8 +12,10 @@ class ViewController: UIViewController {
 
     let urlString = "http://web.juhe.cn:8080/environment/water/river"
 
-    let params = ["river"   :   "松花江流域",
-                  "key"     :   "8eb77a504db4a2b3511ed3c4d0964015"]
+    let params = [
+        "river" :   "松花江流域",
+        "key"   :   "8eb77a504db4a2b3511ed3c4d0964015",
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,20 +28,21 @@ class ViewController: UIViewController {
     }
 
     @IBAction func loadContent(_ sender: UIButton) {
-
+/*
         RGNetwork.get(
             with: urlString,
             parameters: params,
             showIndicator: true,
             success: { (json, requestString, jsonString, httpStatusCode) in
                 print("jsonString: ", jsonString)
-//                RGToast.shared.toast(message: "get content success.")
+                //RGToast.shared.toast(message: "get content success.")
         },
             fail: { (error, requestString) in
                 print("error: \n", error ?? "get nil failed.")
                 print("request string: \n", requestString)
-//                RGToast.shared.toast(message: "get content failed.")
+                //RGToast.shared.toast(message: "get content failed.")
         })
+        */
     }
 
     @IBAction func loadContentInfo(_ sender: UIButton) {
@@ -48,11 +51,19 @@ class ViewController: UIViewController {
                           parameters: params,
                           showIndicator: true,
                           responseType: .json,
-                          success: { (json, string, data, httpStatusCode) in
+                          success: { (json, string, data, httpStatusCode, request, response) in
                             print("json:", json ?? "")
                             print("string:", string ?? "")
+                            print("response package:", response)
+
+                            switch response {
+                            case let .json(responseJSON):
+                                print("response:", responseJSON)
+                                
+                            default: break
+                            }
         },
-                          failure: { (error) in
+                          failure: { (error, httpStatusCode, request, response)  in
                             print("error: \n", error ?? "get nil failed.")
         })
     }
