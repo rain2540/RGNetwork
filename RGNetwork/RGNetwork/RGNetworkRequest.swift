@@ -19,6 +19,13 @@ class RGNetworkRequest {
     
     
     // MARK: - Lifecycle
+    /// create network request
+    /// - Parameters:
+    ///   - urlString: string of URL path
+    ///   - method: HTTP method
+    ///   - parameters: request parameters
+    ///   - encoding: parameter encoding
+    ///   - headers: HTTP headers
     init(urlString: String,
          method: HTTPMethod = .get,
          parameters: Parameters? = nil,
