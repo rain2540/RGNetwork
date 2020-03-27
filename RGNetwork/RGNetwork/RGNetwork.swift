@@ -162,14 +162,22 @@ extension RGNetwork {
 
     private static func urlPathString(by urlString: String) throws -> String {
         if let host = RGNetworkConfig.shared.baseURL, host.rg_hasHttpPrefix {
-            return host + urlString
+            if host.hasSuffix("/") && urlString.hasPrefix("/") {
+                var fixHost = host
+                fixHost.rg_removeLast(ifHas: "/")
+                return fixHost + urlString
+            } else if host.hasSuffix("/") == false && urlString.hasPrefix("/") == false {
+                return host + "/" + urlString
+            } else {
+                return host + urlString
+            }
         } else if urlString.rg_hasHttpPrefix {
             return urlString
         } else {
             throw RGNetworkError.wrongURLFormat
         }
     }
-
+    
 }
 
 
