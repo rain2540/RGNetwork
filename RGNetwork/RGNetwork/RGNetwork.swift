@@ -11,10 +11,10 @@ import Alamofire
 import AlamofireNetworkActivityIndicator
 import MBProgressHUD
 
-typealias ResponseJSON = [String: Any]
-typealias ResponseString = String
-typealias ResponseData = Data
-typealias HttpStatusCode = Int
+
+enum ResponseType {
+    case json, string, data
+}
 
 enum DataResponsePackage {
     case json(DataResponse<Any, AFError>)
@@ -22,19 +22,24 @@ enum DataResponsePackage {
     case data(DataResponse<Data, AFError>)
 }
 
+
+typealias ResponseJSON = [String: Any]
+typealias ResponseString = String
+typealias ResponseData = Data
+typealias HttpStatusCode = Int
+
 typealias SuccessTask = (ResponseJSON?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponsePackage) -> Void
 typealias FailureTask = (Error?, HttpStatusCode?, DataRequest, DataResponsePackage) -> Void
 
-enum ResponseType {
-    case json, string, data
-}
+
+struct RGNetwork { }
 
 
-struct RGNetwork {
+//  MARK: - Public Methods
 
-    //  MARK: Public Methods
+extension RGNetwork {
+
     /// 通用请求方法
-    ///
     /// - Parameters:
     ///   - urlString: 请求地址
     ///   - method: 请求方法
@@ -82,8 +87,13 @@ struct RGNetwork {
         }
     }
 
+}
 
-    //  MARK: - Private Methods
+
+//  MARK: - Private Methods
+
+extension RGNetwork {
+
     private static func responseJSON(
         with request: DataRequest,
         success: @escaping SuccessTask,
@@ -164,6 +174,7 @@ struct RGNetwork {
 
 
 // MARK: - Indicator View
+
 extension RGNetwork {
     /// 在 Status Bar 上显示 Activity Indicator
     ///
