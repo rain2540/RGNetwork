@@ -11,10 +11,10 @@ import Alamofire
 import AlamofireNetworkActivityIndicator
 import MBProgressHUD
 
-typealias ResponseJSON = [String: Any]
-typealias ResponseString = String
-typealias ResponseData = Data
-typealias HttpStatusCode = Int
+
+enum ResponseType {
+    case json, string, data
+}
 
 enum DataResponsePackage {
     case json(DataResponse<Any, AFError>)
@@ -22,19 +22,24 @@ enum DataResponsePackage {
     case data(DataResponse<Data, AFError>)
 }
 
+
+typealias ResponseJSON = [String: Any]
+typealias ResponseString = String
+typealias ResponseData = Data
+typealias HttpStatusCode = Int
+
 typealias SuccessTask = (ResponseJSON?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponsePackage) -> Void
 typealias FailureTask = (Error?, HttpStatusCode?, DataRequest, DataResponsePackage) -> Void
 
-enum ResponseType {
-    case json, string, data
-}
+
+struct RGNetwork { }
 
 
-struct RGNetwork {
+//  MARK: - Public Methods
 
-    //  MARK: Public Methods
+extension RGNetwork {
+
     /// 通用请求方法
-    ///
     /// - Parameters:
     ///   - urlString: 请求地址
     ///   - method: 请求方法
@@ -82,8 +87,13 @@ struct RGNetwork {
         }
     }
 
+}
 
-    //  MARK: - Private Methods
+
+//  MARK: - Private Methods
+
+extension RGNetwork {
+
     private static func responseJSON(
         with request: DataRequest,
         success: @escaping SuccessTask,
@@ -151,19 +161,28 @@ struct RGNetwork {
     }
 
     private static func urlPathString(by urlString: String) throws -> String {
-        if let host = RGNetworkConfig.shared.baseURL, host.hasHttpPrefix {
-            return host + urlString
-        } else if urlString.hasHttpPrefix {
+        if let host = RGNetworkConfig.shared.baseURL, host.rg_hasHttpPrefix {
+            if host.hasSuffix("/") && urlString.hasPrefix("/") {
+                var fixHost = host
+                fixHost.rg_removeLast(ifHas: "/")
+                return fixHost + urlString
+            } else if host.hasSuffix("/") == false && urlString.hasPrefix("/") == false {
+                return host + "/" + urlString
+            } else {
+                return host + urlString
+            }
+        } else if urlString.rg_hasHttpPrefix {
             return urlString
         } else {
             throw RGNetworkError.wrongURLFormat
         }
     }
-
+    
 }
 
 
 // MARK: - Indicator View
+
 extension RGNetwork {
     /// 在 Status Bar 上显示 Activity Indicator
     ///
@@ -199,10 +218,17 @@ extension RGNetwork {
 
 
 // MARK: - String Extension
+
 fileprivate extension String {
 
-    var hasHttpPrefix: Bool {
+    var rg_hasHttpPrefix: Bool {
         return self.hasPrefix("http://") || self.hasPrefix("https://")
+    }
+
+    mutating func rg_removeLast(ifHas suffix: String) {
+        if hasSuffix(suffix) {
+            removeLast()
+        }
     }
 
 }
