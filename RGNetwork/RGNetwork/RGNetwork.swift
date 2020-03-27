@@ -199,10 +199,17 @@ extension RGNetwork {
 
 
 // MARK: - String Extension
+
 fileprivate extension String {
 
     var rg_hasHttpPrefix: Bool {
         return self.hasPrefix("http://") || self.hasPrefix("https://")
+    }
+
+    mutating func rg_removeLast(ifHas suffix: String) {
+        if hasSuffix(suffix) {
+            removeLast()
+        }
     }
 
 }
