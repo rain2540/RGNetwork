@@ -83,6 +83,7 @@ extension RGNetwork {
                 }
             } catch {
                 print(error)
+                RGNetwork.hideIndicator()
             }
         }
     }
