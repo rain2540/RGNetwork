@@ -1,7 +1,7 @@
 PODS:
-  - Alamofire (5.0.5)
-  - AlamofireNetworkActivityIndicator (3.0.1):
-    - Alamofire (~> 5.0)
+  - Alamofire (5.1.0)
+  - AlamofireNetworkActivityIndicator (3.1.0):
+    - Alamofire (~> 5.1)
   - MBProgressHUD (1.2.0)
 
 DEPENDENCIES:
@@ -16,8 +16,8 @@ SPEC REPOS:
     - MBProgressHUD
 
 SPEC CHECKSUMS:
-  Alamofire: df2f8f826963b08b9a870791ad48e07a10090b2e
-  AlamofireNetworkActivityIndicator: f7d4cd8d12bcf61dc569cbe000b0c35e9c8d8d32
+  Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
+  AlamofireNetworkActivityIndicator: 6564782bd7b9e6c430ae67d9277af01907b01ca4
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
 
 PODFILE CHECKSUM: 7b35fee48810f7658329d9636d9b555d2a2ba2e5
