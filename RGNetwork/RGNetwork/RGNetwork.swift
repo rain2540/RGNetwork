@@ -56,6 +56,7 @@ extension RGNetwork {
         parameters: Parameters? = nil,
         encoding: ParameterEncoding = URLEncoding.default,
         headers: HTTPHeaders? = nil,
+        timeoutInterval: TimeInterval = 30.0,
         showIndicator: Bool = false,
         responseType: ResponseType = .json,
         success: @escaping SuccessTask,
@@ -69,7 +70,9 @@ extension RGNetwork {
         DispatchQueue.global().async {
             do {
                 let urlPath = try urlPathString(by: urlString)
-                let request = AF.request(urlPath, method: method, parameters: parameters, encoding: encoding, headers: headers)
+                let request = AF.request(urlPath, method: method, parameters: parameters, encoding: encoding, headers: headers, requestModifier: { urlRequest in
+                    urlRequest.timeoutInterval = timeoutInterval
+                })
 
                 switch responseType {
                     case .json:
