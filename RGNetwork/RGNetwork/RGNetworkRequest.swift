@@ -27,6 +27,7 @@ class RGNetworkRequest {
     ///   - parameters: request parameters
     ///   - encoding: parameter encoding
     ///   - headers: HTTP headers
+    ///   - timeoutInterval: 超时时长
     init(urlString: String,
          method: HTTPMethod = .get,
          parameters: Parameters? = nil,
