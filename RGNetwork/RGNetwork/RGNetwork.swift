@@ -50,12 +50,14 @@ extension RGNetwork {
     ///   - responseType: 返回数据格式类型
     ///   - success: 请求成功的 Task
     ///   - failure: 请求失败的 Task
+    ///   - timeoutInterval: 超时时长
     public static func request(
         with urlString: String,
         method: HTTPMethod = .get,
         parameters: Parameters? = nil,
         encoding: ParameterEncoding = URLEncoding.default,
         headers: HTTPHeaders? = nil,
+        timeoutInterval: TimeInterval = 30.0,
         showIndicator: Bool = false,
         responseType: ResponseType = .json,
         success: @escaping SuccessTask,
@@ -69,7 +71,10 @@ extension RGNetwork {
         DispatchQueue.global().async {
             do {
                 let urlPath = try urlPathString(by: urlString)
-                let request = AF.request(urlPath, method: method, parameters: parameters, encoding: encoding, headers: headers)
+
+                let request = AF.request(urlPath, method: method, parameters: parameters, encoding: encoding, headers: headers, requestModifier: { urlRequest in
+                    urlRequest.timeoutInterval = timeoutInterval
+                })
 
                 switch responseType {
                     case .json:

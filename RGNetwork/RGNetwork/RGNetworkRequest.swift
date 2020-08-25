@@ -16,6 +16,7 @@ class RGNetworkRequest {
     let parameters: Parameters?
     let encoding: ParameterEncoding
     let headers: HTTPHeaders?
+    let timeoutInterval: TimeInterval
     
     
     // MARK: - Lifecycle
@@ -26,17 +27,20 @@ class RGNetworkRequest {
     ///   - parameters: request parameters
     ///   - encoding: parameter encoding
     ///   - headers: HTTP headers
+    ///   - timeoutInterval: 超时时长
     init(urlString: String,
          method: HTTPMethod = .get,
          parameters: Parameters? = nil,
          encoding: ParameterEncoding = URLEncoding.default,
-         headers: HTTPHeaders? = nil)
+         headers: HTTPHeaders? = nil,
+         timeoutInterval: TimeInterval = 30.0)
     {
-        self.urlString  =   urlString
-        self.method     =   method
-        self.parameters =   parameters
-        self.encoding   =   encoding
-        self.headers    =   headers
+        self.urlString          =   urlString
+        self.method             =   method
+        self.parameters         =   parameters
+        self.encoding           =   encoding
+        self.headers            =   headers
+        self.timeoutInterval    =   timeoutInterval
     }
     
 }
@@ -62,6 +66,7 @@ extension RGNetworkRequest {
             parameters: parameters,
             encoding: encoding,
             headers: headers,
+            timeoutInterval: timeoutInterval,
             showIndicator: showIndicator,
             responseType: responseType,
             success: success,
