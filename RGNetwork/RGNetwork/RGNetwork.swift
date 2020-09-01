@@ -46,11 +46,11 @@ extension RGNetwork {
     ///   - parameters: 请求参数
     ///   - encoding: 请求参数编码
     ///   - headers: 请求头
+    ///   - timeoutInterval: 超时时长
     ///   - showIndicator: 是否显示 Indicator
     ///   - responseType: 返回数据格式类型
     ///   - success: 请求成功的 Task
     ///   - failure: 请求失败的 Task
-    ///   - timeoutInterval: 超时时长
     public static func request(
         with urlString: String,
         method: HTTPMethod = .get,
