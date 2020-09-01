@@ -190,6 +190,7 @@ extension RGNetwork {
 // MARK: - Indicator View
 
 extension RGNetwork {
+
     /// 在 Status Bar 上显示 Activity Indicator
     ///
     /// - Parameters:
@@ -213,13 +214,15 @@ extension RGNetwork {
             hud.label.text = text
         }
     }
-    
+
+    /// 隐藏 indicator
     private static func hideIndicator() {
         DispatchQueue.main.async {
             guard let window = UIApplication.shared.keyWindow else { return }
             MBProgressHUD.hide(for: window, animated: true)
         }
     }
+
 }
 
 
