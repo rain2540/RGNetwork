@@ -227,6 +227,7 @@ extension RGNetwork {
 
 fileprivate extension String {
 
+    /// 是否含有 http / https 前缀
     var rg_hasHttpPrefix: Bool {
         return self.hasPrefix("http://") || self.hasPrefix("https://")
     }
