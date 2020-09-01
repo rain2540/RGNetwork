@@ -204,6 +204,10 @@ extension RGNetwork {
         NetworkActivityIndicatorManager.shared.completionDelay = completionDelay
     }
 
+    /// 显示 indicator
+    /// - Parameters:
+    ///   - mode: 显示模式，默认为 .indeterminate
+    ///   - text: 显示的文字，默认为空
     private static func showIndicator(mode: MBProgressHUDMode = .indeterminate,
                                       text: String = "")
     {
