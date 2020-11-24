@@ -230,6 +230,31 @@ extension RGNetwork {
 }
 
 
+extension RGNetwork {
+
+    private static var proxyStatus: CFString {
+        let proxySetting = CFNetworkCopySystemProxySettings()!.takeUnretainedValue()
+        let url = URL(string: "https://www.baidu.com")!
+        let proxyArray = CFNetworkCopyProxiesForURL(url as CFURL, proxySetting).takeUnretainedValue()
+
+        let proxyInfo = (proxyArray as [AnyObject])[0]
+
+        #if DEBUG
+        let hostName = proxyInfo.object(forKey: kCFProxyHostNameKey) ?? "null"
+        let portNumber = proxyInfo.object(forKey: kCFProxyPortNumberKey) ?? "null"
+        let type = proxyInfo.object(forKey: kCFProxyTypeKey) ?? "null"
+
+        print("Proxy Host Name: \(hostName)")
+        print("Proxy Port Number: \(portNumber)")
+        print("Proxy Type: \(type)")
+        #endif
+
+        return proxyInfo.object(forKey: kCFProxyTypeKey) ?? kCFProxyTypeNone
+    }
+
+}
+
+
 // MARK: - String Extension
 
 fileprivate extension String {
