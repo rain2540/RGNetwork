@@ -232,6 +232,20 @@ extension RGNetwork {
 
 extension RGNetwork {
 
+    public static var isSetupProxy: Bool {
+        if proxyStatus == kCFProxyTypeNone {
+            #if DEBUG
+            print("当前未设置网络代理")
+            #endif
+            return false
+        } else {
+            #if DEBUG
+            print("当前设置了网络代理")
+            #endif
+            return true
+        }
+    }
+
     private static var proxyStatus: CFString {
         let proxySetting = CFNetworkCopySystemProxySettings()!.takeUnretainedValue()
         let url = URL(string: "https://www.baidu.com")!
