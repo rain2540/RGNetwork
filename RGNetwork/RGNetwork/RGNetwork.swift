@@ -230,6 +230,8 @@ extension RGNetwork {
 }
 
 
+// MARK: - Proxy
+
 extension RGNetwork {
 
     /// 是否设置网络代理
@@ -268,6 +270,40 @@ extension RGNetwork {
         return proxyInfo.object(forKey: kCFProxyTypeKey) ?? kCFProxyTypeNone
     }
 
+}
+
+
+// MARK: - VPN
+
+extension RGNetwork {
+
+    /// 是否开启 VPN
+    public static var isVPNOn: Bool {
+        var flag = false
+        let proxySetting = CFNetworkCopySystemProxySettings()?.takeUnretainedValue() as? [AnyHashable: Any] ?? [:]
+        let keys = (proxySetting["__SCOPED__"] as? NSDictionary)?.allKeys as? [String] ?? []
+
+        for key in keys {
+            let nsKey = key as NSString
+            let checkStrings = ["tap", "tun", "ipsec", "ppp"]
+
+            let condition = checkStrings.reduce(false) { (res, string) -> Bool in
+                res || nsKey.range(of: string).location != NSNotFound
+            }
+
+            if condition {
+                #if DEBUG
+                print("当前开启了 VPN")
+                #endif
+                flag = true
+                break
+            }
+        }
+        #if DEBUG
+        print("当前未开启 VPN")
+        #endif
+        return flag
+    }
 }
 
 
