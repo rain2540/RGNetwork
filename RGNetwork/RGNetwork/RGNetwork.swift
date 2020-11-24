@@ -46,11 +46,11 @@ extension RGNetwork {
     ///   - parameters: 请求参数
     ///   - encoding: 请求参数编码
     ///   - headers: 请求头
+    ///   - timeoutInterval: 超时时长
     ///   - showIndicator: 是否显示 Indicator
     ///   - responseType: 返回数据格式类型
     ///   - success: 请求成功的 Task
     ///   - failure: 请求失败的 Task
-    ///   - timeoutInterval: 超时时长
     public static func request(
         with urlString: String,
         method: HTTPMethod = .get,
@@ -190,6 +190,7 @@ extension RGNetwork {
 // MARK: - Indicator View
 
 extension RGNetwork {
+
     /// 在 Status Bar 上显示 Activity Indicator
     ///
     /// - Parameters:
@@ -203,6 +204,10 @@ extension RGNetwork {
         NetworkActivityIndicatorManager.shared.completionDelay = completionDelay
     }
 
+    /// 显示 indicator
+    /// - Parameters:
+    ///   - mode: 显示模式，默认为 .indeterminate
+    ///   - text: 显示的文字，默认为空
     private static func showIndicator(mode: MBProgressHUDMode = .indeterminate,
                                       text: String = "")
     {
@@ -213,13 +218,56 @@ extension RGNetwork {
             hud.label.text = text
         }
     }
-    
+
+    /// 隐藏 indicator
     private static func hideIndicator() {
         DispatchQueue.main.async {
             guard let window = UIApplication.shared.keyWindow else { return }
             MBProgressHUD.hide(for: window, animated: true)
         }
     }
+
+}
+
+
+extension RGNetwork {
+
+    /// 是否设置网络代理
+    public static var isSetupProxy: Bool {
+        if proxyStatus == kCFProxyTypeNone {
+            #if DEBUG
+            print("当前未设置网络代理")
+            #endif
+            return false
+        } else {
+            #if DEBUG
+            print("当前设置了网络代理")
+            #endif
+            return true
+        }
+    }
+
+    /// 网络代理状态
+    private static var proxyStatus: CFString {
+        let proxySetting = CFNetworkCopySystemProxySettings()!.takeUnretainedValue()
+        let url = URL(string: "https://www.baidu.com")!
+        let proxyArray = CFNetworkCopyProxiesForURL(url as CFURL, proxySetting).takeUnretainedValue()
+
+        let proxyInfo = (proxyArray as [AnyObject])[0]
+
+        #if DEBUG
+        let hostName = proxyInfo.object(forKey: kCFProxyHostNameKey) ?? "null"
+        let portNumber = proxyInfo.object(forKey: kCFProxyPortNumberKey) ?? "null"
+        let type = proxyInfo.object(forKey: kCFProxyTypeKey) ?? "null"
+
+        print("Proxy Host Name: \(hostName)")
+        print("Proxy Port Number: \(portNumber)")
+        print("Proxy Type: \(type)")
+        #endif
+
+        return proxyInfo.object(forKey: kCFProxyTypeKey) ?? kCFProxyTypeNone
+    }
+
 }
 
 
@@ -227,10 +275,13 @@ extension RGNetwork {
 
 fileprivate extension String {
 
+    /// 是否含有 http / https 前缀
     var rg_hasHttpPrefix: Bool {
         return self.hasPrefix("http://") || self.hasPrefix("https://")
     }
 
+    /// 如果含有某个后缀，则删除
+    /// - Parameter suffix: 需要删除的后缀
     mutating func rg_removeLast(ifHas suffix: String) {
         if hasSuffix(suffix) {
             removeLast()
