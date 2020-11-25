@@ -265,6 +265,14 @@ extension RGNetwork {
         return portNumber
     }
 
+    public static var proxyType: CFString {
+        let type = proxyInfos.object(forKey: kCFProxyTypeKey) ?? kCFProxyTypeNone
+        #if DEBUG
+        print("Proxy Type: \(type)")
+        #endif
+        return type
+    }
+
     private static var proxyInfos: AnyObject {
         let proxySetting = CFNetworkCopySystemProxySettings()!.takeUnretainedValue()
         let url = URL(string: "https://www.baidu.com")!
