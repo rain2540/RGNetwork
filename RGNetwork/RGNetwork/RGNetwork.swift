@@ -249,6 +249,15 @@ extension RGNetwork {
         }
     }
 
+    private static var proxyInfos: AnyObject {
+        let proxySetting = CFNetworkCopySystemProxySettings()!.takeUnretainedValue()
+        let url = URL(string: "https://www.baidu.com")!
+        let proxyArray = CFNetworkCopyProxiesForURL(url as CFURL, proxySetting).takeUnretainedValue()
+
+        let proxyInfo = (proxyArray as [AnyObject])[0]
+        return proxyInfo
+    }
+
     /// 网络代理状态
     private static var proxyStatus: CFString {
         let proxySetting = CFNetworkCopySystemProxySettings()!.takeUnretainedValue()
