@@ -236,7 +236,7 @@ extension RGNetwork {
 
     /// 是否设置网络代理
     public static var isSetupProxy: Bool {
-        if proxyStatus == kCFProxyTypeNone {
+        if proxyType == kCFProxyTypeNone {
             #if DEBUG
             print("当前未设置网络代理")
             #endif
@@ -249,25 +249,41 @@ extension RGNetwork {
         }
     }
 
-    /// 网络代理状态
-    private static var proxyStatus: CFString {
+    /// 网络代理主机名
+    public static var proxyHostName: String {
+        let hostName = proxyInfos.object(forKey: kCFProxyHostNameKey) as? String ?? "Proxy Host Name is nil"
+        #if DEBUG
+        print("Proxy Host Name: \(hostName)")
+        #endif
+        return hostName
+    }
+
+    /// 网络代理端口号
+    public static var proxyPortNumber: String {
+        let portNumber = proxyInfos.object(forKey: kCFProxyPortNumberKey) as? String ?? "Proxy Port Number is nil"
+        #if DEBUG
+        print("Proxy Port Number: \(portNumber)")
+        #endif
+        return portNumber
+    }
+
+    /// 网络代理类型
+    public static var proxyType: CFString {
+        let type = proxyInfos.object(forKey: kCFProxyTypeKey) ?? kCFProxyTypeNone
+        #if DEBUG
+        print("Proxy Type: \(type)")
+        #endif
+        return type
+    }
+
+    /// 网络代理信息
+    private static var proxyInfos: AnyObject {
         let proxySetting = CFNetworkCopySystemProxySettings()!.takeUnretainedValue()
         let url = URL(string: "https://www.baidu.com")!
         let proxyArray = CFNetworkCopyProxiesForURL(url as CFURL, proxySetting).takeUnretainedValue()
 
         let proxyInfo = (proxyArray as [AnyObject])[0]
-
-        #if DEBUG
-        let hostName = proxyInfo.object(forKey: kCFProxyHostNameKey) ?? "null"
-        let portNumber = proxyInfo.object(forKey: kCFProxyPortNumberKey) ?? "null"
-        let type = proxyInfo.object(forKey: kCFProxyTypeKey) ?? "null"
-
-        print("Proxy Host Name: \(hostName)")
-        print("Proxy Port Number: \(portNumber)")
-        print("Proxy Type: \(type)")
-        #endif
-
-        return proxyInfo.object(forKey: kCFProxyTypeKey) ?? kCFProxyTypeNone
+        return proxyInfo
     }
 
 }
