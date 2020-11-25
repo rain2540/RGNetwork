@@ -236,7 +236,7 @@ extension RGNetwork {
 
     /// 是否设置网络代理
     public static var isSetupProxy: Bool {
-        if proxyStatus == kCFProxyTypeNone {
+        if proxyType == kCFProxyTypeNone {
             #if DEBUG
             print("当前未设置网络代理")
             #endif
@@ -280,27 +280,6 @@ extension RGNetwork {
 
         let proxyInfo = (proxyArray as [AnyObject])[0]
         return proxyInfo
-    }
-
-    /// 网络代理状态
-    private static var proxyStatus: CFString {
-        let proxySetting = CFNetworkCopySystemProxySettings()!.takeUnretainedValue()
-        let url = URL(string: "https://www.baidu.com")!
-        let proxyArray = CFNetworkCopyProxiesForURL(url as CFURL, proxySetting).takeUnretainedValue()
-
-        let proxyInfo = (proxyArray as [AnyObject])[0]
-
-        #if DEBUG
-        let hostName = proxyInfo.object(forKey: kCFProxyHostNameKey) ?? "null"
-        let portNumber = proxyInfo.object(forKey: kCFProxyPortNumberKey) ?? "null"
-        let type = proxyInfo.object(forKey: kCFProxyTypeKey) ?? "null"
-
-        print("Proxy Host Name: \(hostName)")
-        print("Proxy Port Number: \(portNumber)")
-        print("Proxy Type: \(type)")
-        #endif
-
-        return proxyInfo.object(forKey: kCFProxyTypeKey) ?? kCFProxyTypeNone
     }
 
 }
