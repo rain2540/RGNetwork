@@ -249,6 +249,14 @@ extension RGNetwork {
         }
     }
 
+    public static var proxyHostName: String {
+        let hostName = proxyInfos.object(forKey: kCFProxyHostNameKey) as? String ?? "Proxy Host Name is nil"
+        #if DEBUG
+        print("Proxy Host Name: \(hostName)")
+        #endif
+        return hostName
+    }
+
     private static var proxyInfos: AnyObject {
         let proxySetting = CFNetworkCopySystemProxySettings()!.takeUnretainedValue()
         let url = URL(string: "https://www.baidu.com")!
