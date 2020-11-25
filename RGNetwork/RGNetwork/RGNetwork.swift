@@ -249,6 +249,7 @@ extension RGNetwork {
         }
     }
 
+    /// 网络代理主机名
     public static var proxyHostName: String {
         let hostName = proxyInfos.object(forKey: kCFProxyHostNameKey) as? String ?? "Proxy Host Name is nil"
         #if DEBUG
@@ -257,6 +258,7 @@ extension RGNetwork {
         return hostName
     }
 
+    /// 网络代理端口号
     public static var proxyPortNumber: String {
         let portNumber = proxyInfos.object(forKey: kCFProxyPortNumberKey) as? String ?? "Proxy Port Number is nil"
         #if DEBUG
@@ -265,6 +267,7 @@ extension RGNetwork {
         return portNumber
     }
 
+    /// 网络代理类型
     public static var proxyType: CFString {
         let type = proxyInfos.object(forKey: kCFProxyTypeKey) ?? kCFProxyTypeNone
         #if DEBUG
@@ -273,6 +276,7 @@ extension RGNetwork {
         return type
     }
 
+    /// 网络代理信息
     private static var proxyInfos: AnyObject {
         let proxySetting = CFNetworkCopySystemProxySettings()!.takeUnretainedValue()
         let url = URL(string: "https://www.baidu.com")!
