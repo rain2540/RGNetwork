@@ -192,7 +192,6 @@ extension RGNetwork {
 extension RGNetwork {
 
     /// 在 Status Bar 上显示 Activity Indicator
-    ///
     /// - Parameters:
     ///   - startDelay: 开始延迟时间
     ///   - completionDelay: 结束延迟时间

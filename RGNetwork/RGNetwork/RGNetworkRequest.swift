@@ -20,6 +20,7 @@ class RGNetworkRequest {
     
     
     // MARK: - Lifecycle
+
     /// create network request
     /// - Parameters:
     ///   - urlString: string of URL path
@@ -47,6 +48,7 @@ class RGNetworkRequest {
 
 
 // MARK: - Public
+
 extension RGNetworkRequest {
 
     /// 执行请求
