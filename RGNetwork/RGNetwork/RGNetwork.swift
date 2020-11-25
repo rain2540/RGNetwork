@@ -257,6 +257,14 @@ extension RGNetwork {
         return hostName
     }
 
+    public static var proxyPortNumber: String {
+        let portNumber = proxyInfos.object(forKey: kCFProxyPortNumberKey) as? String ?? "Proxy Port Number is nil"
+        #if DEBUG
+        print("Proxy Port Number: \(portNumber)")
+        #endif
+        return portNumber
+    }
+
     private static var proxyInfos: AnyObject {
         let proxySetting = CFNetworkCopySystemProxySettings()!.takeUnretainedValue()
         let url = URL(string: "https://www.baidu.com")!
