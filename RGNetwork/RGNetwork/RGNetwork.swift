@@ -315,7 +315,9 @@ extension RGNetwork {
             }
         }
         #if DEBUG
-        print("当前未开启 VPN")
+        if flag == false {
+            print("当前未开启 VPN")
+        }
         #endif
         return flag
     }
