@@ -72,9 +72,17 @@ extension RGNetwork {
             do {
                 let urlPath = try urlPathString(by: urlString)
 
-                let request = AF.request(urlPath, method: method, parameters: parameters, encoding: encoding, headers: headers, requestModifier: { urlRequest in
-                    urlRequest.timeoutInterval = timeoutInterval
-                })
+                let request = AF.request(
+                    urlPath,
+                    method: method,
+                    parameters: parameters,
+                    encoding: encoding,
+                    headers: headers,
+                    requestModifier: { urlRequest in
+                        urlRequest.timeoutInterval = timeoutInterval
+                    }
+                )
+                .validate(statusCode: 200 ..< 300)
 
                 switch responseType {
                     case .json:
@@ -299,12 +307,8 @@ extension RGNetwork {
         let keys = (proxySetting["__SCOPED__"] as? NSDictionary)?.allKeys as? [String] ?? []
 
         for key in keys {
-            let nsKey = key as NSString
             let checkStrings = ["tap", "tun", "ipsec", "ppp"]
-
-            let condition = checkStrings.reduce(false) { (res, string) -> Bool in
-                res || nsKey.range(of: string).location != NSNotFound
-            }
+            let condition = checkStrings.contains(key)
 
             if condition {
                 #if DEBUG
