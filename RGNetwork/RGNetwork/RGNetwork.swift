@@ -72,9 +72,17 @@ extension RGNetwork {
             do {
                 let urlPath = try urlPathString(by: urlString)
 
-                let request = AF.request(urlPath, method: method, parameters: parameters, encoding: encoding, headers: headers, requestModifier: { urlRequest in
-                    urlRequest.timeoutInterval = timeoutInterval
-                })
+                let request = AF.request(
+                    urlPath,
+                    method: method,
+                    parameters: parameters,
+                    encoding: encoding,
+                    headers: headers,
+                    requestModifier: { urlRequest in
+                        urlRequest.timeoutInterval = timeoutInterval
+                    }
+                )
+                .validate(statusCode: 200 ..< 300)
 
                 switch responseType {
                     case .json:
