@@ -101,6 +101,53 @@ extension RGNetwork {
         }
     }
 
+    public static func upload(
+        multipartData: @escaping (MultipartFormData) -> Void,
+        to urlString: String,
+        method: HTTPMethod = .post,
+        headers: HTTPHeaders? = nil,
+        timeoutInterval: TimeInterval = 30.0,
+        showIndicator: Bool = false,
+        responseType: ResponseType = .json,
+        success: @escaping SuccessTask,
+        failure: @escaping FailureTask)
+    {
+        if showIndicator == true {
+            RGNetwork.showIndicator()
+            RGNetwork.showActivityIndicator()
+        }
+
+        DispatchQueue.global().async {
+            do {
+                let urlPath = try urlPathString(by: urlString)
+                let request = AF.upload(
+                    multipartFormData: multipartData,
+                    to: urlPath,
+                    method: method,
+                    headers: headers,
+                    requestModifier: { uploadRequest in
+                        uploadRequest.timeoutInterval = timeoutInterval
+                    }
+                )
+                .validate(statusCode: 200 ..< 300)
+
+                switch responseType {
+                    case .json:
+                        RGNetwork.responseJSON(with: request, success: success, failure: failure)
+
+                    case .string:
+                        RGNetwork.responseString(with: request, success: success, failure: failure)
+
+                    case .data:
+                        RGNetwork.responseData(with: request, success: success, failure: failure)
+                }
+            } catch {
+                print(error)
+                RGNetwork.hideIndicator()
+            }
+        }
+    }
+
 }
 
 
@@ -175,7 +222,9 @@ extension RGNetwork {
     }
 
     private static func urlPathString(by urlString: String) throws -> String {
-        if let host = RGNetworkConfig.shared.baseURL, host.rg_hasHttpPrefix {
+        if urlString.rg_hasHttpPrefix {
+            return urlString
+        } else if let host = RGNetworkConfig.shared.baseURL, host.rg_hasHttpPrefix {
             if host.hasSuffix("/") && urlString.hasPrefix("/") {
                 var fixHost = host
                 fixHost.rg_removeLast(ifHas: "/")
@@ -185,13 +234,11 @@ extension RGNetwork {
             } else {
                 return host + urlString
             }
-        } else if urlString.rg_hasHttpPrefix {
-            return urlString
         } else {
             throw RGNetworkError.wrongURLFormat
         }
     }
-    
+
 }
 
 
