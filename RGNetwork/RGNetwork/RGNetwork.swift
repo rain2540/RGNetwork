@@ -101,6 +101,17 @@ extension RGNetwork {
         }
     }
 
+    /// 上传方法
+    /// - Parameters:
+    ///   - multipartData: 执行上传操作的 Task
+    ///   - urlString: 上传地址
+    ///   - method: 请求方法，默认为 `POST`
+    ///   - headers: 请求头，默认为 `nil`
+    ///   - timeoutInterval: 超时时长，默认为 30 秒
+    ///   - showIndicator: 是否显示 Indicator，默认为 `false`
+    ///   - responseType: 返回数据格式类型，默认为 `.json`
+    ///   - success: 上传成功的 Task
+    ///   - failure: 上传失败的 Task
     public static func upload(
         multipartData: @escaping (MultipartFormData) -> Void,
         to urlString: String,
