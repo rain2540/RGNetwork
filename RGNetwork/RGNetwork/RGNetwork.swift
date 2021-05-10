@@ -131,6 +131,7 @@ extension RGNetwork {
         DispatchQueue.global().async {
             do {
                 let urlPath = try urlPathString(by: urlString)
+
                 let request = AF.upload(
                     multipartFormData: multipartData,
                     to: urlPath,
