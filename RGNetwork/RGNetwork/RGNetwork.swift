@@ -261,8 +261,9 @@ extension RGNetwork {
     /// - Parameters:
     ///   - startDelay: 开始延迟时间
     ///   - completionDelay: 结束延迟时间
-    public static func showActivityIndicator(startDelay: TimeInterval = 0.0,
-                                             completionDelay: TimeInterval = 0.7)
+    public static func showActivityIndicator(
+        startDelay: TimeInterval = 0.0,
+        completionDelay: TimeInterval = 0.7)
     {
         NetworkActivityIndicatorManager.shared.isEnabled = true
         NetworkActivityIndicatorManager.shared.startDelay = startDelay
@@ -273,8 +274,9 @@ extension RGNetwork {
     /// - Parameters:
     ///   - mode: 显示模式，默认为 .indeterminate
     ///   - text: 显示的文字，默认为空
-    private static func showIndicator(mode: MBProgressHUDMode = .indeterminate,
-                                      text: String = "")
+    private static func showIndicator(
+        mode: MBProgressHUDMode = .indeterminate,
+        text: String = "")
     {
         DispatchQueue.main.async {
             guard let window = UIApplication.shared.keyWindow else { return }
@@ -383,6 +385,7 @@ extension RGNetwork {
         #endif
         return flag
     }
+
 }
 
 
