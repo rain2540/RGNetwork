@@ -30,7 +30,7 @@ typealias ResponseData = Data
 typealias HttpStatusCode = Int
 
 typealias SuccessTask = (ResponseJSON?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponsePackage) -> Void
-typealias FailureTask = (Error?, HttpStatusCode?, DataRequest, DataResponsePackage) -> Void
+typealias FailTask = (Error?, HttpStatusCode?, DataRequest, DataResponsePackage) -> Void
 
 
 struct RGNetwork { }
@@ -62,7 +62,7 @@ extension RGNetwork {
         showIndicator: Bool = false,
         responseType: ResponseType = .json,
         success: @escaping SuccessTask,
-        failure: @escaping FailureTask)
+        failure: @escaping FailTask)
     {
         if showIndicator == true {
             RGNetwork.showIndicator()
@@ -122,7 +122,7 @@ extension RGNetwork {
         showIndicator: Bool = false,
         responseType: ResponseType = .json,
         success: @escaping SuccessTask,
-        failure: @escaping FailureTask)
+        failure: @escaping FailTask)
     {
         if showIndicator == true {
             RGNetwork.showIndicator()
@@ -171,7 +171,7 @@ extension RGNetwork {
     private static func responseJSON(
         with request: DataRequest,
         success: @escaping SuccessTask,
-        failure: @escaping FailureTask)
+        failure: @escaping FailTask)
     {
         request.responseJSON { (responseJSON) in
             print("RGNetwork request debugDescription: \n", responseJSON.debugDescription, separator: "")
@@ -196,7 +196,7 @@ extension RGNetwork {
     private static func responseString(
         with request: DataRequest,
         success: @escaping SuccessTask,
-        failure: @escaping FailureTask)
+        failure: @escaping FailTask)
     {
         request.responseString { (responseString) in
             print("RGNetwork request debugDescription: \n", responseString.debugDescription, separator: "")
@@ -216,7 +216,7 @@ extension RGNetwork {
     private static func responseData(
         with request: DataRequest,
         success: @escaping SuccessTask,
-        failure: @escaping FailureTask)
+        failure: @escaping FailTask)
     {
         request.responseData { (responseData) in
             print("RGNetwork request debugDescription: \n", responseData.debugDescription, separator: "")

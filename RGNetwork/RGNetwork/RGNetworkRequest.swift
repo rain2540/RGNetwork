@@ -60,7 +60,7 @@ extension RGNetworkRequest {
     public func task(showIndicator: Bool = false,
                      responseType: ResponseType = .json,
                      success: @escaping SuccessTask,
-                     failure: @escaping FailureTask)
+                     failure: @escaping FailTask)
     {
         RGNetwork.request(
             with: urlString,
