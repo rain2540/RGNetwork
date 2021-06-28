@@ -16,4 +16,16 @@ struct RGUploadConfig: RGNetworkConfig {
     let headers: HTTPHeaders?
     let timeoutInterval: TimeInterval
 
+
+    init(urlString: String,
+         method: HTTPMethod = .post,
+         headers: HTTPHeaders? = nil,
+         timeoutInterval: TimeInterval = 30.0)
+    {
+        self.urlString          =   urlString
+        self.method             =   method
+        self.headers            =   headers
+        self.timeoutInterval    =   timeoutInterval
+    }
+
 }
