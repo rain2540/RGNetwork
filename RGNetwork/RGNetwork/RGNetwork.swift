@@ -41,6 +41,52 @@ struct RGNetwork { }
 
 extension RGNetwork {
 
+    public static func request(
+        config: RGDataRequestConfig,
+        queue: DispatchQueue = DispatchQueue.global(),
+        showIndicator: Bool = false,
+        responseType: ResponseType = .json,
+        success: @escaping SuccessTask,
+        failure: @escaping FailTask)
+    {
+        if showIndicator == true {
+            RGNetwork.showIndicator()
+            RGNetwork.showActivityIndicator()
+        }
+
+        queue.async {
+            do {
+                let urlPath = try urlPathString(by: config.urlString)
+
+                let request = AF.request(
+                    urlPath,
+                    method: config.method,
+                    parameters: config.parameters,
+                    encoding: config.encoding,
+                    headers: config.headers,
+                    requestModifier: { urlRequest in
+                        urlRequest.timeoutInterval = config.timeoutInterval
+                    }
+                )
+                .validate(statusCode: 200 ..< 300)
+
+                switch responseType {
+                    case .json:
+                        RGNetwork.responseJSON(with: request, success: success, failure: failure)
+
+                    case .string:
+                        RGNetwork.responseString(with: request, success: success, failure: failure)
+
+                    case .data:
+                        RGNetwork.responseData(with: request, success: success, failure: failure)
+                }
+            } catch {
+                print(error)
+                RGNetwork.hideIndicator()
+            }
+        }
+    }
+
     /// 通用请求方法
     /// - Parameters:
     ///   - urlString: 请求地址
