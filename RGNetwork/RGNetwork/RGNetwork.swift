@@ -149,6 +149,52 @@ extension RGNetwork {
         }
     }
 
+    public static func upload(
+        multipartData: @escaping (MultipartFormData) -> Void,
+        config: RGUploadConfig,
+        queue: DispatchQueue = DispatchQueue.global(),
+        showIndicator: Bool = false,
+        responseType: ResponseType = .json,
+        success: @escaping SuccessTask,
+        failure: @escaping FailTask)
+    {
+        if showIndicator == true {
+            RGNetwork.showIndicator()
+            RGNetwork.showActivityIndicator()
+        }
+
+        queue.async {
+            do {
+                let urlPath = try urlPathString(by: config.urlString)
+
+                let request = AF.upload(
+                    multipartFormData: multipartData,
+                    to: urlPath,
+                    method: config.method,
+                    headers: config.headers,
+                    requestModifier: { uploadRequest in
+                        uploadRequest.timeoutInterval = config.timeoutInterval
+                    }
+                )
+                .validate(statusCode: 200 ..< 300)
+
+                switch responseType {
+                    case .json:
+                        RGNetwork.responseJSON(with: request, success: success, failure: failure)
+
+                    case .string:
+                        RGNetwork.responseString(with: request, success: success, failure: failure)
+
+                    case .data:
+                        RGNetwork.responseData(with: request, success: success, failure: failure)
+                }
+            } catch {
+                print(error)
+                RGNetwork.hideIndicator()
+            }
+        }
+    }
+
     /// 上传方法
     /// - Parameters:
     ///   - multipartData: 执行上传操作的 Task
