@@ -30,6 +30,7 @@ typealias ResponseData = Data
 typealias HttpStatusCode = Int
 
 typealias SuccessTask = (ResponseJSON?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponsePackage) -> Void
+typealias FailureTask = (Error?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponsePackage) -> Void
 typealias FailTask = (Error?, HttpStatusCode?, DataRequest, DataResponsePackage) -> Void
 
 
