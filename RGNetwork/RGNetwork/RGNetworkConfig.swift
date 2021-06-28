@@ -7,7 +7,13 @@
 //
 
 import Foundation
+import Alamofire
 
 protocol RGNetworkConfig {
+
+    var urlString: String { get }
+    var method: HTTPMethod { get }
+    var headers: HTTPHeaders? { get }
+    var timeoutInterval: TimeInterval { get }
 
 }
