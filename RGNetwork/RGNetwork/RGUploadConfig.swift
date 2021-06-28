@@ -7,7 +7,13 @@
 //
 
 import Foundation
+import Alamofire
 
-struct RGUploadConfig {
-    
+struct RGUploadConfig: RGNetworkConfig {
+
+    let urlString: String
+    let method: HTTPMethod
+    let headers: HTTPHeaders?
+    let timeoutInterval: TimeInterval
+
 }
