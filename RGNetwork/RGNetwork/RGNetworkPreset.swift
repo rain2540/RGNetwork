@@ -1,5 +1,5 @@
 //
-//  RGNetworkConfig.swift
+//  RGNetworkPreset.swift
 //  RGNetwork
 //
 //  Created by RAIN on 2019/12/6.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-class RGNetworkConfig {
+class RGNetworkPreset {
 
-    static let shared = RGNetworkConfig()
+    static let shared = RGNetworkPreset()
 
     var baseURL: String? = nil
 

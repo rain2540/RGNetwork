@@ -237,7 +237,7 @@ extension RGNetwork {
     private static func urlPathString(by urlString: String) throws -> String {
         if urlString.rg_hasHttpPrefix {
             return urlString
-        } else if let host = RGNetworkConfig.shared.baseURL, host.rg_hasHttpPrefix {
+        } else if let host = RGNetworkPreset.shared.baseURL, host.rg_hasHttpPrefix {
             if host.hasSuffix("/") && urlString.hasPrefix("/") {
                 var fixHost = host
                 fixHost.rg_removeLast(ifHas: "/")
