@@ -87,68 +87,6 @@ extension RGNetwork {
         }
     }
 
-    /// 通用请求方法
-    /// - Parameters:
-    ///   - urlString: 请求地址
-    ///   - method: 请求方法，默认为 `GET`
-    ///   - parameters: 请求参数，默认为 `nil`
-    ///   - encoding: 请求参数编码，默认为 `URLEncoding.default`
-    ///   - headers: 请求头，默认为 `nil`
-    ///   - timeoutInterval: 超时时长，默认为 30 秒
-    ///   - showIndicator: 是否显示 Indicator，默认为 `false`
-    ///   - responseType: 返回数据格式类型，默认为 `.json`
-    ///   - success: 请求成功的 Task
-    ///   - failure: 请求失败的 Task
-    public static func request(
-        with urlString: String,
-        method: HTTPMethod = .get,
-        parameters: Parameters? = nil,
-        encoding: ParameterEncoding = URLEncoding.default,
-        headers: HTTPHeaders? = nil,
-        timeoutInterval: TimeInterval = 30.0,
-        showIndicator: Bool = false,
-        responseType: ResponseType = .json,
-        success: @escaping SuccessTask,
-        failure: @escaping FailTask)
-    {
-        if showIndicator == true {
-            RGNetwork.showIndicator()
-            RGNetwork.showActivityIndicator()
-        }
-
-        DispatchQueue.global().async {
-            do {
-                let urlPath = try urlPathString(by: urlString)
-
-                let request = AF.request(
-                    urlPath,
-                    method: method,
-                    parameters: parameters,
-                    encoding: encoding,
-                    headers: headers,
-                    requestModifier: { urlRequest in
-                        urlRequest.timeoutInterval = timeoutInterval
-                    }
-                )
-                .validate(statusCode: 200 ..< 300)
-
-                switch responseType {
-                    case .json:
-                        RGNetwork.responseJSON(with: request, success: success, failure: failure)
-
-                    case .string:
-                        RGNetwork.responseString(with: request, success: success, failure: failure)
-
-                    case .data:
-                        RGNetwork.responseData(with: request, success: success, failure: failure)
-                }
-            } catch {
-                print(error)
-                RGNetwork.hideIndicator()
-            }
-        }
-    }
-
     public static func upload(
         multipartData: @escaping (MultipartFormData) -> Void,
         config: RGUploadConfig,
@@ -498,6 +436,76 @@ fileprivate extension String {
     mutating func rg_removeLast(ifHas suffix: String) {
         if hasSuffix(suffix) {
             removeLast()
+        }
+    }
+
+}
+
+
+// MARK: - Deprecated
+
+extension RGNetwork {
+
+    /// 通用请求方法
+    /// - Parameters:
+    ///   - urlString: 请求地址
+    ///   - method: 请求方法，默认为 `GET`
+    ///   - parameters: 请求参数，默认为 `nil`
+    ///   - encoding: 请求参数编码，默认为 `URLEncoding.default`
+    ///   - headers: 请求头，默认为 `nil`
+    ///   - timeoutInterval: 超时时长，默认为 30 秒
+    ///   - showIndicator: 是否显示 Indicator，默认为 `false`
+    ///   - responseType: 返回数据格式类型，默认为 `.json`
+    ///   - success: 请求成功的 Task
+    ///   - failure: 请求失败的 Task
+    @available(*, deprecated, message: "This method is deprecated, please use: request(config:queue:showIndicator:responseType:success:failure:)")
+    public static func request(
+        with urlString: String,
+        method: HTTPMethod = .get,
+        parameters: Parameters? = nil,
+        encoding: ParameterEncoding = URLEncoding.default,
+        headers: HTTPHeaders? = nil,
+        timeoutInterval: TimeInterval = 30.0,
+        showIndicator: Bool = false,
+        responseType: ResponseType = .json,
+        success: @escaping SuccessTask,
+        failure: @escaping FailTask)
+    {
+        if showIndicator == true {
+            RGNetwork.showIndicator()
+            RGNetwork.showActivityIndicator()
+        }
+
+        DispatchQueue.global().async {
+            do {
+                let urlPath = try urlPathString(by: urlString)
+
+                let request = AF.request(
+                    urlPath,
+                    method: method,
+                    parameters: parameters,
+                    encoding: encoding,
+                    headers: headers,
+                    requestModifier: { urlRequest in
+                        urlRequest.timeoutInterval = timeoutInterval
+                    }
+                )
+                .validate(statusCode: 200 ..< 300)
+
+                switch responseType {
+                    case .json:
+                        RGNetwork.responseJSON(with: request, success: success, failure: failure)
+
+                    case .string:
+                        RGNetwork.responseString(with: request, success: success, failure: failure)
+
+                    case .data:
+                        RGNetwork.responseData(with: request, success: success, failure: failure)
+                }
+            } catch {
+                print(error)
+                RGNetwork.hideIndicator()
+            }
         }
     }
 
