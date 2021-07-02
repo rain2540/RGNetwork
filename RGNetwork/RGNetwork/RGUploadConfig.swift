@@ -15,17 +15,20 @@ struct RGUploadConfig: RGNetworkConfig {
     let method: HTTPMethod
     let headers: HTTPHeaders?
     let timeoutInterval: TimeInterval
+    let multipartFormData: (MultipartFormData) -> Void
 
 
     init(urlString: String,
          method: HTTPMethod = .post,
          headers: HTTPHeaders? = nil,
-         timeoutInterval: TimeInterval = 30.0)
+         timeoutInterval: TimeInterval = 30.0,
+         multipartFormData: @escaping (MultipartFormData) -> Void)
     {
         self.urlString          =   urlString
         self.method             =   method
         self.headers            =   headers
         self.timeoutInterval    =   timeoutInterval
+        self.multipartFormData  =   multipartFormData
     }
 
 }
