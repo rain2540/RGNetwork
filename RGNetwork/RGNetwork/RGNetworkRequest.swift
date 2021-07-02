@@ -17,8 +17,11 @@ class RGNetworkRequest {
     let encoding: ParameterEncoding
     let headers: HTTPHeaders?
     let timeoutInterval: TimeInterval
-    
-    
+
+    public var tag: Int = 0
+    public private(set) var config: RGDataRequestConfig
+
+
     // MARK: - Lifecycle
 
     /// create network request
@@ -42,6 +45,15 @@ class RGNetworkRequest {
         self.encoding           =   encoding
         self.headers            =   headers
         self.timeoutInterval    =   timeoutInterval
+
+        self.config = RGDataRequestConfig(
+            urlString: urlString,
+            method: method,
+            parameters: parameters,
+            encoding: encoding,
+            headers: headers,
+            timeoutInterval: timeoutInterval
+        )
     }
     
 }
@@ -50,6 +62,23 @@ class RGNetworkRequest {
 // MARK: - Public
 
 extension RGNetworkRequest {
+
+    public func task(
+        queue: DispatchQueue = DispatchQueue.global(),
+        showIndicator: Bool = false,
+        responseType: ResponseType = .json,
+        success: @escaping SuccessTask,
+        failure: @escaping FailTask)
+    {
+        RGNetwork.request(
+            config: config,
+            queue: queue,
+            showIndicator: showIndicator,
+            responseType: responseType,
+            success: success,
+            failure: failure
+        )
+    }
 
     /// 执行请求
     /// - Parameters:
