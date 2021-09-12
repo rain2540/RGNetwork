@@ -47,8 +47,8 @@ extension RGNetwork {
         showIndicator: Bool = false,
         responseType: ResponseType = .json,
         success: @escaping SuccessTask,
-        failure: @escaping FailTask)
-    {
+        failure: @escaping FailTask
+    ) {
         if showIndicator == true {
             RGNetwork.showIndicator()
             RGNetwork.showActivityIndicator()
@@ -94,8 +94,8 @@ extension RGNetwork {
         showIndicator: Bool = false,
         responseType: ResponseType = .json,
         success: @escaping SuccessTask,
-        failure: @escaping FailTask)
-    {
+        failure: @escaping FailTask
+    ) {
         if showIndicator == true {
             RGNetwork.showIndicator()
             RGNetwork.showActivityIndicator()
@@ -153,8 +153,8 @@ extension RGNetwork {
         showIndicator: Bool = false,
         responseType: ResponseType = .json,
         success: @escaping SuccessTask,
-        failure: @escaping FailTask)
-    {
+        failure: @escaping FailTask
+    ) {
         if showIndicator == true {
             RGNetwork.showIndicator()
             RGNetwork.showActivityIndicator()
@@ -202,8 +202,8 @@ extension RGNetwork {
     private static func responseJSON(
         with request: DataRequest,
         success: @escaping SuccessTask,
-        failure: @escaping FailTask)
-    {
+        failure: @escaping FailTask
+    ) {
         request.responseJSON { (responseJSON) in
             print("RGNetwork request debugDescription: \n", responseJSON.debugDescription, separator: "")
 
@@ -227,8 +227,8 @@ extension RGNetwork {
     private static func responseString(
         with request: DataRequest,
         success: @escaping SuccessTask,
-        failure: @escaping FailTask)
-    {
+        failure: @escaping FailTask
+    ) {
         request.responseString { (responseString) in
             print("RGNetwork request debugDescription: \n", responseString.debugDescription, separator: "")
 
@@ -247,8 +247,8 @@ extension RGNetwork {
     private static func responseData(
         with request: DataRequest,
         success: @escaping SuccessTask,
-        failure: @escaping FailTask)
-    {
+        failure: @escaping FailTask
+    ) {
         request.responseData { (responseData) in
             print("RGNetwork request debugDescription: \n", responseData.debugDescription, separator: "")
 
@@ -296,8 +296,8 @@ extension RGNetwork {
     ///   - completionDelay: 结束延迟时间
     public static func showActivityIndicator(
         startDelay: TimeInterval = 0.0,
-        completionDelay: TimeInterval = 0.7)
-    {
+        completionDelay: TimeInterval = 0.7
+    ) {
         NetworkActivityIndicatorManager.shared.isEnabled = true
         NetworkActivityIndicatorManager.shared.startDelay = startDelay
         NetworkActivityIndicatorManager.shared.completionDelay = completionDelay
@@ -309,8 +309,8 @@ extension RGNetwork {
     ///   - text: 显示的文字，默认为空
     private static func showIndicator(
         mode: MBProgressHUDMode = .indeterminate,
-        text: String = "")
-    {
+        text: String = ""
+    ) {
         DispatchQueue.main.async {
             guard let window = UIApplication.shared.keyWindow else { return }
             let hud = MBProgressHUD.showAdded(to: window, animated: true)
@@ -469,8 +469,8 @@ extension RGNetwork {
         showIndicator: Bool = false,
         responseType: ResponseType = .json,
         success: @escaping SuccessTask,
-        failure: @escaping FailTask)
-    {
+        failure: @escaping FailTask
+    ) {
         if showIndicator == true {
             RGNetwork.showIndicator()
             RGNetwork.showActivityIndicator()
