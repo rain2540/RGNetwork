@@ -32,13 +32,14 @@ class RGNetworkRequest {
     ///   - encoding: parameter encoding
     ///   - headers: HTTP headers
     ///   - timeoutInterval: 超时时长
-    init(urlString: String,
-         method: HTTPMethod = .get,
-         parameters: Parameters? = nil,
-         encoding: ParameterEncoding = URLEncoding.default,
-         headers: HTTPHeaders? = nil,
-         timeoutInterval: TimeInterval = 30.0)
-    {
+    init(
+        urlString: String,
+        method: HTTPMethod = .get,
+        parameters: Parameters? = nil,
+        encoding: ParameterEncoding = URLEncoding.default,
+        headers: HTTPHeaders? = nil,
+        timeoutInterval: TimeInterval = 30.0
+    ) {
         self.urlString          =   urlString
         self.method             =   method
         self.parameters         =   parameters
@@ -63,6 +64,13 @@ class RGNetworkRequest {
 
 extension RGNetworkRequest {
 
+    /// 执行请求
+    /// - Parameters:
+    ///   - queue: 执行请求的队列
+    ///   - showIndicator: 是否显示 Indicator
+    ///   - responseType: 返回数据格式类型
+    ///   - success: 请求成功的 Task
+    ///   - failure: 请求失败的 Task
     public func task(
         queue: DispatchQueue = DispatchQueue.global(),
         showIndicator: Bool = false,
