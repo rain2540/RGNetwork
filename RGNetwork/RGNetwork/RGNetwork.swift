@@ -268,7 +268,10 @@ extension RGNetwork {
 
     private static func urlPathString(by urlString: String) throws -> String {
         if urlString.rg_hasHttpPrefix {
-            return urlString
+            let fixURLString = urlString
+                .replacingOccurrences(of: "//", with: "/")
+                .replacingOccurrences(of: ":/", with: "://")
+            return fixURLString
         } else if let host = RGNetworkPreset.shared.baseURL, host.rg_hasHttpPrefix {
             if host.hasSuffix("/") && urlString.hasPrefix("/") {
                 var fixHost = host
@@ -459,7 +462,7 @@ extension RGNetwork {
     ///   - responseType: 返回数据格式类型，默认为 `.json`
     ///   - success: 请求成功的 Task
     ///   - failure: 请求失败的 Task
-    @available(*, deprecated, message: "This method is deprecated, please use: request(config:queue:showIndicator:responseType:success:failure:)")
+    @available(*, deprecated, renamed: "request(config:queue:showIndicator:responseType:success:failure:)")
     public static func request(
         with urlString: String,
         method: HTTPMethod = .get,
