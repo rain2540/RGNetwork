@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 class RGNetworkRequest {
-    
+
     let urlString: String
     let method: HTTPMethod
     let parameters: Parameters?
@@ -55,7 +55,7 @@ class RGNetworkRequest {
             timeoutInterval: timeoutInterval
         )
     }
-    
+
 }
 
 
@@ -68,8 +68,8 @@ extension RGNetworkRequest {
         showIndicator: Bool = false,
         responseType: ResponseType = .json,
         success: @escaping SuccessTask,
-        failure: @escaping FailTask)
-    {
+        failure: @escaping FailureTask
+    ) {
         RGNetwork.request(
             config: config,
             queue: queue,
@@ -89,7 +89,7 @@ extension RGNetworkRequest {
     public func task(showIndicator: Bool = false,
                      responseType: ResponseType = .json,
                      success: @escaping SuccessTask,
-                     failure: @escaping FailTask)
+                     failure: @escaping FailureTask)
     {
         RGNetwork.request(
             with: urlString,
@@ -104,5 +104,5 @@ extension RGNetworkRequest {
             failure: failure
         )
     }
-    
+
 }
