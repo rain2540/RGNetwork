@@ -196,31 +196,37 @@ extension RGNetwork {
 }
 
 
-//  MARK: - Private Methods
+// MARK: - Response of DataRequest / UploadRequest
 
 extension RGNetwork {
 
     private static func responseJSON(
         with request: DataRequest,
         success: @escaping SuccessTask,
-        failure: @escaping FailTask
+        failure: @escaping FailureTask
     ) {
         request.responseJSON { (responseJSON) in
-            print("RGNetwork request debugDescription: \n", responseJSON.debugDescription, separator: "")
+            print("RGNetwork.request.debugDescription: \n\(responseJSON.debugDescription)")
 
             let httpStatusCode = responseJSON.response?.statusCode
-            guard let json = responseJSON.value else {
-                failure(responseJSON.error, httpStatusCode, request, .json(responseJSON))
-                RGNetwork.hideIndicator()
-                return
-            }
             var responseData = Data()
             if let data = responseJSON.data {
                 responseData = data
             }
             let string = String(data: responseData, encoding: .utf8)
+            guard let code = httpStatusCode, code >= 200 && code < 300 else {
+                failure(responseJSON.error, string, responseJSON.data, httpStatusCode, request, .json(responseJSON))
+                RGNetwork.hideIndicator()
+                return
+            }
 
-            success(json as? [String : Any], string, responseJSON.data, httpStatusCode, request, .json(responseJSON))
+            guard let json = responseJSON.value as? ResponseJSON else {
+                success(nil, string, responseJSON.data, httpStatusCode, request, .json(responseJSON))
+                RGNetwork.hideIndicator()
+                return
+            }
+
+            success(json, string, responseJSON.data, httpStatusCode, request, .json(responseJSON))
             RGNetwork.hideIndicator()
         }
     }
@@ -228,19 +234,30 @@ extension RGNetwork {
     private static func responseString(
         with request: DataRequest,
         success: @escaping SuccessTask,
-        failure: @escaping FailTask
+        failure: @escaping FailureTask
     ) {
         request.responseString { (responseString) in
-            print("RGNetwork request debugDescription: \n", responseString.debugDescription, separator: "")
+            print("RGNetwork.request.debugDescription: \n\(responseString.debugDescription)")
 
             let httpStatusCode = responseString.response?.statusCode
-            guard let string = responseString.value else {
-                failure(responseString.error, httpStatusCode, request, .string(responseString))
+            var responseData = Data()
+            if let data = responseString.data {
+                responseData = data
+            }
+            let string = String(data: responseData, encoding: .utf8)
+            guard let code = httpStatusCode, code >= 200 && code < 300 else {
+                failure(responseString.error, string, responseString.data, httpStatusCode, request, .string(responseString))
                 RGNetwork.hideIndicator()
                 return
             }
 
-            success(nil, string, responseString.data, httpStatusCode, request, .string(responseString))
+            guard let resString = responseString.value else {
+                success(nil, nil, responseString.data, httpStatusCode, request, .string(responseString))
+                RGNetwork.hideIndicator()
+                return
+            }
+
+            success(nil, resString, responseString.data, httpStatusCode, request, .string(responseString))
             RGNetwork.hideIndicator()
         }
     }
@@ -248,14 +265,14 @@ extension RGNetwork {
     private static func responseData(
         with request: DataRequest,
         success: @escaping SuccessTask,
-        failure: @escaping FailTask
+        failure: @escaping FailureTask
     ) {
         request.responseData { (responseData) in
-            print("RGNetwork request debugDescription: \n", responseData.debugDescription, separator: "")
+            print("RGNetwork.request.debugDescription: \n\(responseData.debugDescription)")
 
             let httpStatusCode = responseData.response?.statusCode
             guard let data = responseData.value else {
-                failure(responseData.error, httpStatusCode, request, .data(responseData))
+                failure(responseData.error, nil, nil, httpStatusCode, request, .data(responseData))
                 RGNetwork.hideIndicator()
                 return
             }
@@ -265,6 +282,13 @@ extension RGNetwork {
             RGNetwork.hideIndicator()
         }
     }
+
+}
+
+
+// MARK: - URL Path Handle
+
+extension RGNetwork {
 
     private static func urlPathString(by urlString: String) throws -> String {
         if urlString.rg_hasHttpPrefix {
