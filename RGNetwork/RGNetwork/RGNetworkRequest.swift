@@ -88,29 +88,4 @@ extension RGNetworkRequest {
         )
     }
 
-    /// 执行请求
-    /// - Parameters:
-    ///   - showIndicator: 是否显示 Indicator
-    ///   - responseType: 返回数据格式类型
-    ///   - success: 请求成功的 Task
-    ///   - failure: 请求失败的 Task
-    public func task(showIndicator: Bool = false,
-                     responseType: ResponseType = .json,
-                     success: @escaping SuccessTask,
-                     failure: @escaping FailureTask)
-    {
-        RGNetwork.request(
-            with: urlString,
-            method: method,
-            parameters: parameters,
-            encoding: encoding,
-            headers: headers,
-            timeoutInterval: timeoutInterval,
-            showIndicator: showIndicator,
-            responseType: responseType,
-            success: success,
-            failure: failure
-        )
-    }
-
 }
