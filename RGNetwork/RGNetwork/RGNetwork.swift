@@ -42,13 +42,15 @@ struct RGNetwork { }
 
 extension RGNetwork {
 
+    // MARK: DataRequest
+
     public static func request(
         config: RGDataRequestConfig,
         queue: DispatchQueue = DispatchQueue.global(),
         showIndicator: Bool = false,
         responseType: ResponseType = .json,
         success: @escaping SuccessTask,
-        failure: @escaping FailTask
+        failure: @escaping FailureTask
     ) {
         if showIndicator == true {
             RGNetwork.showIndicator()
@@ -87,6 +89,9 @@ extension RGNetwork {
             }
         }
     }
+
+
+    // MARK: - UploadRequest
 
     public static func upload(
         config: RGUploadConfig,
