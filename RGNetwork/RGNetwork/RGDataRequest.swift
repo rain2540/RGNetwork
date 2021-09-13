@@ -1,5 +1,5 @@
 //
-//  RGNetworkRequest.swift
+//  RGDataRequest.swift
 //  RGNetwork
 //
 //  Created by Rain on 2020/3/6.
@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-class RGNetworkRequest {
+class RGDataRequest {
 
     let urlString: String
     let method: HTTPMethod
@@ -62,7 +62,7 @@ class RGNetworkRequest {
 
 // MARK: - Public
 
-extension RGNetworkRequest {
+extension RGDataRequest {
 
     /// 执行请求
     /// - Parameters:
