@@ -16,11 +16,16 @@ enum ResponseType {
     case json, string, data
 }
 
-
 enum DataResponsePackage {
     case json(DataResponse<Any, AFError>)
     case string(DataResponse<String, AFError>)
     case data(DataResponse<Data, AFError>)
+}
+
+enum DownloadResponsePackage {
+    case json(DownloadResponse<Any, AFError>)
+    case string(DownloadResponse<String, AFError>)
+    case data(DownloadResponse<Data, AFError>)
 }
 
 
@@ -31,8 +36,6 @@ typealias HttpStatusCode = Int
 
 typealias SuccessTask = (ResponseJSON?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponsePackage) -> Void
 typealias FailureTask = (Error?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponsePackage) -> Void
-@available(*, deprecated, renamed: "FailureTask")
-typealias FailTask = (Error?, HttpStatusCode?, DataRequest, DataResponsePackage) -> Void
 
 
 struct RGNetwork { }
