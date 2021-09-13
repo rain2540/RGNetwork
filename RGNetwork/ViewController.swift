@@ -43,7 +43,7 @@ class ViewController: UIViewController {
                             print("error: \n", error ?? "get nil failed.")
         })
         */
-        let request = RGNetworkRequest(urlString: urlString, parameters: params)
+        let request = RGDataRequest(urlString: urlString, parameters: params)
         request.task(
             showIndicator: true,
             responseType: .json,
