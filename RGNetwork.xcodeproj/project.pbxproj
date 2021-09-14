@@ -99,9 +99,9 @@
 			children = (
 				B74D9DC91F132BFB00D34AE1 /* RGNetwork.swift */,
 				B72A229E241233500059CFC4 /* RGDataRequest.swift */,
-				B75037D7268A0D59006190F4 /* RGNetworkConfig.swift */,
 				B75037DA268A0ED2006190F4 /* RGDataRequestConfig.swift */,
 				B75037DD268A10BB006190F4 /* RGUploadConfig.swift */,
+				B75037D7268A0D59006190F4 /* RGNetworkConfig.swift */,
 				B7639FD32399E87A004859B5 /* RGNetworkPreset.swift */,
 				B763A0162399F7FB004859B5 /* RGNetworkError.swift */,
 				B74D9DCC1F134DDB00D34AE1 /* RGToast.swift */,
