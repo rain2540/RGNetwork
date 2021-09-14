@@ -16,11 +16,16 @@ enum ResponseType {
     case json, string, data
 }
 
-
 enum DataResponsePackage {
     case json(DataResponse<Any, AFError>)
     case string(DataResponse<String, AFError>)
     case data(DataResponse<Data, AFError>)
+}
+
+enum DownloadResponsePackage {
+    case json(DownloadResponse<Any, AFError>)
+    case string(DownloadResponse<String, AFError>)
+    case data(DownloadResponse<Data, AFError>)
 }
 
 
@@ -30,7 +35,7 @@ typealias ResponseData = Data
 typealias HttpStatusCode = Int
 
 typealias SuccessTask = (ResponseJSON?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponsePackage) -> Void
-typealias FailureTask = (Error?, HttpStatusCode?, DataRequest, DataResponsePackage) -> Void
+typealias FailureTask = (Error?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponsePackage) -> Void
 
 
 struct RGNetwork { }
@@ -40,46 +45,33 @@ struct RGNetwork { }
 
 extension RGNetwork {
 
-    /// 通用请求方法
-    /// - Parameters:
-    ///   - urlString: 请求地址
-    ///   - method: 请求方法，默认为 `GET`
-    ///   - parameters: 请求参数，默认为 `nil`
-    ///   - encoding: 请求参数编码，默认为 `URLEncoding.default`
-    ///   - headers: 请求头，默认为 `nil`
-    ///   - timeoutInterval: 超时时长，默认为 30 秒
-    ///   - showIndicator: 是否显示 Indicator，默认为 `false`
-    ///   - responseType: 返回数据格式类型，默认为 `.json`
-    ///   - success: 请求成功的 Task
-    ///   - failure: 请求失败的 Task
+    // MARK: DataRequest
+
     public static func request(
-        with urlString: String,
-        method: HTTPMethod = .get,
-        parameters: Parameters? = nil,
-        encoding: ParameterEncoding = URLEncoding.default,
-        headers: HTTPHeaders? = nil,
-        timeoutInterval: TimeInterval = 30.0,
+        config: RGDataRequestConfig,
+        queue: DispatchQueue = DispatchQueue.global(),
         showIndicator: Bool = false,
         responseType: ResponseType = .json,
         success: @escaping SuccessTask,
-        failure: @escaping FailureTask)
-    {
+        failure: @escaping FailureTask
+    ) {
         if showIndicator == true {
             RGNetwork.showIndicator()
             RGNetwork.showActivityIndicator()
         }
 
-        DispatchQueue.global().async {
+        queue.async {
             do {
-                let urlPath = try urlPathString(by: urlString)
+                let urlPath = try urlPathString(by: config.urlString)
+
                 let request = AF.request(
                     urlPath,
-                    method: method,
-                    parameters: parameters,
-                    encoding: encoding,
-                    headers: headers,
+                    method: config.method,
+                    parameters: config.parameters,
+                    encoding: config.encoding,
+                    headers: config.headers,
                     requestModifier: { urlRequest in
-                        urlRequest.timeoutInterval = timeoutInterval
+                        urlRequest.timeoutInterval = config.timeoutInterval
                     }
                 )
                 .validate(statusCode: 200 ..< 300)
@@ -101,44 +93,33 @@ extension RGNetwork {
         }
     }
 
-    /// 上传方法
-    /// - Parameters:
-    ///   - multipartData: 执行上传操作的 Task
-    ///   - urlString: 上传地址
-    ///   - method: 请求方法，默认为 `POST`
-    ///   - headers: 请求头，默认为 `nil`
-    ///   - timeoutInterval: 超时时长，默认为 30 秒
-    ///   - showIndicator: 是否显示 Indicator，默认为 `false`
-    ///   - responseType: 返回数据格式类型，默认为 `.json`
-    ///   - success: 上传成功的 Task
-    ///   - failure: 上传失败的 Task
+
+    // MARK: - UploadRequest
+
     public static func upload(
-        multipartData: @escaping (MultipartFormData) -> Void,
-        to urlString: String,
-        method: HTTPMethod = .post,
-        headers: HTTPHeaders? = nil,
-        timeoutInterval: TimeInterval = 30.0,
+        config: RGUploadConfig,
+        queue: DispatchQueue = DispatchQueue.global(),
         showIndicator: Bool = false,
         responseType: ResponseType = .json,
         success: @escaping SuccessTask,
-        failure: @escaping FailureTask)
-    {
+        failure: @escaping FailureTask
+    ) {
         if showIndicator == true {
             RGNetwork.showIndicator()
             RGNetwork.showActivityIndicator()
         }
 
-        DispatchQueue.global().async {
+        queue.async {
             do {
-                let urlPath = try urlPathString(by: urlString)
+                let urlPath = try urlPathString(by: config.urlString)
 
                 let request = AF.upload(
-                    multipartFormData: multipartData,
+                    multipartFormData: config.multipartFormData,
                     to: urlPath,
-                    method: method,
-                    headers: headers,
+                    method: config.method,
+                    headers: config.headers,
                     requestModifier: { uploadRequest in
-                        uploadRequest.timeoutInterval = timeoutInterval
+                        uploadRequest.timeoutInterval = config.timeoutInterval
                     }
                 )
                 .validate(statusCode: 200 ..< 300)
@@ -163,31 +144,37 @@ extension RGNetwork {
 }
 
 
-//  MARK: - Private Methods
+// MARK: - Response of DataRequest / UploadRequest
 
 extension RGNetwork {
 
     private static func responseJSON(
         with request: DataRequest,
         success: @escaping SuccessTask,
-        failure: @escaping FailureTask)
-    {
+        failure: @escaping FailureTask
+    ) {
         request.responseJSON { (responseJSON) in
-            print("RGNetwork request debugDescription: \n", responseJSON.debugDescription, separator: "")
+            print("RGNetwork.request.debugDescription: \n\(responseJSON.debugDescription)")
 
             let httpStatusCode = responseJSON.response?.statusCode
-            guard let json = responseJSON.value else {
-                failure(responseJSON.error, httpStatusCode, request, .json(responseJSON))
-                RGNetwork.hideIndicator()
-                return
-            }
             var responseData = Data()
             if let data = responseJSON.data {
                 responseData = data
             }
             let string = String(data: responseData, encoding: .utf8)
+            guard let code = httpStatusCode, code >= 200 && code < 300 else {
+                failure(responseJSON.error, string, responseJSON.data, httpStatusCode, request, .json(responseJSON))
+                RGNetwork.hideIndicator()
+                return
+            }
 
-            success(json as? [String : Any], string, responseJSON.data, httpStatusCode, request, .json(responseJSON))
+            guard let json = responseJSON.value as? ResponseJSON else {
+                success(nil, string, responseJSON.data, httpStatusCode, request, .json(responseJSON))
+                RGNetwork.hideIndicator()
+                return
+            }
+
+            success(json, string, responseJSON.data, httpStatusCode, request, .json(responseJSON))
             RGNetwork.hideIndicator()
         }
     }
@@ -195,19 +182,30 @@ extension RGNetwork {
     private static func responseString(
         with request: DataRequest,
         success: @escaping SuccessTask,
-        failure: @escaping FailureTask)
-    {
+        failure: @escaping FailureTask
+    ) {
         request.responseString { (responseString) in
-            print("RGNetwork request debugDescription: \n", responseString.debugDescription, separator: "")
+            print("RGNetwork.request.debugDescription: \n\(responseString.debugDescription)")
 
             let httpStatusCode = responseString.response?.statusCode
-            guard let string = responseString.value else {
-                failure(responseString.error, httpStatusCode, request, .string(responseString))
+            var responseData = Data()
+            if let data = responseString.data {
+                responseData = data
+            }
+            let string = String(data: responseData, encoding: .utf8)
+            guard let code = httpStatusCode, code >= 200 && code < 300 else {
+                failure(responseString.error, string, responseString.data, httpStatusCode, request, .string(responseString))
                 RGNetwork.hideIndicator()
                 return
             }
 
-            success(nil, string, responseString.data, httpStatusCode, request, .string(responseString))
+            guard let resString = responseString.value else {
+                success(nil, nil, responseString.data, httpStatusCode, request, .string(responseString))
+                RGNetwork.hideIndicator()
+                return
+            }
+
+            success(nil, resString, responseString.data, httpStatusCode, request, .string(responseString))
             RGNetwork.hideIndicator()
         }
     }
@@ -215,14 +213,14 @@ extension RGNetwork {
     private static func responseData(
         with request: DataRequest,
         success: @escaping SuccessTask,
-        failure: @escaping FailureTask)
-    {
+        failure: @escaping FailureTask
+    ) {
         request.responseData { (responseData) in
-            print("RGNetwork request debugDescription: \n", responseData.debugDescription, separator: "")
+            print("RGNetwork.request.debugDescription: \n\(responseData.debugDescription)")
 
             let httpStatusCode = responseData.response?.statusCode
             guard let data = responseData.value else {
-                failure(responseData.error, httpStatusCode, request, .data(responseData))
+                failure(responseData.error, nil, nil, httpStatusCode, request, .data(responseData))
                 RGNetwork.hideIndicator()
                 return
             }
@@ -233,10 +231,20 @@ extension RGNetwork {
         }
     }
 
+}
+
+
+// MARK: - URL Path Handle
+
+extension RGNetwork {
+
     private static func urlPathString(by urlString: String) throws -> String {
         if urlString.rg_hasHttpPrefix {
-            return urlString
-        } else if let host = RGNetworkConfig.shared.baseURL, host.rg_hasHttpPrefix {
+            let fixURLString = urlString
+                .replacingOccurrences(of: "//", with: "/")
+                .replacingOccurrences(of: ":/", with: "://")
+            return fixURLString
+        } else if let host = RGNetworkPreset.shared.baseURL, host.rg_hasHttpPrefix {
             if host.hasSuffix("/") && urlString.hasPrefix("/") {
                 var fixHost = host
                 fixHost.rg_removeLast(ifHas: "/")
@@ -264,8 +272,8 @@ extension RGNetwork {
     ///   - completionDelay: 结束延迟时间
     public static func showActivityIndicator(
         startDelay: TimeInterval = 0.0,
-        completionDelay: TimeInterval = 0.7)
-    {
+        completionDelay: TimeInterval = 0.7
+    ) {
         NetworkActivityIndicatorManager.shared.isEnabled = true
         NetworkActivityIndicatorManager.shared.startDelay = startDelay
         NetworkActivityIndicatorManager.shared.completionDelay = completionDelay
@@ -277,8 +285,8 @@ extension RGNetwork {
     ///   - text: 显示的文字，默认为空
     private static func showIndicator(
         mode: MBProgressHUDMode = .indeterminate,
-        text: String = "")
-    {
+        text: String = ""
+    ) {
         DispatchQueue.main.async {
             guard let window = UIApplication.shared.keyWindow else { return }
             let hud = MBProgressHUD.showAdded(to: window, animated: true)

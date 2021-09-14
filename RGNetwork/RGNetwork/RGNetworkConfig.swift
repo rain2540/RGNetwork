@@ -2,18 +2,18 @@
 //  RGNetworkConfig.swift
 //  RGNetwork
 //
-//  Created by RAIN on 2019/12/6.
-//  Copyright © 2019 Smartech. All rights reserved.
+//  Created by Rain on 2021/6/28.
+//  Copyright © 2021 Smartech. All rights reserved.
 //
 
 import Foundation
+import Alamofire
 
-class RGNetworkConfig {
+protocol RGNetworkConfig {
 
-    static let shared = RGNetworkConfig()
-
-    var baseURL: String? = nil
-
-    private init() { }
+    var urlString: String { get }
+    var method: HTTPMethod { get }
+    var headers: HTTPHeaders? { get }
+    var timeoutInterval: TimeInterval { get }
 
 }
