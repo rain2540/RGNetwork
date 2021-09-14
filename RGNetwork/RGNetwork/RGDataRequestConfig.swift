@@ -24,8 +24,8 @@ struct RGDataRequestConfig: RGNetworkConfig {
          parameters: Parameters? = nil,
          encoding: ParameterEncoding = URLEncoding.default,
          headers: HTTPHeaders? = nil,
-         timeoutInterval: TimeInterval = 30.0)
-    {
+         timeoutInterval: TimeInterval = 30.0
+    ) {
         self.urlString          =   urlString
         self.method             =   method
         self.parameters         =   parameters
