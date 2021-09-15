@@ -19,12 +19,13 @@ struct RGDataRequestConfig: RGNetworkConfig {
     let encoding: ParameterEncoding
 
 
-    init(urlString: String,
-         method: HTTPMethod = .get,
-         parameters: Parameters? = nil,
-         encoding: ParameterEncoding = URLEncoding.default,
-         headers: HTTPHeaders? = nil,
-         timeoutInterval: TimeInterval = 30.0
+    init(
+        urlString: String,
+        method: HTTPMethod = .get,
+        parameters: Parameters? = nil,
+        encoding: ParameterEncoding = URLEncoding.default,
+        headers: HTTPHeaders? = nil,
+        timeoutInterval: TimeInterval = 30.0
     ) {
         self.urlString          =   urlString
         self.method             =   method

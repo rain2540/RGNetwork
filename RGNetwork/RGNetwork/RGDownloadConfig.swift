@@ -7,7 +7,16 @@
 //
 
 import Foundation
+import Alamofire
 
-struct RGDownloadConfig {
+struct RGDownloadConfig: RGNetworkConfig {
+
+    let urlString: String
+    let method: HTTPMethod
+    let headers: HTTPHeaders?
+    let timeoutInterval: TimeInterval
+    let parameters: Parameters?
+    let encoding: ParameterEncoding
+    let destination: DownloadRequest.Destination?
 
 }
