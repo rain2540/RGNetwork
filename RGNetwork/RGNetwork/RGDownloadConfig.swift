@@ -19,4 +19,23 @@ struct RGDownloadConfig: RGNetworkConfig {
     let encoding: ParameterEncoding
     let destination: DownloadRequest.Destination?
 
+
+    init(
+        urlString: String,
+        method: HTTPMethod = .get,
+        parameters: Parameters? = nil,
+        encoding: ParameterEncoding = URLEncoding.default,
+        headers: HTTPHeaders? = nil,
+        timeoutInterval: TimeInterval = 30.0,
+        destination: DownloadRequest.Destination? = nil
+    ) {
+        self.urlString          =   urlString
+        self.method             =   method
+        self.parameters         =   parameters
+        self.encoding           =   encoding
+        self.headers            =   headers
+        self.timeoutInterval    =   timeoutInterval
+        self.destination        =   destination
+    }
+
 }
