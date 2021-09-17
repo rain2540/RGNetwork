@@ -63,7 +63,7 @@ extension RGNetwork {
         queue.async {
             do {
                 let urlPath = try urlPathString(by: config.urlString)
-
+                
                 let request = AF.request(
                     urlPath,
                     method: config.method,
@@ -74,8 +74,8 @@ extension RGNetwork {
                         urlRequest.timeoutInterval = config.timeoutInterval
                     }
                 )
-                .validate(statusCode: 200 ..< 300)
-
+                    .validate(statusCode: 200 ..< 300)
+                
                 switch responseType {
                     case .json:
                         RGNetwork.responseJSON(with: request, success: success, failure: failure)
