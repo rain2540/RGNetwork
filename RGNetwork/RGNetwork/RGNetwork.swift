@@ -37,6 +37,9 @@ typealias HttpStatusCode = Int
 typealias SuccessTask = (ResponseJSON?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponsePackage) -> Void
 typealias FailureTask = (Error?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponsePackage) -> Void
 
+typealias DownloadSuccess = (ResponseJSON?, ResponseString?, ResponseData?, URL?, HttpStatusCode?, DownloadRequest, DownloadResponsePackage) -> Void
+typealias DownloadFailure = (Error?, ResponseString?, ResponseData?, HttpStatusCode?, DownloadRequest, DownloadResponsePackage) -> Void
+
 
 struct RGNetwork { }
 
@@ -63,7 +66,7 @@ extension RGNetwork {
         queue.async {
             do {
                 let urlPath = try urlPathString(by: config.urlString)
-                
+
                 let request = AF.request(
                     urlPath,
                     method: config.method,
@@ -75,7 +78,7 @@ extension RGNetwork {
                     }
                 )
                     .validate(statusCode: 200 ..< 300)
-                
+
                 switch responseType {
                     case .json:
                         RGNetwork.responseJSON(with: request, success: success, failure: failure)
