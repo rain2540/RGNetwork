@@ -237,6 +237,35 @@ extension RGNetwork {
 }
 
 
+// MARK: - Response of DownloadRequest
+
+extension RGNetwork {
+
+    private static func downloadData(
+        with request: DownloadRequest,
+        success: @escaping DownloadSuccess,
+        failure: @escaping DownloadFailure
+    ) {
+        request.responseData { responseData in
+            print("RGNetwork.download.debugDescription: \n\(responseData.debugDescription)")
+
+            let httpStatusCode = responseData.response?.statusCode
+            guard let data = responseData.value else {
+                failure(responseData.error, nil, nil, httpStatusCode, request, .data(responseData))
+                return
+            }
+
+            let string = String(data: data, encoding: .utf8)
+            let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? ResponseJSON
+
+            success(json, string, data, responseData.fileURL, httpStatusCode, request, .data(responseData))
+            RGNetwork.hideIndicator()
+        }
+    }
+
+}
+
+
 // MARK: - URL Path Handle
 
 extension RGNetwork {
