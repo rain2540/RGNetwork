@@ -50,6 +50,14 @@ extension RGNetwork {
 
     // MARK: DataRequest
 
+    /// 通用请求方法
+    /// - Parameters:
+    ///   - config: 网络请求配置信息
+    ///   - queue: queue description执行请求的队列，默认为 `DispatchQueue.global()`
+    ///   - showIndicator: 是否显示 Indicator，默认为 `false`
+    ///   - responseType: 返回数据格式类型，默认为 `.json`
+    ///   - success: 请求成功的 Task
+    ///   - failure: 请求失败的 Task
     public static func request(
         config: RGDataRequestConfig,
         queue: DispatchQueue = DispatchQueue.global(),
@@ -145,6 +153,7 @@ extension RGNetwork {
     }
 
 
+    // MARK: - DownloadRequest
 
     public static func download(
         config: RGDownloadConfig,
