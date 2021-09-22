@@ -144,6 +144,45 @@ extension RGNetwork {
         }
     }
 
+
+
+    public static func download(
+        config: RGDownloadConfig,
+        queue: DispatchQueue = DispatchQueue.global(),
+        showIndicator: Bool = false,
+        success: @escaping DownloadSuccess,
+        failure: @escaping DownloadFailure
+    ) {
+        if showIndicator == true {
+            RGNetwork.showIndicator()
+            RGNetwork.showActivityIndicator()
+        }
+
+        queue.async {
+            do {
+                let urlPath = try urlPathString(by: config.urlString)
+
+                let request = AF.download(
+                    urlPath,
+                    method: config.method,
+                    parameters: config.parameters,
+                    encoding: config.encoding,
+                    headers: config.headers,
+                    requestModifier: { downloadRequest in
+                        downloadRequest.timeoutInterval = config.timeoutInterval
+                    },
+                    to: config.destination
+                )
+                    .validate(statusCode: 200 ..< 300)
+
+                RGNetwork.downloadData(with: request, success: success, failure: failure)
+            } catch {
+                print(error)
+                RGNetwork.hideIndicator()
+            }
+        }
+    }
+
 }
 
 
