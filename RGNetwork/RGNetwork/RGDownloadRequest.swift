@@ -10,4 +10,8 @@ import UIKit
 
 class RGDownloadRequest {
 
+    var tag: Int = 0
+
+    public private(set) config: RGDownloadConfig
+
 }
