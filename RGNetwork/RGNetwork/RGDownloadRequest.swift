@@ -39,3 +39,25 @@ class RGDownloadRequest {
     }
 
 }
+
+
+// MARK: - Public
+
+extension RGDownloadRequest {
+
+    public func download(
+        queue: DispatchQueue = DispatchQueue.global(),
+        showIndicator: Bool = false,
+        success: @escaping DownloadSuccess,
+        failure: @escaping DownloadFailure
+    ) {
+        RGNetwork.download(
+            config: config,
+            queue: queue,
+            showIndicator: showIndicator,
+            success: success,
+            failure: failure
+        )
+    }
+
+}
