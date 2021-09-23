@@ -7,11 +7,35 @@
 //
 
 import UIKit
+import Alamofire
 
 class RGDownloadRequest {
 
     var tag: Int = 0
 
-    public private(set) config: RGDownloadConfig
+    public private(set) var config: RGDownloadConfig
+
+
+    // MARK: - Lifecycle
+
+    init(
+        urlString: String,
+        method: HTTPMethod = .get,
+        parameters: Parameters? = nil,
+        encoding: ParameterEncoding = URLEncoding.default,
+        headers: HTTPHeaders? = nil,
+        timeoutInterval: TimeInterval = 30.0,
+        destination: DownloadRequest.Destination? = nil
+    ) {
+        self.config = RGDownloadConfig(
+            urlString: urlString,
+            method: method,
+            parameters: parameters,
+            encoding: encoding,
+            headers: headers,
+            timeoutInterval: timeoutInterval,
+            destination: destination
+        )
+    }
 
 }
