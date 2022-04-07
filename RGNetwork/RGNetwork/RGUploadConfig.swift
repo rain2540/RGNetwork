@@ -16,6 +16,7 @@ struct RGUploadConfig: RGNetworkConfig {
     let headers: HTTPHeaders?
     let timeoutInterval: TimeInterval
     let multipartFormData: (MultipartFormData) -> Void
+    var isShowLog: Bool
 
 
     init(
@@ -29,6 +30,7 @@ struct RGUploadConfig: RGNetworkConfig {
         self.method             =   method
         self.headers            =   headers
         self.timeoutInterval    =   timeoutInterval
+        self.isShowLog          =   isShowLog
         self.multipartFormData  =   multipartFormData
     }
 

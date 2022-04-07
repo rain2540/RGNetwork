@@ -28,6 +28,7 @@ struct RGDownloadConfig: RGNetworkConfig {
         encoding: ParameterEncoding = URLEncoding.default,
         headers: HTTPHeaders? = nil,
         timeoutInterval: TimeInterval = 30.0,
+        isShowLog: Bool = true,
         destination: DownloadRequest.Destination? = nil
     ) {
         self.urlString          =   urlString
