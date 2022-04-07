@@ -24,6 +24,7 @@ struct RGUploadConfig: RGNetworkConfig {
         method: HTTPMethod = .post,
         headers: HTTPHeaders? = nil,
         timeoutInterval: TimeInterval = 30.0,
+        isShowLog: Bool = true,
         multipartFormData: @escaping (MultipartFormData) -> Void
     ) {
         self.urlString          =   urlString
