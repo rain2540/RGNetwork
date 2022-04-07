@@ -32,7 +32,8 @@ class RGDataRequest {
         parameters: Parameters? = nil,
         encoding: ParameterEncoding = URLEncoding.default,
         headers: HTTPHeaders? = nil,
-        timeoutInterval: TimeInterval = 30.0
+        timeoutInterval: TimeInterval = 30.0,
+        isShowLog: Bool = true
     ) {
         self.config = RGDataRequestConfig(
             urlString: urlString,
@@ -40,7 +41,8 @@ class RGDataRequest {
             parameters: parameters,
             encoding: encoding,
             headers: headers,
-            timeoutInterval: timeoutInterval
+            timeoutInterval: timeoutInterval,
+            isShowLog: isShowLog
         )
     }
 
