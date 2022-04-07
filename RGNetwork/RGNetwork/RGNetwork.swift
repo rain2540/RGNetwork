@@ -37,6 +37,9 @@ typealias HttpStatusCode = Int
 typealias SuccessTask = (ResponseJSON?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponsePackage) -> Void
 typealias FailureTask = (Error?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponsePackage) -> Void
 
+typealias DownloadSuccess = (ResponseJSON?, ResponseString?, ResponseData?, URL?, HttpStatusCode?, DownloadRequest, DownloadResponsePackage) -> Void
+typealias DownloadFailure = (Error?, ResponseString?, ResponseData?, HttpStatusCode?, DownloadRequest, DownloadResponsePackage) -> Void
+
 
 struct RGNetwork { }
 
@@ -47,6 +50,14 @@ extension RGNetwork {
 
     // MARK: DataRequest
 
+    /// 通用请求方法
+    /// - Parameters:
+    ///   - config: 网络请求配置信息
+    ///   - queue: queue description执行请求的队列，默认为 `DispatchQueue.global()`
+    ///   - showIndicator: 是否显示 Indicator，默认为 `false`
+    ///   - responseType: 返回数据格式类型，默认为 `.json`
+    ///   - success: 请求成功的 Task
+    ///   - failure: 请求失败的 Task
     public static func request(
         config: RGDataRequestConfig,
         queue: DispatchQueue = DispatchQueue.global(),
@@ -74,7 +85,7 @@ extension RGNetwork {
                         urlRequest.timeoutInterval = config.timeoutInterval
                     }
                 )
-                .validate(statusCode: 200 ..< 300)
+                    .validate(statusCode: 200 ..< 300)
 
                 switch responseType {
                     case .json:
@@ -134,6 +145,46 @@ extension RGNetwork {
                     case .data:
                         RGNetwork.responseData(with: request, success: success, failure: failure)
                 }
+            } catch {
+                print(error)
+                RGNetwork.hideIndicator()
+            }
+        }
+    }
+
+
+    // MARK: - DownloadRequest
+
+    public static func download(
+        config: RGDownloadConfig,
+        queue: DispatchQueue = DispatchQueue.global(),
+        showIndicator: Bool = false,
+        success: @escaping DownloadSuccess,
+        failure: @escaping DownloadFailure
+    ) {
+        if showIndicator == true {
+            RGNetwork.showIndicator()
+            RGNetwork.showActivityIndicator()
+        }
+
+        queue.async {
+            do {
+                let urlPath = try urlPathString(by: config.urlString)
+
+                let request = AF.download(
+                    urlPath,
+                    method: config.method,
+                    parameters: config.parameters,
+                    encoding: config.encoding,
+                    headers: config.headers,
+                    requestModifier: { downloadRequest in
+                        downloadRequest.timeoutInterval = config.timeoutInterval
+                    },
+                    to: config.destination
+                )
+                    .validate(statusCode: 200 ..< 300)
+
+                RGNetwork.downloadData(with: request, success: success, failure: failure)
             } catch {
                 print(error)
                 RGNetwork.hideIndicator()
@@ -227,6 +278,35 @@ extension RGNetwork {
             let string = String(data: data, encoding: .utf8)
 
             success(nil, string, data, httpStatusCode, request, .data(responseData))
+            RGNetwork.hideIndicator()
+        }
+    }
+
+}
+
+
+// MARK: - Response of DownloadRequest
+
+extension RGNetwork {
+
+    private static func downloadData(
+        with request: DownloadRequest,
+        success: @escaping DownloadSuccess,
+        failure: @escaping DownloadFailure
+    ) {
+        request.responseData { responseData in
+            print("RGNetwork.download.debugDescription: \n\(responseData.debugDescription)")
+
+            let httpStatusCode = responseData.response?.statusCode
+            guard let data = responseData.value else {
+                failure(responseData.error, nil, nil, httpStatusCode, request, .data(responseData))
+                return
+            }
+
+            let string = String(data: data, encoding: .utf8)
+            let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? ResponseJSON
+
+            success(json, string, data, responseData.fileURL, httpStatusCode, request, .data(responseData))
             RGNetwork.hideIndicator()
         }
     }

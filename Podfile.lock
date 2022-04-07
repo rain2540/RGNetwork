@@ -1,25 +1,39 @@
 PODS:
-  - Alamofire (5.4.3)
+  - Alamofire (5.5.0)
   - AlamofireNetworkActivityIndicator (3.1.0):
     - Alamofire (~> 5.1)
   - MBProgressHUD (1.2.0)
 
 DEPENDENCIES:
-  - Alamofire (= 5.4.3)
-  - AlamofireNetworkActivityIndicator (= 3.1.0)
+  - Alamofire (from `https://gitee.com/rain2540/Alamofire.git`, tag `5.5.0`)
+  - AlamofireNetworkActivityIndicator (from `https://gitee.com/rain2540/AlamofireNetworkActivityIndicator.git`, tag `3.1.0.1`)
   - MBProgressHUD (= 1.2.0)
 
 SPEC REPOS:
   https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git:
-    - Alamofire
-    - AlamofireNetworkActivityIndicator
     - MBProgressHUD
 
+EXTERNAL SOURCES:
+  Alamofire:
+    :git: https://gitee.com/rain2540/Alamofire.git
+    :tag: 5.5.0
+  AlamofireNetworkActivityIndicator:
+    :git: https://gitee.com/rain2540/AlamofireNetworkActivityIndicator.git
+    :tag: 3.1.0.1
+
+CHECKOUT OPTIONS:
+  Alamofire:
+    :git: https://gitee.com/rain2540/Alamofire.git
+    :tag: 5.5.0
+  AlamofireNetworkActivityIndicator:
+    :git: https://gitee.com/rain2540/AlamofireNetworkActivityIndicator.git
+    :tag: 3.1.0.1
+
 SPEC CHECKSUMS:
-  Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
+  Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
   AlamofireNetworkActivityIndicator: 6564782bd7b9e6c430ae67d9277af01907b01ca4
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
 
-PODFILE CHECKSUM: b23a5e71d610f445252976691a7bf7ec57d954ad
+PODFILE CHECKSUM: 392dc39ae7a613d4826ca3593fcb87fffedc3254
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2

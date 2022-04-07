@@ -11,14 +11,8 @@ import Alamofire
 
 class RGDataRequest {
 
-    let urlString: String
-    let method: HTTPMethod
-    let parameters: Parameters?
-    let encoding: ParameterEncoding
-    let headers: HTTPHeaders?
-    let timeoutInterval: TimeInterval
-
     public var tag: Int = 0
+
     public private(set) var config: RGDataRequestConfig
 
 
@@ -40,13 +34,6 @@ class RGDataRequest {
         headers: HTTPHeaders? = nil,
         timeoutInterval: TimeInterval = 30.0
     ) {
-        self.urlString          =   urlString
-        self.method             =   method
-        self.parameters         =   parameters
-        self.encoding           =   encoding
-        self.headers            =   headers
-        self.timeoutInterval    =   timeoutInterval
-
         self.config = RGDataRequestConfig(
             urlString: urlString,
             method: method,

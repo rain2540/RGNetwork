@@ -1,15 +1,15 @@
 //
-//  RGDataRequestConfig.swift
+//  RGDownloadConfig.swift
 //  RGNetwork
 //
-//  Created by Rain on 2021/6/28.
+//  Created by RAIN on 2021/9/14.
 //  Copyright © 2021 Smartech. All rights reserved.
 //
 
 import Foundation
 import Alamofire
 
-struct RGDataRequestConfig: RGNetworkConfig {
+struct RGDownloadConfig: RGNetworkConfig {
 
     let urlString: String
     let method: HTTPMethod
@@ -17,6 +17,7 @@ struct RGDataRequestConfig: RGNetworkConfig {
     let timeoutInterval: TimeInterval
     let parameters: Parameters?
     let encoding: ParameterEncoding
+    let destination: DownloadRequest.Destination?
 
 
     init(
@@ -25,7 +26,8 @@ struct RGDataRequestConfig: RGNetworkConfig {
         parameters: Parameters? = nil,
         encoding: ParameterEncoding = URLEncoding.default,
         headers: HTTPHeaders? = nil,
-        timeoutInterval: TimeInterval = 30.0
+        timeoutInterval: TimeInterval = 30.0,
+        destination: DownloadRequest.Destination? = nil
     ) {
         self.urlString          =   urlString
         self.method             =   method
@@ -33,6 +35,7 @@ struct RGDataRequestConfig: RGNetworkConfig {
         self.encoding           =   encoding
         self.headers            =   headers
         self.timeoutInterval    =   timeoutInterval
+        self.destination        =   destination
     }
 
 }
