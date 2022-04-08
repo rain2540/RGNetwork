@@ -88,14 +88,14 @@ extension RGNetwork {
                     .validate(statusCode: 200 ..< 300)
 
                 switch responseType {
-                    case .json:
-                        RGNetwork.responseJSON(with: request, success: success, failure: failure)
+                case .json:
+                    RGNetwork.responseJSON(with: request, config: config, success: success, failure: failure)
 
-                    case .string:
-                        RGNetwork.responseString(with: request, success: success, failure: failure)
+                case .string:
+                    RGNetwork.responseString(with: request, success: success, failure: failure)
 
-                    case .data:
-                        RGNetwork.responseData(with: request, success: success, failure: failure)
+                case .data:
+                    RGNetwork.responseData(with: request, success: success, failure: failure)
                 }
             } catch {
                 print(error)
@@ -127,11 +127,11 @@ extension RGNetwork {
             RGNetwork.showIndicator()
             RGNetwork.showActivityIndicator()
         }
-
+        
         queue.async {
             do {
                 let urlPath = try urlPathString(by: config.urlString)
-
+                
                 let request = AF.upload(
                     multipartFormData: config.multipartFormData,
                     to: urlPath,
@@ -141,17 +141,17 @@ extension RGNetwork {
                         uploadRequest.timeoutInterval = config.timeoutInterval
                     }
                 )
-                .validate(statusCode: 200 ..< 300)
-
+                    .validate(statusCode: 200 ..< 300)
+                
                 switch responseType {
-                    case .json:
-                        RGNetwork.responseJSON(with: request, success: success, failure: failure)
-
-                    case .string:
-                        RGNetwork.responseString(with: request, success: success, failure: failure)
-
-                    case .data:
-                        RGNetwork.responseData(with: request, success: success, failure: failure)
+                case .json:
+                    RGNetwork.responseJSON(with: request, config: config, success: success, failure: failure)
+                    
+                case .string:
+                    RGNetwork.responseString(with: request, success: success, failure: failure)
+                    
+                case .data:
+                    RGNetwork.responseData(with: request, success: success, failure: failure)
                 }
             } catch {
                 print(error)
@@ -159,10 +159,10 @@ extension RGNetwork {
             }
         }
     }
-
-
+    
+    
     // MARK: - DownloadRequest
-
+    
     public static func download(
         config: RGDownloadConfig,
         queue: DispatchQueue = DispatchQueue.global(),
@@ -209,11 +209,14 @@ extension RGNetwork {
 
     private static func responseJSON(
         with request: DataRequest,
+        config: RGNetworkConfig,
         success: @escaping SuccessTask,
         failure: @escaping FailureTask
     ) {
         request.responseJSON { (responseJSON) in
-            print("RGNetwork.request.debugDescription: \n\(responseJSON.debugDescription)")
+            if config.isShowLog == true {
+                dLog("RGNetwork.request.debugDescription: \n\(responseJSON.debugDescription)")
+            }
 
             let httpStatusCode = responseJSON.response?.statusCode
             var responseData = Data()
