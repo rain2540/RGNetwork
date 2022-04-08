@@ -107,6 +107,14 @@ extension RGNetwork {
 
     // MARK: - UploadRequest
 
+    /// 上传方法
+    /// - Parameters:
+    ///   - config: 上传相关配置信息
+    ///   - queue: 执行上传的队列，默认为 `DispatchQueue.global()`
+    ///   - showIndicator: 是否显示 Indicator，默认为 `false`
+    ///   - responseType: 返回数据格式类型，默认为 `.json`
+    ///   - success: 上传成功的 Task
+    ///   - failure: 上传失败的 Task
     public static func upload(
         config: RGUploadConfig,
         queue: DispatchQueue = DispatchQueue.global(),
