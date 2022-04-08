@@ -213,34 +213,6 @@ extension RGNetwork {
         success: @escaping SuccessTask,
         failure: @escaping FailureTask
     ) {
-        /*
-        request.responseJSON { (responseJSON) in
-            if config.isShowLog == true {
-                dLog("RGNetwork.request.debugDescription: \n\(responseJSON.debugDescription)")
-            }
-
-            let httpStatusCode = responseJSON.response?.statusCode
-            var responseData = Data()
-            if let data = responseJSON.data {
-                responseData = data
-            }
-            let string = String(data: responseData, encoding: .utf8)
-            guard let code = httpStatusCode, code >= 200 && code < 300 else {
-                failure(responseJSON.error, string, responseJSON.data, httpStatusCode, request, .json(responseJSON))
-                RGNetwork.hideIndicator()
-                return
-            }
-
-            guard let json = responseJSON.value as? ResponseJSON else {
-                success(nil, string, responseJSON.data, httpStatusCode, request, .json(responseJSON))
-                RGNetwork.hideIndicator()
-                return
-            }
-
-            success(json, string, responseJSON.data, httpStatusCode, request, .json(responseJSON))
-            RGNetwork.hideIndicator()
-        }
-        */
         request.responseData { responseData in
             if config.isShowLog == true {
                 dLog("RGNetwork.request.debugDescription: \n\(responseData.debugDescription)")
