@@ -256,7 +256,7 @@ extension RGNetwork {
         failure: @escaping FailureTask
     ) {
         request.responseString { (responseString) in
-            print("RGNetwork.request.debugDescription: \n\(responseString.debugDescription)")
+            dLog("RGNetwork.request.debugDescription: \n\(responseString.debugDescription)")
 
             let httpStatusCode = responseString.response?.statusCode
             var responseData = Data()
@@ -287,7 +287,7 @@ extension RGNetwork {
         failure: @escaping FailureTask
     ) {
         request.responseData { (responseData) in
-            print("RGNetwork.request.debugDescription: \n\(responseData.debugDescription)")
+            dLog("RGNetwork.request.debugDescription: \n\(responseData.debugDescription)")
 
             let httpStatusCode = responseData.response?.statusCode
             guard let data = responseData.value else {
@@ -315,7 +315,7 @@ extension RGNetwork {
         failure: @escaping DownloadFailure
     ) {
         request.responseData { responseData in
-            print("RGNetwork.download.debugDescription: \n\(responseData.debugDescription)")
+            dLog("RGNetwork.download.debugDescription: \n\(responseData.debugDescription)")
 
             let httpStatusCode = responseData.response?.statusCode
             guard let data = responseData.value else {
@@ -413,14 +413,10 @@ extension RGNetwork {
     /// 是否设置网络代理
     public static var isSetupProxy: Bool {
         if proxyType == kCFProxyTypeNone {
-            #if DEBUG
-            print("当前未设置网络代理")
-            #endif
+            dLog("当前未设置网络代理")
             return false
         } else {
-            #if DEBUG
-            print("当前设置了网络代理")
-            #endif
+            dLog("当前设置了网络代理")
             return true
         }
     }
@@ -428,27 +424,21 @@ extension RGNetwork {
     /// 网络代理主机名
     public static var proxyHostName: String {
         let hostName = proxyInfos.object(forKey: kCFProxyHostNameKey) as? String ?? "Proxy Host Name is nil"
-        #if DEBUG
-        print("Proxy Host Name: \(hostName)")
-        #endif
+        dLog("Proxy Host Name: \(hostName)")
         return hostName
     }
 
     /// 网络代理端口号
     public static var proxyPortNumber: String {
         let portNumber = proxyInfos.object(forKey: kCFProxyPortNumberKey) as? String ?? "Proxy Port Number is nil"
-        #if DEBUG
-        print("Proxy Port Number: \(portNumber)")
-        #endif
+        dLog("Proxy Port Number: \(portNumber)")
         return portNumber
     }
 
     /// 网络代理类型
     public static var proxyType: CFString {
         let type = proxyInfos.object(forKey: kCFProxyTypeKey) ?? kCFProxyTypeNone
-        #if DEBUG
-        print("Proxy Type: \(type)")
-        #endif
+        dLog("Proxy Type: \(type)")
         return type
     }
 
@@ -480,18 +470,14 @@ extension RGNetwork {
             let condition = checkStrings.contains(key)
 
             if condition {
-                #if DEBUG
-                print("当前开启了 VPN")
-                #endif
+                dLog("当前开启了 VPN")
                 flag = true
                 break
             }
         }
-        #if DEBUG
         if flag == false {
-            print("当前未开启 VPN")
+            dLog("当前未开启 VPN")
         }
-        #endif
         return flag
     }
 
