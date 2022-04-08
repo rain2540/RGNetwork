@@ -127,11 +127,11 @@ extension RGNetwork {
             RGNetwork.showIndicator()
             RGNetwork.showActivityIndicator()
         }
-        
+
         queue.async {
             do {
                 let urlPath = try urlPathString(by: config.urlString)
-                
+
                 let request = AF.upload(
                     multipartFormData: config.multipartFormData,
                     to: urlPath,
@@ -142,14 +142,14 @@ extension RGNetwork {
                     }
                 )
                     .validate(statusCode: 200 ..< 300)
-                
+
                 switch responseType {
                 case .json:
                     RGNetwork.responseJSON(with: request, config: config, success: success, failure: failure)
-                    
+
                 case .string:
                     RGNetwork.responseString(with: request, success: success, failure: failure)
-                    
+
                 case .data:
                     RGNetwork.responseData(with: request, success: success, failure: failure)
                 }
@@ -159,10 +159,10 @@ extension RGNetwork {
             }
         }
     }
-    
-    
+
+
     // MARK: - DownloadRequest
-    
+
     public static func download(
         config: RGDownloadConfig,
         queue: DispatchQueue = DispatchQueue.global(),
@@ -213,6 +213,7 @@ extension RGNetwork {
         success: @escaping SuccessTask,
         failure: @escaping FailureTask
     ) {
+        /*
         request.responseJSON { (responseJSON) in
             if config.isShowLog == true {
                 dLog("RGNetwork.request.debugDescription: \n\(responseJSON.debugDescription)")
@@ -238,6 +239,42 @@ extension RGNetwork {
 
             success(json, string, responseJSON.data, httpStatusCode, request, .json(responseJSON))
             RGNetwork.hideIndicator()
+        }
+        */
+        request.responseData { responseData in
+            if config.isShowLog == true {
+                dLog("RGNetwork.request.debugDescription: \n\(responseData.debugDescription)")
+            }
+
+            let httpStatusCode = responseData.response?.statusCode
+            guard let data = responseData.value else {
+                failure(responseData.error, nil, nil, httpStatusCode, request, .data(responseData))
+                RGNetwork.hideIndicator()
+                return
+            }
+            let string = String(data: data, encoding: .utf8)
+            guard let code = httpStatusCode, code >= 200 && code < 300 else {
+                failure(responseData.error, string, data, httpStatusCode, request, .data(responseData))
+                RGNetwork.hideIndicator()
+                return
+            }
+            do {
+                guard let json = try JSONSerialization.jsonObject(
+                    with: data,
+                    options: [.fragmentsAllowed, .mutableContainers, .mutableLeaves]
+                ) as? ResponseJSON else {
+                    success(nil, string, data, httpStatusCode, request, .data(responseData))
+                    RGNetwork.hideIndicator()
+                    return
+                }
+
+                success(json, string, data, httpStatusCode, request, .data(responseData))
+                RGNetwork.hideIndicator()
+            } catch {
+                success(nil, error.localizedDescription, data, httpStatusCode, request, .data(responseData))
+                RGNetwork.hideIndicator()
+                return
+            }
         }
     }
 
