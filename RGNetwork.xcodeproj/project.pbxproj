@@ -22,6 +22,7 @@
 		B75037DE268A10BB006190F4 /* RGUploadConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75037DD268A10BB006190F4 /* RGUploadConfig.swift */; };
 		B7639FD42399E87A004859B5 /* RGNetworkPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7639FD32399E87A004859B5 /* RGNetworkPreset.swift */; };
 		B763A0172399F7FB004859B5 /* RGNetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B763A0162399F7FB004859B5 /* RGNetworkError.swift */; };
+		B7F334292803CE7B009E3C6F /* RequstInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F334282803CE7B009E3C6F /* RequstInfo.swift */; };
 		C920AEA058F7C0115712508C /* Pods_RGNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D55A1A9A7EEF5DE9B684171B /* Pods_RGNetwork.framework */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +46,7 @@
 		B75037DD268A10BB006190F4 /* RGUploadConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGUploadConfig.swift; sourceTree = "<group>"; };
 		B7639FD32399E87A004859B5 /* RGNetworkPreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGNetworkPreset.swift; sourceTree = "<group>"; };
 		B763A0162399F7FB004859B5 /* RGNetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGNetworkError.swift; sourceTree = "<group>"; };
+		B7F334282803CE7B009E3C6F /* RequstInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequstInfo.swift; sourceTree = "<group>"; };
 		D55A1A9A7EEF5DE9B684171B /* Pods_RGNetwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RGNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -92,6 +94,7 @@
 				B74D9DC81F132BFB00D34AE1 /* RGNetwork */,
 				B74D9DB61F132A5100D34AE1 /* AppDelegate.swift */,
 				B74D9DB81F132A5100D34AE1 /* ViewController.swift */,
+				B7F334282803CE7B009E3C6F /* RequstInfo.swift */,
 				B74D9DBD1F132A5100D34AE1 /* Assets.xcassets */,
 				B74D9DCB1F133D1300D34AE1 /* Supporting Files */,
 			);
@@ -178,7 +181,6 @@
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
@@ -263,6 +265,7 @@
 				B7639FD42399E87A004859B5 /* RGNetworkPreset.swift in Sources */,
 				B74D9DCA1F132BFB00D34AE1 /* RGNetwork.swift in Sources */,
 				B72A229F241233500059CFC4 /* RGDataRequest.swift in Sources */,
+				B7F334292803CE7B009E3C6F /* RequstInfo.swift in Sources */,
 				B75037DB268A0ED2006190F4 /* RGDataRequestConfig.swift in Sources */,
 				B75037DE268A10BB006190F4 /* RGUploadConfig.swift in Sources */,
 			);
