@@ -22,6 +22,38 @@ typealias ResponseTuple = (
 @available(iOS 13, *)
 extension RGNetwork {
 
+    public static func request(
+        config: RGDataRequestConfig,
+        showIndicator: Bool = false
+    ) async -> ResponseTuple {
+        if showIndicator == true {
+            RGNetwork.showIndicator()
+            RGNetwork.showActivityIndicator()
+        }
+
+        do {
+            let urlPath = try urlPathString(by: config.urlString)
+            let request = AF.request(
+                urlPath,
+                method: config.method,
+                parameters: config.parameters,
+                encoding: config.encoding,
+                headers: config.headers,
+                requestModifier: { urlRequest in
+                    urlRequest.timeoutInterval = config.timeoutInterval
+                }
+            )
+                .validate(statusCode: 200 ..< 300)
+
+            let responseInfo = await RGNetwork.dataResponse(with: request, config: config)
+            return responseInfo
+        } catch {
+            dLog(error)
+            RGNetwork.hideIndicator()
+            return (nil, error.localizedDescription, nil, error, nil, nil, nil)
+        }
+    }
+
     private static func dataResponse(
         with request: DataRequest,
         config: RGNetworkConfig
