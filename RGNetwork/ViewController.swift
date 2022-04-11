@@ -107,8 +107,8 @@ final class ViewController: UIViewController {
     @available(iOS 15.0, *)
     private func loadBySessionAsync() {
         Task {
-            guard let req = await createRequest() else { return }
-            let (data, response) = try await URLSession.shared.data(for: req)
+            guard let request = await createRequest() else { return }
+            let (data, response) = try await URLSession.shared.data(for: request)
             let json = try JSONSerialization.jsonObject(with: data) as? [String: Any] ?? [:]
             print(json)
             print(response)
@@ -130,6 +130,21 @@ final class ViewController: UIViewController {
         }
     }
 
+    @available(iOS 13.0, *)
+    private func loadByAlamofireAsync() {
+        Task {
+            let dataRequest = AF.request(
+                urlString,
+                method: .get,
+                parameters: params,
+                encoding: URLEncoding.default
+            )
+            let dataTask = dataRequest.serializingData()
+            guard let data = await dataTask.response.value else { return }
+            let string = String(data: data, encoding: .utf8) ?? "get string failed."
+            print(string)
+        }
+    }
 
 }
 
@@ -149,7 +164,10 @@ extension ViewController: UITableViewDataSource {
         _ tableView: UITableView,
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: CellIdentifier,
+            for: indexPath
+        )
         let requestInfo = requestInfos[indexPath.row]
         cell.textLabel?.text = requestInfo.rawValue
         return cell
@@ -181,6 +199,13 @@ extension ViewController: UITableViewDelegate {
         case .urlSessionAsync:
             if #available(iOS 15.0, *) {
                 loadBySessionAsync()
+            } else {
+                print("此方法在该系统版本无法使用")
+            }
+
+        case .alamofireAsync:
+            if #available(iOS 13.0, *) {
+                loadByAlamofireAsync()
             } else {
                 print("此方法在该系统版本无法使用")
             }
