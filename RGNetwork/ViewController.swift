@@ -28,31 +28,21 @@ class ViewController: UIViewController {
     }
 
     @IBAction func loadContent(_ sender: UIButton) {
-        /*RGNetwork.request(with: urlString,
-                          parameters: params,
-                          showIndicator: true,
-                          responseType: .json,
-                          success: { (json, string, data, httpStatusCode, request, response) in
-                            print("\n/* ***** ***** ***** ***** */\n")
-                            print("JSON:", json ?? "", separator: "\n")
-                            print("\n/* ***** ***** ***** ***** */\n")
-                            print("string:", string ?? "", separator: "\n")
-                            print("\n/* ***** ***** ***** ***** */\n")
-        },
-                          failure: { (error, httpStatusCode, request, response)  in
-                            print("error: \n", error ?? "get nil failed.")
-        })
-        */
-        let request = RGDataRequest(urlString: urlString, parameters: params)
-        request.task(
+        let config = RGDataRequestConfig(urlString: urlString, parameters: params)
+        RGNetwork.request(
+            config: config,
             showIndicator: true,
             responseType: .json,
             success: { (json, string, data, httpStatusCode, request, responsePackage) in
+                switch responsePackage {
+                case let .json(responseJSON):
                 print("\n/* ***** ***** ***** ***** */\n")
-                print("JSON:", json ?? "", separator: "\n")
+                    print("response:", responseJSON, separator: "\n")
                 print("\n/* ***** ***** ***** ***** */\n")
-                print("string:", string ?? "", separator: "\n")
+                    print("metrics:", responseJSON.metrics ?? "none", separator: "\n")
                 print("\n/* ***** ***** ***** ***** */\n")
+                default: break
+                }
             },
             failure: { (error, resString, resData, httpStatusCode, request, response)  in
                 print("error: \n", error ?? "get nil failed.")
@@ -61,21 +51,16 @@ class ViewController: UIViewController {
     }
 
     @IBAction func loadContentInfo(_ sender: UIButton) {
-        let config = RGDataRequestConfig(urlString: urlString, parameters: params)
-        RGNetwork.request(
-            config: config,
+        let request = RGDataRequest(urlString: urlString, parameters: params)
+        request.task(
             showIndicator: true,
             responseType: .json,
             success: { (json, string, data, httpStatusCode, request, responsePackage) in
-                switch responsePackage {
-                    case let .json(responseJSON):
                         print("\n/* ***** ***** ***** ***** */\n")
-                        print("response:", responseJSON, separator: "\n")
+                print("JSON:", json ?? "", separator: "\n")
                         print("\n/* ***** ***** ***** ***** */\n")
-                        print("metrics:", responseJSON.metrics ?? "none", separator: "\n")
+                print("string:", string ?? "", separator: "\n")
                         print("\n/* ***** ***** ***** ***** */\n")
-                    default: break
-                }
             },
             failure: { (error, resString, resData, httpStatusCode, request, response)  in
                 print("error: \n", error ?? "get nil failed.")
