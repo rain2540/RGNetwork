@@ -34,6 +34,15 @@ typealias ResponseString = String
 typealias ResponseData = Data
 typealias HttpStatusCode = Int
 
+typealias ResponseTuple = (
+    json: ResponseJSON?,
+    string: ResponseString?,
+    data: ResponseData?,
+    error: Error?,
+    httpStatusCode: HttpStatusCode?,
+    request: DataRequest?,
+    responsePackage: DataResponsePackage?
+)
 typealias SuccessTask = (ResponseJSON?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponsePackage) -> Void
 typealias FailureTask = (Error?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponsePackage) -> Void
 
