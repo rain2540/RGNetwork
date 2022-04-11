@@ -14,6 +14,7 @@ enum RequstInfo: String {
     case rgDataRequest = "RGDataRequest"
     case urlSessionCallback = "URLSession 回调"
     case urlSessionAsync = "URLSession 并发"
+    case alamofireAsync = "Alamofire 并发"
 
     static var list: [RequstInfo] {
         return [
@@ -21,6 +22,7 @@ enum RequstInfo: String {
             rgDataRequest,
             urlSessionCallback,
             urlSessionAsync,
+            alamofireAsync,
         ]
     }
 
