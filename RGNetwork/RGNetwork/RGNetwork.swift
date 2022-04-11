@@ -338,7 +338,7 @@ extension RGNetwork {
 
 extension RGNetwork {
 
-    private static func urlPathString(by urlString: String) throws -> String {
+    internal static func urlPathString(by urlString: String) throws -> String {
         if urlString.rg_hasHttpPrefix {
             let fixURLString = urlString
                 .replacingOccurrences(of: "//", with: "/")
@@ -383,7 +383,7 @@ extension RGNetwork {
     /// - Parameters:
     ///   - mode: 显示模式，默认为 .indeterminate
     ///   - text: 显示的文字，默认为空
-    private static func showIndicator(
+    internal static func showIndicator(
         mode: MBProgressHUDMode = .indeterminate,
         text: String = ""
     ) {
