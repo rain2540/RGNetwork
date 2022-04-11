@@ -7,6 +7,17 @@
 //
 
 import Foundation
+import Alamofire
+
+typealias ResponseTuple = (
+    json: ResponseJSON?,
+    string: ResponseString?,
+    data: ResponseData?,
+    error: Error?,
+    httpStatusCode: HttpStatusCode?,
+    request: DataRequest?,
+    responsePackage: DataResponsePackage?
+)
 
 extension RGNetwork {
 
