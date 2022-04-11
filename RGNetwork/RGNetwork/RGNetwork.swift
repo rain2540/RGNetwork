@@ -396,7 +396,7 @@ extension RGNetwork {
     }
 
     /// 隐藏 indicator
-    private static func hideIndicator() {
+    internal static func hideIndicator() {
         DispatchQueue.main.async {
             guard let window = UIApplication.shared.keyWindow else { return }
             MBProgressHUD.hide(for: window, animated: true)
