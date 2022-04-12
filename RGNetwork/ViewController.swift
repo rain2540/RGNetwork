@@ -146,6 +146,19 @@ final class ViewController: UIViewController {
         }
     }
 
+    @available(iOS 13.0, *)
+    private func loadByNetworkAsync() {
+        Task {
+            let config = RGDataRequestConfig(urlString: urlString, parameters: params)
+            let response = await RGNetwork.request(config: config, showIndicator: true)
+            guard let json = response.json else {
+                print("get json failed.")
+                return
+            }
+            print(json)
+        }
+    }
+
 }
 
 
@@ -206,6 +219,13 @@ extension ViewController: UITableViewDelegate {
         case .alamofireAsync:
             if #available(iOS 13.0, *) {
                 loadByAlamofireAsync()
+            } else {
+                print("此方法在该系统版本无法使用")
+            }
+
+        case .rgNetworkAsync:
+            if #available(iOS 13.0, *) {
+                loadByNetworkAsync()
             } else {
                 print("此方法在该系统版本无法使用")
             }
