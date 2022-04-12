@@ -13,7 +13,6 @@
 		B74D9DB71F132A5100D34AE1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74D9DB61F132A5100D34AE1 /* AppDelegate.swift */; };
 		B74D9DB91F132A5100D34AE1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74D9DB81F132A5100D34AE1 /* ViewController.swift */; };
 		B74D9DBE1F132A5100D34AE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B74D9DBD1F132A5100D34AE1 /* Assets.xcassets */; };
-		B74D9DC11F132A5100D34AE1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B74D9DBF1F132A5100D34AE1 /* LaunchScreen.storyboard */; };
 		B74D9DCA1F132BFB00D34AE1 /* RGNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74D9DC91F132BFB00D34AE1 /* RGNetwork.swift */; };
 		B74D9DCD1F134DDB00D34AE1 /* RGToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74D9DCC1F134DDB00D34AE1 /* RGToast.swift */; };
 		B75037D8268A0D59006190F4 /* RGNetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75037D7268A0D59006190F4 /* RGNetworkConfig.swift */; };
@@ -22,6 +21,7 @@
 		B7639FD42399E87A004859B5 /* RGNetworkPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7639FD32399E87A004859B5 /* RGNetworkPreset.swift */; };
 		B763A0172399F7FB004859B5 /* RGNetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B763A0162399F7FB004859B5 /* RGNetworkError.swift */; };
 		B7C53239280505FB006D13D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7C53237280505FB006D13D9 /* Main.storyboard */; };
+		B7C5323C280508A6006D13D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7C5323A280508A6006D13D9 /* LaunchScreen.storyboard */; };
 		B7F334292803CE7B009E3C6F /* RequstInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F334282803CE7B009E3C6F /* RequstInfo.swift */; };
 		B7F3342B280424CF009E3C6F /* RGNetwork+Concurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F3342A280424CF009E3C6F /* RGNetwork+Concurrency.swift */; };
 		C920AEA058F7C0115712508C /* Pods_RGNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D55A1A9A7EEF5DE9B684171B /* Pods_RGNetwork.framework */; };
@@ -37,7 +37,6 @@
 		B74D9DB61F132A5100D34AE1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B74D9DB81F132A5100D34AE1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B74D9DBD1F132A5100D34AE1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		B74D9DC01F132A5100D34AE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B74D9DC21F132A5100D34AE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B74D9DC91F132BFB00D34AE1 /* RGNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGNetwork.swift; sourceTree = "<group>"; };
 		B74D9DCC1F134DDB00D34AE1 /* RGToast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGToast.swift; sourceTree = "<group>"; };
@@ -47,6 +46,7 @@
 		B7639FD32399E87A004859B5 /* RGNetworkPreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGNetworkPreset.swift; sourceTree = "<group>"; };
 		B763A0162399F7FB004859B5 /* RGNetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGNetworkError.swift; sourceTree = "<group>"; };
 		B7C53238280505FB006D13D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B7C5323B280508A6006D13D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B7F334282803CE7B009E3C6F /* RequstInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequstInfo.swift; sourceTree = "<group>"; };
 		B7F3342A280424CF009E3C6F /* RGNetwork+Concurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RGNetwork+Concurrency.swift"; sourceTree = "<group>"; };
 		D55A1A9A7EEF5DE9B684171B /* Pods_RGNetwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RGNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,7 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				B7C53237280505FB006D13D9 /* Main.storyboard */,
-				B74D9DBF1F132A5100D34AE1 /* LaunchScreen.storyboard */,
+				B7C5323A280508A6006D13D9 /* LaunchScreen.storyboard */,
 				B74D9DC21F132A5100D34AE1 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -202,9 +202,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B74D9DC11F132A5100D34AE1 /* LaunchScreen.storyboard in Resources */,
 				B7C53239280505FB006D13D9 /* Main.storyboard in Resources */,
 				B74D9DBE1F132A5100D34AE1 /* Assets.xcassets in Resources */,
+				B7C5323C280508A6006D13D9 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,20 +278,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		B74D9DBF1F132A5100D34AE1 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B74D9DC01F132A5100D34AE1 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 		B7C53237280505FB006D13D9 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				B7C53238280505FB006D13D9 /* Base */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B7C5323A280508A6006D13D9 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B7C5323B280508A6006D13D9 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
