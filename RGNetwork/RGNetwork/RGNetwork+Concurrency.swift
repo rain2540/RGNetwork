@@ -33,6 +33,7 @@ extension RGNetwork {
 
         do {
             let urlPath = try urlPathString(by: config.urlString)
+
             let request = AF.request(
                 urlPath,
                 method: config.method,
@@ -45,6 +46,37 @@ extension RGNetwork {
             )
                 .validate(statusCode: 200 ..< 300)
 
+            let responseInfo = await RGNetwork.dataResponse(with: request, config: config)
+            return responseInfo
+        } catch {
+            dLog(error)
+            RGNetwork.hideIndicator()
+            return (nil, error.localizedDescription, nil, error, nil, nil, nil)
+        }
+    }
+
+    public static func upload(
+        config: RGUploadConfig,
+        showIndicator: Bool = false
+    ) async -> ResponseTuple {
+        if showIndicator == true {
+            RGNetwork.showIndicator()
+            RGNetwork.showActivityIndicator()
+        }
+        
+        do {
+            let urlPath = try urlPathString(by: config.urlString)
+            let request = AF.upload(
+                multipartFormData: config.multipartFormData,
+                to: urlPath,
+                method: config.method,
+                headers: config.headers,
+                requestModifier: { uploadRequest in
+                    uploadRequest.timeoutInterval = config.timeoutInterval
+                }
+            )
+                .validate(statusCode: 200 ..< 300)
+            
             let responseInfo = await RGNetwork.dataResponse(with: request, config: config)
             return responseInfo
         } catch {
