@@ -19,6 +19,17 @@ typealias ResponseTuple = (
     responsePackage: DataResponsePackage?
 )
 
+typealias DownloadTuple = (
+    json: ResponseJSON?,
+    string: ResponseString?,
+    data: ResponseData?,
+    url: URL?,
+    error: Error?,
+    httpStatusCode: HttpStatusCode?,
+    request: DownloadRequest?,
+    responsePackage: DownloadResponsePackage?
+)
+
 @available(iOS 13, *)
 extension RGNetwork {
 
@@ -63,7 +74,7 @@ extension RGNetwork {
             RGNetwork.showIndicator()
             RGNetwork.showActivityIndicator()
         }
-        
+
         do {
             let urlPath = try urlPathString(by: config.urlString)
             let request = AF.upload(
@@ -76,7 +87,7 @@ extension RGNetwork {
                 }
             )
                 .validate(statusCode: 200 ..< 300)
-            
+
             let responseInfo = await RGNetwork.dataResponse(with: request, config: config)
             return responseInfo
         } catch {
