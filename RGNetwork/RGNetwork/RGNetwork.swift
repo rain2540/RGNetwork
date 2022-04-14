@@ -192,7 +192,7 @@ extension RGNetwork {
                 )
                     .validate(statusCode: 200 ..< 300)
 
-                RGNetwork.downloadData(with: request, success: success, failure: failure)
+                RGNetwork.downloadData(with: request, config: config, success: success, failure: failure)
             } catch {
                 print(error)
                 RGNetwork.hideIndicator()
@@ -311,20 +311,24 @@ extension RGNetwork {
 
     private static func downloadData(
         with request: DownloadRequest,
+        config: RGNetworkConfig,
         success: @escaping DownloadSuccess,
         failure: @escaping DownloadFailure
     ) {
         request.responseData { responseData in
-            dLog("RGNetwork.download.debugDescription: \n\(responseData.debugDescription)")
+            if config.isShowLog {
+                dLog("RGNetwork.download.debugDescription: \n\(responseData.debugDescription)")
+            }
 
             let httpStatusCode = responseData.response?.statusCode
             guard let data = responseData.value else {
                 failure(responseData.error, nil, nil, httpStatusCode, request, .data(responseData))
+                RGNetwork.hideIndicator()
                 return
             }
 
             let string = String(data: data, encoding: .utf8)
-            let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? ResponseJSON
+            let json = try? JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed) as? ResponseJSON
 
             success(json, string, data, responseData.fileURL, httpStatusCode, request, .data(responseData))
             RGNetwork.hideIndicator()
