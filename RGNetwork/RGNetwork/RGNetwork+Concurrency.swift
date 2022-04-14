@@ -103,9 +103,11 @@ extension RGNetwork {
     ) async -> ResponseTuple {
         let dataTask = request.serializingData()
         let responseData = await dataTask.response
+
         if config.isShowLog {
             dLog("RGNetwork.request.debugDescription: \n\(responseData.debugDescription)")
         }
+
         let httpStatusCode = responseData.response?.statusCode
         guard let data = responseData.value else {
             RGNetwork.hideIndicator()
@@ -130,6 +132,33 @@ extension RGNetwork {
             RGNetwork.hideIndicator()
             return (nil, error.localizedDescription, data, nil, httpStatusCode, request, .data(responseData))
         }
+    }
+
+    private static func downloadResponse(
+        with request: DownloadRequest,
+        config: RGNetworkConfig
+    ) async -> DownloadTuple {
+        let downloadTask = request.serializingData()
+        let responseData = await downloadTask.response
+
+        if config.isShowLog {
+            dLog("RGNetwork.download.debugDescription: \n\(responseData.debugDescription)")
+        }
+
+        let httpStatusCode = responseData.response?.statusCode
+        guard let data = responseData.value else {
+            RGNetwork.hideIndicator()
+            return (nil, nil, nil, nil, responseData.error, httpStatusCode, request, .data(responseData))
+        }
+
+        let string = String(data: data, encoding: .utf8)
+        let json = try? JSONSerialization.jsonObject(
+            with: data,
+            options: .fragmentsAllowed
+        ) as? ResponseJSON
+
+        RGNetwork.hideIndicator()
+        return (json, string, data, responseData.fileURL, nil, httpStatusCode, request, .data(responseData))
     }
 
 }
