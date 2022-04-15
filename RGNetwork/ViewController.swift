@@ -242,8 +242,14 @@ extension ViewController: UITableViewDelegate {
 }
 
 
+@available(iOS 13.0, *)
 struct TaskGroupSample {
 
-
+    private func work(_ value: Int) async -> Int {
+        print("Start work \(value)")
+        try? await Task.sleep(nanoseconds: UInt64(value) * NSEC_PER_SEC)
+        print("Work \(value) done")
+        return value
+    }
 
 }
