@@ -247,7 +247,19 @@ struct TaskGroupSample {
 
     func start() async {
         print("Start")
+        await withTaskGroup(of: Int.self) { group in
+            for idx in 0 ..< 3 {
+                group.addTask {
+                    await work(idx)
+                }
+            }
+            print("Task added")
 
+            for await result in group {
+                print("Get result: \(result)")
+            }
+            print("Task ended")
+        }
         print("End")
     }
 
