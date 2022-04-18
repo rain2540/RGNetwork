@@ -392,7 +392,7 @@ extension RGNetwork {
         text: String = ""
     ) {
         DispatchQueue.main.async {
-            guard let window = UIApplication.shared.keyWindow else { return }
+            guard let window = UIApplication.shared.keySceneWindow else { return }
             let hud = MBProgressHUD.showAdded(to: window, animated: true)
             hud.mode = mode
             hud.label.text = text
@@ -402,7 +402,7 @@ extension RGNetwork {
     /// 隐藏 indicator
     internal static func hideIndicator() {
         DispatchQueue.main.async {
-            guard let window = UIApplication.shared.keyWindow else { return }
+            guard let window = UIApplication.shared.keySceneWindow else { return }
             MBProgressHUD.hide(for: window, animated: true)
         }
     }
@@ -502,6 +502,35 @@ fileprivate extension String {
     mutating func rg_removeLast(ifHas suffix: String) {
         if hasSuffix(suffix) {
             removeLast()
+        }
+    }
+
+}
+
+
+// MARK: - UIApplication Extension
+
+fileprivate extension UIApplication {
+
+    var keySceneWindow: UIWindow? {
+        if #available(iOS 13, *) {
+            var keyWindow: UIWindow?
+            for connectedScene in UIApplication.shared.connectedScenes {
+                guard let windowScene = connectedScene as? UIWindowScene else {
+                    continue
+                }
+                if #available(iOS 15, *) {
+                    keyWindow = windowScene.keyWindow
+                    break
+                } else {
+                    for window in windowScene.windows where window.isKeyWindow {
+                        keyWindow = window
+                    }
+                }
+            }
+            return keyWindow
+        } else {
+            return UIApplication.shared.keyWindow
         }
     }
 
