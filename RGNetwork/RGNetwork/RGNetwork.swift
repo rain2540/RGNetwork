@@ -88,14 +88,14 @@ extension RGNetwork {
                     .validate(statusCode: 200 ..< 300)
 
                 switch responseType {
-                    case .json:
-                        RGNetwork.responseJSON(with: request, success: success, failure: failure)
+                case .json:
+                    RGNetwork.responseJSON(with: request, config: config, success: success, failure: failure)
 
-                    case .string:
-                        RGNetwork.responseString(with: request, success: success, failure: failure)
+                case .string:
+                    RGNetwork.responseString(with: request, success: success, failure: failure)
 
-                    case .data:
-                        RGNetwork.responseData(with: request, success: success, failure: failure)
+                case .data:
+                    RGNetwork.responseData(with: request, success: success, failure: failure)
                 }
             } catch {
                 print(error)
@@ -107,6 +107,14 @@ extension RGNetwork {
 
     // MARK: - UploadRequest
 
+    /// 上传方法
+    /// - Parameters:
+    ///   - config: 上传相关配置信息
+    ///   - queue: 执行上传的队列，默认为 `DispatchQueue.global()`
+    ///   - showIndicator: 是否显示 Indicator，默认为 `false`
+    ///   - responseType: 返回数据格式类型，默认为 `.json`
+    ///   - success: 上传成功的 Task
+    ///   - failure: 上传失败的 Task
     public static func upload(
         config: RGUploadConfig,
         queue: DispatchQueue = DispatchQueue.global(),
@@ -133,17 +141,17 @@ extension RGNetwork {
                         uploadRequest.timeoutInterval = config.timeoutInterval
                     }
                 )
-                .validate(statusCode: 200 ..< 300)
+                    .validate(statusCode: 200 ..< 300)
 
                 switch responseType {
-                    case .json:
-                        RGNetwork.responseJSON(with: request, success: success, failure: failure)
+                case .json:
+                    RGNetwork.responseJSON(with: request, config: config, success: success, failure: failure)
 
-                    case .string:
-                        RGNetwork.responseString(with: request, success: success, failure: failure)
+                case .string:
+                    RGNetwork.responseString(with: request, success: success, failure: failure)
 
-                    case .data:
-                        RGNetwork.responseData(with: request, success: success, failure: failure)
+                case .data:
+                    RGNetwork.responseData(with: request, success: success, failure: failure)
                 }
             } catch {
                 print(error)
@@ -201,32 +209,44 @@ extension RGNetwork {
 
     private static func responseJSON(
         with request: DataRequest,
+        config: RGNetworkConfig,
         success: @escaping SuccessTask,
         failure: @escaping FailureTask
     ) {
-        request.responseJSON { (responseJSON) in
-            print("RGNetwork.request.debugDescription: \n\(responseJSON.debugDescription)")
-
-            let httpStatusCode = responseJSON.response?.statusCode
-            var responseData = Data()
-            if let data = responseJSON.data {
-                responseData = data
+        request.responseData { responseData in
+            if config.isShowLog == true {
+                dLog("RGNetwork.request.debugDescription: \n\(responseData.debugDescription)")
             }
-            let string = String(data: responseData, encoding: .utf8)
+
+            let httpStatusCode = responseData.response?.statusCode
+            guard let data = responseData.value else {
+                failure(responseData.error, nil, nil, httpStatusCode, request, .data(responseData))
+                RGNetwork.hideIndicator()
+                return
+            }
+            let string = String(data: data, encoding: .utf8)
             guard let code = httpStatusCode, code >= 200 && code < 300 else {
-                failure(responseJSON.error, string, responseJSON.data, httpStatusCode, request, .json(responseJSON))
+                failure(responseData.error, string, data, httpStatusCode, request, .data(responseData))
                 RGNetwork.hideIndicator()
                 return
             }
+            do {
+                guard let json = try JSONSerialization.jsonObject(
+                    with: data,
+                    options: [.fragmentsAllowed, .mutableContainers, .mutableLeaves]
+                ) as? ResponseJSON else {
+                    success(nil, string, data, httpStatusCode, request, .data(responseData))
+                    RGNetwork.hideIndicator()
+                    return
+                }
 
-            guard let json = responseJSON.value as? ResponseJSON else {
-                success(nil, string, responseJSON.data, httpStatusCode, request, .json(responseJSON))
+                success(json, string, data, httpStatusCode, request, .data(responseData))
+                RGNetwork.hideIndicator()
+            } catch {
+                success(nil, error.localizedDescription, data, httpStatusCode, request, .data(responseData))
                 RGNetwork.hideIndicator()
                 return
             }
-
-            success(json, string, responseJSON.data, httpStatusCode, request, .json(responseJSON))
-            RGNetwork.hideIndicator()
         }
     }
 
@@ -236,7 +256,7 @@ extension RGNetwork {
         failure: @escaping FailureTask
     ) {
         request.responseString { (responseString) in
-            print("RGNetwork.request.debugDescription: \n\(responseString.debugDescription)")
+            dLog("RGNetwork.request.debugDescription: \n\(responseString.debugDescription)")
 
             let httpStatusCode = responseString.response?.statusCode
             var responseData = Data()
@@ -267,7 +287,7 @@ extension RGNetwork {
         failure: @escaping FailureTask
     ) {
         request.responseData { (responseData) in
-            print("RGNetwork.request.debugDescription: \n\(responseData.debugDescription)")
+            dLog("RGNetwork.request.debugDescription: \n\(responseData.debugDescription)")
 
             let httpStatusCode = responseData.response?.statusCode
             guard let data = responseData.value else {
@@ -295,7 +315,7 @@ extension RGNetwork {
         failure: @escaping DownloadFailure
     ) {
         request.responseData { responseData in
-            print("RGNetwork.download.debugDescription: \n\(responseData.debugDescription)")
+            dLog("RGNetwork.download.debugDescription: \n\(responseData.debugDescription)")
 
             let httpStatusCode = responseData.response?.statusCode
             guard let data = responseData.value else {
@@ -368,7 +388,7 @@ extension RGNetwork {
         text: String = ""
     ) {
         DispatchQueue.main.async {
-            guard let window = UIApplication.shared.keyWindow else { return }
+            guard let window = UIApplication.shared.keySceneWindow else { return }
             let hud = MBProgressHUD.showAdded(to: window, animated: true)
             hud.mode = mode
             hud.label.text = text
@@ -378,7 +398,7 @@ extension RGNetwork {
     /// 隐藏 indicator
     private static func hideIndicator() {
         DispatchQueue.main.async {
-            guard let window = UIApplication.shared.keyWindow else { return }
+            guard let window = UIApplication.shared.keySceneWindow else { return }
             MBProgressHUD.hide(for: window, animated: true)
         }
     }
@@ -393,14 +413,10 @@ extension RGNetwork {
     /// 是否设置网络代理
     public static var isSetupProxy: Bool {
         if proxyType == kCFProxyTypeNone {
-            #if DEBUG
-            print("当前未设置网络代理")
-            #endif
+            dLog("当前未设置网络代理")
             return false
         } else {
-            #if DEBUG
-            print("当前设置了网络代理")
-            #endif
+            dLog("当前设置了网络代理")
             return true
         }
     }
@@ -408,27 +424,21 @@ extension RGNetwork {
     /// 网络代理主机名
     public static var proxyHostName: String {
         let hostName = proxyInfos.object(forKey: kCFProxyHostNameKey) as? String ?? "Proxy Host Name is nil"
-        #if DEBUG
-        print("Proxy Host Name: \(hostName)")
-        #endif
+        dLog("Proxy Host Name: \(hostName)")
         return hostName
     }
 
     /// 网络代理端口号
     public static var proxyPortNumber: String {
         let portNumber = proxyInfos.object(forKey: kCFProxyPortNumberKey) as? String ?? "Proxy Port Number is nil"
-        #if DEBUG
-        print("Proxy Port Number: \(portNumber)")
-        #endif
+        dLog("Proxy Port Number: \(portNumber)")
         return portNumber
     }
 
     /// 网络代理类型
     public static var proxyType: CFString {
         let type = proxyInfos.object(forKey: kCFProxyTypeKey) ?? kCFProxyTypeNone
-        #if DEBUG
-        print("Proxy Type: \(type)")
-        #endif
+        dLog("Proxy Type: \(type)")
         return type
     }
 
@@ -460,18 +470,14 @@ extension RGNetwork {
             let condition = checkStrings.contains(key)
 
             if condition {
-                #if DEBUG
-                print("当前开启了 VPN")
-                #endif
+                dLog("当前开启了 VPN")
                 flag = true
                 break
             }
         }
-        #if DEBUG
         if flag == false {
-            print("当前未开启 VPN")
+            dLog("当前未开启 VPN")
         }
-        #endif
         return flag
     }
 
@@ -495,4 +501,52 @@ fileprivate extension String {
         }
     }
 
+}
+
+
+// MARK: - UIApplication Extension
+
+fileprivate extension UIApplication {
+
+    var keySceneWindow: UIWindow? {
+        if #available(iOS 13, *) {
+            var keyWindow: UIWindow?
+            for connectedScene in UIApplication.shared.connectedScenes {
+                guard let windowScene = connectedScene as? UIWindowScene else {
+                    continue
+                }
+                if #available(iOS 15, *) {
+                    keyWindow = windowScene.keyWindow
+                    break
+                } else {
+                    for window in windowScene.windows where window.isKeyWindow {
+                        keyWindow = window
+                    }
+                }
+            }
+            return keyWindow
+        } else {
+            return UIApplication.shared.keyWindow
+        }
+    }
+
+}
+
+
+// MARK: - Debug Log
+
+internal func dLog(
+    _ item: @autoclosure () -> Any,
+    separator: String = " ",
+    terminator: String = "\n",
+    file: String = #file,
+    method: String = #function,
+    line: Int = #line
+) {
+#if DEBUG
+    print("\n/* ***** ***** ***** ***** ***** ***** */\n")
+    print("\(URL(fileURLWithPath: file).lastPathComponent)[\(line)], \(method): \n")
+    print(item(), separator: separator, terminator: terminator)
+    print("")
+#endif
 }

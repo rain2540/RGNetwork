@@ -17,6 +17,7 @@ struct RGDownloadConfig: RGNetworkConfig {
     let timeoutInterval: TimeInterval
     let parameters: Parameters?
     let encoding: ParameterEncoding
+    var isShowLog: Bool
     let destination: DownloadRequest.Destination?
 
 
@@ -27,6 +28,7 @@ struct RGDownloadConfig: RGNetworkConfig {
         encoding: ParameterEncoding = URLEncoding.default,
         headers: HTTPHeaders? = nil,
         timeoutInterval: TimeInterval = 30.0,
+        isShowLog: Bool = true,
         destination: DownloadRequest.Destination? = nil
     ) {
         self.urlString          =   urlString
@@ -35,6 +37,7 @@ struct RGDownloadConfig: RGNetworkConfig {
         self.encoding           =   encoding
         self.headers            =   headers
         self.timeoutInterval    =   timeoutInterval
+        self.isShowLog          =   isShowLog
         self.destination        =   destination
     }
 

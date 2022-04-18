@@ -15,5 +15,6 @@ protocol RGNetworkConfig {
     var method: HTTPMethod { get }
     var headers: HTTPHeaders? { get }
     var timeoutInterval: TimeInterval { get }
+    var isShowLog: Bool { get set }
 
 }
