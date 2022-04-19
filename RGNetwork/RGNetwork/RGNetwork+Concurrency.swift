@@ -97,6 +97,39 @@ extension RGNetwork {
         }
     }
 
+    public static func download(
+        config: RGDownloadConfig,
+        showIndicator: Bool = false
+    ) async -> DownloadTuple {
+        if showIndicator == true {
+            RGNetwork.showIndicator()
+            RGNetwork.showActivityIndicator()
+        }
+
+        do {
+            let urlPath = try urlPathString(by: config.urlString)
+            let request = AF.download(
+                urlPath,
+                method: config.method,
+                parameters: config.parameters,
+                encoding: config.encoding,
+                headers: config.headers,
+                requestModifier: { downloadRequest in
+                    downloadRequest.timeoutInterval = config.timeoutInterval
+                },
+                to: config.destination
+            )
+                .validate(statusCode: 200 ..< 300)
+
+            let responseInfo = await RGNetwork.downloadResponse(with: request, config: config)
+            return responseInfo
+        } catch {
+            dLog(error)
+            RGNetwork.hideIndicator()
+            return (nil, error.localizedDescription, nil, nil, error, nil, nil, nil)
+        }
+    }
+
     private static func dataResponse(
         with request: DataRequest,
         config: RGNetworkConfig
