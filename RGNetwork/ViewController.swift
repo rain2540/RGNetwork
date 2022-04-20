@@ -112,8 +112,6 @@ final class ViewController: UIViewController {
             let json = try JSONSerialization.jsonObject(with: data) as? [String: Any] ?? [:]
             print(json)
             print(response)
-
-            await TaskGroupSample().start()
         }
     }
 
@@ -159,6 +157,11 @@ final class ViewController: UIViewController {
             }
             print(json)
         }
+    }
+
+    @available(iOS 13.0, *)
+    private func taskGroup() async {
+        await TaskGroupSample().start()
     }
 
 }
@@ -228,6 +231,15 @@ extension ViewController: UITableViewDelegate {
         case .rgNetworkAsync:
             if #available(iOS 13.0, *) {
                 loadByNetworkAsync()
+            } else {
+                print("此方法在该系统版本无法使用")
+            }
+
+        case .taskGroup:
+            if #available(iOS 13.0, *) {
+                Task {
+                    await taskGroup()
+                }
             } else {
                 print("此方法在该系统版本无法使用")
             }
