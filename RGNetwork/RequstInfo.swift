@@ -16,6 +16,7 @@ enum RequstInfo: String {
     case urlSessionAsync = "URLSession 并发"
     case alamofireAsync = "Alamofire 并发"
     case rgNetworkAsync = "RGNetwork 并发"
+    case taskGroup = "并发任务组"
 
     static var list: [RequstInfo] {
         return [
@@ -25,6 +26,7 @@ enum RequstInfo: String {
             urlSessionAsync,
             alamofireAsync,
             rgNetworkAsync,
+            taskGroup,
         ]
     }
 
