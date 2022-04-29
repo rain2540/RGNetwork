@@ -398,7 +398,7 @@ extension RGNetwork {
         mode: MBProgressHUDMode = .indeterminate,
         text: String = ""
     ) {
-        DispatchQueue.main.async {
+        DispatchQueue.mainAsync {
             guard let window = UIApplication.shared.keySceneWindow else { return }
             let hud = MBProgressHUD.showAdded(to: window, animated: true)
             hud.mode = mode
@@ -408,7 +408,7 @@ extension RGNetwork {
 
     /// 隐藏 indicator
     internal static func hideIndicator() {
-        DispatchQueue.main.async {
+        DispatchQueue.mainAsync {
             guard let window = UIApplication.shared.keySceneWindow else { return }
             MBProgressHUD.hide(for: window, animated: true)
         }
@@ -509,6 +509,21 @@ fileprivate extension String {
     mutating func rg_removeLast(ifHas suffix: String) {
         if hasSuffix(suffix) {
             removeLast()
+        }
+    }
+
+}
+
+
+// MARK: - DispatchQueue
+
+fileprivate extension DispatchQueue {
+
+    static func mainAsync(execute: @escaping () -> Void) {
+        if Thread.current.isMainThread {
+            execute()
+        } else {
+            main.async { execute() }
         }
     }
 
