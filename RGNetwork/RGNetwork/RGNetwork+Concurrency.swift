@@ -36,6 +36,11 @@ typealias DownloadTuple = (
 @available(iOS 13, *)
 extension RGNetwork {
 
+    /// 通用请求方法
+    /// - Parameters:
+    ///   - config: 网络请求配置信息
+    ///   - showIndicator: 是否显示 Indicator，默认为 `false`
+    /// - Returns: 请求后返回的结果
     public static func request(
         config: RGDataRequestConfig,
         showIndicator: Bool = false
