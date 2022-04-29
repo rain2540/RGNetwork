@@ -74,6 +74,11 @@ extension RGNetwork {
         }
     }
 
+    /// 上传方法
+    /// - Parameters:
+    ///   - config: 上传相关配置信息
+    ///   - showIndicator: 是否显示 Indicator，默认为 `false`
+    /// - Returns: 上传后返回的结果
     public static func upload(
         config: RGUploadConfig,
         showIndicator: Bool = false
