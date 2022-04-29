@@ -110,6 +110,11 @@ extension RGNetwork {
         }
     }
 
+    /// 下载方法
+    /// - Parameters:
+    ///   - config: 下载相关配置信息
+    ///   - showIndicator: 是否显示 Indicator，默认为 `false`
+    /// - Returns: 下载后返回的结果
     public static func download(
         config: RGDownloadConfig,
         showIndicator: Bool = false
