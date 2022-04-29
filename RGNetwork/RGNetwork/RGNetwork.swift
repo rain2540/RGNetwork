@@ -511,6 +511,15 @@ fileprivate extension String {
 }
 
 
+// MARK: - DispatchQueue
+
+fileprivate extension DispatchQueue {
+
+    
+
+}
+
+
 // MARK: - UIApplication Extension
 
 fileprivate extension UIApplication {
