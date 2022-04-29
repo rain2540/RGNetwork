@@ -515,7 +515,13 @@ fileprivate extension String {
 
 fileprivate extension DispatchQueue {
 
-    
+    static func mainAsync(execute: @escaping () -> Void) {
+        if Thread.current.isMainThread {
+            execute()
+        } else {
+            main.async { execute() }
+        }
+    }
 
 }
 
