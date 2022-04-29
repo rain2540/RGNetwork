@@ -30,6 +30,9 @@ typealias DownloadTuple = (
     responsePackage: DownloadResponsePackage?
 )
 
+
+// MARK: - Request with Concurrency
+
 @available(iOS 13, *)
 extension RGNetwork {
 
@@ -129,6 +132,14 @@ extension RGNetwork {
             return (nil, error.localizedDescription, nil, nil, error, nil, nil, nil)
         }
     }
+
+}
+
+
+// MARK: - Response with Concurrency
+
+@available(iOS 13, *)
+extension RGNetwork {
 
     private static func dataResponse(
         with request: DataRequest,
