@@ -257,6 +257,23 @@ extension RGNetwork {
         }
     }
 
+    private static func responseDecodable<T: Decodable>(
+        with request: DataRequest,
+        of type: T.Type = T.self,
+        success: @escaping (T?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest) -> Void,
+        failure: @escaping (Error?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest) -> Void
+    ) {
+        request.responseDecodable(of: type) { response in
+            let httpStatusCode = response.response?.statusCode
+            guard let value = response.value else {
+                failure(response.error, nil, response.data, httpStatusCode, request)
+                return
+            }
+            print(value)
+            success(value, nil, response.data, httpStatusCode, request)
+        }
+    }
+
     private static func responseString(
         with request: DataRequest,
         success: @escaping SuccessTask,
