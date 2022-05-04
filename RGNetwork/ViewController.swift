@@ -61,6 +61,16 @@ final class ViewController: UIViewController {
                 print("error: \n", error ?? "get nil failed.")
             }
         )
+        /*
+        let request = AF.request(urlString, parameters: params)
+        RGNetwork.responseDecodable(with: request, of: Test.self) { test, string, data, httpStatusCode, request in
+            print(test)
+            guard let test = test else { return }
+            print(test)
+        } failure: { error, string, data, httpStatusCode, request in
+
+        }
+         */
     }
 
     private func loadByDataRequest() {
@@ -220,3 +230,20 @@ extension ViewController: UITableViewDelegate {
     }
 
 }
+
+/*
+struct Test: Codable {
+
+    var resultcode: String
+    var reason: String
+    var result: [String]
+    var error_code: Int
+
+    /* enum CodingKeys: String, CodingKey {
+        case resultcode = "resultcode"
+        case reason = "reason"
+        case result = "result"
+        case errorCode = "error_code"
+    } */
+
+} */
