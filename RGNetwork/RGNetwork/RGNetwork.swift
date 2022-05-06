@@ -273,6 +273,10 @@ extension RGNetwork {
             }
 
             let httpStatusCode = response.response?.statusCode
+            var responseData = Data()
+            if let data = response.data {
+                responseData = data
+            }
             guard let value = response.value else {
                 failure(response.error, nil, response.data, httpStatusCode, request, response)
                 return
