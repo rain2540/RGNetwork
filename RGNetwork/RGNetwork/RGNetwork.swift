@@ -105,7 +105,8 @@ extension RGNetwork {
         }
     }
 
-    public static func request<T: Decodable>(
+    public static func requestDecodable<T: Decodable>(
+        of type: T.Type = T.self,
         config: RGDataRequestConfig,
         queue: DispatchQueue = DispatchQueue.global(),
         showIndicator: Bool = false,
