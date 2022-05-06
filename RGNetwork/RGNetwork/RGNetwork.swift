@@ -285,7 +285,8 @@ extension RGNetwork {
             }
 
             guard let value = response.value else {
-                failure(response.error, nil, response.data, httpStatusCode, request, response)
+                failure(response.error, string, response.data, httpStatusCode, request, response)
+                RGNetwork.hideIndicator()
                 return
             }
             print(value)
