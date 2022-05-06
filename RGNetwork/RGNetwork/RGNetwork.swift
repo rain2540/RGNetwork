@@ -133,6 +133,8 @@ extension RGNetwork {
                     }
                 )
                     .validate(statusCode: 200 ..< 300)
+
+                RGNetwork.responseDecodable(of: type, with: request, config: config, success: success, failure: failure)
             } catch {
 
             }
