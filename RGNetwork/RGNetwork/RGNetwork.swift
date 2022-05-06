@@ -17,7 +17,6 @@ enum ResponseType {
 }
 
 enum DataResponsePackage {
-    case json(DataResponse<Any, AFError>)
     case string(DataResponse<String, AFError>)
     case data(DataResponse<Data, AFError>)
 }
