@@ -105,6 +105,16 @@ extension RGNetwork {
         }
     }
 
+    public static func request<T: Decodable>(
+        config: RGDataRequestConfig,
+        queue: DispatchQueue = DispatchQueue.global(),
+        showIndicator: Bool = false,
+        success: @escaping DecodableSuccess<T>,
+        failure: @escaping DecodableFailure<T>
+    ) {
+
+    }
+
 
     // MARK: - UploadRequest
 
