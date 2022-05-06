@@ -131,6 +131,7 @@ extension RGNetwork {
                         urlRequest.timeoutInterval = config.timeoutInterval
                     }
                 )
+                    .validate(statusCode: 200 ..< 300)
             } catch {
 
             }
