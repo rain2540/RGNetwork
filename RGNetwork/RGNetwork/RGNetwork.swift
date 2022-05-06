@@ -278,6 +278,12 @@ extension RGNetwork {
                 responseData = data
             }
             let string = String(data: responseData, encoding: .utf8)
+            guard let code = httpStatusCode, code >= 200 && code < 300 else {
+                failure(response.error, string, response.data, httpStatusCode, request, response)
+                RGNetwork.hideIndicator()
+                return
+            }
+
             guard let value = response.value else {
                 failure(response.error, nil, response.data, httpStatusCode, request, response)
                 return
