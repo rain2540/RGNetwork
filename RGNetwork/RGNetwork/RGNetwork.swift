@@ -292,8 +292,8 @@ extension RGNetwork {
     }
 
     private static func responseDecodable<T: Decodable>(
-        with request: DataRequest,
         of type: T.Type = T.self,
+        with request: DataRequest,
         config: RGNetworkConfig,
         success: @escaping DecodableSuccess<T>,
         failure: @escaping DecodableFailure<T>
