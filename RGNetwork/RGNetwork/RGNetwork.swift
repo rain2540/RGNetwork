@@ -277,6 +277,7 @@ extension RGNetwork {
             if let data = response.data {
                 responseData = data
             }
+            let string = String(data: responseData, encoding: .utf8)
             guard let value = response.value else {
                 failure(response.error, nil, response.data, httpStatusCode, request, response)
                 return
