@@ -117,7 +117,24 @@ extension RGNetwork {
             RGNetwork.showActivityIndicator()
         }
 
-        
+        queue.async {
+            do {
+                let urlPath = try urlPathString(by: config.urlString)
+
+                let request = AF.request(
+                    urlPath,
+                    method: config.method,
+                    parameters: config.parameters,
+                    encoding: config.encoding,
+                    headers: config.headers,
+                    requestModifier: { urlRequest in
+                        urlRequest.timeoutInterval = config.timeoutInterval
+                    }
+                )
+            } catch {
+
+            }
+        }
     }
 
 
