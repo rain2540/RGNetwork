@@ -23,7 +23,6 @@ enum DataResponsePackage {
 }
 
 enum DownloadResponsePackage {
-    case json(DownloadResponse<Any, AFError>)
     case string(DownloadResponse<String, AFError>)
     case data(DownloadResponse<Data, AFError>)
 }
