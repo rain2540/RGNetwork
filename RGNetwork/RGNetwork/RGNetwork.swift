@@ -263,8 +263,8 @@ extension RGNetwork {
     private static func responseDecodable<T: Decodable>(
         with request: DataRequest,
         of type: T.Type = T.self,
-        success: @escaping DecodableSuccess<T>/*(T?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponse<T, AFError>) -> Void*/,
-        failure: @escaping DecodableFailure<T>/*(Error?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponse<T, AFError>) -> Void*/
+        success: @escaping DecodableSuccess<T>,
+        failure: @escaping DecodableFailure<T>
     ) {
         request.responseDecodable(of: type) { response in
             let httpStatusCode = response.response?.statusCode
