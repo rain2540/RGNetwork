@@ -289,8 +289,9 @@ extension RGNetwork {
                 RGNetwork.hideIndicator()
                 return
             }
-            print(value)
-            success(value, nil, response.data, httpStatusCode, request, response)
+
+            success(value, string, response.data, httpStatusCode, request, response)
+            RGNetwork.hideIndicator()
         }
     }
 
