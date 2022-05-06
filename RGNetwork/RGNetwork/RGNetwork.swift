@@ -263,10 +263,15 @@ extension RGNetwork {
     private static func responseDecodable<T: Decodable>(
         with request: DataRequest,
         of type: T.Type = T.self,
+        config: RGNetworkConfig,
         success: @escaping DecodableSuccess<T>,
         failure: @escaping DecodableFailure<T>
     ) {
         request.responseDecodable(of: type) { response in
+            if config.isShowLog == true {
+                dLog("RGNetwork.request.debugDescription: \n\(response.debugDescription)")
+            }
+
             let httpStatusCode = response.response?.statusCode
             guard let value = response.value else {
                 failure(response.error, nil, response.data, httpStatusCode, request, response)
