@@ -136,7 +136,8 @@ extension RGNetwork {
 
                 RGNetwork.responseDecodable(of: type, with: request, config: config, success: success, failure: failure)
             } catch {
-
+                dLog(error)
+                RGNetwork.hideIndicator()
             }
         }
     }
