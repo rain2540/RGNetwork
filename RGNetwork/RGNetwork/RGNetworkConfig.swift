@@ -11,10 +11,10 @@ import Alamofire
 
 protocol RGNetworkConfig {
 
-    var urlString: String { get }
-    var method: HTTPMethod { get }
-    var headers: HTTPHeaders? { get }
-    var timeoutInterval: TimeInterval { get }
-    var isShowLog: Bool { get set }
+  var urlString: String { get }
+  var method: HTTPMethod { get }
+  var headers: HTTPHeaders? { get }
+  var timeoutInterval: TimeInterval { get }
+  var isShowLog: Bool { get set }
 
 }
