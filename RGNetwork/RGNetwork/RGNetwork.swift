@@ -280,14 +280,10 @@ extension RGNetwork {
         return
       }
       do {
-        guard let json = try JSONSerialization.jsonObject(
+        let json = try JSONSerialization.jsonObject(
           with: data,
           options: [.fragmentsAllowed, .mutableContainers, .mutableLeaves]
-        ) as? ResponseJSON else {
-          success(nil, string, data, httpStatusCode, request, .data(responseData))
-          RGNetwork.hideIndicator()
-          return
-        }
+        ) as? ResponseJSON
 
         success(json, string, data, httpStatusCode, request, .data(responseData))
         RGNetwork.hideIndicator()
