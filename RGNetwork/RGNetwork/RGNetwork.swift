@@ -413,10 +413,19 @@ extension RGNetwork {
         RGNetwork.hideIndicator()
         return
       }
-      let json = try? JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed) as? ResponseJSON
+      do {
+        let json = try JSONSerialization.jsonObject(
+          with: data,
+          options: .fragmentsAllowed
+        ) as? ResponseJSON
 
-      success(json, string, data, responseData.fileURL, httpStatusCode, request, .data(responseData))
-      RGNetwork.hideIndicator()
+        success(json, string, data, responseData.fileURL, httpStatusCode, request, .data(responseData))
+        RGNetwork.hideIndicator()
+      } catch {
+        success(nil, error.localizedDescription, data, responseData.fileURL, httpStatusCode, request, .data(responseData))
+        RGNetwork.hideIndicator()
+        return
+      }
     }
   }
 
