@@ -10,20 +10,22 @@ import Foundation
 
 enum RequstInfo: String {
 
-    case rgNetwork = "RGNetwork"
-    case rgDataRequest = "RGDataRequest"
-    case urlSessionCallback = "URLSession 回调"
-    case urlSessionAsync = "URLSession 并发"
-    case alamofireAsync = "Alamofire 并发"
+  case rgNetwork = "RGNetwork"
+  case rgNetworkDecodable = "RGNetwork Decodable"
+  case rgDataRequest = "RGDataRequest"
+  case urlSessionCallback = "URLSession 回调"
+  case urlSessionAsync = "URLSession 并发"
+  case alamofireAsync = "Alamofire 并发"
 
-    static var list: [RequstInfo] {
-        return [
-            rgNetwork,
-            rgDataRequest,
-            urlSessionCallback,
-            urlSessionAsync,
-            alamofireAsync,
-        ]
-    }
+  static var list: [RequstInfo] {
+    return [
+      rgNetwork,
+      rgNetworkDecodable,
+      rgDataRequest,
+      urlSessionCallback,
+      urlSessionAsync,
+      alamofireAsync,
+    ]
+  }
 
 }
