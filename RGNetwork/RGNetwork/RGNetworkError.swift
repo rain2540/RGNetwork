@@ -13,7 +13,7 @@ import Foundation
 /// - wrongURLFormat : 错误的 URL 格式
 enum RGNetworkError: Error {
 
-    /// 错误类型 - 错误的 URL 格式
-    case wrongURLFormat
+  /// 错误类型 - 错误的 URL 格式
+  case wrongURLFormat
 
 }
