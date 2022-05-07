@@ -59,18 +59,17 @@ final class ViewController: UIViewController {
             },
             failure: { (error, resString, resData, httpStatusCode, request, response)  in
                 print("error: \n", error ?? "get nil failed.")
-            }
-        )
-        /*
-        let request = AF.request(urlString, parameters: params)
-        RGNetwork.responseDecodable(with: request, of: Test.self) { test, string, data, httpStatusCode, request in
-            print(test)
-            guard let test = test else { return }
-            print(test)
-        } failure: { error, string, data, httpStatusCode, request in
+      })
+  }
 
+  private func loadByNetworkDecodable() {
+    let config = RGDataRequestConfig(urlString: urlString, parameters: params)
+    RGNetwork.requestDecodable(of: Test.self, config: config, showIndicator: true) { obj, string, data, httpStatusCode, request, response in
+      guard let test = obj else { return }
+      print("Test: ", test)
+    } failure: { error, string, data, httpStatusCode, request, response in
+      print("error: \n", error ?? "get nil failed.")
         }
-         */
     }
 
     private func loadByDataRequest() {
@@ -87,8 +86,7 @@ final class ViewController: UIViewController {
             },
             failure: { (error, resString, resData, httpStatusCode, request, response)  in
                 print("error: \n", error ?? "get nil failed.")
-            }
-        )
+      })
     }
 
     private func loadBySessionCallback() {
