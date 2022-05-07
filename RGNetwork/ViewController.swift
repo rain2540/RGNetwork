@@ -231,19 +231,19 @@ extension ViewController: UITableViewDelegate {
 
 }
 
-/*
+
 struct Test: Codable {
 
     var resultcode: String
     var reason: String
     var result: [String]
     var error_code: Int
-
-    /* enum CodingKeys: String, CodingKey {
+  /*
+  enum CodingKeys: String, CodingKey {
         case resultcode = "resultcode"
         case reason = "reason"
         case result = "result"
         case errorCode = "error_code"
-    } */
-
-} */
+  }
+   */
+}
