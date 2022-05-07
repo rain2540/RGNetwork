@@ -40,6 +40,36 @@ final class ViewController: UIViewController {
 
   // MARK: - Event
 
+  private func loadInfo(by requestInfo: RequstInfo) {
+    switch requestInfo {
+    case .rgNetwork:
+      loadByNetwork()
+
+    case .rgNetworkDecodable:
+      loadByNetworkDecodable()
+
+    case .rgDataRequest:
+      loadByDataRequest()
+
+    case .urlSessionCallback:
+      loadBySessionCallback()
+
+    case .urlSessionAsync:
+      if #available(iOS 15.0, *) {
+        loadBySessionAsync()
+      } else {
+        print("此方法在该系统版本无法使用")
+      }
+
+    case .alamofireAsync:
+      if #available(iOS 13.0, *) {
+        loadByAlamofireAsync()
+      } else {
+        print("此方法在该系统版本无法使用")
+      }
+    }
+  }
+
   private func loadByNetwork() {
     let config = RGDataRequestConfig(urlString: urlString, parameters: params)
     RGNetwork.request(
@@ -194,33 +224,7 @@ extension ViewController: UITableViewDelegate {
   ) {
     tableView.deselectRow(at: indexPath, animated: true)
     let requestInfo = requestInfos[indexPath.row]
-    switch requestInfo {
-    case .rgNetwork:
-      loadByNetwork()
-
-    case .rgNetworkDecodable:
-      loadByNetworkDecodable()
-
-    case .rgDataRequest:
-      loadByDataRequest()
-
-    case .urlSessionCallback:
-      loadBySessionCallback()
-
-    case .urlSessionAsync:
-      if #available(iOS 15.0, *) {
-        loadBySessionAsync()
-      } else {
-        print("此方法在该系统版本无法使用")
-      }
-
-    case .alamofireAsync:
-      if #available(iOS 13.0, *) {
-        loadByAlamofireAsync()
-      } else {
-        print("此方法在该系统版本无法使用")
-      }
-    }
+    loadInfo(by: requestInfo)
   }
 
   func tableView(
