@@ -191,8 +191,11 @@ class RGToast: NSObject {
     }
 }
 
-//  MARK: RGToastView
+
+// MARK: - RGToastView
+
 fileprivate class RGToastView: UIView {
+
     private var messageRect: CGRect?
     private var _image: UIImage?
     private var _messageText: String?
@@ -228,20 +231,28 @@ fileprivate class RGToastView: UIView {
 
     private func drawRoundRectangle(in rect: CGRect, radius: CGFloat) {
         let context = UIGraphicsGetCurrentContext()
-        let rRect = CGRect(x: rect.origin.x, y: rect.origin.y, width: rect.width, height: rect.height)
+    let rRect = CGRect(
+      x: rect.origin.x,
+      y: rect.origin.y,
+      width: rect.width,
+      height: rect.height)
         let minX = rRect.minX, midX = rRect.midX, maxX = rRect.maxX
         let minY = rRect.minY, midY = rRect.midY, maxY = rRect.maxY
         context?.move(to: CGPoint(x: minX, y: midY))
-        context?.addArc(tangent1End: CGPoint(x: minX, y: minY),
+    context?.addArc(
+      tangent1End: CGPoint(x: minX, y: minY),
                         tangent2End: CGPoint(x: midX, y: minY),
                         radius: radius)
-        context?.addArc(tangent1End: CGPoint(x: maxX, y: minY),
+    context?.addArc(
+      tangent1End: CGPoint(x: maxX, y: minY),
                         tangent2End: CGPoint(x: maxX, y: midY),
                         radius: radius)
-        context?.addArc(tangent1End: CGPoint(x: maxX, y: maxY),
+    context?.addArc(
+      tangent1End: CGPoint(x: maxX, y: maxY),
                         tangent2End: CGPoint(x: midX, y: maxY),
                         radius: radius)
-        context?.addArc(tangent1End: CGPoint(x: minX, y: maxY),
+    context?.addArc(
+      tangent1End: CGPoint(x: minX, y: maxY),
                         tangent2End: CGPoint(x: minX, y: midY),
                         radius: radius)
         context?.closePath()
@@ -256,9 +267,11 @@ fileprivate class RGToastView: UIView {
         let paragraphStyle = NSMutableParagraphStyle.default.mutableCopy()
         (paragraphStyle as! NSMutableParagraphStyle).lineBreakMode = .byWordWrapping
         (paragraphStyle as! NSMutableParagraphStyle).alignment = .center
-        let dict = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14.0),
-                    NSAttributedString.Key.paragraphStyle: paragraphStyle,
-                    NSAttributedString.Key.foregroundColor: UIColor.white]
+    let dict: [NSAttributedString.Key: Any] = [
+      .font: UIFont.boldSystemFont(ofSize: 14.0),
+      .paragraphStyle: paragraphStyle,
+      .foregroundColor: UIColor.white
+    ]
         (messageText! as NSString).draw(in: messageRect!, withAttributes: dict)
 
         if let image = image {
