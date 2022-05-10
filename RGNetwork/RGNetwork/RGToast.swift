@@ -271,17 +271,27 @@ fileprivate class RGToastView: UIView {
     }
 
     //  MARK: Setter Methods
+
     private func adjust() {
-        let size = messageText?.boundingRect(with: CGSize(width: 160.0, height: 200.0),
+    let attributes: [NSAttributedString.Key: Any] = [
+      .font: UIFont.boldSystemFont(ofSize: 14.0)
+    ]
+    let size = messageText?.boundingRect(
+      with: CGSize(width: 160.0, height: 200.0),
                                              options: [.usesLineFragmentOrigin],
-                                             attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14.0)],
+      attributes: attributes,
                                              context: nil).size
-        messageText?.size(withAttributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14.0)])
+    messageText?.size(withAttributes: attributes)
+
         var imageAdjustment: CGFloat = 0.0
-        if image != nil {
-            imageAdjustment = 7.0 + (image?.size.height)!
+    if let image = image {
+      imageAdjustment = 7.0 + image.size.height
         }
-        bounds = CGRect(x: 0.0, y: 0.0, width: (size?.width)! + 40.0, height: (size?.height)! + 15.0 + 15.0 + imageAdjustment)
+    bounds = CGRect(
+      x: 0.0,
+      y: 0.0,
+      width: (size?.width)! + 40.0,
+      height: (size?.height)! + 15.0 + 15.0 + imageAdjustment)
         messageRect?.size = size!
         messageRect?.size.height += 5
         messageRect?.origin.x = 20.0
@@ -290,6 +300,7 @@ fileprivate class RGToastView: UIView {
         setNeedsLayout()
         setNeedsDisplay()
     }
+
 }
 
 protocol CanBeToast { }
