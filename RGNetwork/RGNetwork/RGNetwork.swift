@@ -432,6 +432,16 @@ extension RGNetwork {
     }
   }
 
+  private static func downloadDecodable<T: Decodable>(
+    of type: T.Type = T.self,
+    with request: DownloadRequest,
+    config: RGNetworkConfig,
+    success: @escaping DownloadDecodableSuccess<T>,
+    failure: @escaping DownloadDecodableFailure<T>
+  ) {
+
+  }
+
 }
 
 
