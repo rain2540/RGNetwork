@@ -445,8 +445,10 @@ extension RGNetwork {
       }
 
       let httpStatusCode = response.response?.statusCode
-      guard let data = response.value else {
-        failure(response.error, nil, nil, httpStatusCode, request, response)
+      var resumeData = Data()
+      if let data = response.resumeData {
+        resumeData = data
+      }
         RGNetwork.hideIndicator()
         return
       }
