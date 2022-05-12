@@ -449,6 +449,7 @@ extension RGNetwork {
       if let data = response.resumeData {
         resumeData = data
       }
+      let string = String(data: resumeData, encoding: .utf8)
         RGNetwork.hideIndicator()
         return
       }
