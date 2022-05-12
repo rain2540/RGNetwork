@@ -456,6 +456,11 @@ extension RGNetwork {
         return
       }
 
+      guard let value = response.value else {
+        success(nil, string, resumeData, response.fileURL, httpStatusCode, request, response)
+        RGNetwork.hideIndicator()
+        return
+      }
     }
   }
 
