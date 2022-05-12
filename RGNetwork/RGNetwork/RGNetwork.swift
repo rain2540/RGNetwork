@@ -461,6 +461,9 @@ extension RGNetwork {
         RGNetwork.hideIndicator()
         return
       }
+
+      success(value, string, resumeData, response.fileURL, httpStatusCode, request, response)
+      RGNetwork.hideIndicator()
     }
   }
 
