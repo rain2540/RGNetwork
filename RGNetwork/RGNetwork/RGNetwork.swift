@@ -444,6 +444,7 @@ extension RGNetwork {
         dLog("RGNetwork.download.debugDescription: \n\(response.debugDescription)")
       }
 
+      let httpStatusCode = response.response?.statusCode
     }
   }
 
