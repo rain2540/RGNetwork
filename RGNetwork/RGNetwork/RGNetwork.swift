@@ -450,6 +450,8 @@ extension RGNetwork {
         resumeData = data
       }
       let string = String(data: resumeData, encoding: .utf8)
+      guard let code = httpStatusCode, code >= 200 && code < 300 else {
+        failure(response.error, string, resumeData, httpStatusCode, request, response)
         RGNetwork.hideIndicator()
         return
       }
