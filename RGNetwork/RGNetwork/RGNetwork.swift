@@ -439,7 +439,12 @@ extension RGNetwork {
     success: @escaping DownloadDecodableSuccess<T>,
     failure: @escaping DownloadDecodableFailure<T>
   ) {
+    request.responseDecodable(of: type) { response in
+      if config.isShowLog {
+        dLog("RGNetwork.download.debugDescription: \n\(response.debugDescription)")
+      }
 
+    }
   }
 
 }
