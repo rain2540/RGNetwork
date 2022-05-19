@@ -206,6 +206,17 @@ extension RGNetwork {
     }
   }
 
+  public static func uploadDecodable<T: Decodable>(
+    of type: T.Type = T.self,
+    config: RGUploadConfig,
+    queue: DispatchQueue = .global(),
+    showIndicator: Bool = false,
+    success: @escaping DecodableSuccess<T>,
+    failure: @escaping DecodableFailure<T>
+  ) {
+
+  }
+
 
   // MARK: - DownloadRequest
 
