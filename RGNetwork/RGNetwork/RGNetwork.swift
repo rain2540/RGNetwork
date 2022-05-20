@@ -214,6 +214,10 @@ extension RGNetwork {
     success: @escaping DecodableSuccess<T>,
     failure: @escaping DecodableFailure<T>
   ) {
+    if showIndicator == true {
+      RGNetwork.showIndicator()
+      RGNetwork.showActivityIndicator()
+    }
 
   }
 
