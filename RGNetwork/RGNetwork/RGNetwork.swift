@@ -219,6 +219,13 @@ extension RGNetwork {
       RGNetwork.showActivityIndicator()
     }
 
+    queue.async {
+      do {
+      } catch {
+        dLog(error)
+        RGNetwork.hideIndicator()
+      }
+    }
   }
 
 
