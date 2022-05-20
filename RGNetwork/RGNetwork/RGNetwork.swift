@@ -231,7 +231,7 @@ extension RGNetwork {
           requestModifier: { uploadRequest in
             uploadRequest.timeoutInterval = config.timeoutInterval
           })
-        
+          .validate(statusCode: 200 ..< 300)
       } catch {
         dLog(error)
         RGNetwork.hideIndicator()
