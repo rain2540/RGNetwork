@@ -232,6 +232,8 @@ extension RGNetwork {
             uploadRequest.timeoutInterval = config.timeoutInterval
           })
           .validate(statusCode: 200 ..< 300)
+
+        RGNetwork.responseDecodable(of: type, with: request, config: config, success: success, failure: failure)
       } catch {
         dLog(error)
         RGNetwork.hideIndicator()
