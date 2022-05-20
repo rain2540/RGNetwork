@@ -221,6 +221,17 @@ extension RGNetwork {
 
     queue.async {
       do {
+        let urlPath = try urlPathString(by: config.urlString)
+
+        let request = AF.upload(
+          multipartFormData: config.multipartFormData,
+          to: urlPath,
+          method: config.method,
+          headers: config.headers,
+          requestModifier: { uploadRequest in
+            uploadRequest.timeoutInterval = config.timeoutInterval
+          })
+        
       } catch {
         dLog(error)
         RGNetwork.hideIndicator()
