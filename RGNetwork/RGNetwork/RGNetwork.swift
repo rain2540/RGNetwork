@@ -206,6 +206,14 @@ extension RGNetwork {
     }
   }
 
+  /// 上传方法，用于获取满足 `Decodable` 协议的实体类对象
+  /// - Parameters:
+  ///   - type: 实体对象的类别
+  ///   - config: 上传相关配置信息
+  ///   - queue: 执行上传的队列，默认为 `DispatchQueue.global()`
+  ///   - showIndicator: 是否显示 Indicator，默认为 `false`
+  ///   - success: 上传成功的 Task
+  ///   - failure: 上传失败的 Task
   public static func uploadDecodable<T: Decodable>(
     of type: T.Type = T.self,
     config: RGUploadConfig,
