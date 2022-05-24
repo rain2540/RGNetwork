@@ -303,6 +303,10 @@ extension RGNetwork {
     success: @escaping DownloadDecodableSuccess<T>,
     failure: @escaping DownloadDecodableFailure<T>
   ) {
+    if showIndicator == true {
+      RGNetwork.showIndicator()
+      RGNetwork.showActivityIndicator()
+    }
 
   }
 
