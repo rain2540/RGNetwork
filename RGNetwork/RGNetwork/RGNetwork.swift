@@ -310,7 +310,18 @@ extension RGNetwork {
 
     queue.async {
       do {
+        let urlPath = try urlPathString(by: config.urlString)
 
+        let request = AF.download(
+          urlPath,
+          method: config.method,
+          parameters: config.parameters,
+          encoding: config.encoding,
+          headers: config.headers,
+          requestModifier: { downloadRequest in
+            downloadRequest.timeoutInterval = config.timeoutInterval
+          },
+          to: config.destination)
       } catch {
         dLog(error)
         RGNetwork.hideIndicator()
