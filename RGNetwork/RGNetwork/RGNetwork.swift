@@ -323,6 +323,8 @@ extension RGNetwork {
           },
           to: config.destination)
           .validate(statusCode: 200 ..< 300)
+
+        RGNetwork.downloadDecodable(of: type, with: request, config: config, success: success, failure: failure)
       } catch {
         dLog(error)
         RGNetwork.hideIndicator()
