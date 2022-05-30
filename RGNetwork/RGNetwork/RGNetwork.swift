@@ -295,6 +295,14 @@ extension RGNetwork {
     }
   }
 
+  /// 下载方法，用于获取满足 `Decodable` 协议的实体类对象
+  /// - Parameters:
+  ///   - type: 实体对象的类别
+  ///   - config: 下载相关配置信息
+  ///   - queue: 执行下载的队列，默认为 `DispatchQueue.global()`
+  ///   - showIndicator: 是否显示 Indicator，默认为 `false`
+  ///   - success: 下载成功的 Task
+  ///   - failure: 下载失败的 Task
   public static func downloadDecodable<T: Decodable>(
     of type: T.Type = T.self,
     config: RGDownloadConfig,
