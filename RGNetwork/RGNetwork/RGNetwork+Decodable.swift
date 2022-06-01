@@ -15,6 +15,9 @@ typealias DecodableFailure<T: Decodable> = (Error?, ResponseString?, ResponseDat
 typealias DownloadDecodableSuccess<T: Decodable> = (T?, ResponseString?, ResponseData?, URL?, HttpStatusCode?, DownloadRequest, DownloadResponse<T, AFError>) -> Void
 typealias DownloadDecodableFailure<T: Decodable> = (Error?, ResponseString?, ResponseData?, HttpStatusCode?, DownloadRequest, DownloadResponse<T, AFError>) -> Void
 
+
+// MARK: -
+
 extension RGNetwork {
 
   // MARK: DataRequest
@@ -149,7 +152,7 @@ extension RGNetwork {
           to: config.destination)
           .validate(statusCode: 200 ..< 300)
 
-        RGNetwork.downloadDecodable(of: type, with: request, config: config, success: success, failure: failure)
+        RGNetwork.responseDownloadDecodable(of: type, with: request, config: config, success: success, failure: failure)
       } catch {
         dLog(error)
         RGNetwork.hideIndicator()
@@ -206,7 +209,7 @@ extension RGNetwork {
 
 extension RGNetwork {
 
-  private static func downloadDecodable<T: Decodable>(
+  private static func responseDownloadDecodable<T: Decodable>(
     of type: T.Type = T.self,
     with request: DownloadRequest,
     config: RGNetworkConfig,
