@@ -194,7 +194,7 @@ extension RGNetwork {
           to: config.destination)
           .validate(statusCode: 200 ..< 300)
 
-        RGNetwork.downloadData(with: request, config: config, success: success, failure: failure)
+        RGNetwork.responseDownloadData(with: request, config: config, success: success, failure: failure)
       } catch {
         dLog(error)
         RGNetwork.hideIndicator()
@@ -307,7 +307,7 @@ extension RGNetwork {
 
 extension RGNetwork {
 
-  private static func downloadData(
+  private static func responseDownloadData(
     with request: DownloadRequest,
     config: RGNetworkConfig,
     success: @escaping DownloadSuccess,
