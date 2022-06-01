@@ -347,41 +347,6 @@ extension RGNetwork {
     }
   }
 
-  private static func downloadDecodable<T: Decodable>(
-    of type: T.Type = T.self,
-    with request: DownloadRequest,
-    config: RGNetworkConfig,
-    success: @escaping DownloadDecodableSuccess<T>,
-    failure: @escaping DownloadDecodableFailure<T>
-  ) {
-    request.responseDecodable(of: type) { response in
-      if config.isShowLog {
-        dLog("RGNetwork.download.debugDescription: \n\(response.debugDescription)")
-      }
-
-      let httpStatusCode = response.response?.statusCode
-      var resumeData = Data()
-      if let data = response.resumeData {
-        resumeData = data
-      }
-      let string = String(data: resumeData, encoding: .utf8)
-      guard let code = httpStatusCode, code >= 200 && code < 300 else {
-        failure(response.error, string, resumeData, httpStatusCode, request, response)
-        RGNetwork.hideIndicator()
-        return
-      }
-
-      guard let value = response.value else {
-        success(nil, string, resumeData, response.fileURL, httpStatusCode, request, response)
-        RGNetwork.hideIndicator()
-        return
-      }
-
-      success(value, string, resumeData, response.fileURL, httpStatusCode, request, response)
-      RGNetwork.hideIndicator()
-    }
-  }
-
 }
 
 
