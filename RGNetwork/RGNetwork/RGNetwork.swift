@@ -293,41 +293,6 @@ extension RGNetwork {
     }
   }
 
-  private static func responseDecodable<T: Decodable>(
-    of type: T.Type = T.self,
-    with request: DataRequest,
-    config: RGNetworkConfig,
-    success: @escaping DecodableSuccess<T>,
-    failure: @escaping DecodableFailure<T>
-  ) {
-    request.responseDecodable(of: type) { response in
-      if config.isShowLog == true {
-        dLog("RGNetwork.request.debugDescription: \n\(response.debugDescription)")
-      }
-
-      let httpStatusCode = response.response?.statusCode
-      var responseData = Data()
-      if let data = response.data {
-        responseData = data
-      }
-      let string = String(data: responseData, encoding: .utf8)
-      guard let code = httpStatusCode, code >= 200 && code < 300 else {
-        failure(response.error, string, response.data, httpStatusCode, request, response)
-        RGNetwork.hideIndicator()
-        return
-      }
-
-      guard let value = response.value else {
-        success(nil, string, response.data, httpStatusCode, request, response)
-        RGNetwork.hideIndicator()
-        return
-      }
-
-      success(value, string, response.data, httpStatusCode, request, response)
-      RGNetwork.hideIndicator()
-    }
-  }
-
   private static func responseString(
     with request: DataRequest,
     success: @escaping SuccessTask,
