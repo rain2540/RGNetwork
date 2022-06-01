@@ -110,6 +110,56 @@ extension RGNetwork {
   }
 
 
+  // MARK: - DownloadRequest
+
+  /// 下载方法，用于获取满足 `Decodable` 协议的实体类对象
+  /// - Parameters:
+  ///   - type: 实体对象的类别
+  ///   - config: 下载相关配置信息
+  ///   - queue: 执行下载的队列，默认为 `DispatchQueue.global()`
+  ///   - showIndicator: 是否显示 Indicator，默认为 `false`
+  ///   - success: 下载成功的 Task
+  ///   - failure: 下载失败的 Task
+  public static func downloadDecodable<T: Decodable>(
+    of type: T.Type = T.self,
+    config: RGDownloadConfig,
+    queue: DispatchQueue = DispatchQueue.global(),
+    showIndicator: Bool = false,
+    success: @escaping DownloadDecodableSuccess<T>,
+    failure: @escaping DownloadDecodableFailure<T>
+  ) {
+    if showIndicator == true {
+      RGNetwork.showIndicator()
+      RGNetwork.showActivityIndicator()
+    }
+
+    queue.async {
+      do {
+        let urlPath = try urlPathString(by: config.urlString)
+
+        let request = AF.download(
+          urlPath,
+          method: config.method,
+          parameters: config.parameters,
+          encoding: config.encoding,
+          headers: config.headers,
+          requestModifier: { downloadRequest in
+            downloadRequest.timeoutInterval = config.timeoutInterval
+          },
+          to: config.destination)
+          .validate(statusCode: 200 ..< 300)
+
+        RGNetwork.downloadDecodable(of: type, with: request, config: config, success: success, failure: failure)
+      } catch {
+        dLog(error)
+        RGNetwork.hideIndicator()
+      }
+    }
+  }
+
+}
+
+
 // MARK: - Response of DataRequest / UploadRequest
 
 extension RGNetwork {
