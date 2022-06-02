@@ -55,7 +55,6 @@ extension RGDataRequest {
   public func task(
     queue: DispatchQueue = .main,
     showIndicator: Bool = false,
-    showLog: Bool = true,
     success: @escaping SuccessRequest,
     failure: @escaping FailureRequest
   ) {
@@ -64,7 +63,7 @@ extension RGDataRequest {
       request.responseJSON(
         queue: queue,
         showIndicator: showIndicator,
-        showLog: showLog,
+        showLog: config.isShowLog,
         success: success,
         failure: failure)
     } catch {
