@@ -52,6 +52,12 @@ class RGDataRequest {
 
 extension RGDataRequest {
 
+  /// 执行请求
+  /// - Parameters:
+  ///   - queue: 执行请求的队列
+  ///   - showIndicator: 是否显示 Indicator
+  ///   - success: 请求成功的 Task
+  ///   - failure: 请求失败的 Task
   public func task(
     queue: DispatchQueue = .main,
     showIndicator: Bool = false,
