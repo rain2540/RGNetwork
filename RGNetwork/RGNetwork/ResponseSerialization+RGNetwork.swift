@@ -22,6 +22,17 @@ extension DataRequest {
       RGNetwork.showIndicator()
       RGNetwork.showActivityIndicator()
     }
+
+    queue.async { [weak self] in
+      guard let self = self else { return }
+      self.responseData { responseData in
+        if showLog == true {
+          dLog("RGNetwork.request.debugDescription: \n\(responseData.debugDescription)")
+        }
+
+        
+      }
+    }
   }
 
 }
