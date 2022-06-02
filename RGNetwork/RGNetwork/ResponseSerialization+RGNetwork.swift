@@ -18,7 +18,10 @@ extension DataRequest {
     success: @escaping SuccessRequest,
     failure: @escaping FailureRequest
   ) {
-
+    if showIndicator == true {
+      RGNetwork.showIndicator()
+      RGNetwork.showActivityIndicator()
+    }
   }
 
 }
