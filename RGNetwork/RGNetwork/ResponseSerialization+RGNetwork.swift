@@ -42,7 +42,13 @@ extension DataRequest {
           RGNetwork.hideIndicator()
           return
         }
+        do {
 
+        } catch {
+          success(nil, error.localizedDescription, data, httpStatusCode, self, responseData)
+          RGNetwork.hideIndicator()
+          return
+        }
       }
     }
   }
