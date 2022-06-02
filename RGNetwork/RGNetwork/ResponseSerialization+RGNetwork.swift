@@ -31,6 +31,11 @@ extension DataRequest {
         }
 
         let httpStatusCode = responseData.response?.statusCode
+        guard let data = responseData.value else {
+          failure(responseData.error, nil, nil, httpStatusCode, self, responseData)
+          RGNetwork.hideIndicator()
+          return
+        }
       }
     }
   }
