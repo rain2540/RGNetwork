@@ -43,7 +43,13 @@ extension DataRequest {
           return
         }
         do {
+          let json = try JSONSerialization.jsonObject(
+            with: data,
+            options: [.fragmentsAllowed, .mutableContainers, .mutableLeaves]
+          ) as? ResponseJSON
 
+          success(json, string, data, httpStatusCode, self, responseData)
+          RGNetwork.hideIndicator()
         } catch {
           success(nil, error.localizedDescription, data, httpStatusCode, self, responseData)
           RGNetwork.hideIndicator()
