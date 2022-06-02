@@ -36,6 +36,7 @@ extension DataRequest {
           RGNetwork.hideIndicator()
           return
         }
+        let string = String(data: data, encoding: .utf8)
       }
     }
   }
