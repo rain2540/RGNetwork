@@ -67,7 +67,10 @@ extension DataRequest {
     success: @escaping SuccessRequestDecodable<T>,
     failure: @escaping FailureRequestDecodable<T>
   ) {
-
+    if showIndicator == true {
+      RGNetwork.showIndicator()
+      RGNetwork.showActivityIndicator()
+    }
   }
 
 }
