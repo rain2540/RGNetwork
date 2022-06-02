@@ -96,6 +96,9 @@ extension DataRequest {
           RGNetwork.hideIndicator()
           return
         }
+
+        success(value, string, response.data, httpStatusCode, self, response)
+        RGNetwork.hideIndicator()
       }
     }
   }
