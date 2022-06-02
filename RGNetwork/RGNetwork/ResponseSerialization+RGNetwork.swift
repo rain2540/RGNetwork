@@ -78,6 +78,8 @@ extension DataRequest {
         if showLog == true {
           dLog("RGNetwork.request.decodable.debugDescription: \n\(response.debugDescription)")
         }
+
+        let httpStatusCode = response.response?.statusCode
       }
     }
   }
