@@ -27,10 +27,10 @@ enum DownloadResponsePackage {
 }
 
 
-typealias ResponseJSON = [String: Any]
-typealias ResponseString = String
-typealias ResponseData = Data
-typealias HttpStatusCode = Int
+public typealias ResponseJSON = [String: Any]
+public typealias ResponseString = String
+public typealias ResponseData = Data
+public typealias HttpStatusCode = Int
 
 typealias SuccessTask = (ResponseJSON?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponsePackage) -> Void
 typealias FailureTask = (Error?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponsePackage) -> Void
