@@ -7,3 +7,18 @@
 //
 
 import Foundation
+import Alamofire
+
+extension DataRequest {
+
+  public func responseJSON(
+    queue: DispatchQueue = .main,
+    showIndicator: Bool = false,
+    showLog: Bool = true,
+    success: @escaping SuccessRequest,
+    failure: @escaping FailureRequest
+  ) {
+
+  }
+
+}
