@@ -91,6 +91,11 @@ extension DataRequest {
           return
         }
 
+        guard let value = response.value else {
+          success(nil, string, response.data, httpStatusCode, self, response)
+          RGNetwork.hideIndicator()
+          return
+        }
       }
     }
   }
