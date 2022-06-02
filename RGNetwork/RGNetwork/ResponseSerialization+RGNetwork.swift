@@ -59,4 +59,15 @@ extension DataRequest {
     }
   }
 
+  public func responseDecodable<T: Decodable>(
+    of type: T.Type = T.self,
+    queue: DispatchQueue = .main,
+    showIndicator: Bool = false,
+    showLog: Bool = true,
+    success: @escaping SuccessRequestDecodable<T>,
+    failure: @escaping FailureRequestDecodable<T>
+  ) {
+
+  }
+
 }
