@@ -59,6 +59,17 @@ extension RGDataRequest {
     success: @escaping SuccessRequest,
     failure: @escaping FailureRequest
   ) {
+    do {
+      let request = try AF.request(config: config)
+      request.responseJSON(
+        queue: queue,
+        showIndicator: showIndicator,
+        showLog: showLog,
+        success: success,
+        failure: failure)
+    } catch {
+      dLog(error)
+    }
   }
 
   /// 执行请求
