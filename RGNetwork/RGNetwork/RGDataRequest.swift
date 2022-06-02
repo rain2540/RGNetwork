@@ -96,18 +96,23 @@ extension RGDataRequest {
 
   public func taskDecodable<T: Decodable>(
     of type: T.Type = T.self,
-    queue: DispatchQueue = .global(),
+    queue: DispatchQueue = .main,
     showIndicator: Bool = false,
-    success: @escaping DecodableSuccess<T>,
-    failure: @escaping DecodableFailure<T>
+    success: @escaping SuccessRequestDecodable<T>,
+    failure: @escaping FailureRequestDecodable<T>
   ) {
-    RGNetwork.requestDecodable(
-      of: type,
-      config: config,
-      queue: queue,
-      showIndicator: showIndicator,
-      success: success,
-      failure: failure)
+    do {
+      let request = try AF.request(config: config)
+      request.responseDecodable(
+        of: type,
+        queue: queue,
+        showIndicator: showIndicator,
+        showLog: config.isShowLog,
+        success: success,
+        failure: failure)
+    } catch {
+      dLog(error)
+    }
   }
 
 }
