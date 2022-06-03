@@ -72,7 +72,26 @@ final class ViewController: UIViewController {
 
   private func loadByNetwork() {
     let config = RGDataRequestConfig(urlString: urlString, parameters: params)
-    RGNetwork.request(
+    do {
+      let request = try AF.request(config: config)
+      request.responseJSON(
+        queue: .global(),
+        showIndicator: true,
+        showLog: true,
+        success: { json, string, data, httpStatusCode, request, response in
+          print("JSON: \n\(json ?? [:])")
+          print("\n/* ***** ***** ***** ***** */\n")
+          print("response:", response, separator: "\n")
+          print("\n/* ***** ***** ***** ***** */\n")
+          print("metrics:", response.metrics ?? "none", separator: "\n")
+          print("\n/* ***** ***** ***** ***** */\n")
+        }, failure: { error, string, data, httpStatusCode, request, response in
+          print("error: \n", error ?? "get nil failed.")
+        })
+    } catch {
+      print(error)
+    }
+    /* RGNetwork.request(
       config: config,
       showIndicator: true,
       responseType: .json,
@@ -89,7 +108,7 @@ final class ViewController: UIViewController {
       },
       failure: { (error, resString, resData, httpStatusCode, request, response)  in
         print("error: \n", error ?? "get nil failed.")
-      })
+      }) */
   }
 
   private func loadByNetworkDecodable() {
