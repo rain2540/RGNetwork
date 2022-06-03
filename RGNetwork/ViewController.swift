@@ -121,11 +121,11 @@ final class ViewController: UIViewController {
         showIndicator: true,
         showLog: true,
         success: { obj, string, data, httpStatusCode, request, response in
-      guard let test = obj else { return }
-      print("Test: ", test)
+          guard let test = obj else { return }
+          print("Test: ", test)
         },
         failure: { error, string, data, httpStatusCode, request, response in
-      print("error: \n", error ?? "get nil failed.")
+          print("error: \n", error ?? "get nil failed.")
         })
     } catch {
       print(error)
@@ -141,6 +141,19 @@ final class ViewController: UIViewController {
   private func loadByDataRequest() {
     let request = RGDataRequest(urlString: urlString, parameters: params)
     request.task(
+      queue: .global(),
+      showIndicator: true,
+      success: { (json, string, data, httpStatusCode, request, response) in
+        print("\n/* ***** ***** ***** ***** */\n")
+        print("JSON:", json ?? "", separator: "\n")
+        print("\n/* ***** ***** ***** ***** */\n")
+        print("string:", string ?? "", separator: "\n")
+        print("\n/* ***** ***** ***** ***** */\n")
+      },
+      failure: { (error, resString, resData, httpStatusCode, request, response)  in
+        print("error: \n", error ?? "get nil failed.")
+      })
+    /* request.task(
       showIndicator: true,
       responseType: .json,
       success: { (json, string, data, httpStatusCode, request, responsePackage) in
@@ -152,7 +165,7 @@ final class ViewController: UIViewController {
       },
       failure: { (error, resString, resData, httpStatusCode, request, response)  in
         print("error: \n", error ?? "get nil failed.")
-      })
+      }) */
   }
 
   private func loadBySessionCallback() {
