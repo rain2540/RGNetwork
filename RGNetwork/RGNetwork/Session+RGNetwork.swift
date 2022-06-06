@@ -29,4 +29,6 @@ extension Session {
     }
   }
 
+  public func upload(config: RGUploadConfig) throws -> UploadRequest {
+  }
 }
