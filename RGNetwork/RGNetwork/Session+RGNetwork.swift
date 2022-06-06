@@ -30,6 +30,20 @@ extension Session {
   }
 
   public func upload(config: RGUploadConfig) throws -> UploadRequest {
+    do {
+      let urlPath = try RGNetwork.urlPathString(by: config.urlString)
+      let request = AF.upload(
+        multipartFormData: config.multipartFormData,
+        to: urlPath,
+        method: config.method,
+        headers: config.headers,
+        requestModifier: { uploadRequest in
+          uploadRequest.timeoutInterval = config.timeoutInterval
+        })
+      return request
+    } catch {
+      throw error
+    }
   }
 
 }
