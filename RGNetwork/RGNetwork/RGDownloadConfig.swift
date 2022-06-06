@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-struct RGDownloadConfig: RGNetworkConfig {
+public struct RGDownloadConfig: RGNetworkConfig {
 
   let urlString: String
   let method: HTTPMethod
