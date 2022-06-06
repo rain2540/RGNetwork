@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-struct RGUploadConfig: RGNetworkConfig {
+public struct RGUploadConfig: RGNetworkConfig {
 
   let urlString: String
   let method: HTTPMethod
