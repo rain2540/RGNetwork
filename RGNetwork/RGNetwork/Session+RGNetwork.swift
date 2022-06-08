@@ -46,4 +46,7 @@ extension Session {
     }
   }
 
+  public func download(config: RGDownloadConfig) throws -> DownloadRequest {
+  }
+
 }
