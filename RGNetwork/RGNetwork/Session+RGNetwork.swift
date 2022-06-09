@@ -48,6 +48,18 @@ extension Session {
 
   public func download(config: RGDownloadConfig) throws -> DownloadRequest {
     do {
+      let urlPath = try RGNetwork.urlPathString(by: config.urlString)
+      let request = AF.download(
+        urlPath,
+        method: config.method,
+        parameters: config.parameters,
+        encoding: config.encoding,
+        headers: config.headers,
+        requestModifier: { downloadRequest in
+          downloadRequest.timeoutInterval = config.timeoutInterval
+        },
+        to: config.destination)
+      return request
     } catch {
       throw error
     }
