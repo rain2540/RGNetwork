@@ -104,3 +104,12 @@ extension DataRequest {
   }
 
 }
+
+
+// MARK: -
+
+extension DownloadRequest {
+
+
+
+}
