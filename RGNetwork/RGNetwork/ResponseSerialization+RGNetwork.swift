@@ -11,13 +11,14 @@ import Alamofire
 
 extension DataRequest {
 
+  @discardableResult
   public func responseJSON(
     queue: DispatchQueue = .main,
     showIndicator: Bool = false,
     showLog: Bool = true,
     success: @escaping SuccessRequest,
     failure: @escaping FailureRequest
-  ) {
+  ) -> Self {
     if showIndicator == true {
       RGNetwork.showIndicator()
       RGNetwork.showActivityIndicator()
@@ -57,6 +58,8 @@ extension DataRequest {
         }
       }
     }
+
+    return self
   }
 
   public func responseDecodable<T: Decodable>(
