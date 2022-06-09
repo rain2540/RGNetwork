@@ -62,6 +62,7 @@ extension DataRequest {
     return self
   }
 
+  @discardableResult
   public func responseDecodable<T: Decodable>(
     of type: T.Type = T.self,
     queue: DispatchQueue = .main,
@@ -69,7 +70,7 @@ extension DataRequest {
     showLog: Bool = true,
     success: @escaping SuccessRequestDecodable<T>,
     failure: @escaping FailureRequestDecodable<T>
-  ) {
+  ) -> Self {
     if showIndicator == true {
       RGNetwork.showIndicator()
       RGNetwork.showActivityIndicator()
@@ -104,6 +105,8 @@ extension DataRequest {
         RGNetwork.hideIndicator()
       }
     }
+
+    return self
   }
 
 }
