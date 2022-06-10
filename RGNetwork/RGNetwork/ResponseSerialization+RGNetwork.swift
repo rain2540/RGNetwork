@@ -125,6 +125,7 @@ extension DownloadRequest {
     success: @escaping SuccessDownload,
     failure: @escaping FailureDownload
   ) -> Self {
+    return self
   }
 
 }
