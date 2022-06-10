@@ -136,6 +136,7 @@ extension DownloadRequest {
           dLog("RGNetwork.download.debugDescription: \n\(responseData.debugDescription)")
         }
 
+        let httpStatusCode = responseData.response?.statusCode
     }
 
     return self
