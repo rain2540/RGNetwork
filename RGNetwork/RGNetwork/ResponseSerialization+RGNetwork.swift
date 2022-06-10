@@ -117,5 +117,14 @@ extension DataRequest {
 extension DownloadRequest {
 
 
+  @discardableResult
+  public func responseJSON(
+    queue: DispatchQueue = .main,
+    showIndicator: Bool = false,
+    showLog: Bool = true,
+    success: @escaping SuccessDownload,
+    failure: @escaping FailureDownload
+  ) -> Self {
+  }
 
 }
