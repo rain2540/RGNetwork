@@ -116,7 +116,6 @@ extension DataRequest {
 
 extension DownloadRequest {
 
-
   @discardableResult
   public func responseJSON(
     queue: DispatchQueue = .main,
@@ -128,6 +127,15 @@ extension DownloadRequest {
     if showIndicator == true {
       RGNetwork.showIndicator()
       RGNetwork.showActivityIndicator()
+    }
+
+    queue.async { [weak self] in
+      guard let self = self else { return }
+      self.responseData { responseData in
+        if showLog == true {
+          dLog("RGNetwork.download.debugDescription: \n\(responseData.debugDescription)")
+        }
+
     }
 
     return self
