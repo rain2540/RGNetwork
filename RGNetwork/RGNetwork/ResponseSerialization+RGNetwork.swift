@@ -149,6 +149,13 @@ extension DownloadRequest {
           RGNetwork.hideIndicator()
           return
         }
+        do {
+        } catch {
+          success(nil, error.localizedDescription, data, responseData.fileURL, httpStatusCode, self, responseData)
+          RGNetwork.hideIndicator()
+          return
+        }
+      }
     }
 
     return self
