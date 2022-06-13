@@ -150,6 +150,13 @@ extension DownloadRequest {
           return
         }
         do {
+          let json = try JSONSerialization.jsonObject(
+            with: data,
+            options: .fragmentsAllowed
+          ) as? ResponseJSON
+
+          success(json, string, data, responseData.fileURL, httpStatusCode, self, responseData)
+          RGNetwork.hideIndicator()
         } catch {
           success(nil, error.localizedDescription, data, responseData.fileURL, httpStatusCode, self, responseData)
           RGNetwork.hideIndicator()
