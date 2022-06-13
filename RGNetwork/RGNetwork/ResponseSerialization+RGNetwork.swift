@@ -143,6 +143,7 @@ extension DownloadRequest {
           return
         }
 
+        let string = String(data: data, encoding: .utf8)
     }
 
     return self
