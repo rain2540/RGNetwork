@@ -32,7 +32,9 @@ public typealias ResponseString = String
 public typealias ResponseData = Data
 public typealias HttpStatusCode = Int
 
+@available(*, deprecated)
 typealias SuccessTask = (ResponseJSON?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponsePackage) -> Void
+@available(*, deprecated)
 typealias FailureTask = (Error?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponsePackage) -> Void
 
 public typealias SuccessRequest = (ResponseJSON?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponse<Data, AFError>) -> Void
