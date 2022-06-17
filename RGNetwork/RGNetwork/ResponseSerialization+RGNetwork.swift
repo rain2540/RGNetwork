@@ -168,4 +168,15 @@ extension DownloadRequest {
     return self
   }
 
+  @discardableResult
+  public func responseDecodable<T: Decodable>(
+    of type: T.Type = T.self,
+    queue: DispatchQueue = .main,
+    showIndicator: Bool = false,
+    showLog: Bool = true,
+    success: @escaping SuccessDownloadDecodable<T>,
+    failure: @escaping FailureDownloadDecodable<T>
+  ) -> Self {
+  }
+
 }
