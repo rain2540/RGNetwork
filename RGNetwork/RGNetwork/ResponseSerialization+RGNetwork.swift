@@ -177,6 +177,8 @@ extension DownloadRequest {
     success: @escaping SuccessDownloadDecodable<T>,
     failure: @escaping FailureDownloadDecodable<T>
   ) -> Self {
+
+    return self
   }
 
 }
