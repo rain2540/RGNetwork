@@ -177,6 +177,11 @@ extension DownloadRequest {
     success: @escaping SuccessDownloadDecodable<T>,
     failure: @escaping FailureDownloadDecodable<T>
   ) -> Self {
+    if showIndicator == true {
+      RGNetwork.showIndicator()
+      RGNetwork.showActivityIndicator()
+    }
+
 
     return self
   }
