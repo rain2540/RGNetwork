@@ -182,6 +182,14 @@ extension DownloadRequest {
       RGNetwork.showActivityIndicator()
     }
 
+    queue.async { [weak self] in
+      guard let self = self else { return }
+      self.responseDecodable(of: type) { response in
+        if showLog == true {
+          dLog("RGNetwork.download.debugDescription: \n\(response.debugDescription)")
+        }
+
+    }
 
     return self
   }
