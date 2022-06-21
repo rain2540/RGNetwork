@@ -80,13 +80,27 @@ extension RGDataRequest {
     }
   }
 
+  @discardableResult
+  public func taskDecodable<T: Decodable>(
+    of type: T.Type = T.self,
+    queue: DispatchQueue = .main,
+    showIndicator: Bool = false,
+    success: @escaping SuccessRequestDecodable<T>,
+    failure: @escaping FailureRequestDecodable<T>
+  ) throws -> DataRequest {
+    do {
+      let req = try AF.request(config: config)
+      let request = req.responseDecodable(
+        of: type,
         queue: queue,
         showIndicator: showIndicator,
         showLog: config.isShowLog,
         success: success,
         failure: failure)
+      return request
     } catch {
       dLog(error)
+      throw error
     }
   }
 
@@ -112,27 +126,6 @@ extension RGDataRequest {
       responseType: responseType,
       success: success,
       failure: failure)
-  }
-
-  public func taskDecodable<T: Decodable>(
-    of type: T.Type = T.self,
-    queue: DispatchQueue = .main,
-    showIndicator: Bool = false,
-    success: @escaping SuccessRequestDecodable<T>,
-    failure: @escaping FailureRequestDecodable<T>
-  ) {
-    do {
-      let request = try AF.request(config: config)
-      request.responseDecodable(
-        of: type,
-        queue: queue,
-        showIndicator: showIndicator,
-        showLog: config.isShowLog,
-        success: success,
-        failure: failure)
-    } catch {
-      dLog(error)
-    }
   }
 
 }
