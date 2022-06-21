@@ -10,4 +10,6 @@ import Foundation
 
 class RGUploadRequest {
 
+  public var tag: Int = 0
+
 }
