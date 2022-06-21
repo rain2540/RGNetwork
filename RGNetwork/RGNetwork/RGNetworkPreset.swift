@@ -10,10 +10,10 @@ import Foundation
 
 class RGNetworkPreset {
 
-    static let shared = RGNetworkPreset()
+  static let shared = RGNetworkPreset()
 
-    var baseURL: String? = nil
+  var baseURL: String? = nil
 
-    private init() { }
+  private init() { }
 
 }
