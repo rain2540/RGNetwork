@@ -194,6 +194,7 @@ extension DownloadRequest {
         if let data = response.resumeData {
           resumeData = data
         }
+        let string = String(data: resumeData, encoding: .utf8)
     }
 
     return self
