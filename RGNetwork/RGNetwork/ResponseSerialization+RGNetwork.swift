@@ -200,6 +200,12 @@ extension DownloadRequest {
           RGNetwork.hideIndicator()
           return
         }
+
+        guard let value = response.value else {
+          success(nil, string, resumeData, response.fileURL, httpStatusCode, self, response)
+          RGNetwork.hideIndicator()
+          return
+        }
     }
 
     return self
