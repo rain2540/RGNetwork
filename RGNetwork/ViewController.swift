@@ -140,19 +140,23 @@ final class ViewController: UIViewController {
 
   private func loadByDataRequest() {
     let request = RGDataRequest(urlString: urlString, parameters: params)
-    request.task(
-      queue: .global(),
-      showIndicator: true,
-      success: { (json, string, data, httpStatusCode, request, response) in
-        print("\n/* ***** ***** ***** ***** */\n")
-        print("JSON:", json ?? "", separator: "\n")
-        print("\n/* ***** ***** ***** ***** */\n")
-        print("string:", string ?? "", separator: "\n")
-        print("\n/* ***** ***** ***** ***** */\n")
-      },
-      failure: { (error, resString, resData, httpStatusCode, request, response)  in
-        print("error: \n", error ?? "get nil failed.")
-      })
+    do {
+      try request.task(
+        queue: .global(),
+        showIndicator: true,
+        success: { (json, string, data, httpStatusCode, request, response) in
+          print("\n/* ***** ***** ***** ***** */\n")
+          print("JSON:", json ?? "", separator: "\n")
+          print("\n/* ***** ***** ***** ***** */\n")
+          print("string:", string ?? "", separator: "\n")
+          print("\n/* ***** ***** ***** ***** */\n")
+        },
+        failure: { (error, resString, resData, httpStatusCode, request, response)  in
+          print("error: \n", error ?? "get nil failed.")
+        })
+    } catch {
+      print(error)
+    }
     /* request.task(
       showIndicator: true,
       responseType: .json,
