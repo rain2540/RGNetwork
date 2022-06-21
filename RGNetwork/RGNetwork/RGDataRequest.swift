@@ -97,6 +97,7 @@ extension RGDataRequest {
   ///   - responseType: 返回数据格式类型
   ///   - success: 请求成功的 Task
   ///   - failure: 请求失败的 Task
+  @available(*, deprecated)
   public func task(
     queue: DispatchQueue = DispatchQueue.global(),
     showIndicator: Bool = false,
