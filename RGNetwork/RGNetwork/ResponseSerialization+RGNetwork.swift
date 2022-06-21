@@ -190,6 +190,10 @@ extension DownloadRequest {
         }
 
         let httpStatusCode = response.response?.statusCode
+        var resumeData = Data()
+        if let data = response.resumeData {
+          resumeData = data
+        }
     }
 
     return self
