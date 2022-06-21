@@ -27,16 +27,26 @@ enum DownloadResponsePackage {
 }
 
 
-typealias ResponseJSON = [String: Any]
-typealias ResponseString = String
-typealias ResponseData = Data
-typealias HttpStatusCode = Int
+public typealias ResponseJSON = [String: Any]
+public typealias ResponseString = String
+public typealias ResponseData = Data
+public typealias HttpStatusCode = Int
 
+@available(*, deprecated)
 typealias SuccessTask = (ResponseJSON?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponsePackage) -> Void
+@available(*, deprecated)
 typealias FailureTask = (Error?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponsePackage) -> Void
 
+public typealias SuccessRequest = (ResponseJSON?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponse<Data, AFError>) -> Void
+public typealias FailureRequest = (Error?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponse<Data, AFError>) -> Void
+
+@available(*, deprecated)
 typealias DownloadSuccess = (ResponseJSON?, ResponseString?, ResponseData?, URL?, HttpStatusCode?, DownloadRequest, DownloadResponsePackage) -> Void
+@available(*, deprecated)
 typealias DownloadFailure = (Error?, ResponseString?, ResponseData?, HttpStatusCode?, DownloadRequest, DownloadResponsePackage) -> Void
+
+public typealias SuccessDownload = (ResponseJSON?, ResponseString?, ResponseData?, URL?, HttpStatusCode?, DownloadRequest, DownloadResponse<Data, AFError>) -> Void
+public typealias FailureDownload = (Error?, ResponseString?, ResponseData?, HttpStatusCode?, DownloadRequest, DownloadResponse<Data, AFError>) -> Void
 
 
 struct RGNetwork { }

@@ -56,9 +56,62 @@ extension RGDataRequest {
   /// - Parameters:
   ///   - queue: 执行请求的队列
   ///   - showIndicator: 是否显示 Indicator
+  ///   - success: 请求成功的 Task
+  ///   - failure: 请求失败的 Task
+  @discardableResult
+  public func task(
+    queue: DispatchQueue = .main,
+    showIndicator: Bool = false,
+    success: @escaping SuccessRequest,
+    failure: @escaping FailureRequest
+  ) throws -> DataRequest {
+    do {
+      let req = try AF.request(config: config)
+      let request = req.responseJSON(
+        queue: queue,
+        showIndicator: showIndicator,
+        showLog: config.isShowLog,
+        success: success,
+        failure: failure)
+      return request
+    } catch {
+      dLog(error)
+      throw error
+    }
+  }
+
+  @discardableResult
+  public func taskDecodable<T: Decodable>(
+    of type: T.Type = T.self,
+    queue: DispatchQueue = .main,
+    showIndicator: Bool = false,
+    success: @escaping SuccessRequestDecodable<T>,
+    failure: @escaping FailureRequestDecodable<T>
+  ) throws -> DataRequest {
+    do {
+      let req = try AF.request(config: config)
+      let request = req.responseDecodable(
+        of: type,
+        queue: queue,
+        showIndicator: showIndicator,
+        showLog: config.isShowLog,
+        success: success,
+        failure: failure)
+      return request
+    } catch {
+      dLog(error)
+      throw error
+    }
+  }
+
+  /// 执行请求
+  /// - Parameters:
+  ///   - queue: 执行请求的队列
+  ///   - showIndicator: 是否显示 Indicator
   ///   - responseType: 返回数据格式类型
   ///   - success: 请求成功的 Task
   ///   - failure: 请求失败的 Task
+  @available(*, deprecated)
   public func task(
     queue: DispatchQueue = DispatchQueue.global(),
     showIndicator: Bool = false,
@@ -71,22 +124,6 @@ extension RGDataRequest {
       queue: queue,
       showIndicator: showIndicator,
       responseType: responseType,
-      success: success,
-      failure: failure)
-  }
-
-  public func taskDecodable<T: Decodable>(
-    of type: T.Type = T.self,
-    queue: DispatchQueue = .global(),
-    showIndicator: Bool = false,
-    success: @escaping DecodableSuccess<T>,
-    failure: @escaping DecodableFailure<T>
-  ) {
-    RGNetwork.requestDecodable(
-      of: type,
-      config: config,
-      queue: queue,
-      showIndicator: showIndicator,
       success: success,
       failure: failure)
   }

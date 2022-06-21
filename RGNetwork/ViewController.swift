@@ -88,7 +88,26 @@ final class ViewController: UIViewController {
 
   private func loadByNetwork() {
     let config = RGDataRequestConfig(urlString: urlString, parameters: params)
-    RGNetwork.request(
+    do {
+      let request = try AF.request(config: config)
+      request.responseJSON(
+        queue: .global(),
+        showIndicator: true,
+        showLog: true,
+        success: { json, string, data, httpStatusCode, request, response in
+          print("JSON: \n\(json ?? [:])")
+          print("\n/* ***** ***** ***** ***** */\n")
+          print("response:", response, separator: "\n")
+          print("\n/* ***** ***** ***** ***** */\n")
+          print("metrics:", response.metrics ?? "none", separator: "\n")
+          print("\n/* ***** ***** ***** ***** */\n")
+        }, failure: { error, string, data, httpStatusCode, request, response in
+          print("error: \n", error ?? "get nil failed.")
+        })
+    } catch {
+      print(error)
+    }
+    /* RGNetwork.request(
       config: config,
       showIndicator: true,
       responseType: .json,
@@ -105,22 +124,52 @@ final class ViewController: UIViewController {
       },
       failure: { (error, resString, resData, httpStatusCode, request, response)  in
         print("error: \n", error ?? "get nil failed.")
-      })
+      }) */
   }
 
   private func loadByNetworkDecodable() {
     let config = RGDataRequestConfig(urlString: urlString, parameters: params)
-    RGNetwork.requestDecodable(of: Test.self, config: config, showIndicator: true) { obj, string, data, httpStatusCode, request, response in
+    do {
+      let request = try AF.request(config: config)
+      request.responseDecodable(
+        of: Test.self,
+        queue: .global(),
+        showIndicator: true,
+        showLog: true,
+        success: { obj, string, data, httpStatusCode, request, response in
+          guard let test = obj else { return }
+          print("Test: ", test)
+        },
+        failure: { error, string, data, httpStatusCode, request, response in
+          print("error: \n", error ?? "get nil failed.")
+        })
+    } catch {
+      print(error)
+    }
+    /* RGNetwork.requestDecodable(of: Test.self, config: config, showIndicator: true) { obj, string, data, httpStatusCode, request, response in
       guard let test = obj else { return }
       print("Test: ", test)
     } failure: { error, string, data, httpStatusCode, request, response in
       print("error: \n", error ?? "get nil failed.")
-    }
+    } */
   }
 
   private func loadByDataRequest() {
     let request = RGDataRequest(urlString: urlString, parameters: params)
     request.task(
+      queue: .global(),
+      showIndicator: true,
+      success: { (json, string, data, httpStatusCode, request, response) in
+        print("\n/* ***** ***** ***** ***** */\n")
+        print("JSON:", json ?? "", separator: "\n")
+        print("\n/* ***** ***** ***** ***** */\n")
+        print("string:", string ?? "", separator: "\n")
+        print("\n/* ***** ***** ***** ***** */\n")
+      },
+      failure: { (error, resString, resData, httpStatusCode, request, response)  in
+        print("error: \n", error ?? "get nil failed.")
+      })
+    /* request.task(
       showIndicator: true,
       responseType: .json,
       success: { (json, string, data, httpStatusCode, request, responsePackage) in
@@ -132,7 +181,7 @@ final class ViewController: UIViewController {
       },
       failure: { (error, resString, resData, httpStatusCode, request, response)  in
         print("error: \n", error ?? "get nil failed.")
-      })
+      }) */
   }
 
   private func loadBySessionCallback() {
