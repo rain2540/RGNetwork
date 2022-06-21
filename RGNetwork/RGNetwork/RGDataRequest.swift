@@ -58,15 +58,28 @@ extension RGDataRequest {
   ///   - showIndicator: 是否显示 Indicator
   ///   - success: 请求成功的 Task
   ///   - failure: 请求失败的 Task
+  @discardableResult
   public func task(
     queue: DispatchQueue = .main,
     showIndicator: Bool = false,
     success: @escaping SuccessRequest,
     failure: @escaping FailureRequest
-  ) {
+  ) throws -> DataRequest {
     do {
-      let request = try AF.request(config: config)
-      request.responseJSON(
+      let req = try AF.request(config: config)
+      let request = req.responseJSON(
+        queue: queue,
+        showIndicator: showIndicator,
+        showLog: config.isShowLog,
+        success: success,
+        failure: failure)
+      return request
+    } catch {
+      dLog(error)
+      throw error
+    }
+  }
+
         queue: queue,
         showIndicator: showIndicator,
         showLog: config.isShowLog,
