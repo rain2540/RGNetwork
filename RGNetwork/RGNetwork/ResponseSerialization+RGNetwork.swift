@@ -206,6 +206,10 @@ extension DownloadRequest {
           RGNetwork.hideIndicator()
           return
         }
+
+        success(value, string, resumeData, response.fileURL, httpStatusCode, self, response)
+        RGNetwork.hideIndicator()
+      }
     }
 
     return self
