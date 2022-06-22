@@ -153,19 +153,6 @@ final class ViewController: UIViewController {
       failure: { (error, resString, resData, httpStatusCode, request, response)  in
         print("error: \n", error ?? "get nil failed.")
       })
-    /* request.task(
-      showIndicator: true,
-      responseType: .json,
-      success: { (json, string, data, httpStatusCode, request, responsePackage) in
-        print("\n/* ***** ***** ***** ***** */\n")
-        print("JSON:", json ?? "", separator: "\n")
-        print("\n/* ***** ***** ***** ***** */\n")
-        print("string:", string ?? "", separator: "\n")
-        print("\n/* ***** ***** ***** ***** */\n")
-      },
-      failure: { (error, resString, resData, httpStatusCode, request, response)  in
-        print("error: \n", error ?? "get nil failed.")
-      }) */
   }
 
   private func loadBySessionCallback() {
