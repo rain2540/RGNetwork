@@ -9,6 +9,16 @@
 import Foundation
 import Alamofire
 
+@available(iOS 13, *)
+public typealias SerializingJSON = (
+  json: ResponseJSON?,
+  string: ResponseString?,
+  data: ResponseData?,
+  error: Error?,
+  httpStatusCode: HttpStatusCode?,
+  task: DataTask<Data>
+)
+
 typealias ResponseTuple = (
     json: ResponseJSON?,
     string: ResponseString?,
