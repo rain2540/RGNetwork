@@ -91,24 +91,6 @@ final class ViewController: UIViewController {
     } catch {
       print(error)
     }
-    /* RGNetwork.request(
-      config: config,
-      showIndicator: true,
-      responseType: .json,
-      success: { (json, string, data, httpStatusCode, request, responsePackage) in
-        switch responsePackage {
-        case let .data(responseJSON):
-          print("\n/* ***** ***** ***** ***** */\n")
-          print("response:", responseJSON, separator: "\n")
-          print("\n/* ***** ***** ***** ***** */\n")
-          print("metrics:", responseJSON.metrics ?? "none", separator: "\n")
-          print("\n/* ***** ***** ***** ***** */\n")
-        default: break
-        }
-      },
-      failure: { (error, resString, resData, httpStatusCode, request, response)  in
-        print("error: \n", error ?? "get nil failed.")
-      }) */
   }
 
   private func loadByNetworkDecodable() {
