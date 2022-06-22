@@ -140,7 +140,8 @@ final class ViewController: UIViewController {
 
   private func loadByDataRequest() {
     let request = RGDataRequest(urlString: urlString, parameters: params)
-    request.task(
+    do {
+      try request.task(
       queue: .global(),
       showIndicator: true,
       success: { (json, string, data, httpStatusCode, request, response) in
@@ -153,6 +154,9 @@ final class ViewController: UIViewController {
       failure: { (error, resString, resData, httpStatusCode, request, response)  in
         print("error: \n", error ?? "get nil failed.")
       })
+    } catch {
+      dLog(error)
+    }
   }
 
   private func loadBySessionCallback() {
