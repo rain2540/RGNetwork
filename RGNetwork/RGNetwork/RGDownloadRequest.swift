@@ -74,6 +74,11 @@ extension RGDownloadRequest {
     success: @escaping SuccessDownloadDecodable<T>,
     failure: @escaping FailureDownloadDecodable<T>
   ) throws -> DownloadRequest {
+    do {
+    } catch {
+      dLog(error)
+      throw error
+    }
   }
 
   public func download(
