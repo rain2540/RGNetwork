@@ -49,6 +49,11 @@ extension RGUploadRequest {
     success: @escaping SuccessRequest,
     failure: @escaping FailureRequest
   ) throws -> UploadRequest {
+    do {
+    } catch {
+      dLog(error)
+      throw error
+    }
   }
 
   @discardableResult
