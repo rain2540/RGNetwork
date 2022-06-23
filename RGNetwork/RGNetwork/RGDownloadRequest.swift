@@ -75,6 +75,15 @@ extension RGDownloadRequest {
     failure: @escaping FailureDownloadDecodable<T>
   ) throws -> DownloadRequest {
     do {
+      let req = try AF.download(config: config)
+      let request = req.responseDecodable(
+        of: type,
+        queue: queue,
+        showIndicator: showIndicator,
+        showLog: config.isShowLog,
+        success: success,
+        failure: failure)
+      return request
     } catch {
       dLog(error)
       throw error
