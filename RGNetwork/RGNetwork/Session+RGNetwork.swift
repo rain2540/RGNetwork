@@ -52,6 +52,9 @@ extension Session {
     }
   }
 
+  /// 构建 Download Request
+  /// - Parameter config: Download Request 配置信息
+  /// - Returns: Download Request 对象
   public func download(config: RGDownloadConfig) throws -> DownloadRequest {
     do {
       let urlPath = try RGNetwork.urlPathString(by: config.urlString)
