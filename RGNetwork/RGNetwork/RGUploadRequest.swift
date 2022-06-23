@@ -73,6 +73,15 @@ extension RGUploadRequest {
     failure: @escaping FailureRequestDecodable<T>
   ) throws -> UploadRequest {
     do {
+      let req = try AF.upload(config: config)
+      let request = req.responseDecodable(
+        of: type,
+        queue: queue,
+        showIndicator: showIndicator,
+        showLog: config.isShowLog,
+        success: success,
+        failure: failure)
+      return request
     } catch {
       dLog(error)
       throw error
