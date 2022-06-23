@@ -11,6 +11,9 @@ import Alamofire
 
 extension Session {
 
+  /// 构建 Data Request
+  /// - Parameter config: Data Request 配置信息
+  /// - Returns: Data Request 对象
   public func request(config: RGDataRequestConfig) throws -> DataRequest {
     do {
       let urlPath = try RGNetwork.urlPathString(by: config.urlString)
