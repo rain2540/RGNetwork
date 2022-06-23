@@ -52,6 +52,8 @@ extension DataRequest {
       RGNetwork.showIndicator()
       RGNetwork.showActivityIndicator()
     }
+
+    let dataTask = serializingData()
   }
 
 }
