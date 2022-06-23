@@ -41,6 +41,18 @@ typealias DownloadTuple = (
 )
 
 
+@available(iOS 13, *)
+extension DataRequest {
+
+  public func serializingJSON(
+    showIndicator: Bool = false,
+    showLog: Bool = true
+  ) async -> SerializingJSON {
+  }
+
+}
+
+
 // MARK: - Request with Concurrency
 
 @available(iOS 13, *)
