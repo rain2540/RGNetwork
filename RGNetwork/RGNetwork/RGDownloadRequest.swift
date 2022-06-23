@@ -44,6 +44,15 @@ class RGDownloadRequest {
 
 extension RGDownloadRequest {
 
+  @discardableResult
+  public func download(
+    queue: DispatchQueue = .main,
+    showIndicator: Bool = false,
+    success: @escaping SuccessDownload,
+    failure: @escaping FailureDownload
+  ) throws -> DownloadRequest {
+  }
+
   public func download(
     queue: DispatchQueue = DispatchQueue.global(),
     showIndicator: Bool = false,
