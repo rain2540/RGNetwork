@@ -107,24 +107,6 @@ final class ViewController: UIViewController {
     } catch {
       print(error)
     }
-    /* RGNetwork.request(
-      config: config,
-      showIndicator: true,
-      responseType: .json,
-      success: { (json, string, data, httpStatusCode, request, responsePackage) in
-        switch responsePackage {
-        case let .data(responseJSON):
-          print("\n/* ***** ***** ***** ***** */\n")
-          print("response:", responseJSON, separator: "\n")
-          print("\n/* ***** ***** ***** ***** */\n")
-          print("metrics:", responseJSON.metrics ?? "none", separator: "\n")
-          print("\n/* ***** ***** ***** ***** */\n")
-        default: break
-        }
-      },
-      failure: { (error, resString, resData, httpStatusCode, request, response)  in
-        print("error: \n", error ?? "get nil failed.")
-      }) */
   }
 
   private func loadByNetworkDecodable() {
@@ -146,12 +128,6 @@ final class ViewController: UIViewController {
     } catch {
       print(error)
     }
-    /* RGNetwork.requestDecodable(of: Test.self, config: config, showIndicator: true) { obj, string, data, httpStatusCode, request, response in
-      guard let test = obj else { return }
-      print("Test: ", test)
-    } failure: { error, string, data, httpStatusCode, request, response in
-      print("error: \n", error ?? "get nil failed.")
-    } */
   }
 
   private func loadByDataRequest() {
@@ -171,21 +147,8 @@ final class ViewController: UIViewController {
           print("error: \n", error ?? "get nil failed.")
         })
     } catch {
-      print(error)
+      dLog(error)
     }
-    /* request.task(
-      showIndicator: true,
-      responseType: .json,
-      success: { (json, string, data, httpStatusCode, request, responsePackage) in
-        print("\n/* ***** ***** ***** ***** */\n")
-        print("JSON:", json ?? "", separator: "\n")
-        print("\n/* ***** ***** ***** ***** */\n")
-        print("string:", string ?? "", separator: "\n")
-        print("\n/* ***** ***** ***** ***** */\n")
-      },
-      failure: { (error, resString, resData, httpStatusCode, request, response)  in
-        print("error: \n", error ?? "get nil failed.")
-      }) */
   }
 
   private func loadBySessionCallback() {

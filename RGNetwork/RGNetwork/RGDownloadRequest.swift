@@ -44,6 +44,60 @@ class RGDownloadRequest {
 
 extension RGDownloadRequest {
 
+  @discardableResult
+  public func download(
+    queue: DispatchQueue = .main,
+    showIndicator: Bool = false,
+    success: @escaping SuccessDownload,
+    failure: @escaping FailureDownload
+  ) throws -> DownloadRequest {
+    do {
+      let req = try AF.download(config: config)
+      let request = req.responseJSON(
+        queue: queue,
+        showIndicator: showIndicator,
+        showLog: config.isShowLog,
+        success: success,
+        failure: failure)
+      return request
+    } catch {
+      dLog(error)
+      throw error
+    }
+  }
+
+  @discardableResult
+  public func downloadDecodable<T: Decodable>(
+    of type: T.Type = T.self,
+    queue: DispatchQueue = .main,
+    showIndicator: Bool = false,
+    success: @escaping SuccessDownloadDecodable<T>,
+    failure: @escaping FailureDownloadDecodable<T>
+  ) throws -> DownloadRequest {
+    do {
+      let req = try AF.download(config: config)
+      let request = req.responseDecodable(
+        of: type,
+        queue: queue,
+        showIndicator: showIndicator,
+        showLog: config.isShowLog,
+        success: success,
+        failure: failure)
+      return request
+    } catch {
+      dLog(error)
+      throw error
+    }
+  }
+
+}
+
+
+// MARK: - Deprecated
+
+extension RGDownloadRequest {
+
+  @available(*, deprecated)
   public func download(
     queue: DispatchQueue = DispatchQueue.global(),
     showIndicator: Bool = false,

@@ -104,6 +104,12 @@ extension RGDataRequest {
     }
   }
 
+}
+
+
+// MARK: - Deprecated
+
+extension RGDataRequest {
   /// 执行请求
   /// - Parameters:
   ///   - queue: 执行请求的队列

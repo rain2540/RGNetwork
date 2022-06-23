@@ -9,24 +9,25 @@
 import Foundation
 import Alamofire
 
+public typealias SuccessRequestDecodable<T: Decodable> = (T?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponse<T, AFError>) -> Void
+public typealias FailureRequestDecodable<T: Decodable> = (Error?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponse<T, AFError>) -> Void
+
+public typealias SuccessDownloadDecodable<T: Decodable> = (T?, ResponseString?, ResponseData?, URL?, HttpStatusCode?, DownloadRequest, DownloadResponse<T, AFError>) -> Void
+public typealias FailureDownloadDecodable<T: Decodable> = (Error?, ResponseString?, ResponseData?, HttpStatusCode?, DownloadRequest, DownloadResponse<T, AFError>) -> Void
+
+
+// MARK: - Deprecated
+
 @available(*, deprecated)
 typealias DecodableSuccess<T: Decodable> = (T?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponse<T, AFError>) -> Void
 @available(*, deprecated)
 typealias DecodableFailure<T: Decodable> = (Error?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponse<T, AFError>) -> Void
-
-public typealias SuccessRequestDecodable<T: Decodable> = (T?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponse<T, AFError>) -> Void
-public typealias FailureRequestDecodable<T: Decodable> = (Error?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponse<T, AFError>) -> Void
 
 @available(*, deprecated)
 typealias DownloadDecodableSuccess<T: Decodable> = (T?, ResponseString?, ResponseData?, URL?, HttpStatusCode?, DownloadRequest, DownloadResponse<T, AFError>) -> Void
 @available(*, deprecated)
 typealias DownloadDecodableFailure<T: Decodable> = (Error?, ResponseString?, ResponseData?, HttpStatusCode?, DownloadRequest, DownloadResponse<T, AFError>) -> Void
 
-public typealias SuccessDownloadDecodable<T: Decodable> = (T?, ResponseString?, ResponseData?, URL?, HttpStatusCode?, DownloadRequest, DownloadResponse<T, AFError>) -> Void
-public typealias FailureDownloadDecodable<T: Decodable> = (Error?, ResponseString?, ResponseData?, HttpStatusCode?, DownloadRequest, DownloadResponse<T, AFError>) -> Void
-
-
-// MARK: -
 
 extension RGNetwork {
 
@@ -40,6 +41,7 @@ extension RGNetwork {
   ///   - showIndicator: 是否显示 Indicator，默认为 `false`
   ///   - success: 请求成功的 Task
   ///   - failure: 请求失败的 Task
+  @available(*, deprecated)
   public static func requestDecodable<T: Decodable>(
     of type: T.Type = T.self,
     config: RGDataRequestConfig,
@@ -77,7 +79,7 @@ extension RGNetwork {
   }
 
 
-  // MARK: - UploadRequest
+  // MARK: UploadRequest
 
   /// 上传方法，用于获取满足 `Decodable` 协议的实体类对象
   /// - Parameters:
@@ -87,6 +89,7 @@ extension RGNetwork {
   ///   - showIndicator: 是否显示 Indicator，默认为 `false`
   ///   - success: 上传成功的 Task
   ///   - failure: 上传失败的 Task
+  @available(*, deprecated)
   public static func uploadDecodable<T: Decodable>(
     of type: T.Type = T.self,
     config: RGUploadConfig,
@@ -123,7 +126,7 @@ extension RGNetwork {
   }
 
 
-  // MARK: - DownloadRequest
+  // MARK: DownloadRequest
 
   /// 下载方法，用于获取满足 `Decodable` 协议的实体类对象
   /// - Parameters:
@@ -133,6 +136,7 @@ extension RGNetwork {
   ///   - showIndicator: 是否显示 Indicator，默认为 `false`
   ///   - success: 下载成功的 Task
   ///   - failure: 下载失败的 Task
+  @available(*, deprecated)
   public static func downloadDecodable<T: Decodable>(
     of type: T.Type = T.self,
     config: RGDownloadConfig,
@@ -173,10 +177,11 @@ extension RGNetwork {
 }
 
 
-// MARK: - Response of DataRequest / UploadRequest
+// MARK: Response of DataRequest / UploadRequest
 
 extension RGNetwork {
 
+  @available(*, deprecated)
   private static func responseDecodable<T: Decodable>(
     of type: T.Type = T.self,
     with request: DataRequest,
@@ -215,10 +220,11 @@ extension RGNetwork {
 }
 
 
-// MARK: - Response of DownloadRequest
+// MARK: Response of DownloadRequest
 
 extension RGNetwork {
 
+  @available(*, deprecated)
   private static func responseDownloadDecodable<T: Decodable>(
     of type: T.Type = T.self,
     with request: DownloadRequest,
