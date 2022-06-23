@@ -36,3 +36,19 @@ class RGUploadRequest {
   }
 
 }
+
+
+// MARK: - Public
+
+extension RGUploadRequest {
+
+  @discardableResult
+  public func upload(
+    queue: DispatchQueue = .main,
+    showIndicator: Bool = false,
+    success: @escaping SuccessRequest,
+    failure: @escaping FailureRequest
+  ) throws -> UploadRequest {
+  }
+
+}
