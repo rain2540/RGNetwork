@@ -53,6 +53,16 @@ extension RGDownloadRequest {
   ) throws -> DownloadRequest {
   }
 
+  @discardableResult
+  public func downloadDecodable<T: Decodable>(
+    of type: T.Type = T.self,
+    queue: DispatchQueue = .main,
+    showIndicator: Bool = false,
+    success: @escaping SuccessDownloadDecodable<T>,
+    failure: @escaping FailureDownloadDecodable<T>
+  ) throws -> DownloadRequest {
+  }
+
   public func download(
     queue: DispatchQueue = DispatchQueue.global(),
     showIndicator: Bool = false,
