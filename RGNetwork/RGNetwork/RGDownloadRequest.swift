@@ -90,6 +90,14 @@ extension RGDownloadRequest {
     }
   }
 
+}
+
+
+// MARK: - Deprecated
+
+extension RGDownloadRequest {
+
+  @available(*, deprecated)
   public func download(
     queue: DispatchQueue = DispatchQueue.global(),
     showIndicator: Bool = false,
