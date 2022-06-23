@@ -48,6 +48,10 @@ extension DataRequest {
     showIndicator: Bool = false,
     showLog: Bool = true
   ) async -> SerializingJSON {
+    if showIndicator {
+      RGNetwork.showIndicator()
+      RGNetwork.showActivityIndicator()
+    }
   }
 
 }
