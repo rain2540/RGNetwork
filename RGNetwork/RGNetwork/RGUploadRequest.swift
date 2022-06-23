@@ -51,4 +51,14 @@ extension RGUploadRequest {
   ) throws -> UploadRequest {
   }
 
+  @discardableResult
+  public func uploadDecodable<T: Decodable>(
+    of type: T.Type = T.self,
+    queue: DispatchQueue = .main,
+    showIndicator: Bool = false,
+    success: @escaping SuccessRequestDecodable<T>,
+    failure: @escaping FailureRequestDecodable<T>
+  ) throws -> UploadRequest {
+  }
+
 }
