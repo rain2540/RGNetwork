@@ -12,21 +12,6 @@ import AlamofireNetworkActivityIndicator
 import MBProgressHUD
 
 
-enum ResponseType {
-  case json, string, data
-}
-
-enum DataResponsePackage {
-  case string(DataResponse<String, AFError>)
-  case data(DataResponse<Data, AFError>)
-}
-
-enum DownloadResponsePackage {
-  case string(DownloadResponse<String, AFError>)
-  case data(DownloadResponse<Data, AFError>)
-}
-
-
 public typealias ResponseJSON = [String: Any]
 public typealias ResponseString = String
 public typealias ResponseData = Data
@@ -36,8 +21,14 @@ public typealias HttpStatusCode = Int
 public typealias SuccessRequest = (ResponseJSON?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponse<Data, AFError>) -> Void
 public typealias FailureRequest = (Error?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponse<Data, AFError>) -> Void
 
+public typealias SuccessRequestDecodable<T: Decodable> = (T?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponse<T, AFError>) -> Void
+public typealias FailureRequestDecodable<T: Decodable> = (Error?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponse<T, AFError>) -> Void
+
 public typealias SuccessDownload = (ResponseJSON?, ResponseString?, ResponseData?, URL?, HttpStatusCode?, DownloadRequest, DownloadResponse<Data, AFError>) -> Void
 public typealias FailureDownload = (Error?, ResponseString?, ResponseData?, HttpStatusCode?, DownloadRequest, DownloadResponse<Data, AFError>) -> Void
+
+public typealias SuccessDownloadDecodable<T: Decodable> = (T?, ResponseString?, ResponseData?, URL?, HttpStatusCode?, DownloadRequest, DownloadResponse<T, AFError>) -> Void
+public typealias FailureDownloadDecodable<T: Decodable> = (Error?, ResponseString?, ResponseData?, HttpStatusCode?, DownloadRequest, DownloadResponse<T, AFError>) -> Void
 
 
 // MARK: -
@@ -279,6 +270,23 @@ internal func dLog(
 
 
 // MARK: - Deprecated
+
+@available(*, deprecated)
+enum ResponseType {
+  case json, string, data
+}
+
+@available(*, deprecated)
+enum DataResponsePackage {
+  case string(DataResponse<String, AFError>)
+  case data(DataResponse<Data, AFError>)
+}
+
+@available(*, deprecated)
+enum DownloadResponsePackage {
+  case string(DownloadResponse<String, AFError>)
+  case data(DownloadResponse<Data, AFError>)
+}
 
 @available(*, deprecated)
 typealias SuccessTask = (ResponseJSON?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponsePackage) -> Void
