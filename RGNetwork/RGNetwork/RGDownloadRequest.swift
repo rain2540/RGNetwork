@@ -52,6 +52,14 @@ extension RGDownloadRequest {
     failure: @escaping FailureDownload
   ) throws -> DownloadRequest {
     do {
+      let req = try AF.download(config: config)
+      let request = req.responseJSON(
+        queue: queue,
+        showIndicator: showIndicator,
+        showLog: config.isShowLog,
+        success: success,
+        failure: failure)
+      return request
     } catch {
       dLog(error)
       throw error
