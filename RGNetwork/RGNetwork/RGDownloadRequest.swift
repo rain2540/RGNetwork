@@ -51,6 +51,11 @@ extension RGDownloadRequest {
     success: @escaping SuccessDownload,
     failure: @escaping FailureDownload
   ) throws -> DownloadRequest {
+    do {
+    } catch {
+      dLog(error)
+      throw error
+    }
   }
 
   @discardableResult
