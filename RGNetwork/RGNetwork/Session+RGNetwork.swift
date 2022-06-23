@@ -32,6 +32,9 @@ extension Session {
     }
   }
 
+  /// 构建 Upload Request
+  /// - Parameter config: Upload Request 配置信息
+  /// - Returns: Upload Request 对象
   public func upload(config: RGUploadConfig) throws -> UploadRequest {
     do {
       let urlPath = try RGNetwork.urlPathString(by: config.urlString)
