@@ -135,6 +135,15 @@ extension DataRequest {
 
 extension DownloadRequest {
 
+  /// 处理 `DownloadRequest` 响应数据
+  /// - 反序列化为 `JSON` 对象
+  /// - Parameters:
+  ///   - queue: 执行下载的队列，默认为主队列
+  ///   - showIndicator: 是否显示 Indicator，默认为 `false`
+  ///   - showLog: 是否显示 debug 日志，默认为 `true`
+  ///   - success: 下载成功的操作
+  ///   - failure: 下载失败的操作
+  /// - Returns: `DownloadRequest` 对象
   @discardableResult
   public func responseJSON(
     queue: DispatchQueue = .main,
