@@ -50,6 +50,14 @@ extension RGUploadRequest {
     failure: @escaping FailureRequest
   ) throws -> UploadRequest {
     do {
+      let req = try AF.upload(config: config)
+      let request = req.responseJSON(
+        queue: queue,
+        showIndicator: showIndicator,
+        showLog: config.isShowLog,
+        success: success,
+        failure: failure)
+      return request
     } catch {
       dLog(error)
       throw error
