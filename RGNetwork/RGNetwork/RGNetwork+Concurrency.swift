@@ -56,6 +56,10 @@ extension DataRequest {
     let dataTask = serializingData()
     let responseData = await dataTask.response
 
+    if showLog {
+      dLog("RGNetwork.request.debugDescription: \n\(responseData.debugDescription)")
+    }
+
   }
 
 }
