@@ -65,6 +65,7 @@ extension DataRequest {
       RGNetwork.hideIndicator()
       return (nil, nil, nil, responseData.error, httpStatusCode, dataTask)
     }
+    let string = String(data: data, encoding: .utf8)
   }
 
 }
