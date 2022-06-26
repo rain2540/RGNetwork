@@ -54,6 +54,8 @@ extension DataRequest {
     }
 
     let dataTask = serializingData()
+    let responseData = await dataTask.response
+
   }
 
 }
