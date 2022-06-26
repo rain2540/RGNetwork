@@ -60,6 +60,7 @@ extension DataRequest {
       dLog("RGNetwork.request.debugDescription: \n\(responseData.debugDescription)")
     }
 
+    let httpStatusCode = responseData.response?.statusCode
   }
 
 }
