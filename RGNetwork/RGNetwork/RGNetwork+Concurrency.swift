@@ -70,6 +70,11 @@ extension DataRequest {
       RGNetwork.hideIndicator()
       return (nil, string, data, responseData.error, httpStatusCode, dataTask)
     }
+    do {
+    } catch {
+      RGNetwork.hideIndicator()
+      return (nil, error.localizedDescription, data, nil, httpStatusCode, dataTask)
+    }
   }
 
 }
