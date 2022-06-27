@@ -40,7 +40,7 @@ struct RGNetwork { }
 
 extension RGNetwork {
 
-  internal static func urlPathString(by urlString: String) throws -> String {
+  internal static func urlPathString(by urlString: String) -> String {
     if urlString.rg_hasHttpPrefix {
       let fixURLString = urlString
         .replacingOccurrences(of: "//", with: "/")
@@ -57,7 +57,8 @@ extension RGNetwork {
         return host + urlString
       }
     } else {
-      throw RGNetworkError.wrongURLFormat
+      dLog("RGNetwork.URLPathString.error: Wrong URL Format")
+      return ""
     }
   }
 
