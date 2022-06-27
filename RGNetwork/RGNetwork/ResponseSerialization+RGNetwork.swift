@@ -33,9 +33,8 @@ extension DataRequest {
       // RGNetwork.showActivityIndicator()
     }
 
-    queue.async { [weak self] in
+    responseData(queue: queue) { [weak self] responseData in
       guard let self = self else { return }
-      self.responseData { responseData in
         if showLog == true {
           dLog("RGNetwork.request.debugDescription: \n\(responseData.debugDescription)")
         }
@@ -66,7 +65,6 @@ extension DataRequest {
           return
         }
       }
-    }
 
     return self
   }
