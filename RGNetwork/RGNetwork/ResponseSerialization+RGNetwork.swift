@@ -214,9 +214,8 @@ extension DownloadRequest {
       // RGNetwork.showActivityIndicator()
     }
 
-    queue.async { [weak self] in
+    responseDecodable(of: type, queue: queue) { [weak self] response in
       guard let self = self else { return }
-      self.responseDecodable(of: type) { response in
         if showLog == true {
           dLog("RGNetwork.download.debugDescription: \n\(response.debugDescription)")
         }
@@ -242,7 +241,6 @@ extension DownloadRequest {
         success(value, string, resumeData, response.fileURL, httpStatusCode, self, response)
         RGNetwork.hideIndicator()
       }
-    }
 
     return self
   }
