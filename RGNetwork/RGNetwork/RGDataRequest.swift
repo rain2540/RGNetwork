@@ -64,20 +64,15 @@ extension RGDataRequest {
     showIndicator: Bool = false,
     success: @escaping SuccessRequest,
     failure: @escaping FailureRequest
-  ) throws -> DataRequest {
-    do {
-      let req = try AF.request(config: config)
-      let request = req.responseJSON(
-        queue: queue,
-        showIndicator: showIndicator,
-        showLog: config.isShowLog,
-        success: success,
-        failure: failure)
-      return request
-    } catch {
-      dLog(error)
-      throw error
-    }
+  ) -> DataRequest {
+    let req = AF.request(config: config)
+    let request = req.responseJSON(
+      queue: queue,
+      showIndicator: showIndicator,
+      showLog: config.isShowLog,
+      success: success,
+      failure: failure)
+    return request
   }
 
   @discardableResult
@@ -87,21 +82,16 @@ extension RGDataRequest {
     showIndicator: Bool = false,
     success: @escaping SuccessRequestDecodable<T>,
     failure: @escaping FailureRequestDecodable<T>
-  ) throws -> DataRequest {
-    do {
-      let req = try AF.request(config: config)
-      let request = req.responseDecodable(
-        of: type,
-        queue: queue,
-        showIndicator: showIndicator,
-        showLog: config.isShowLog,
-        success: success,
-        failure: failure)
-      return request
-    } catch {
-      dLog(error)
-      throw error
-    }
+  ) -> DataRequest {
+    let req = AF.request(config: config)
+    let request = req.responseDecodable(
+      of: type,
+      queue: queue,
+      showIndicator: showIndicator,
+      showLog: config.isShowLog,
+      success: success,
+      failure: failure)
+    return request
   }
 
 }
