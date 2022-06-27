@@ -30,7 +30,7 @@ extension DataRequest {
   ) -> Self {
     if showIndicator == true {
       RGNetwork.showIndicator()
-      RGNetwork.showActivityIndicator()
+      // RGNetwork.showActivityIndicator()
     }
 
     queue.async { [weak self] in
@@ -92,7 +92,7 @@ extension DataRequest {
   ) -> Self {
     if showIndicator == true {
       RGNetwork.showIndicator()
-      RGNetwork.showActivityIndicator()
+      // RGNetwork.showActivityIndicator()
     }
 
     queue.async { [weak self] in
@@ -154,7 +154,7 @@ extension DownloadRequest {
   ) -> Self {
     if showIndicator == true {
       RGNetwork.showIndicator()
-      RGNetwork.showActivityIndicator()
+      // RGNetwork.showActivityIndicator()
     }
 
     queue.async { [weak self] in
@@ -217,7 +217,7 @@ extension DownloadRequest {
   ) -> Self {
     if showIndicator == true {
       RGNetwork.showIndicator()
-      RGNetwork.showActivityIndicator()
+      // RGNetwork.showActivityIndicator()
     }
 
     queue.async { [weak self] in

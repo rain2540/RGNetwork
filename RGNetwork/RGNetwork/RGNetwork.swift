@@ -323,7 +323,7 @@ extension RGNetwork {
   ) {
     if showIndicator == true {
       RGNetwork.showIndicator()
-      RGNetwork.showActivityIndicator()
+      // RGNetwork.showActivityIndicator()
     }
 
     queue.async {
@@ -374,7 +374,7 @@ extension RGNetwork {
   ) {
     if showIndicator == true {
       RGNetwork.showIndicator()
-      RGNetwork.showActivityIndicator()
+      // RGNetwork.showActivityIndicator()
     }
 
     queue.async {
@@ -422,7 +422,7 @@ extension RGNetwork {
   ) {
     if showIndicator == true {
       RGNetwork.showIndicator()
-      RGNetwork.showActivityIndicator()
+      // RGNetwork.showActivityIndicator()
     }
 
     queue.async {

@@ -29,7 +29,7 @@ extension DataRequest {
   ) async -> SerializingJSON {
     if showIndicator {
       RGNetwork.showIndicator()
-      RGNetwork.showActivityIndicator()
+      // RGNetwork.showActivityIndicator()
     }
 
     let dataTask = serializingData()
@@ -109,10 +109,10 @@ extension RGNetwork {
   ) async -> ResponseTuple {
     if showIndicator == true {
       RGNetwork.showIndicator()
-      RGNetwork.showActivityIndicator()
+      // RGNetwork.showActivityIndicator()
     }
 
-    let urlPath = try urlPathString(by: config.urlString)
+    let urlPath = urlPathString(by: config.urlString)
 
     let request = AF.request(
       urlPath,
@@ -142,7 +142,7 @@ extension RGNetwork {
   ) async -> ResponseTuple {
     if showIndicator == true {
       RGNetwork.showIndicator()
-      RGNetwork.showActivityIndicator()
+      // RGNetwork.showActivityIndicator()
     }
 
     let urlPath = urlPathString(by: config.urlString)
@@ -173,7 +173,7 @@ extension RGNetwork {
   ) async -> DownloadTuple {
     if showIndicator == true {
       RGNetwork.showIndicator()
-      RGNetwork.showActivityIndicator()
+      // RGNetwork.showActivityIndicator()
     }
 
     let urlPath = urlPathString(by: config.urlString)
