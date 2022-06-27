@@ -50,20 +50,15 @@ extension RGDownloadRequest {
     showIndicator: Bool = false,
     success: @escaping SuccessDownload,
     failure: @escaping FailureDownload
-  ) throws -> DownloadRequest {
-    do {
-      let req = try AF.download(config: config)
-      let request = req.responseJSON(
-        queue: queue,
-        showIndicator: showIndicator,
-        showLog: config.isShowLog,
-        success: success,
-        failure: failure)
-      return request
-    } catch {
-      dLog(error)
-      throw error
-    }
+  ) -> DownloadRequest {
+    let req = AF.download(config: config)
+    let request = req.responseJSON(
+      queue: queue,
+      showIndicator: showIndicator,
+      showLog: config.isShowLog,
+      success: success,
+      failure: failure)
+    return request
   }
 
   @discardableResult
@@ -73,21 +68,16 @@ extension RGDownloadRequest {
     showIndicator: Bool = false,
     success: @escaping SuccessDownloadDecodable<T>,
     failure: @escaping FailureDownloadDecodable<T>
-  ) throws -> DownloadRequest {
-    do {
-      let req = try AF.download(config: config)
-      let request = req.responseDecodable(
-        of: type,
-        queue: queue,
-        showIndicator: showIndicator,
-        showLog: config.isShowLog,
-        success: success,
-        failure: failure)
-      return request
-    } catch {
-      dLog(error)
-      throw error
-    }
+  ) -> DownloadRequest {
+    let req = AF.download(config: config)
+    let request = req.responseDecodable(
+      of: type,
+      queue: queue,
+      showIndicator: showIndicator,
+      showLog: config.isShowLog,
+      success: success,
+      failure: failure)
+    return request
   }
 
 }
