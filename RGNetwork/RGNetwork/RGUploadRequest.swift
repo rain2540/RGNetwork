@@ -48,20 +48,15 @@ extension RGUploadRequest {
     showIndicator: Bool = false,
     success: @escaping SuccessRequest,
     failure: @escaping FailureRequest
-  ) throws -> UploadRequest {
-    do {
-      let req = try AF.upload(config: config)
-      let request = req.responseJSON(
-        queue: queue,
-        showIndicator: showIndicator,
-        showLog: config.isShowLog,
-        success: success,
-        failure: failure)
-      return request
-    } catch {
-      dLog(error)
-      throw error
-    }
+  ) -> UploadRequest {
+    let req = AF.upload(config: config)
+    let request = req.responseJSON(
+      queue: queue,
+      showIndicator: showIndicator,
+      showLog: config.isShowLog,
+      success: success,
+      failure: failure)
+    return request
   }
 
   @discardableResult
@@ -71,21 +66,16 @@ extension RGUploadRequest {
     showIndicator: Bool = false,
     success: @escaping SuccessRequestDecodable<T>,
     failure: @escaping FailureRequestDecodable<T>
-  ) throws -> UploadRequest {
-    do {
-      let req = try AF.upload(config: config)
-      let request = req.responseDecodable(
-        of: type,
-        queue: queue,
-        showIndicator: showIndicator,
-        showLog: config.isShowLog,
-        success: success,
-        failure: failure)
-      return request
-    } catch {
-      dLog(error)
-      throw error
-    }
+  ) -> UploadRequest {
+    let req = AF.upload(config: config)
+    let request = req.responseDecodable(
+      of: type,
+      queue: queue,
+      showIndicator: showIndicator,
+      showLog: config.isShowLog,
+      success: success,
+      failure: failure)
+    return request
   }
-
+  
 }
