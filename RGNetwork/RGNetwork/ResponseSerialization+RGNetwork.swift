@@ -93,9 +93,8 @@ extension DataRequest {
       // RGNetwork.showActivityIndicator()
     }
 
-    queue.async { [weak self] in
+    responseDecodable(of: type, queue: queue) { [weak self] response in
       guard let self = self else { return }
-      self.responseDecodable(of: type) { response in
         if showLog == true {
           dLog("RGNetwork.request.decodable.debugDescription: \n\(response.debugDescription)")
         }
@@ -121,7 +120,6 @@ extension DataRequest {
         success(value, string, response.data, httpStatusCode, self, response)
         RGNetwork.hideIndicator()
       }
-    }
 
     return self
   }
