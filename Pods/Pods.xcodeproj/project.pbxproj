@@ -7,59 +7,51 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2AB271587AF30581EEA8250F34851F77 /* Pods-RGNetwork-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C127A6040E6562118F2FC497E648DDC /* Pods-RGNetwork-dummy.m */; };
-		71DCC7A184A080E400D1F22D95F15AD2 /* Pods-RGNetwork-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EA79EC34C39901F3B4D7217A77668E8D /* Pods-RGNetwork-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F9512879D588D1DD6AF09DD07122CC10 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		1C8AFCE5EFE4AF275F333C27AE56FF01 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		65F47AFD2C5599375DC7CA87A835ECD6 /* Pods-RGNetwork-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EA79EC34C39901F3B4D7217A77668E8D /* Pods-RGNetwork-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BA43AA32E4AEB2F94210416A7BE9BDDD /* Pods-RGNetwork-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C127A6040E6562118F2FC497E648DDC /* Pods-RGNetwork-dummy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		7562741C876897BC492BE2767B244C37 /* PBXContainerItemProxy */ = {
+		45482663E64F352A9DB19E1158389390 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 69582FCF9052CB12D7F204CA1995BA6A /* AlamofireNetworkActivityIndicator.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 044CB2D8687F7D47D21B1CC417E87E81;
-			remoteInfo = AlamofireNetworkActivityIndicator;
-		};
-		CBC66F784D19E6F241CB73C0B3D3384B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 93F3FADDE1156DF8EB4ECF7621D8549B /* MBProgressHUD.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 0F48A71D28991325602E8C8A19DF1F64;
-			remoteInfo = MBProgressHUD;
-		};
-		E11484305D18CC3FBBD536D24E5D3D4B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D671EDC3BE02457A34BA9F588E59F15D /* Alamofire.xcodeproj */;
+			containerPortal = 095DA43E608747CA67BB564249B33E25 /* Alamofire.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 81B7E9B7CD0CADA087A4BB042FBA92E7;
 			remoteInfo = Alamofire;
+		};
+		F255D62FA6CB0F004CDF546B962DB27E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F4D6A977122FEBF142FF0454761857FE /* MBProgressHUD.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 0F48A71D28991325602E8C8A19DF1F64;
+			remoteInfo = MBProgressHUD;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		004831EBDD0AAB741E92F3CDB1E6F837 /* Pods-RGNetwork-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-RGNetwork-acknowledgements.plist"; sourceTree = "<group>"; };
+		095DA43E608747CA67BB564249B33E25 /* Alamofire */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire; path = Alamofire.xcodeproj; sourceTree = "<group>"; };
 		0DBBABCA65399AE4F9CECD9B64107C39 /* Pods-RGNetwork */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-RGNetwork"; path = Pods_RGNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E74E85E4CF9A429A4C1FE7D6E15499F /* Pods-RGNetwork.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RGNetwork.release.xcconfig"; sourceTree = "<group>"; };
 		32F62CE7065C7C012EB58D502B749207 /* Pods-RGNetwork-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-RGNetwork-frameworks.sh"; sourceTree = "<group>"; };
-		69582FCF9052CB12D7F204CA1995BA6A /* AlamofireNetworkActivityIndicator */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AlamofireNetworkActivityIndicator; path = AlamofireNetworkActivityIndicator.xcodeproj; sourceTree = "<group>"; };
 		69C923E978277F57ACA2C80B1969414F /* Pods-RGNetwork.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RGNetwork.debug.xcconfig"; sourceTree = "<group>"; };
 		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		93F3FADDE1156DF8EB4ECF7621D8549B /* MBProgressHUD */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MBProgressHUD; path = MBProgressHUD.xcodeproj; sourceTree = "<group>"; };
 		9C127A6040E6562118F2FC497E648DDC /* Pods-RGNetwork-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-RGNetwork-dummy.m"; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		CFD2CCBD872F2D7AC437FFA71D5F93FC /* Pods-RGNetwork-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-RGNetwork-acknowledgements.markdown"; sourceTree = "<group>"; };
-		D671EDC3BE02457A34BA9F588E59F15D /* Alamofire */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire; path = Alamofire.xcodeproj; sourceTree = "<group>"; };
 		EA79EC34C39901F3B4D7217A77668E8D /* Pods-RGNetwork-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-RGNetwork-umbrella.h"; sourceTree = "<group>"; };
 		F384AAC53DB73595A9560CF3FAC9F5B0 /* Pods-RGNetwork.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-RGNetwork.modulemap"; sourceTree = "<group>"; };
+		F4D6A977122FEBF142FF0454761857FE /* MBProgressHUD */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MBProgressHUD; path = MBProgressHUD.xcodeproj; sourceTree = "<group>"; };
 		F78542DFFF5D28A614628FB2EB874A3D /* Pods-RGNetwork-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-RGNetwork-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		7138D03B418E495DC2646EEA80CCE2AA /* Frameworks */ = {
+		A7A2CFC2FD9B969099B5159358F00247 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F9512879D588D1DD6AF09DD07122CC10 /* Foundation.framework in Frameworks */,
+				1C8AFCE5EFE4AF275F333C27AE56FF01 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,12 +82,11 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		85FECF27A68185A39569972B8301BD94 /* Pods */ = {
+		7DD58E279AE7CB5AF89926B24452E8BC /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				D671EDC3BE02457A34BA9F588E59F15D /* Alamofire */,
-				69582FCF9052CB12D7F204CA1995BA6A /* AlamofireNetworkActivityIndicator */,
-				93F3FADDE1156DF8EB4ECF7621D8549B /* MBProgressHUD */,
+				095DA43E608747CA67BB564249B33E25 /* Alamofire */,
+				F4D6A977122FEBF142FF0454761857FE /* MBProgressHUD */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -122,7 +113,7 @@
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
-				85FECF27A68185A39569972B8301BD94 /* Pods */,
+				7DD58E279AE7CB5AF89926B24452E8BC /* Pods */,
 				166055CB9026A85F5C00ECED83D5B241 /* Products */,
 				1DD3FF2BC71959E0C3192487EBA51C45 /* Targets Support Files */,
 			);
@@ -139,11 +130,11 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		43FA7DA08D105CCE37A70719B86BFFB8 /* Headers */ = {
+		61B81CBF13528116A69CFB3A3DD56ADE /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				71DCC7A184A080E400D1F22D95F15AD2 /* Pods-RGNetwork-umbrella.h in Headers */,
+				65F47AFD2C5599375DC7CA87A835ECD6 /* Pods-RGNetwork-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,19 +143,18 @@
 /* Begin PBXNativeTarget section */
 		C08B4DCF736E48FE5A3F8EF8D0454E67 /* Pods-RGNetwork */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 47D1D5098B4EDBCC0E675BF2D4BB085A /* Build configuration list for PBXNativeTarget "Pods-RGNetwork" */;
+			buildConfigurationList = 2F8314C247A1D50DD1A406777FE167C3 /* Build configuration list for PBXNativeTarget "Pods-RGNetwork" */;
 			buildPhases = (
-				43FA7DA08D105CCE37A70719B86BFFB8 /* Headers */,
-				6D0FAEDD5B1E8A05E9EEA54943CA8332 /* Sources */,
-				7138D03B418E495DC2646EEA80CCE2AA /* Frameworks */,
-				1EB8324DE11209170C0A68EDD4FA33F8 /* Resources */,
+				61B81CBF13528116A69CFB3A3DD56ADE /* Headers */,
+				F1351EFFB8CDC5A3E4D7B26FFA81A7F4 /* Sources */,
+				A7A2CFC2FD9B969099B5159358F00247 /* Frameworks */,
+				88A4290245FA8B7CB75081B1A4E1E721 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				A48943622EEAC3C7F65E97058BB9F3B7 /* PBXTargetDependency */,
-				3192C3EA5F4B5F454256358DFB60AB07 /* PBXTargetDependency */,
-				791053B7EADAC50203FF5A1F77299527 /* PBXTargetDependency */,
+				65A991011B5D798FD8D48999B20DE7F4 /* PBXTargetDependency */,
+				878031D05869072489C1CCA31ACC5C71 /* PBXTargetDependency */,
 			);
 			name = "Pods-RGNetwork";
 			productName = Pods_RGNetwork;
@@ -193,13 +183,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProjectRef = D671EDC3BE02457A34BA9F588E59F15D /* Alamofire */;
+					ProjectRef = 095DA43E608747CA67BB564249B33E25 /* Alamofire */;
 				},
 				{
-					ProjectRef = 69582FCF9052CB12D7F204CA1995BA6A /* AlamofireNetworkActivityIndicator */;
-				},
-				{
-					ProjectRef = 93F3FADDE1156DF8EB4ECF7621D8549B /* MBProgressHUD */;
+					ProjectRef = F4D6A977122FEBF142FF0454761857FE /* MBProgressHUD */;
 				},
 			);
 			projectRoot = "";
@@ -210,7 +197,7 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		1EB8324DE11209170C0A68EDD4FA33F8 /* Resources */ = {
+		88A4290245FA8B7CB75081B1A4E1E721 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -220,36 +207,31 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		6D0FAEDD5B1E8A05E9EEA54943CA8332 /* Sources */ = {
+		F1351EFFB8CDC5A3E4D7B26FFA81A7F4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2AB271587AF30581EEA8250F34851F77 /* Pods-RGNetwork-dummy.m in Sources */,
+				BA43AA32E4AEB2F94210416A7BE9BDDD /* Pods-RGNetwork-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3192C3EA5F4B5F454256358DFB60AB07 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = AlamofireNetworkActivityIndicator;
-			targetProxy = 7562741C876897BC492BE2767B244C37 /* PBXContainerItemProxy */;
-		};
-		791053B7EADAC50203FF5A1F77299527 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = MBProgressHUD;
-			targetProxy = CBC66F784D19E6F241CB73C0B3D3384B /* PBXContainerItemProxy */;
-		};
-		A48943622EEAC3C7F65E97058BB9F3B7 /* PBXTargetDependency */ = {
+		65A991011B5D798FD8D48999B20DE7F4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Alamofire;
-			targetProxy = E11484305D18CC3FBBD536D24E5D3D4B /* PBXContainerItemProxy */;
+			targetProxy = 45482663E64F352A9DB19E1158389390 /* PBXContainerItemProxy */;
+		};
+		878031D05869072489C1CCA31ACC5C71 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MBProgressHUD;
+			targetProxy = F255D62FA6CB0F004CDF546B962DB27E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		6F409326AA205664DA669F6EB2581476 /* Release */ = {
+		30DC69B718F2788D5277AC81D5568577 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2E74E85E4CF9A429A4C1FE7D6E15499F /* Pods-RGNetwork.release.xcconfig */;
 			buildSettings = {
@@ -282,6 +264,39 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
+		};
+		5B9E430E1866FD37FF958BFACFC02F60 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 69C923E978277F57ACA2C80B1969414F /* Pods-RGNetwork.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-RGNetwork/Pods-RGNetwork-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-RGNetwork/Pods-RGNetwork.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
 		};
 		7EE7A78859F657F6BEFC651185B43192 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -344,39 +359,6 @@
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Release;
-		};
-		C3E8660B994E50119A7B84B0C55836D9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 69C923E978277F57ACA2C80B1969414F /* Pods-RGNetwork.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-RGNetwork/Pods-RGNetwork-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-RGNetwork/Pods-RGNetwork.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
 		};
 		D299434AB35E7FD6F7921C8EF24742FF /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -447,11 +429,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		47D1D5098B4EDBCC0E675BF2D4BB085A /* Build configuration list for PBXNativeTarget "Pods-RGNetwork" */ = {
+		2F8314C247A1D50DD1A406777FE167C3 /* Build configuration list for PBXNativeTarget "Pods-RGNetwork" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C3E8660B994E50119A7B84B0C55836D9 /* Debug */,
-				6F409326AA205664DA669F6EB2581476 /* Release */,
+				5B9E430E1866FD37FF958BFACFC02F60 /* Debug */,
+				30DC69B718F2788D5277AC81D5568577 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
