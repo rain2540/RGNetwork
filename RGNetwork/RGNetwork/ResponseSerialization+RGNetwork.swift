@@ -35,36 +35,36 @@ extension DataRequest {
 
     responseData(queue: queue) { [weak self] responseData in
       guard let self = self else { return }
-        if showLog == true {
-          dLog("RGNetwork.request.debugDescription: \n\(responseData.debugDescription)")
-        }
-
-        let httpStatusCode = responseData.response?.statusCode
-        guard let data = responseData.value else {
-          failure(responseData.error, nil, nil, httpStatusCode, self, responseData)
-          RGNetwork.hideIndicator()
-          return
-        }
-        let string = String(data: data, encoding: .utf8)
-        guard let code = httpStatusCode, code >= 200 && code < 300 else {
-          failure(responseData.error, string, data, httpStatusCode, self, responseData)
-          RGNetwork.hideIndicator()
-          return
-        }
-        do {
-          let json = try JSONSerialization.jsonObject(
-            with: data,
-            options: [.fragmentsAllowed, .mutableContainers, .mutableLeaves]
-          ) as? ResponseJSON
-
-          success(json, string, data, httpStatusCode, self, responseData)
-          RGNetwork.hideIndicator()
-        } catch {
-          success(nil, error.localizedDescription, data, httpStatusCode, self, responseData)
-          RGNetwork.hideIndicator()
-          return
-        }
+      if showLog == true {
+        dLog("RGNetwork.request.debugDescription: \n\(responseData.debugDescription)")
       }
+
+      let httpStatusCode = responseData.response?.statusCode
+      guard let data = responseData.value else {
+        failure(responseData.error, nil, nil, httpStatusCode, self, responseData)
+        RGNetwork.hideIndicator()
+        return
+      }
+      let string = String(data: data, encoding: .utf8)
+      guard let code = httpStatusCode, code >= 200 && code < 300 else {
+        failure(responseData.error, string, data, httpStatusCode, self, responseData)
+        RGNetwork.hideIndicator()
+        return
+      }
+      do {
+        let json = try JSONSerialization.jsonObject(
+          with: data,
+          options: [.fragmentsAllowed, .mutableContainers, .mutableLeaves]
+        ) as? ResponseJSON
+
+        success(json, string, data, httpStatusCode, self, responseData)
+        RGNetwork.hideIndicator()
+      } catch {
+        success(nil, error.localizedDescription, data, httpStatusCode, self, responseData)
+        RGNetwork.hideIndicator()
+        return
+      }
+    }
 
     return self
   }
@@ -95,31 +95,31 @@ extension DataRequest {
 
     responseDecodable(of: type, queue: queue) { [weak self] response in
       guard let self = self else { return }
-        if showLog == true {
-          dLog("RGNetwork.request.decodable.debugDescription: \n\(response.debugDescription)")
-        }
-
-        let httpStatusCode = response.response?.statusCode
-        var responseData = Data()
-        if let data = response.data {
-          responseData = data
-        }
-        let string = String(data: responseData, encoding: .utf8)
-        guard let code = httpStatusCode, code >= 200 && code < 300 else {
-          failure(response.error, string, response.data, httpStatusCode, self, response)
-          RGNetwork.hideIndicator()
-          return
-        }
-
-        guard let value = response.value else {
-          success(nil, string, response.data, httpStatusCode, self, response)
-          RGNetwork.hideIndicator()
-          return
-        }
-
-        success(value, string, response.data, httpStatusCode, self, response)
-        RGNetwork.hideIndicator()
+      if showLog == true {
+        dLog("RGNetwork.request.decodable.debugDescription: \n\(response.debugDescription)")
       }
+
+      let httpStatusCode = response.response?.statusCode
+      var responseData = Data()
+      if let data = response.data {
+        responseData = data
+      }
+      let string = String(data: responseData, encoding: .utf8)
+      guard let code = httpStatusCode, code >= 200 && code < 300 else {
+        failure(response.error, string, response.data, httpStatusCode, self, response)
+        RGNetwork.hideIndicator()
+        return
+      }
+
+      guard let value = response.value else {
+        success(nil, string, response.data, httpStatusCode, self, response)
+        RGNetwork.hideIndicator()
+        return
+      }
+
+      success(value, string, response.data, httpStatusCode, self, response)
+      RGNetwork.hideIndicator()
+    }
 
     return self
   }
@@ -155,37 +155,37 @@ extension DownloadRequest {
 
     responseData(queue: queue) { [weak self] responseData in
       guard let self = self else { return }
-        if showLog == true {
-          dLog("RGNetwork.download.debugDescription: \n\(responseData.debugDescription)")
-        }
-
-        let httpStatusCode = responseData.response?.statusCode
-        guard let data = responseData.value else {
-          failure(responseData.error, nil, nil, httpStatusCode, self, responseData)
-          RGNetwork.hideIndicator()
-          return
-        }
-
-        let string = String(data: data, encoding: .utf8)
-        guard let code = httpStatusCode, code >= 200 && code < 300 else {
-          failure(responseData.error, string, data, httpStatusCode, self, responseData)
-          RGNetwork.hideIndicator()
-          return
-        }
-        do {
-          let json = try JSONSerialization.jsonObject(
-            with: data,
-            options: .fragmentsAllowed
-          ) as? ResponseJSON
-
-          success(json, string, data, responseData.fileURL, httpStatusCode, self, responseData)
-          RGNetwork.hideIndicator()
-        } catch {
-          success(nil, error.localizedDescription, data, responseData.fileURL, httpStatusCode, self, responseData)
-          RGNetwork.hideIndicator()
-          return
-        }
+      if showLog == true {
+        dLog("RGNetwork.download.debugDescription: \n\(responseData.debugDescription)")
       }
+
+      let httpStatusCode = responseData.response?.statusCode
+      guard let data = responseData.value else {
+        failure(responseData.error, nil, nil, httpStatusCode, self, responseData)
+        RGNetwork.hideIndicator()
+        return
+      }
+
+      let string = String(data: data, encoding: .utf8)
+      guard let code = httpStatusCode, code >= 200 && code < 300 else {
+        failure(responseData.error, string, data, httpStatusCode, self, responseData)
+        RGNetwork.hideIndicator()
+        return
+      }
+      do {
+        let json = try JSONSerialization.jsonObject(
+          with: data,
+          options: .fragmentsAllowed
+        ) as? ResponseJSON
+
+        success(json, string, data, responseData.fileURL, httpStatusCode, self, responseData)
+        RGNetwork.hideIndicator()
+      } catch {
+        success(nil, error.localizedDescription, data, responseData.fileURL, httpStatusCode, self, responseData)
+        RGNetwork.hideIndicator()
+        return
+      }
+    }
 
     return self
   }
@@ -216,31 +216,31 @@ extension DownloadRequest {
 
     responseDecodable(of: type, queue: queue) { [weak self] response in
       guard let self = self else { return }
-        if showLog == true {
-          dLog("RGNetwork.download.debugDescription: \n\(response.debugDescription)")
-        }
-
-        let httpStatusCode = response.response?.statusCode
-        var resumeData = Data()
-        if let data = response.resumeData {
-          resumeData = data
-        }
-        let string = String(data: resumeData, encoding: .utf8)
-        guard let code = httpStatusCode, code >= 200 && code < 300 else {
-          failure(response.error, string, resumeData, httpStatusCode, self, response)
-          RGNetwork.hideIndicator()
-          return
-        }
-
-        guard let value = response.value else {
-          success(nil, string, resumeData, response.fileURL, httpStatusCode, self, response)
-          RGNetwork.hideIndicator()
-          return
-        }
-
-        success(value, string, resumeData, response.fileURL, httpStatusCode, self, response)
-        RGNetwork.hideIndicator()
+      if showLog == true {
+        dLog("RGNetwork.download.debugDescription: \n\(response.debugDescription)")
       }
+
+      let httpStatusCode = response.response?.statusCode
+      var resumeData = Data()
+      if let data = response.resumeData {
+        resumeData = data
+      }
+      let string = String(data: resumeData, encoding: .utf8)
+      guard let code = httpStatusCode, code >= 200 && code < 300 else {
+        failure(response.error, string, resumeData, httpStatusCode, self, response)
+        RGNetwork.hideIndicator()
+        return
+      }
+
+      guard let value = response.value else {
+        success(nil, string, resumeData, response.fileURL, httpStatusCode, self, response)
+        RGNetwork.hideIndicator()
+        return
+      }
+
+      success(value, string, resumeData, response.fileURL, httpStatusCode, self, response)
+      RGNetwork.hideIndicator()
+    }
 
     return self
   }
