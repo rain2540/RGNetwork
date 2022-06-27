@@ -8,7 +8,7 @@
 
 import Foundation
 import Alamofire
-import AlamofireNetworkActivityIndicator
+//import AlamofireNetworkActivityIndicator
 import MBProgressHUD
 
 
@@ -68,7 +68,7 @@ extension RGNetwork {
 // MARK: - Indicator View
 
 extension RGNetwork {
-
+  /*
   /// 在 Status Bar 上显示 Activity Indicator
   /// - Parameters:
   ///   - startDelay: 开始延迟时间
@@ -81,7 +81,7 @@ extension RGNetwork {
     NetworkActivityIndicatorManager.shared.startDelay = startDelay
     NetworkActivityIndicatorManager.shared.completionDelay = completionDelay
   }
-
+   */
   /// 显示 indicator
   /// - Parameters:
   ///   - mode: 显示模式，默认为 .indeterminate
