@@ -105,6 +105,19 @@ extension DataRequest {
     }
   }
 
+  public func serializingDecodable<Value: Decodable>(
+    of type: Value.Type = Value.self,
+    automaticallyCancelling shouldAutomaticallyCancel: Bool = false,
+    dataPreprocessor: DataPreprocessor = DecodableResponseSerializer<Value>.defaultDataPreprocessor,
+    decoder: DataDecoder = JSONDecoder(),
+    emptyResponseCodes: Set<Int> = DecodableResponseSerializer<Value>.defaultEmptyResponseCodes,
+    emptyRequestMethods: Set<HTTPMethod> = DecodableResponseSerializer<Value>.defaultEmptyRequestMethods,
+    showIndicator: Bool = false,
+    showLog: Bool = true
+  ) async -> SerializingRequestDecodable<Value> {
+  }
+
+}
 
 
 // MARK: -
