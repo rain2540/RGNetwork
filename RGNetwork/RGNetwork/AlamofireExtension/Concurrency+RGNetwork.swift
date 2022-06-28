@@ -125,6 +125,16 @@ extension DataRequest {
 @available(iOS 13, *)
 extension DownloadRequest {
 
+  public func serializingJSON(
+    automaticallyCancelling shouldAutomaticallyCancel: Bool = false,
+    dataPreprocessor: DataPreprocessor = DataResponseSerializer.defaultDataPreprocessor,
+    emptyResponseCodes: Set<Int> = DataResponseSerializer.defaultEmptyResponseCodes,
+    emptyRequestMethods: Set<HTTPMethod> = DataResponseSerializer.defaultEmptyRequestMethods,
+    showIndicator: Bool = false,
+    showLog: Bool = true
+  ) async -> SerializingDownloadJSON {
+  }
+
 
 }
 
