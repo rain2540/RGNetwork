@@ -72,7 +72,7 @@ extension DataRequest {
         with: data,
         options: [.fragmentsAllowed, .mutableContainers, .mutableLeaves]
       ) as? ResponseJSON
-      
+
       RGNetwork.hideIndicator()
       return (json, string, data, nil, httpStatusCode, dataTask)
     } catch {
@@ -80,6 +80,14 @@ extension DataRequest {
       return (nil, error.localizedDescription, data, nil, httpStatusCode, dataTask)
     }
   }
+
+
+
+// MARK: -
+
+@available(iOS 13, *)
+extension DownloadRequest {
+
 
 }
 
@@ -240,7 +248,7 @@ extension RGNetwork {
     let string = String(data: data, encoding: .utf8)
     guard let code = httpStatusCode, code >= 200 && code < 300 else {
       RGNetwork.hideIndicator()
-      return (nil, string, data, responseData.error,httpStatusCode, request, .data(responseData))
+      return (nil, string, data, responseData.error, httpStatusCode, request, .data(responseData))
     }
     do {
       guard let json = try JSONSerialization.jsonObject(
