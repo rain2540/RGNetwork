@@ -114,6 +114,7 @@
 		B74D9DC81F132BFB00D34AE1 /* RGNetwork */ = {
 			isa = PBXGroup;
 			children = (
+				B7B03571286A7F5A00E2413E /* AlamofireExtension */,
 				B74D9DC91F132BFB00D34AE1 /* RGNetwork.swift */,
 				B72D8BBF28475AEF001CD94B /* RGNetwork+Decodable.swift */,
 				B72A229E241233500059CFC4 /* RGDataRequest.swift */,
@@ -126,9 +127,6 @@
 				B7639FD32399E87A004859B5 /* RGNetworkPreset.swift */,
 				B763A0162399F7FB004859B5 /* RGNetworkError.swift */,
 				B74D9DCC1F134DDB00D34AE1 /* RGToast.swift */,
-				B72D8BC8284865B0001CD94B /* Session+RGNetwork.swift */,
-				B72D8BCA28487DD0001CD94B /* ResponseSerialization+RGNetwork.swift */,
-				B7F3342A280424CF009E3C6F /* Concurrency+RGNetwork.swift */,
 			);
 			path = RGNetwork;
 			sourceTree = "<group>";
@@ -141,6 +139,16 @@
 				B74D9DC21F132A5100D34AE1 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B7B03571286A7F5A00E2413E /* AlamofireExtension */ = {
+			isa = PBXGroup;
+			children = (
+				B72D8BC8284865B0001CD94B /* Session+RGNetwork.swift */,
+				B72D8BCA28487DD0001CD94B /* ResponseSerialization+RGNetwork.swift */,
+				B7F3342A280424CF009E3C6F /* Concurrency+RGNetwork.swift */,
+			);
+			path = AlamofireExtension;
 			sourceTree = "<group>";
 		};
 		BD26487FD37C2393FBC99D3B /* Pods */ = {
