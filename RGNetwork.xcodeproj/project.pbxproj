@@ -117,9 +117,7 @@
 				B7B03571286A7F5A00E2413E /* AlamofireExtension */,
 				B74D9DC91F132BFB00D34AE1 /* RGNetwork.swift */,
 				B72D8BBF28475AEF001CD94B /* RGNetwork+Decodable.swift */,
-				B72A229E241233500059CFC4 /* RGDataRequest.swift */,
-				B76802182861550D00AF50BA /* RGUploadRequest.swift */,
-				B729B6B526FC0BB30044D58A /* RGDownloadRequest.swift */,
+				B7B03572286A811B00E2413E /* Request */,
 				B75037DA268A0ED2006190F4 /* RGDataRequestConfig.swift */,
 				B75037DD268A10BB006190F4 /* RGUploadConfig.swift */,
 				B704BBA926F03485001CC8F7 /* RGDownloadConfig.swift */,
@@ -149,6 +147,16 @@
 				B7F3342A280424CF009E3C6F /* Concurrency+RGNetwork.swift */,
 			);
 			path = AlamofireExtension;
+			sourceTree = "<group>";
+		};
+		B7B03572286A811B00E2413E /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				B72A229E241233500059CFC4 /* RGDataRequest.swift */,
+				B76802182861550D00AF50BA /* RGUploadRequest.swift */,
+				B729B6B526FC0BB30044D58A /* RGDownloadRequest.swift */,
+			);
+			path = Request;
 			sourceTree = "<group>";
 		};
 		BD26487FD37C2393FBC99D3B /* Pods */ = {
