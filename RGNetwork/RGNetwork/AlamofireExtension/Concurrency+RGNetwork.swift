@@ -19,6 +19,15 @@ public typealias SerializingRequestJSON = (
   task: DataTask<Data>
 )
 
+@available(iOS 13, *)
+public typealias SerializingRequestDecodable<Value: Decodable> = (
+  value: Value?,
+  string: ResponseString?,
+  data: ResponseData?,
+  error: Error?,
+  httpStatusCode: HttpStatusCode?,
+  task: DataTask<Value>
+)
 // MARK: -
 
 @available(iOS 13, *)
