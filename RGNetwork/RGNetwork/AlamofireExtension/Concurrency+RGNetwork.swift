@@ -28,6 +28,18 @@ public typealias SerializingRequestDecodable<Value: Decodable> = (
   httpStatusCode: HttpStatusCode?,
   task: DataTask<Value>
 )
+
+@available(iOS 13, *)
+public typealias SerializingDownloadJSON = (
+  json: ResponseJSON?,
+  string: ResponseString?,
+  data: ResponseData?,
+  url: URL?,
+  error: Error?,
+  httpStatusCode: HttpStatusCode?,
+  task: DownloadTask<Data>
+)
+
 // MARK: -
 
 @available(iOS 13, *)
