@@ -19,11 +19,16 @@ public typealias SerializingRequestJSON = (
   task: DataTask<Data>
 )
 
+// MARK: -
 
 @available(iOS 13, *)
 extension DataRequest {
 
   public func serializingJSON(
+    automaticallyCancelling shouldAutomaticallyCancel: Bool = false,
+    dataPreprocessor: DataPreprocessor = DataResponseSerializer.defaultDataPreprocessor,
+    emptyResponseCodes: Set<Int> = DataResponseSerializer.defaultEmptyResponseCodes,
+    emptyRequestMethods: Set<HTTPMethod> = DataResponseSerializer.defaultEmptyRequestMethods,
     showIndicator: Bool = false,
     showLog: Bool = true
   ) async -> SerializingRequestJSON {
@@ -32,7 +37,11 @@ extension DataRequest {
       // RGNetwork.showActivityIndicator()
     }
 
-    let dataTask = serializingData()
+    let dataTask = serializingData(
+      automaticallyCancelling: shouldAutomaticallyCancel,
+      dataPreprocessor: dataPreprocessor,
+      emptyResponseCodes: emptyResponseCodes,
+      emptyRequestMethods: emptyRequestMethods)
     let responseData = await dataTask.response
 
     if showLog {
