@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 @available(iOS 13, *)
-public typealias SerializingJSON = (
+public typealias SerializingRequestJSON = (
   json: ResponseJSON?,
   string: ResponseString?,
   data: ResponseData?,
@@ -26,7 +26,7 @@ extension DataRequest {
   public func serializingJSON(
     showIndicator: Bool = false,
     showLog: Bool = true
-  ) async -> SerializingJSON {
+  ) async -> SerializingRequestJSON {
     if showIndicator {
       RGNetwork.showIndicator()
       // RGNetwork.showActivityIndicator()
