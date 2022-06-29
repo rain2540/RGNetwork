@@ -137,6 +137,7 @@ extension DataRequest {
     if let data = response.data {
       responseData = data
     }
+    let string = String(data: responseData, encoding: .utf8)
   }
 
 }
