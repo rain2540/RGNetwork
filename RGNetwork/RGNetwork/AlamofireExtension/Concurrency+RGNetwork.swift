@@ -126,6 +126,8 @@ extension DataRequest {
       decoder: decoder,
       emptyResponseCodes: emptyResponseCodes,
       emptyRequestMethods: emptyRequestMethods)
+    let response = await dataTask.response
+
   }
 
 }
