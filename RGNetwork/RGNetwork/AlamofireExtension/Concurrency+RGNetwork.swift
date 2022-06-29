@@ -138,6 +138,11 @@ extension DataRequest {
       responseData = data
     }
     let string = String(data: responseData, encoding: .utf8)
+    guard let code = httpStatusCode, code >= 200 && code < 300 else {
+      RGNetwork.hideIndicator()
+      return (nil, string, response.data, response.error, httpStatusCode, dataTask)
+    }
+
   }
 
 }
