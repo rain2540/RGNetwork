@@ -147,6 +147,9 @@ extension DataRequest {
       RGNetwork.hideIndicator()
       return (nil, string, response.data, nil, httpStatusCode, dataTask)
     }
+
+    RGNetwork.hideIndicator()
+    return (value, string, response.data, nil, httpStatusCode, dataTask)
   }
 
 }
