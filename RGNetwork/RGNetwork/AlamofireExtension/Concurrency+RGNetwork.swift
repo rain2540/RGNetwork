@@ -115,6 +115,10 @@ extension DataRequest {
     showIndicator: Bool = false,
     showLog: Bool = true
   ) async -> SerializingRequestDecodable<Value> {
+    if showIndicator {
+      RGNetwork.showIndicator()
+    }
+
   }
 
 }
