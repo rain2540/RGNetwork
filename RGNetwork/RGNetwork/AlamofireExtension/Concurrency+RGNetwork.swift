@@ -143,6 +143,10 @@ extension DataRequest {
       return (nil, string, response.data, response.error, httpStatusCode, dataTask)
     }
 
+    guard let value = response.value else {
+      RGNetwork.hideIndicator()
+      return (nil, string, response.data, nil, httpStatusCode, dataTask)
+    }
   }
 
 }
