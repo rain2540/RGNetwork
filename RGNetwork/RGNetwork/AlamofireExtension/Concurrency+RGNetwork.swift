@@ -133,6 +133,10 @@ extension DataRequest {
     }
 
     let httpStatusCode = response.response?.statusCode
+    var responseData = Data()
+    if let data = response.data {
+      responseData = data
+    }
   }
 
 }
