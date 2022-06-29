@@ -132,6 +132,7 @@ extension DataRequest {
       dLog("RGNetwork.request.serializingDecodable.debugDescription: \n\(response.debugDescription)")
     }
 
+    let httpStatusCode = response.response?.statusCode
   }
 
 }
