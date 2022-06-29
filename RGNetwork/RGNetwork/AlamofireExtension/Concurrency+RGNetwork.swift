@@ -128,6 +128,10 @@ extension DataRequest {
       emptyRequestMethods: emptyRequestMethods)
     let response = await dataTask.response
 
+    if showLog {
+      dLog("RGNetwork.request.serializingDecodable.debugDescription: \n\(response.debugDescription)")
+    }
+
   }
 
 }
