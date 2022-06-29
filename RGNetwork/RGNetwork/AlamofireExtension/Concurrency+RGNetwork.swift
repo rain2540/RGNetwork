@@ -119,6 +119,13 @@ extension DataRequest {
       RGNetwork.showIndicator()
     }
 
+    let dataTask = serializingDecodable(
+      type,
+      automaticallyCancelling: shouldAutomaticallyCancel,
+      dataPreprocessor: dataPreprocessor,
+      decoder: decoder,
+      emptyResponseCodes: emptyResponseCodes,
+      emptyRequestMethods: emptyRequestMethods)
   }
 
 }
