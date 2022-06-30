@@ -194,6 +194,7 @@ extension DownloadRequest {
       return (nil, nil, nil, nil, responseData.error, httpStatusCode, downloadTask)
     }
 
+    let string = String(data: data, encoding: .utf8)
   }
 
   public func serializingDecodable<Value: Decodable>(
