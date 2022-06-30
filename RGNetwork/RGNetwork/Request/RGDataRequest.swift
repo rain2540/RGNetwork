@@ -136,34 +136,3 @@ extension RGDataRequest {
   }
 
 }
-
-
-// MARK: - Deprecated
-
-extension RGDataRequest {
-  /*
-  /// 执行请求
-  /// - Parameters:
-  ///   - queue: 执行请求的队列
-  ///   - showIndicator: 是否显示 Indicator
-  ///   - responseType: 返回数据格式类型
-  ///   - success: 请求成功的 Task
-  ///   - failure: 请求失败的 Task
-  @available(*, deprecated)
-  public func task(
-    queue: DispatchQueue = DispatchQueue.global(),
-    showIndicator: Bool = false,
-    responseType: ResponseType = .json,
-    success: @escaping SuccessTask,
-    failure: @escaping FailureTask
-  ) {
-    RGNetwork.request(
-      config: config,
-      queue: queue,
-      showIndicator: showIndicator,
-      responseType: responseType,
-      success: success,
-      failure: failure)
-  }
-   */
-}
