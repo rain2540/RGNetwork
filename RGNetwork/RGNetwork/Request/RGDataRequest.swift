@@ -45,6 +45,26 @@ class RGDataRequest {
       timeoutInterval: timeoutInterval,
       isShowLog: isShowLog)
   }*/
+
+  init(
+    urlString: String,
+    method: HTTPMethod = .get,
+    parameters: Parameters? = nil,
+    encoding: ParameterEncoding = URLEncoding.default,
+    headers: HTTPHeaders? = nil,
+    interceptor: RequestInterceptor? = nil,
+    requestModifier: Session.RequestModifier? = nil
+  ) {
+    let urlPath = RGNetwork.urlPathString(by: urlString)
+    self.dataRequest = AF.request(
+      urlPath,
+      method: method,
+      parameters: parameters,
+      encoding: encoding,
+      headers: headers,
+      interceptor: interceptor,
+      requestModifier: requestModifier
+    )
   }
 
 }
