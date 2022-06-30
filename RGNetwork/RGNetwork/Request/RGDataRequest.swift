@@ -14,6 +14,7 @@ class RGDataRequest {
   public var tag: Int = 0
 
   public private(set) var config: RGDataRequestConfig
+  public private(set) var dataRequest: DataRequest
 
 
   // MARK: - Lifecycle
