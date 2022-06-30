@@ -195,6 +195,11 @@ extension DownloadRequest {
     }
 
     let string = String(data: data, encoding: .utf8)
+    guard let code = httpStatusCode, code >= 200 && code < 300 else {
+      RGNetwork.hideIndicator()
+      return (nil, string, data, nil, responseData.error, httpStatusCode, downloadTask)
+    }
+
   }
 
   public func serializingDecodable<Value: Decodable>(
