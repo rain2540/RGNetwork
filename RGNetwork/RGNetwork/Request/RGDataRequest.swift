@@ -27,7 +27,7 @@ class RGDataRequest {
   ///   - encoding: parameter encoding
   ///   - headers: HTTP headers
   ///   - timeoutInterval: 超时时长
-  init(
+  /*init(
     urlString: String,
     method: HTTPMethod = .get,
     parameters: Parameters? = nil,
@@ -44,6 +44,7 @@ class RGDataRequest {
       headers: headers,
       timeoutInterval: timeoutInterval,
       isShowLog: isShowLog)
+  }*/
   }
 
 }
