@@ -129,6 +129,7 @@ extension DataRequest {
       decoder: decoder,
       emptyResponseCodes: emptyResponseCodes,
       emptyRequestMethods: emptyRequestMethods)
+
     let response = await dataTask.response
 
     if showLog {
@@ -171,6 +172,10 @@ extension DownloadRequest {
     showIndicator: Bool = false,
     showLog: Bool = true
   ) async -> SerializingDownloadJSON {
+    if showIndicator {
+      RGNetwork.showIndicator()
+    }
+
   }
 
   public func serializingDecodable<Value: Decodable>(
