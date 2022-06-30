@@ -200,6 +200,11 @@ extension DownloadRequest {
       return (nil, string, data, nil, responseData.error, httpStatusCode, downloadTask)
     }
 
+    do {
+    } catch {
+      RGNetwork.hideIndicator()
+      return (nil, error.localizedDescription, data, responseData.fileURL, nil, httpStatusCode, downloadTask)
+    }
   }
 
   public func serializingDecodable<Value: Decodable>(
