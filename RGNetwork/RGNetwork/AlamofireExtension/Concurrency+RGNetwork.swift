@@ -188,6 +188,7 @@ extension DownloadRequest {
       dLog("RGNetwork.download.serializingJSON.debugDescription: \n\(responseData.debugDescription)")
     }
 
+    let httpStatusCode = responseData.response?.statusCode
   }
 
   public func serializingDecodable<Value: Decodable>(
