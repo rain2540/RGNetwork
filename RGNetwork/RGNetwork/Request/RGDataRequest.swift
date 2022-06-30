@@ -122,15 +122,15 @@ extension RGDataRequest {
     of type: T.Type = T.self,
     queue: DispatchQueue = .main,
     showIndicator: Bool = false,
+    showLog: Bool = true,
     success: @escaping SuccessRequestDecodable<T>,
     failure: @escaping FailureRequestDecodable<T>
   ) -> DataRequest {
-    let req = AF.request(config: config)
-    let request = req.responseDecodable(
+    let request = dataRequest.responseDecodable(
       of: type,
       queue: queue,
       showIndicator: showIndicator,
-      showLog: config.isShowLog,
+      showLog: showLog,
       success: success,
       failure: failure)
     return request
