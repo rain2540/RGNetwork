@@ -182,6 +182,8 @@ extension DownloadRequest {
       emptyResponseCodes: emptyResponseCodes,
       emptyRequestMethods: emptyRequestMethods)
 
+    let responseData = await downloadTask.response
+
   }
 
   public func serializingDecodable<Value: Decodable>(
