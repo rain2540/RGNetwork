@@ -75,10 +75,11 @@ extension DataRequest {
       dataPreprocessor: dataPreprocessor,
       emptyResponseCodes: emptyResponseCodes,
       emptyRequestMethods: emptyRequestMethods)
+
     let responseData = await dataTask.response
 
     if showLog {
-      dLog("RGNetwork.request.debugDescription: \n\(responseData.debugDescription)")
+      dLog("RGNetwork.request.serializingJSON.debugDescription: \n\(responseData.debugDescription)")
     }
 
     let httpStatusCode = responseData.response?.statusCode
@@ -86,11 +87,13 @@ extension DataRequest {
       RGNetwork.hideIndicator()
       return (nil, nil, nil, responseData.error, httpStatusCode, dataTask)
     }
+
     let string = String(data: data, encoding: .utf8)
     guard let code = httpStatusCode, code >= 200 && code < 300 else {
       RGNetwork.hideIndicator()
       return (nil, string, data, responseData.error, httpStatusCode, dataTask)
     }
+
     do {
       let json = try JSONSerialization.jsonObject(
         with: data,
