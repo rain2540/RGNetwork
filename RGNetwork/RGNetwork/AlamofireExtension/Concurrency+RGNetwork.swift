@@ -184,6 +184,10 @@ extension DownloadRequest {
 
     let responseData = await downloadTask.response
 
+    if showLog {
+      dLog("RGNetwork.download.serializingJSON.debugDescription: \n\(responseData.debugDescription)")
+    }
+
   }
 
   public func serializingDecodable<Value: Decodable>(
