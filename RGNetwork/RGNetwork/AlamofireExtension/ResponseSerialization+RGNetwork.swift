@@ -36,7 +36,7 @@ extension DataRequest {
     responseData(queue: queue) { [weak self] responseData in
       guard let self = self else { return }
       if showLog == true {
-        dLog("RGNetwork.request.debugDescription: \n\(responseData.debugDescription)")
+        dLog("RGNetwork.request.responseJSON.debugDescription: \n\(responseData.debugDescription)")
       }
 
       let httpStatusCode = responseData.response?.statusCode
@@ -45,12 +45,14 @@ extension DataRequest {
         RGNetwork.hideIndicator()
         return
       }
+
       let string = String(data: data, encoding: .utf8)
       guard let code = httpStatusCode, code >= 200 && code < 300 else {
         failure(responseData.error, string, data, httpStatusCode, self, responseData)
         RGNetwork.hideIndicator()
         return
       }
+
       do {
         let json = try JSONSerialization.jsonObject(
           with: data,
