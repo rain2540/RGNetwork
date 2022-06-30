@@ -104,14 +104,14 @@ extension RGDataRequest {
   public func task(
     queue: DispatchQueue = .main,
     showIndicator: Bool = false,
+    showLog: Bool = true,
     success: @escaping SuccessRequest,
     failure: @escaping FailureRequest
   ) -> DataRequest {
-    let req = AF.request(config: config)
-    let request = req.responseJSON(
+    let request = dataRequest.responseJSON(
       queue: queue,
       showIndicator: showIndicator,
-      showLog: config.isShowLog,
+      showLog: showLog,
       success: success,
       failure: failure)
     return request
