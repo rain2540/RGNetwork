@@ -46,6 +46,26 @@ class RGDataRequest {
       isShowLog: isShowLog)
   }*/
 
+  convenience init(
+    urlString: String,
+    method: HTTPMethod = .get,
+    parameters: Parameters? = nil,
+    encoding: ParameterEncoding = URLEncoding.default,
+    headers: HTTPHeaders? = nil,
+    timeoutInterval: TimeInterval = 30.0
+  ) {
+    self.init(
+      urlString: urlString,
+      method: method,
+      parameters: parameters,
+      encoding: encoding,
+      headers: headers,
+      requestModifier: { urlRequest in
+        urlRequest.timeoutInterval = timeoutInterval
+      }
+    )
+  }
+
   init(
     urlString: String,
     method: HTTPMethod = .get,
