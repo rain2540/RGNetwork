@@ -26,25 +26,6 @@ class RGDataRequest {
   ///   - encoding: parameter encoding
   ///   - headers: HTTP headers
   ///   - timeoutInterval: 超时时长
-  /*init(
-    urlString: String,
-    method: HTTPMethod = .get,
-    parameters: Parameters? = nil,
-    encoding: ParameterEncoding = URLEncoding.default,
-    headers: HTTPHeaders? = nil,
-    timeoutInterval: TimeInterval = 30.0,
-    isShowLog: Bool = true
-  ) {
-    self.config = RGDataRequestConfig(
-      urlString: urlString,
-      method: method,
-      parameters: parameters,
-      encoding: encoding,
-      headers: headers,
-      timeoutInterval: timeoutInterval,
-      isShowLog: isShowLog)
-  }*/
-
   convenience init(
     urlString: String,
     method: HTTPMethod = .get,
