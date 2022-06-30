@@ -176,6 +176,12 @@ extension DownloadRequest {
       RGNetwork.showIndicator()
     }
 
+    let downloadTask = serializingData(
+      automaticallyCancelling: shouldAutomaticallyCancel,
+      dataPreprocessor: dataPreprocessor,
+      emptyResponseCodes: emptyResponseCodes,
+      emptyRequestMethods: emptyRequestMethods)
+
   }
 
   public func serializingDecodable<Value: Decodable>(
