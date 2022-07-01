@@ -248,6 +248,11 @@ extension DownloadRequest {
       resumeData = data
     }
     let string = String(data: resumeData, encoding: .utf8)
+    guard let code = httpStatusCode, code >= 200 && code < 300 else {
+      RGNetwork.hideIndicator()
+      return (nil, string, resumeData, nil, response.error, httpStatusCode, downloadTask)
+    }
+
   }
 
 }
