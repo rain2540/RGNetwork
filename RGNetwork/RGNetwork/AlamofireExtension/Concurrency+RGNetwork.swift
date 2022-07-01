@@ -224,6 +224,10 @@ extension DownloadRequest {
     showIndicator: Bool = false,
     showLog: Bool = true
   ) async -> SerializingDownloadDecodable<Value> {
+    if showIndicator {
+      RGNetwork.showIndicator()
+    }
+
   }
 
 }
