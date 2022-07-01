@@ -238,6 +238,10 @@ extension DownloadRequest {
 
     let response = await downloadTask.response
 
+    if showLog {
+      dLog("RGNetwork.download.serializingDecodable.debugDescription: \n\(response.debugDescription)")
+    }
+
   }
 
 }
