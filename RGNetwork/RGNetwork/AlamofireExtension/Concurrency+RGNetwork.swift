@@ -228,6 +228,14 @@ extension DownloadRequest {
       RGNetwork.showIndicator()
     }
 
+    let downloadTask = serializingDecodable(
+      type,
+      automaticallyCancelling: shouldAutomaticallyCancel,
+      dataPreprocessor: dataPreprocessor,
+      decoder: decoder,
+      emptyResponseCodes: emptyResponseCodes,
+      emptyRequestMethods: emptyRequestMethods)
+
   }
 
 }
