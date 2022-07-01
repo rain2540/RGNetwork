@@ -242,6 +242,7 @@ extension DownloadRequest {
       dLog("RGNetwork.download.serializingDecodable.debugDescription: \n\(response.debugDescription)")
     }
 
+    let httpStatusCode = response.response?.statusCode
   }
 
 }
