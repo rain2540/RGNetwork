@@ -236,6 +236,8 @@ extension DownloadRequest {
       emptyResponseCodes: emptyResponseCodes,
       emptyRequestMethods: emptyRequestMethods)
 
+    let response = await downloadTask.response
+
   }
 
 }
