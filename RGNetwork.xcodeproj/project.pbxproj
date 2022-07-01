@@ -24,7 +24,7 @@
 		B7639FD42399E87A004859B5 /* RGNetworkPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7639FD32399E87A004859B5 /* RGNetworkPreset.swift */; };
 		B763A0172399F7FB004859B5 /* RGNetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B763A0162399F7FB004859B5 /* RGNetworkError.swift */; };
 		B76802192861550D00AF50BA /* RGUploadRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76802182861550D00AF50BA /* RGUploadRequest.swift */; };
-		B795796E286E86E80071D4CC /* RGNetAddtionalConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B795796D286E86E80071D4CC /* RGNetAddtionalConfig.swift */; };
+		B795796E286E86E80071D4CC /* RGNetAdditionalConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B795796D286E86E80071D4CC /* RGNetAdditionalConfig.swift */; };
 		B7C53239280505FB006D13D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7C53237280505FB006D13D9 /* Main.storyboard */; };
 		B7C5323C280508A6006D13D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7C5323A280508A6006D13D9 /* LaunchScreen.storyboard */; };
 		B7F334292803CE7B009E3C6F /* RequstInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F334282803CE7B009E3C6F /* RequstInfo.swift */; };
@@ -54,7 +54,7 @@
 		B7639FD32399E87A004859B5 /* RGNetworkPreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGNetworkPreset.swift; sourceTree = "<group>"; };
 		B763A0162399F7FB004859B5 /* RGNetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGNetworkError.swift; sourceTree = "<group>"; };
 		B76802182861550D00AF50BA /* RGUploadRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGUploadRequest.swift; sourceTree = "<group>"; };
-		B795796D286E86E80071D4CC /* RGNetAddtionalConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGNetAddtionalConfig.swift; sourceTree = "<group>"; };
+		B795796D286E86E80071D4CC /* RGNetAdditionalConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGNetAdditionalConfig.swift; sourceTree = "<group>"; };
 		B7C53238280505FB006D13D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B7C5323B280508A6006D13D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B7F334282803CE7B009E3C6F /* RequstInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequstInfo.swift; sourceTree = "<group>"; };
@@ -152,7 +152,7 @@
 				B72D8BBF28475AEF001CD94B /* RGNetwork+Decodable.swift */,
 				B7639FD32399E87A004859B5 /* RGNetworkPreset.swift */,
 				B763A0162399F7FB004859B5 /* RGNetworkError.swift */,
-				B795796D286E86E80071D4CC /* RGNetAddtionalConfig.swift */,
+				B795796D286E86E80071D4CC /* RGNetAdditionalConfig.swift */,
 				B74D9DCC1F134DDB00D34AE1 /* RGToast.swift */,
 			);
 			path = Base;
@@ -310,7 +310,7 @@
 				B729B6B626FC0BB40044D58A /* RGDownloadRequest.swift in Sources */,
 				B72D8BC028475AEF001CD94B /* RGNetwork+Decodable.swift in Sources */,
 				B72D8BC9284865B0001CD94B /* Session+RGNetwork.swift in Sources */,
-				B795796E286E86E80071D4CC /* RGNetAddtionalConfig.swift in Sources */,
+				B795796E286E86E80071D4CC /* RGNetAdditionalConfig.swift in Sources */,
 				B76802192861550D00AF50BA /* RGUploadRequest.swift in Sources */,
 				B763A0172399F7FB004859B5 /* RGNetworkError.swift in Sources */,
 				B74D9DB71F132A5100D34AE1 /* AppDelegate.swift in Sources */,

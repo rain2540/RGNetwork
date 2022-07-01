@@ -1,5 +1,5 @@
 //
-//  RGNetAddtionalConfig.swift
+//  RGNetAdditionalConfig.swift
 //  RGNetwork
 //
 //  Created by RAIN on 2022/7/1.
@@ -8,8 +8,9 @@
 
 import Foundation
 
-struct RGNetAddtionalConfig {
+public struct RGNetAdditionalConfig {
 
-
+  public let showIndicator: Bool
+  public let showLog: Bool
 
 }
