@@ -258,6 +258,8 @@ extension DownloadRequest {
       return (nil, string, resumeData, response.fileURL, nil, httpStatusCode, downloadTask)
     }
 
+    RGNetwork.hideIndicator()
+    return (value, string, resumeData, response.fileURL, nil, httpStatusCode, downloadTask)
   }
 
 }
