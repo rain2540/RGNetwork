@@ -13,4 +13,10 @@ public struct RGNetAdditionalConfig {
   public let showIndicator: Bool
   public let showLog: Bool
 
+
+  public init(showIndicator: Bool = false, showLog: Bool = true) {
+    self.showIndicator = showIndicator
+    self.showLog = showLog
+  }
+
 }
