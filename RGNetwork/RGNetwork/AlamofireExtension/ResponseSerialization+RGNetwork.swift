@@ -98,7 +98,7 @@ extension DataRequest {
     responseDecodable(of: type, queue: queue) { [weak self] response in
       guard let self = self else { return }
       if showLog == true {
-        dLog("RGNetwork.request.decodable.debugDescription: \n\(response.debugDescription)")
+        dLog("RGNetwork.request.responseDecodable.debugDescription: \n\(response.debugDescription)")
       }
 
       let httpStatusCode = response.response?.statusCode
