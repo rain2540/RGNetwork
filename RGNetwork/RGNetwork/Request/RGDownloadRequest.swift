@@ -14,6 +14,7 @@ class RGDownloadRequest {
   var tag: Int = 0
 
   public private(set) var config: RGDownloadConfig
+  public let downloadRequest: DownloadRequest
 
 
   // MARK: - Lifecycle
