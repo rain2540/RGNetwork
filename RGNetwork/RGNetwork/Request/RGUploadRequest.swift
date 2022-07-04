@@ -14,6 +14,7 @@ class RGUploadRequest {
   public var tag: Int = 0
 
   public private(set) var config: RGUploadConfig
+  public let uploadRequest: UploadRequest
 
 
   // MARK: - Lifecycle
