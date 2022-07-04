@@ -157,6 +157,7 @@ extension DownloadRequest {
       guard let self = self else { return }
       if showLog == true {
         dLog("RGNetwork.download.debugDescription: \n\(responseData.debugDescription)")
+        dLog("RGNetwork.download.responseJSON.debugDescription: \n\(responseData.debugDescription)")
       }
 
       let httpStatusCode = responseData.response?.statusCode
@@ -172,6 +173,7 @@ extension DownloadRequest {
         RGNetwork.hideIndicator()
         return
       }
+
       do {
         let json = try JSONSerialization.jsonObject(
           with: data,
