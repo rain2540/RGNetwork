@@ -23,19 +23,18 @@ extension DataRequest {
   @discardableResult
   public func responseJSON(
     queue: DispatchQueue = .main,
-    showIndicator: Bool = false,
-    showLog: Bool = true,
+    additionalConfig: RGNetAdditionalConfig = .init(),
     success: @escaping SuccessRequest,
     failure: @escaping FailureRequest
   ) -> Self {
-    if showIndicator == true {
+    if additionalConfig.showIndicator == true {
       RGNetwork.showIndicator()
       // RGNetwork.showActivityIndicator()
     }
 
     responseData(queue: queue) { [weak self] responseData in
       guard let self = self else { return }
-      if showLog == true {
+      if additionalConfig.showLog == true {
         dLog("RGNetwork.request.responseJSON.debugDescription: \n\(responseData.debugDescription)")
       }
 
