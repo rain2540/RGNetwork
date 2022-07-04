@@ -19,20 +19,20 @@ class RGUploadRequest {
 
   // MARK: - Lifecycle
 
-  init(
+  convenience init(
     urlString: String,
     method: HTTPMethod = .post,
     headers: HTTPHeaders? = nil,
     timeoutInterval: TimeInterval = 30.0,
-    isShowLog: Bool = true,
     multipartData: @escaping (MultipartFormData) -> Void
   ) {
-    self.config = RGUploadConfig(
+    self.init(
       urlString: urlString,
       method: method,
       headers: headers,
-      timeoutInterval: timeoutInterval,
-      isShowLog: isShowLog,
+      requestModifier: { urlRequest in
+        urlRequest.timeoutInterval = timeoutInterval
+      },
       multipartFormData: multipartData)
   }
 
