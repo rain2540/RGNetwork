@@ -68,15 +68,13 @@ extension RGUploadRequest {
   @discardableResult
   public func upload(
     queue: DispatchQueue = .main,
-    showIndicator: Bool = false,
+    additionalConfig: RGNetAdditionalConfig = .init(),
     success: @escaping SuccessRequest,
     failure: @escaping FailureRequest
   ) -> UploadRequest {
-    let req = AF.upload(config: config)
-    let request = req.responseJSON(
+    let request = uploadRequest.responseJSON(
       queue: queue,
-      showIndicator: showIndicator,
-      showLog: config.isShowLog,
+      additionalConfig: additionalConfig,
       success: success,
       failure: failure)
     return request
