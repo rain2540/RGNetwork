@@ -231,6 +231,10 @@ extension DownloadRequest {
   public func responseDecodable<T: Decodable>(
     of type: T.Type = T.self,
     queue: DispatchQueue = .main,
+    dataPreprocessor: DataPreprocessor = DecodableResponseSerializer<T>.defaultDataPreprocessor,
+    decoder: DataDecoder = JSONDecoder(),
+    emptyResponseCodes: Set<Int> = DecodableResponseSerializer<T>.defaultEmptyResponseCodes,
+    emptyRequestMethods: Set<HTTPMethod> = DecodableResponseSerializer<T>.defaultEmptyRequestMethods,
     additionalConfig: RGNetAdditionalConfig = .init(),
     success: @escaping SuccessDownloadDecodable<T>,
     failure: @escaping FailureDownloadDecodable<T>
@@ -240,7 +244,14 @@ extension DownloadRequest {
       // RGNetwork.showActivityIndicator()
     }
 
-    responseDecodable(of: type, queue: queue) { [weak self] response in
+    responseDecodable(
+      of: type,
+      queue: queue,
+      dataPreprocessor: dataPreprocessor,
+      decoder: decoder,
+      emptyResponseCodes: emptyResponseCodes,
+      emptyRequestMethods: emptyRequestMethods
+    ) { [weak self] response in
       guard let self = self else { return }
       if additionalConfig.showLog == true {
         dLog("RGNetwork.download.responseDecodable.debugDescription: \n\(response.debugDescription)")
