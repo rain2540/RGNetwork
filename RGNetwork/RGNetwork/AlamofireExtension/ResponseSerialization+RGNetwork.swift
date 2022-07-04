@@ -162,6 +162,9 @@ extension DownloadRequest {
   @discardableResult
   public func responseJSON(
     queue: DispatchQueue = .main,
+    dataPreprocessor: DataPreprocessor = DataResponseSerializer.defaultDataPreprocessor,
+    emptyResponseCodes: Set<Int> = DataResponseSerializer.defaultEmptyResponseCodes,
+    emptyRequestMethods: Set<HTTPMethod> = DataResponseSerializer.defaultEmptyRequestMethods,
     additionalConfig: RGNetAdditionalConfig = .init(),
     success: @escaping SuccessDownload,
     failure: @escaping FailureDownload
@@ -171,7 +174,12 @@ extension DownloadRequest {
       // RGNetwork.showActivityIndicator()
     }
 
-    responseData(queue: queue) { [weak self] responseData in
+    responseData(
+      queue: queue,
+      dataPreprocessor: dataPreprocessor,
+      emptyResponseCodes: emptyResponseCodes,
+      emptyRequestMethods: emptyRequestMethods
+    ) { [weak self] responseData in
       guard let self = self else { return }
       if additionalConfig.showLog == true {
         dLog("RGNetwork.download.responseJSON.debugDescription: \n\(responseData.debugDescription)")
