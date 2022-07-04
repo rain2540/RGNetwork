@@ -83,15 +83,13 @@ extension RGDataRequest {
   @discardableResult
   public func task(
     queue: DispatchQueue = .main,
-    showIndicator: Bool = false,
-    showLog: Bool = true,
+    additionalConfig: RGNetAdditionalConfig = .init(),
     success: @escaping SuccessRequest,
     failure: @escaping FailureRequest
   ) -> DataRequest {
     let request = dataRequest.responseJSON(
       queue: queue,
-      showIndicator: showIndicator,
-      showLog: showLog,
+      additionalConfig: additionalConfig,
       success: success,
       failure: failure)
     return request
