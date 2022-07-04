@@ -19,7 +19,7 @@ class RGDownloadRequest {
 
   // MARK: - Lifecycle
 
-  init(
+  convenience init(
     urlString: String,
     method: HTTPMethod = .get,
     parameters: Parameters? = nil,
@@ -28,13 +28,15 @@ class RGDownloadRequest {
     timeoutInterval: TimeInterval = 30.0,
     destination: DownloadRequest.Destination? = nil
   ) {
-    self.config = RGDownloadConfig(
+    self.init(
       urlString: urlString,
       method: method,
       parameters: parameters,
       encoding: encoding,
       headers: headers,
-      timeoutInterval: timeoutInterval,
+      requestModifier: { urlRequest in
+        urlRequest.timeoutInterval = timeoutInterval
+      },
       destination: destination)
   }
 
