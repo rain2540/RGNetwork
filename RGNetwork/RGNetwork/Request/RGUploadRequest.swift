@@ -35,6 +35,28 @@ class RGUploadRequest {
       multipartFormData: multipartData)
   }
 
+  init(
+    urlString: String,
+    usingThreshold encodingMemoryThreshold: UInt64 = MultipartFormData.encodingMemoryThreshold,
+    method: HTTPMethod = .post,
+    headers: HTTPHeaders? = nil,
+    interceptor: RequestInterceptor? = nil,
+    fileManager: FileManager = .default,
+    requestModifier: Session.RequestModifier? = nil,
+    multipartFormData: @escaping (MultipartFormData) -> Void
+  ) {
+    let urlPath = RGNetwork.urlPathString(by: urlString)
+    self.uploadRequest = AF.upload(
+      multipartFormData: multipartFormData,
+      to: urlPath,
+      usingThreshold: encodingMemoryThreshold,
+      method: method,
+      headers: headers,
+      interceptor: interceptor,
+      fileManager: fileManager,
+      requestModifier: requestModifier)
+  }
+
 }
 
 
