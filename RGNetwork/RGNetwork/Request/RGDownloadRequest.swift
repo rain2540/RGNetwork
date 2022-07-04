@@ -81,25 +81,3 @@ extension RGDownloadRequest {
   }
 
 }
-
-
-// MARK: - Deprecated
-
-extension RGDownloadRequest {
-
-  @available(*, deprecated)
-  public func download(
-    queue: DispatchQueue = DispatchQueue.global(),
-    showIndicator: Bool = false,
-    success: @escaping DownloadSuccess,
-    failure: @escaping DownloadFailure
-  ) {
-    RGNetwork.download(
-      config: config,
-      queue: queue,
-      showIndicator: showIndicator,
-      success: success,
-      failure: failure)
-  }
-
-}
