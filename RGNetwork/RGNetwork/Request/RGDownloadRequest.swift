@@ -72,15 +72,13 @@ extension RGDownloadRequest {
   @discardableResult
   public func download(
     queue: DispatchQueue = .main,
-    showIndicator: Bool = false,
+    additionalConfig: RGNetAdditionalConfig = .init(),
     success: @escaping SuccessDownload,
     failure: @escaping FailureDownload
   ) -> DownloadRequest {
-    let req = AF.download(config: config)
-    let request = req.responseJSON(
+    let request = downloadRequest.responseJSON(
       queue: queue,
-      showIndicator: showIndicator,
-      showLog: config.isShowLog,
+      additionalConfig: additionalConfig,
       success: success,
       failure: failure)
     return request
