@@ -154,20 +154,18 @@ extension DownloadRequest {
   @discardableResult
   public func responseJSON(
     queue: DispatchQueue = .main,
-    showIndicator: Bool = false,
-    showLog: Bool = true,
+    additionalConfig: RGNetAdditionalConfig = .init(),
     success: @escaping SuccessDownload,
     failure: @escaping FailureDownload
   ) -> Self {
-    if showIndicator == true {
+    if additionalConfig.showIndicator == true {
       RGNetwork.showIndicator()
       // RGNetwork.showActivityIndicator()
     }
 
     responseData(queue: queue) { [weak self] responseData in
       guard let self = self else { return }
-      if showLog == true {
-        dLog("RGNetwork.download.debugDescription: \n\(responseData.debugDescription)")
+      if additionalConfig.showLog == true {
         dLog("RGNetwork.download.responseJSON.debugDescription: \n\(responseData.debugDescription)")
       }
 
