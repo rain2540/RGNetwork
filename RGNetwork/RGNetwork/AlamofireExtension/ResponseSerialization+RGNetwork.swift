@@ -219,7 +219,7 @@ extension DownloadRequest {
     responseDecodable(of: type, queue: queue) { [weak self] response in
       guard let self = self else { return }
       if showLog == true {
-        dLog("RGNetwork.download.debugDescription: \n\(response.debugDescription)")
+        dLog("RGNetwork.download.responseDecodable.debugDescription: \n\(response.debugDescription)")
       }
 
       let httpStatusCode = response.response?.statusCode
