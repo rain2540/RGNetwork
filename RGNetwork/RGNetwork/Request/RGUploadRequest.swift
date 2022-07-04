@@ -84,16 +84,14 @@ extension RGUploadRequest {
   public func uploadDecodable<T: Decodable>(
     of type: T.Type = T.self,
     queue: DispatchQueue = .main,
-    showIndicator: Bool = false,
+    additionalConfig: RGNetAdditionalConfig = .init(),
     success: @escaping SuccessRequestDecodable<T>,
     failure: @escaping FailureRequestDecodable<T>
   ) -> UploadRequest {
-    let req = AF.upload(config: config)
-    let request = req.responseDecodable(
+    let request = uploadRequest.responseDecodable(
       of: type,
       queue: queue,
-      showIndicator: showIndicator,
-      showLog: config.isShowLog,
+      additionalConfig: additionalConfig,
       success: success,
       failure: failure)
     return request
