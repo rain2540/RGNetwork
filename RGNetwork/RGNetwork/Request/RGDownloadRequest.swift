@@ -88,16 +88,14 @@ extension RGDownloadRequest {
   public func downloadDecodable<T: Decodable>(
     of type: T.Type = T.self,
     queue: DispatchQueue = .main,
-    showIndicator: Bool = false,
+    additionalConfig: RGNetAdditionalConfig = .init(),
     success: @escaping SuccessDownloadDecodable<T>,
     failure: @escaping FailureDownloadDecodable<T>
   ) -> DownloadRequest {
-    let req = AF.download(config: config)
-    let request = req.responseDecodable(
+    let request = downloadRequest.responseDecodable(
       of: type,
       queue: queue,
-      showIndicator: showIndicator,
-      showLog: config.isShowLog,
+      additionalConfig: additionalConfig,
       success: success,
       failure: failure)
     return request
