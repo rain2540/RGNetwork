@@ -38,6 +38,28 @@ class RGDownloadRequest {
       destination: destination)
   }
 
+  init(
+    urlString: String,
+    method: HTTPMethod = .get,
+    parameters: Parameters? = nil,
+    encoding: ParameterEncoding = URLEncoding.default,
+    headers: HTTPHeaders? = nil,
+    interceptor: RequestInterceptor? = nil,
+    requestModifier: Session.RequestModifier? = nil,
+    destination: DownloadRequest.Destination? = nil
+  ) {
+    let urlPath = RGNetwork.urlPathString(by: urlString)
+    self.downloadRequest = AF.download(
+      urlPath,
+      method: method,
+      parameters: parameters,
+      encoding: encoding,
+      headers: headers,
+      interceptor: interceptor,
+      requestModifier: requestModifier,
+      to: destination)
+  }
+
 }
 
 
