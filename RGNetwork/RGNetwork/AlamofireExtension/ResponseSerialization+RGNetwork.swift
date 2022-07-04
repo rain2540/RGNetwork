@@ -215,19 +215,18 @@ extension DownloadRequest {
   public func responseDecodable<T: Decodable>(
     of type: T.Type = T.self,
     queue: DispatchQueue = .main,
-    showIndicator: Bool = false,
-    showLog: Bool = true,
+    additionalConfig: RGNetAdditionalConfig = .init(),
     success: @escaping SuccessDownloadDecodable<T>,
     failure: @escaping FailureDownloadDecodable<T>
   ) -> Self {
-    if showIndicator == true {
+    if additionalConfig.showIndicator == true {
       RGNetwork.showIndicator()
       // RGNetwork.showActivityIndicator()
     }
 
     responseDecodable(of: type, queue: queue) { [weak self] response in
       guard let self = self else { return }
-      if showLog == true {
+      if additionalConfig.showLog == true {
         dLog("RGNetwork.download.responseDecodable.debugDescription: \n\(response.debugDescription)")
       }
 
