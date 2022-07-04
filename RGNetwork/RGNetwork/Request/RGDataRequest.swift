@@ -99,16 +99,14 @@ extension RGDataRequest {
   public func taskDecodable<T: Decodable>(
     of type: T.Type = T.self,
     queue: DispatchQueue = .main,
-    showIndicator: Bool = false,
-    showLog: Bool = true,
+    additionalConfig: RGNetAdditionalConfig = .init(),
     success: @escaping SuccessRequestDecodable<T>,
     failure: @escaping FailureRequestDecodable<T>
   ) -> DataRequest {
     let request = dataRequest.responseDecodable(
       of: type,
       queue: queue,
-      showIndicator: showIndicator,
-      showLog: showLog,
+      additionalConfig: additionalConfig,
       success: success,
       failure: failure)
     return request
