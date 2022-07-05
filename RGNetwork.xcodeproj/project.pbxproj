@@ -17,7 +17,6 @@
 		B74D9DBE1F132A5100D34AE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B74D9DBD1F132A5100D34AE1 /* Assets.xcassets */; };
 		B74D9DCA1F132BFB00D34AE1 /* RGNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74D9DC91F132BFB00D34AE1 /* RGNetwork.swift */; };
 		B74D9DCD1F134DDB00D34AE1 /* RGToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74D9DCC1F134DDB00D34AE1 /* RGToast.swift */; };
-		B75037D8268A0D59006190F4 /* RGNetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75037D7268A0D59006190F4 /* RGNetworkConfig.swift */; };
 		B7639FD42399E87A004859B5 /* RGNetworkPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7639FD32399E87A004859B5 /* RGNetworkPreset.swift */; };
 		B763A0172399F7FB004859B5 /* RGNetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B763A0162399F7FB004859B5 /* RGNetworkError.swift */; };
 		B76802192861550D00AF50BA /* RGUploadRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76802182861550D00AF50BA /* RGUploadRequest.swift */; };
@@ -44,7 +43,6 @@
 		B74D9DC21F132A5100D34AE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B74D9DC91F132BFB00D34AE1 /* RGNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGNetwork.swift; sourceTree = "<group>"; };
 		B74D9DCC1F134DDB00D34AE1 /* RGToast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGToast.swift; sourceTree = "<group>"; };
-		B75037D7268A0D59006190F4 /* RGNetworkConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGNetworkConfig.swift; sourceTree = "<group>"; };
 		B7639FD32399E87A004859B5 /* RGNetworkPreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGNetworkPreset.swift; sourceTree = "<group>"; };
 		B763A0162399F7FB004859B5 /* RGNetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGNetworkError.swift; sourceTree = "<group>"; };
 		B76802182861550D00AF50BA /* RGUploadRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGUploadRequest.swift; sourceTree = "<group>"; };
@@ -112,7 +110,6 @@
 			children = (
 				B7B03572286A811B00E2413E /* Request */,
 				B7B03571286A7F5A00E2413E /* AlamofireExtension */,
-				B795796B286E84980071D4CC /* Config */,
 				B795796C286E85220071D4CC /* Base */,
 			);
 			path = RGNetwork;
@@ -126,14 +123,6 @@
 				B74D9DC21F132A5100D34AE1 /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		B795796B286E84980071D4CC /* Config */ = {
-			isa = PBXGroup;
-			children = (
-				B75037D7268A0D59006190F4 /* RGNetworkConfig.swift */,
-			);
-			path = Config;
 			sourceTree = "<group>";
 		};
 		B795796C286E85220071D4CC /* Base */ = {
@@ -295,7 +284,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B74D9DCD1F134DDB00D34AE1 /* RGToast.swift in Sources */,
-				B75037D8268A0D59006190F4 /* RGNetworkConfig.swift in Sources */,
 				B74D9DB91F132A5100D34AE1 /* ViewController.swift in Sources */,
 				B729B6B626FC0BB40044D58A /* RGDownloadRequest.swift in Sources */,
 				B72D8BC028475AEF001CD94B /* RGNetwork+Decodable.swift in Sources */,
