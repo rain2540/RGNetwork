@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		B729B6B626FC0BB40044D58A /* RGDownloadRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B729B6B526FC0BB30044D58A /* RGDownloadRequest.swift */; };
 		B72A229F241233500059CFC4 /* RGDataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72A229E241233500059CFC4 /* RGDataRequest.swift */; };
-		B72D8BC028475AEF001CD94B /* RGNetwork+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72D8BBF28475AEF001CD94B /* RGNetwork+Decodable.swift */; };
 		B72D8BC9284865B0001CD94B /* Session+RGNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72D8BC8284865B0001CD94B /* Session+RGNetwork.swift */; };
 		B72D8BCB28487DD0001CD94B /* ResponseSerialization+RGNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72D8BCA28487DD0001CD94B /* ResponseSerialization+RGNetwork.swift */; };
 		B74D9DB71F132A5100D34AE1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74D9DB61F132A5100D34AE1 /* AppDelegate.swift */; };
@@ -33,7 +32,6 @@
 		5A9BB35DAFC3B60F56536275 /* Pods-RGNetwork.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RGNetwork.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RGNetwork/Pods-RGNetwork.debug.xcconfig"; sourceTree = "<group>"; };
 		B729B6B526FC0BB30044D58A /* RGDownloadRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGDownloadRequest.swift; sourceTree = "<group>"; };
 		B72A229E241233500059CFC4 /* RGDataRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGDataRequest.swift; sourceTree = "<group>"; };
-		B72D8BBF28475AEF001CD94B /* RGNetwork+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RGNetwork+Decodable.swift"; sourceTree = "<group>"; };
 		B72D8BC8284865B0001CD94B /* Session+RGNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Session+RGNetwork.swift"; sourceTree = "<group>"; };
 		B72D8BCA28487DD0001CD94B /* ResponseSerialization+RGNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ResponseSerialization+RGNetwork.swift"; sourceTree = "<group>"; };
 		B74D9DB31F132A5100D34AE1 /* RGNetwork.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RGNetwork.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,7 +127,6 @@
 			isa = PBXGroup;
 			children = (
 				B74D9DC91F132BFB00D34AE1 /* RGNetwork.swift */,
-				B72D8BBF28475AEF001CD94B /* RGNetwork+Decodable.swift */,
 				B7639FD32399E87A004859B5 /* RGNetworkPreset.swift */,
 				B763A0162399F7FB004859B5 /* RGNetworkError.swift */,
 				B795796D286E86E80071D4CC /* RGNetAdditionalConfig.swift */,
@@ -286,7 +283,6 @@
 				B74D9DCD1F134DDB00D34AE1 /* RGToast.swift in Sources */,
 				B74D9DB91F132A5100D34AE1 /* ViewController.swift in Sources */,
 				B729B6B626FC0BB40044D58A /* RGDownloadRequest.swift in Sources */,
-				B72D8BC028475AEF001CD94B /* RGNetwork+Decodable.swift in Sources */,
 				B72D8BC9284865B0001CD94B /* Session+RGNetwork.swift in Sources */,
 				B795796E286E86E80071D4CC /* RGNetAdditionalConfig.swift in Sources */,
 				B76802192861550D00AF50BA /* RGUploadRequest.swift in Sources */,
