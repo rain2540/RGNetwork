@@ -218,10 +218,9 @@ extension DownloadRequest {
     decoder: DataDecoder = JSONDecoder(),
     emptyResponseCodes: Set<Int> = DecodableResponseSerializer<Value>.defaultEmptyResponseCodes,
     emptyRequestMethods: Set<HTTPMethod> = DecodableResponseSerializer<Value>.defaultEmptyRequestMethods,
-    showIndicator: Bool = false,
-    showLog: Bool = true
+    additionalConfig: RGNetAdditionalConfig = .init()
   ) async -> SerializingDownloadDecodable<Value> {
-    if showIndicator {
+    if additionalConfig.showIndicator {
       RGNetwork.showIndicator()
     }
 
@@ -235,7 +234,7 @@ extension DownloadRequest {
 
     let response = await downloadTask.response
 
-    if showLog {
+    if additionalConfig.showLog {
       dLog("RGNetwork.download.serializingDecodable.debugDescription: \n\(response.debugDescription)")
     }
 
