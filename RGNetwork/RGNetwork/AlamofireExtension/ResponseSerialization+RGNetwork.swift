@@ -31,7 +31,7 @@ extension DataRequest {
     failure: @escaping FailureRequest
   ) -> Self {
     if additionalConfig.showIndicator == true {
-      RGNetwork.showIndicator()
+      RGNetworkIndicator.show()
       // RGNetwork.showActivityIndicator()
     }
 
@@ -49,14 +49,14 @@ extension DataRequest {
       let httpStatusCode = responseData.response?.statusCode
       guard let data = responseData.value else {
         failure(responseData.error, nil, nil, httpStatusCode, self, responseData)
-        RGNetwork.hideIndicator()
+        RGNetworkIndicator.hide()
         return
       }
 
       let string = String(data: data, encoding: .utf8)
       guard let code = httpStatusCode, code >= 200 && code < 300 else {
         failure(responseData.error, string, data, httpStatusCode, self, responseData)
-        RGNetwork.hideIndicator()
+        RGNetworkIndicator.hide()
         return
       }
 
@@ -67,10 +67,10 @@ extension DataRequest {
         ) as? ResponseJSON
 
         success(json, string, data, httpStatusCode, self, responseData)
-        RGNetwork.hideIndicator()
+        RGNetworkIndicator.hide()
       } catch {
         success(nil, error.localizedDescription, data, httpStatusCode, self, responseData)
-        RGNetwork.hideIndicator()
+        RGNetworkIndicator.hide()
         return
       }
     }
@@ -101,7 +101,7 @@ extension DataRequest {
     failure: @escaping FailureRequestDecodable<T>
   ) -> Self {
     if additionalConfig.showIndicator == true {
-      RGNetwork.showIndicator()
+      RGNetworkIndicator.show()
       // RGNetwork.showActivityIndicator()
     }
 
@@ -126,18 +126,18 @@ extension DataRequest {
       let string = String(data: responseData, encoding: .utf8)
       guard let code = httpStatusCode, code >= 200 && code < 300 else {
         failure(response.error, string, response.data, httpStatusCode, self, response)
-        RGNetwork.hideIndicator()
+        RGNetworkIndicator.hide()
         return
       }
 
       guard let value = response.value else {
         success(nil, string, response.data, httpStatusCode, self, response)
-        RGNetwork.hideIndicator()
+        RGNetworkIndicator.hide()
         return
       }
 
       success(value, string, response.data, httpStatusCode, self, response)
-      RGNetwork.hideIndicator()
+      RGNetworkIndicator.hide()
     }
 
     return self
@@ -170,7 +170,7 @@ extension DownloadRequest {
     failure: @escaping FailureDownload
   ) -> Self {
     if additionalConfig.showIndicator == true {
-      RGNetwork.showIndicator()
+      RGNetworkIndicator.show()
       // RGNetwork.showActivityIndicator()
     }
 
@@ -188,14 +188,14 @@ extension DownloadRequest {
       let httpStatusCode = responseData.response?.statusCode
       guard let data = responseData.value else {
         failure(responseData.error, nil, nil, httpStatusCode, self, responseData)
-        RGNetwork.hideIndicator()
+        RGNetworkIndicator.hide()
         return
       }
 
       let string = String(data: data, encoding: .utf8)
       guard let code = httpStatusCode, code >= 200 && code < 300 else {
         failure(responseData.error, string, data, httpStatusCode, self, responseData)
-        RGNetwork.hideIndicator()
+        RGNetworkIndicator.hide()
         return
       }
 
@@ -206,10 +206,10 @@ extension DownloadRequest {
         ) as? ResponseJSON
 
         success(json, string, data, responseData.fileURL, httpStatusCode, self, responseData)
-        RGNetwork.hideIndicator()
+        RGNetworkIndicator.hide()
       } catch {
         success(nil, error.localizedDescription, data, responseData.fileURL, httpStatusCode, self, responseData)
-        RGNetwork.hideIndicator()
+        RGNetworkIndicator.hide()
         return
       }
     }
@@ -240,7 +240,7 @@ extension DownloadRequest {
     failure: @escaping FailureDownloadDecodable<T>
   ) -> Self {
     if additionalConfig.showIndicator == true {
-      RGNetwork.showIndicator()
+      RGNetworkIndicator.show()
       // RGNetwork.showActivityIndicator()
     }
 
@@ -265,18 +265,18 @@ extension DownloadRequest {
       let string = String(data: resumeData, encoding: .utf8)
       guard let code = httpStatusCode, code >= 200 && code < 300 else {
         failure(response.error, string, resumeData, httpStatusCode, self, response)
-        RGNetwork.hideIndicator()
+        RGNetworkIndicator.hide()
         return
       }
 
       guard let value = response.value else {
         success(nil, string, resumeData, response.fileURL, httpStatusCode, self, response)
-        RGNetwork.hideIndicator()
+        RGNetworkIndicator.hide()
         return
       }
 
       success(value, string, resumeData, response.fileURL, httpStatusCode, self, response)
-      RGNetwork.hideIndicator()
+      RGNetworkIndicator.hide()
     }
 
     return self
