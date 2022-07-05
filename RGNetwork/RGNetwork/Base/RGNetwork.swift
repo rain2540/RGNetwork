@@ -166,7 +166,7 @@ internal extension String {
 
 // MARK: - DispatchQueue
 
-fileprivate extension DispatchQueue {
+internal extension DispatchQueue {
 
   static func mainAsync(execute: @escaping () -> Void) {
     if Thread.current.isMainThread {
