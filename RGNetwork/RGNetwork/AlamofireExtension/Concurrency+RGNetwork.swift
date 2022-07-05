@@ -114,10 +114,9 @@ extension DataRequest {
     decoder: DataDecoder = JSONDecoder(),
     emptyResponseCodes: Set<Int> = DecodableResponseSerializer<Value>.defaultEmptyResponseCodes,
     emptyRequestMethods: Set<HTTPMethod> = DecodableResponseSerializer<Value>.defaultEmptyRequestMethods,
-    showIndicator: Bool = false,
-    showLog: Bool = true
+    additionalConfig: RGNetAdditionalConfig = .init()
   ) async -> SerializingRequestDecodable<Value> {
-    if showIndicator {
+    if additionalConfig.showIndicator {
       RGNetwork.showIndicator()
     }
 
@@ -131,7 +130,7 @@ extension DataRequest {
 
     let response = await dataTask.response
 
-    if showLog {
+    if additionalConfig.showLog {
       dLog("RGNetwork.request.serializingDecodable.debugDescription: \n\(response.debugDescription)")
     }
 
