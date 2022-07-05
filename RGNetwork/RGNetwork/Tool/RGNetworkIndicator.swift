@@ -23,5 +23,11 @@ public struct RGNetworkIndicator {
     }
   }
 
+  public static func hide() {
+    DispatchQueue.mainAsync {
+      guard let window = UIApplication.shared.keySceneWindow else { return }
+      MBProgressHUD.hide(for: window, animated: true)
+    }
+  }
 
 }
