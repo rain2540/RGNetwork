@@ -13,7 +13,7 @@ class RGDataRequest {
 
   public var tag: Int = 0
 
-  public private(set) var dataRequest: DataRequest
+  public let dataRequest: DataRequest
 
 
   // MARK: - Lifecycle
