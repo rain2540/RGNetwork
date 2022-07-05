@@ -175,7 +175,7 @@ extension RGNetwork {
 
 // MARK: - String Extension
 
-fileprivate extension String {
+internal extension String {
 
   /// 是否含有 http / https 前缀
   var rg_hasHttpPrefix: Bool {
