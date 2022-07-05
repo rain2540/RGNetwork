@@ -65,8 +65,7 @@ extension DataRequest {
     additionalConfig: RGNetAdditionalConfig = .init()
   ) async -> SerializingRequestJSON {
     if additionalConfig.showIndicator {
-      RGNetwork.showIndicator()
-      // RGNetwork.showActivityIndicator()
+      RGNetworkIndicator.show()
     }
 
     let dataTask = serializingData(
@@ -83,13 +82,13 @@ extension DataRequest {
 
     let httpStatusCode = responseData.response?.statusCode
     guard let data = responseData.value else {
-      RGNetwork.hideIndicator()
+      RGNetworkIndicator.hide()
       return (nil, nil, nil, responseData.error, httpStatusCode, dataTask)
     }
 
     let string = String(data: data, encoding: .utf8)
     guard let code = httpStatusCode, code >= 200 && code < 300 else {
-      RGNetwork.hideIndicator()
+      RGNetworkIndicator.hide()
       return (nil, string, data, responseData.error, httpStatusCode, dataTask)
     }
 
@@ -99,10 +98,10 @@ extension DataRequest {
         options: [.fragmentsAllowed, .mutableContainers, .mutableLeaves]
       ) as? ResponseJSON
 
-      RGNetwork.hideIndicator()
+      RGNetworkIndicator.hide()
       return (json, string, data, nil, httpStatusCode, dataTask)
     } catch {
-      RGNetwork.hideIndicator()
+      RGNetworkIndicator.hide()
       return (nil, error.localizedDescription, data, nil, httpStatusCode, dataTask)
     }
   }
@@ -117,7 +116,7 @@ extension DataRequest {
     additionalConfig: RGNetAdditionalConfig = .init()
   ) async -> SerializingRequestDecodable<Value> {
     if additionalConfig.showIndicator {
-      RGNetwork.showIndicator()
+      RGNetworkIndicator.show()
     }
 
     let dataTask = serializingDecodable(
@@ -141,16 +140,16 @@ extension DataRequest {
     }
     let string = String(data: responseData, encoding: .utf8)
     guard let code = httpStatusCode, code >= 200 && code < 300 else {
-      RGNetwork.hideIndicator()
+      RGNetworkIndicator.hide()
       return (nil, string, response.data, response.error, httpStatusCode, dataTask)
     }
 
     guard let value = response.value else {
-      RGNetwork.hideIndicator()
+      RGNetworkIndicator.hide()
       return (nil, string, response.data, nil, httpStatusCode, dataTask)
     }
 
-    RGNetwork.hideIndicator()
+    RGNetworkIndicator.hide()
     return (value, string, response.data, nil, httpStatusCode, dataTask)
   }
 
@@ -170,7 +169,7 @@ extension DownloadRequest {
     additionalConfig: RGNetAdditionalConfig = .init()
   ) async -> SerializingDownloadJSON {
     if additionalConfig.showIndicator {
-      RGNetwork.showIndicator()
+      RGNetworkIndicator.show()
     }
 
     let downloadTask = serializingData(
@@ -187,13 +186,13 @@ extension DownloadRequest {
 
     let httpStatusCode = responseData.response?.statusCode
     guard let data = responseData.value else {
-      RGNetwork.hideIndicator()
+      RGNetworkIndicator.hide()
       return (nil, nil, nil, nil, responseData.error, httpStatusCode, downloadTask)
     }
 
     let string = String(data: data, encoding: .utf8)
     guard let code = httpStatusCode, code >= 200 && code < 300 else {
-      RGNetwork.hideIndicator()
+      RGNetworkIndicator.hide()
       return (nil, string, data, nil, responseData.error, httpStatusCode, downloadTask)
     }
 
@@ -203,10 +202,10 @@ extension DownloadRequest {
         options: [.fragmentsAllowed, .mutableContainers, .mutableLeaves]
       ) as? ResponseJSON
 
-      RGNetwork.hideIndicator()
+      RGNetworkIndicator.hide()
       return (json, string, data, responseData.fileURL, nil, httpStatusCode, downloadTask)
     } catch {
-      RGNetwork.hideIndicator()
+      RGNetworkIndicator.hide()
       return (nil, error.localizedDescription, data, responseData.fileURL, nil, httpStatusCode, downloadTask)
     }
   }
@@ -221,7 +220,7 @@ extension DownloadRequest {
     additionalConfig: RGNetAdditionalConfig = .init()
   ) async -> SerializingDownloadDecodable<Value> {
     if additionalConfig.showIndicator {
-      RGNetwork.showIndicator()
+      RGNetworkIndicator.show()
     }
 
     let downloadTask = serializingDecodable(
@@ -245,16 +244,16 @@ extension DownloadRequest {
     }
     let string = String(data: resumeData, encoding: .utf8)
     guard let code = httpStatusCode, code >= 200 && code < 300 else {
-      RGNetwork.hideIndicator()
+      RGNetworkIndicator.hide()
       return (nil, string, resumeData, nil, response.error, httpStatusCode, downloadTask)
     }
 
     guard let value = response.value else {
-      RGNetwork.hideIndicator()
+      RGNetworkIndicator.hide()
       return (nil, string, resumeData, response.fileURL, nil, httpStatusCode, downloadTask)
     }
 
-    RGNetwork.hideIndicator()
+    RGNetworkIndicator.hide()
     return (value, string, resumeData, response.fileURL, nil, httpStatusCode, downloadTask)
   }
 

@@ -32,7 +32,6 @@ extension DataRequest {
   ) -> Self {
     if additionalConfig.showIndicator == true {
       RGNetworkIndicator.show()
-      // RGNetwork.showActivityIndicator()
     }
 
     responseData(
@@ -102,7 +101,6 @@ extension DataRequest {
   ) -> Self {
     if additionalConfig.showIndicator == true {
       RGNetworkIndicator.show()
-      // RGNetwork.showActivityIndicator()
     }
 
     responseDecodable(
@@ -171,7 +169,6 @@ extension DownloadRequest {
   ) -> Self {
     if additionalConfig.showIndicator == true {
       RGNetworkIndicator.show()
-      // RGNetwork.showActivityIndicator()
     }
 
     responseData(
@@ -241,7 +238,6 @@ extension DownloadRequest {
   ) -> Self {
     if additionalConfig.showIndicator == true {
       RGNetworkIndicator.show()
-      // RGNetwork.showActivityIndicator()
     }
 
     responseDecodable(
