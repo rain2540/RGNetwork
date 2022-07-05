@@ -181,7 +181,7 @@ fileprivate extension DispatchQueue {
 
 // MARK: - UIApplication Extension
 
-fileprivate extension UIApplication {
+internal extension UIApplication {
 
   var keySceneWindow: UIWindow? {
     if #available(iOS 13, *) {
