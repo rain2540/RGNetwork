@@ -167,10 +167,9 @@ extension DownloadRequest {
     dataPreprocessor: DataPreprocessor = DataResponseSerializer.defaultDataPreprocessor,
     emptyResponseCodes: Set<Int> = DataResponseSerializer.defaultEmptyResponseCodes,
     emptyRequestMethods: Set<HTTPMethod> = DataResponseSerializer.defaultEmptyRequestMethods,
-    showIndicator: Bool = false,
-    showLog: Bool = true
+    additionalConfig: RGNetAdditionalConfig = .init()
   ) async -> SerializingDownloadJSON {
-    if showIndicator {
+    if additionalConfig.showIndicator {
       RGNetwork.showIndicator()
     }
 
@@ -182,7 +181,7 @@ extension DownloadRequest {
 
     let responseData = await downloadTask.response
 
-    if showLog {
+    if additionalConfig.showLog {
       dLog("RGNetwork.download.serializingJSON.debugDescription: \n\(responseData.debugDescription)")
     }
 
