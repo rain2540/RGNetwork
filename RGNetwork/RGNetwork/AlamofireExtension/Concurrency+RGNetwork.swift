@@ -62,10 +62,9 @@ extension DataRequest {
     dataPreprocessor: DataPreprocessor = DataResponseSerializer.defaultDataPreprocessor,
     emptyResponseCodes: Set<Int> = DataResponseSerializer.defaultEmptyResponseCodes,
     emptyRequestMethods: Set<HTTPMethod> = DataResponseSerializer.defaultEmptyRequestMethods,
-    showIndicator: Bool = false,
-    showLog: Bool = true
+    additionalConfig: RGNetAdditionalConfig = .init()
   ) async -> SerializingRequestJSON {
-    if showIndicator {
+    if additionalConfig.showIndicator {
       RGNetwork.showIndicator()
       // RGNetwork.showActivityIndicator()
     }
@@ -78,7 +77,7 @@ extension DataRequest {
 
     let responseData = await dataTask.response
 
-    if showLog {
+    if additionalConfig.showLog {
       dLog("RGNetwork.request.serializingJSON.debugDescription: \n\(responseData.debugDescription)")
     }
 
