@@ -35,37 +35,6 @@ public typealias FailureDownloadDecodable<T: Decodable> = (Error?, ResponseStrin
 struct RGNetwork { }
 
 
-// MARK: - Indicator View
-
-extension RGNetwork {
-
-  /// 显示 indicator
-  /// - Parameters:
-  ///   - mode: 显示模式，默认为 .indeterminate
-  ///   - text: 显示的文字，默认为空
-  internal static func showIndicator(
-    mode: MBProgressHUDMode = .indeterminate,
-    text: String = ""
-  ) {
-    DispatchQueue.mainAsync {
-      guard let window = UIApplication.shared.keySceneWindow else { return }
-      let hud = MBProgressHUD.showAdded(to: window, animated: true)
-      hud.mode = mode
-      hud.label.text = text
-    }
-  }
-
-  /// 隐藏 indicator
-  internal static func hideIndicator() {
-    DispatchQueue.mainAsync {
-      guard let window = UIApplication.shared.keySceneWindow else { return }
-      MBProgressHUD.hide(for: window, animated: true)
-    }
-  }
-
-}
-
-
 // MARK: - Proxy
 
 extension RGNetwork {
