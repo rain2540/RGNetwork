@@ -49,7 +49,7 @@ class RGDownloadRequest {
     requestModifier: Session.RequestModifier? = nil,
     destination: DownloadRequest.Destination? = nil
   ) {
-    let urlPath = RGNetwork.urlPathString(by: urlString)
+    let urlPath = RGURLHandler.urlPathString(by: urlString)
     self.downloadRequest = AF.download(
       urlPath,
       method: method,
