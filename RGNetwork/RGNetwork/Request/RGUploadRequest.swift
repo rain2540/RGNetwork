@@ -45,7 +45,7 @@ class RGUploadRequest {
     requestModifier: Session.RequestModifier? = nil,
     multipartFormData: @escaping (MultipartFormData) -> Void
   ) {
-    let urlPath = RGNetwork.urlPathString(by: urlString)
+    let urlPath = RGURLHandler.urlPathString(by: urlString)
     self.uploadRequest = AF.upload(
       multipartFormData: multipartFormData,
       to: urlPath,
