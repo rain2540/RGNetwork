@@ -55,7 +55,7 @@ class RGDataRequest {
     interceptor: RequestInterceptor? = nil,
     requestModifier: Session.RequestModifier? = nil
   ) {
-    let urlPath = RGNetwork.urlPathString(by: urlString)
+    let urlPath = RGURLHandler.urlPathString(by: urlString)
     self.dataRequest = AF.request(
       urlPath,
       method: method,
