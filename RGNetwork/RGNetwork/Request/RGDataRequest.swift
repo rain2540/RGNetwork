@@ -63,53 +63,7 @@ class RGDataRequest {
       encoding: encoding,
       headers: headers,
       interceptor: interceptor,
-      requestModifier: requestModifier
-    )
-  }
-
-}
-
-
-// MARK: - Public
-
-extension RGDataRequest {
-
-  /// 执行请求
-  /// - Parameters:
-  ///   - queue: 执行请求的队列
-  ///   - showIndicator: 是否显示 Indicator
-  ///   - success: 请求成功的 Task
-  ///   - failure: 请求失败的 Task
-  @discardableResult
-  public func task(
-    queue: DispatchQueue = .main,
-    additionalConfig: RGNetAdditionalConfig = .init(),
-    success: @escaping SuccessRequest,
-    failure: @escaping FailureRequest
-  ) -> DataRequest {
-    let request = dataRequest.responseJSON(
-      queue: queue,
-      additionalConfig: additionalConfig,
-      success: success,
-      failure: failure)
-    return request
-  }
-
-  @discardableResult
-  public func taskDecodable<T: Decodable>(
-    of type: T.Type = T.self,
-    queue: DispatchQueue = .main,
-    additionalConfig: RGNetAdditionalConfig = .init(),
-    success: @escaping SuccessRequestDecodable<T>,
-    failure: @escaping FailureRequestDecodable<T>
-  ) -> DataRequest {
-    let request = dataRequest.responseDecodable(
-      of: type,
-      queue: queue,
-      additionalConfig: additionalConfig,
-      success: success,
-      failure: failure)
-    return request
+      requestModifier: requestModifier)
   }
 
 }
