@@ -10,6 +10,17 @@ import Foundation
 
 public struct RGNetProxyState {
 
+  /// 是否设置网络代理
+  public static var isSetupProxy: Bool {
+    if proxyType == kCFProxyTypeNone {
+      dLog("当前未设置网络代理")
+      return false
+    } else {
+      dLog("当前设置了网络代理")
+      return true
+    }
+  }
+
   /// 网络代理主机名
   public static var proxyHostName: String {
     let hostName = proxyInfos.object(forKey: kCFProxyHostNameKey) as? String ?? "Proxy Host Name is nil"

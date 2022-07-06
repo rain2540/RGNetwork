@@ -29,29 +29,6 @@ public typealias SuccessDownloadDecodable<T: Decodable> = (T?, ResponseString?, 
 public typealias FailureDownloadDecodable<T: Decodable> = (Error?, ResponseString?, ResponseData?, HttpStatusCode?, DownloadRequest, DownloadResponse<T, AFError>) -> Void
 
 
-// MARK: -
-
-struct RGNetwork { }
-
-
-// MARK: - Proxy
-
-extension RGNetwork {
-
-  /// 是否设置网络代理
-  public static var isSetupProxy: Bool {
-    if proxyType == kCFProxyTypeNone {
-      dLog("当前未设置网络代理")
-      return false
-    } else {
-      dLog("当前设置了网络代理")
-      return true
-    }
-  }
-
-}
-
-
 // MARK: - String Extension
 
 internal extension String {
