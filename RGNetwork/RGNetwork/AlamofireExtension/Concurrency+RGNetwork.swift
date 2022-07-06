@@ -171,7 +171,7 @@ extension DownloadRequest {
     emptyResponseCodes: Set<Int> = DataResponseSerializer.defaultEmptyResponseCodes,
     emptyRequestMethods: Set<HTTPMethod> = DataResponseSerializer.defaultEmptyRequestMethods,
     additionalConfig: RGNetAdditionalConfig = .init()
-  ) async -> SerializingDownloadJSON {
+  ) async -> DownloadSerializeJSON {
     if additionalConfig.showIndicator {
       RGNetworkIndicator.show()
     }
@@ -191,13 +191,13 @@ extension DownloadRequest {
     let httpStatusCode = responseData.response?.statusCode
     guard let data = responseData.value else {
       RGNetworkIndicator.hide()
-      return (nil, nil, nil, nil, responseData.error, httpStatusCode, downloadTask)
+      return .failure((responseData.error, nil, nil, nil, httpStatusCode, downloadTask))
     }
 
     let string = String(data: data, encoding: .utf8)
     guard let code = httpStatusCode, code >= 200 && code < 300 else {
       RGNetworkIndicator.hide()
-      return (nil, string, data, nil, responseData.error, httpStatusCode, downloadTask)
+      return .failure((responseData.error, string, data, nil, httpStatusCode, downloadTask))
     }
 
     do {
@@ -207,10 +207,10 @@ extension DownloadRequest {
       ) as? ResponseJSON
 
       RGNetworkIndicator.hide()
-      return (json, string, data, responseData.fileURL, nil, httpStatusCode, downloadTask)
+      return .success((json, string, data, responseData.fileURL, httpStatusCode, downloadTask))
     } catch {
       RGNetworkIndicator.hide()
-      return (nil, error.localizedDescription, data, responseData.fileURL, nil, httpStatusCode, downloadTask)
+      return .success((nil, error.localizedDescription, data, responseData.fileURL, httpStatusCode, downloadTask))
     }
   }
 
