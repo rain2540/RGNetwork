@@ -88,19 +88,19 @@ final class ViewController: UIViewController {
 
   private func loadByNetwork() {
     let request = AF.request(urlString, parameters: params)
-      request.responseJSON(
-        queue: .global(),
+    request.responseJSON(
+      queue: .global(),
       additionalConfig: .init(showIndicator: true),
-        success: { json, string, data, httpStatusCode, request, response in
-          print("JSON: \n\(json ?? [:])")
-          print("\n/* ***** ***** ***** ***** */\n")
-          print("response:", response, separator: "\n")
-          print("\n/* ***** ***** ***** ***** */\n")
-          print("metrics:", response.metrics ?? "none", separator: "\n")
-          print("\n/* ***** ***** ***** ***** */\n")
-        }, failure: { error, string, data, httpStatusCode, request, response in
-          print("error: \n", error ?? "get nil failed.")
-        })
+      success: { json, string, data, httpStatusCode, request, response in
+        print("JSON: \n\(json ?? [:])")
+        print("\n/* ***** ***** ***** ***** */\n")
+        print("response:", response, separator: "\n")
+        print("\n/* ***** ***** ***** ***** */\n")
+        print("metrics:", response.metrics ?? "none", separator: "\n")
+        print("\n/* ***** ***** ***** ***** */\n")
+      }, failure: { error, string, data, httpStatusCode, request, response in
+        print("error: \n", error ?? "get nil failed.")
+      })
   }
 
   private func loadByNetworkDecodable() {
