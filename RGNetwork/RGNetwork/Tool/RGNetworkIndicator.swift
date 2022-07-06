@@ -11,6 +11,10 @@ import MBProgressHUD
 
 public struct RGNetworkIndicator {
 
+  /// 显示 indicator
+  /// - Parameters:
+  ///   - mode: 显示模式，默认为 .indeterminate
+  ///   - text: 显示的文字，默认为空
   public static func show(
     mode: MBProgressHUDMode = .indeterminate,
     text: String = ""
