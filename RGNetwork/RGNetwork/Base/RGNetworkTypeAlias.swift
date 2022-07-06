@@ -1,5 +1,5 @@
 //
-//  RGNetwork.swift
+//  RGNetworkTypeAlias.swift
 //  RGNetwork
 //
 //  Created by RAIN on 2016/11/15.
