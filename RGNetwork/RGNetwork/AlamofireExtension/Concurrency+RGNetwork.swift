@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 
+@available(*, deprecated)
 @available(iOS 13, *)
 public typealias SerializingRequestJSON = (
   json: ResponseJSON?,
@@ -19,6 +20,7 @@ public typealias SerializingRequestJSON = (
   task: DataTask<Data>
 )
 
+@available(*, deprecated)
 @available(iOS 13, *)
 public typealias SerializingRequestDecodable<Value: Decodable> = (
   value: Value?,
@@ -29,6 +31,7 @@ public typealias SerializingRequestDecodable<Value: Decodable> = (
   task: DataTask<Value>
 )
 
+@available(*, deprecated)
 @available(iOS 13, *)
 public typealias SerializingDownloadJSON = (
   json: ResponseJSON?,
@@ -40,6 +43,7 @@ public typealias SerializingDownloadJSON = (
   task: DownloadTask<Data>
 )
 
+@available(*, deprecated)
 @available(iOS 13, *)
 public typealias SerializingDownloadDecodable<Value: Decodable> = (
   value: Value?,
