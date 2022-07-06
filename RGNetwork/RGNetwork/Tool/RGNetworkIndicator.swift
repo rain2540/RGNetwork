@@ -27,6 +27,7 @@ public struct RGNetworkIndicator {
     }
   }
 
+  /// 隐藏 indicator
   public static func hide() {
     DispatchQueue.mainAsync {
       guard let window = UIApplication.shared.keySceneWindow else { return }
