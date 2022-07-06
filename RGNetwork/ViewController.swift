@@ -201,13 +201,23 @@ final class ViewController: UIViewController {
   @available(iOS 13.0, *)
   private func loadByNetworkAsync() {
     Task {
-      let config = RGDataRequestConfig(urlString: urlString, parameters: params)
-      let response = await RGNetwork.request(config: config, showIndicator: true)
-      guard let json = response.json else {
+      let request = AF.request(urlString, parameters: params)
+      let response = await request.serializingJSON(additionalConfig: .init(showIndicator: true))
+      switch response {
+      case let .success(success):
+        guard let json = success.json else {
         print("get json failed.")
         return
       }
       print(json)
+
+      case let .failure(failure):
+        guard let error = failure.error else {
+          print("unknown error")
+          return
+        }
+        print(error)
+      }
     }
   }
 
