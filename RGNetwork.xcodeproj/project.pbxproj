@@ -137,7 +137,6 @@
 				B7639FD32399E87A004859B5 /* RGNetworkPreset.swift */,
 				B763A0162399F7FB004859B5 /* RGNetworkError.swift */,
 				B795796D286E86E80071D4CC /* RGNetAdditionalConfig.swift */,
-				B74D9DCC1F134DDB00D34AE1 /* RGToast.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -168,6 +167,7 @@
 				B7CA13FB2873E1FB003DE455 /* RGURLHandler.swift */,
 				B7CA13FE2873E48A003DE455 /* RGNetworkIndicator.swift */,
 				B7CA140028740217003DE455 /* RGNetProxyState.swift */,
+				B74D9DCC1F134DDB00D34AE1 /* RGToast.swift */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
