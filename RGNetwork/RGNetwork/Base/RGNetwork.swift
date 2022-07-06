@@ -54,7 +54,29 @@ public enum RequestSerializeJSON {
 }
 
 
+@available(iOS 13, *)
+public typealias RequestSerializeDecodableSuccess<Value: Decodable> = (
+  value: Value?,
+  string: ResponseString?,
+  data: ResponseData?,
+  httpStatusCode: HttpStatusCode?,
+  task: DataTask<Value>
+)
 
+@available(iOS 13, *)
+public typealias RequestSerializeDecodableFailure<Value: Decodable> = (
+  error: Error?,
+  string: ResponseString?,
+  data: ResponseData?,
+  httpStatusCode: HttpStatusCode?,
+  task: DataTask<Value>
+)
+
+@available(iOS 13, *)
+public enum RequestSerializeDecodable<Value: Decodable> {
+  case success(RequestSerializeDecodableSuccess<Value>)
+  case failure(RequestSerializeDecodableFailure<Value>)
+}
 
 
 // MARK: - String Extension
