@@ -70,16 +70,6 @@ extension RGNetwork {
     return type
   }
 
-  /// 网络代理信息
-  private static var proxyInfos: AnyObject {
-    let proxySetting = CFNetworkCopySystemProxySettings()!.takeUnretainedValue()
-    let url = URL(string: "https://www.baidu.com")!
-    let proxyArray = CFNetworkCopyProxiesForURL(url as CFURL, proxySetting).takeUnretainedValue()
-
-    let proxyInfo = (proxyArray as [AnyObject])[0]
-    return proxyInfo
-  }
-
 }
 
 
