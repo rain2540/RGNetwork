@@ -233,8 +233,8 @@ extension DownloadRequest {
     emptyResponseCodes: Set<Int> = DecodableResponseSerializer<T>.defaultEmptyResponseCodes,
     emptyRequestMethods: Set<HTTPMethod> = DecodableResponseSerializer<T>.defaultEmptyRequestMethods,
     additionalConfig: RGNetAdditionalConfig = .init(),
-    success: @escaping SuccessDownloadDecodable<T>,
-    failure: @escaping FailureDownloadDecodable<T>
+    success: @escaping DownloadDecodableSuccess<T>,
+    failure: @escaping DownloadDecodableFailure<T>
   ) -> Self {
     if additionalConfig.showIndicator == true {
       RGNetworkIndicator.show()
