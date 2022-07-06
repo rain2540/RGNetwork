@@ -96,8 +96,8 @@ extension DataRequest {
     emptyResponseCodes: Set<Int> = DecodableResponseSerializer<T>.defaultEmptyResponseCodes,
     emptyRequestMethods: Set<HTTPMethod> = DecodableResponseSerializer<T>.defaultEmptyRequestMethods,
     additionalConfig: RGNetAdditionalConfig = .init(),
-    success: @escaping SuccessRequestDecodable<T>,
-    failure: @escaping FailureRequestDecodable<T>
+    success: @escaping RequestDecodableSuccess<T>,
+    failure: @escaping RequestDecodableFailure<T>
   ) -> Self {
     if additionalConfig.showIndicator == true {
       RGNetworkIndicator.show()
