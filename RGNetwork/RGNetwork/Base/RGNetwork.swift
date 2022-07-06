@@ -54,21 +54,6 @@ internal extension String {
 }
 
 
-// MARK: - DispatchQueue
-
-internal extension DispatchQueue {
-
-  static func mainAsync(execute: @escaping () -> Void) {
-    if Thread.current.isMainThread {
-      execute()
-    } else {
-      main.async { execute() }
-    }
-  }
-
-}
-
-
 // MARK: - Debug Log
 
 internal func dLog(
