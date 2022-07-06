@@ -112,6 +112,28 @@ public enum DownloadSerializeJSON {
 
 
 }
+@available(iOS 13, *)
+public typealias DownloadSerializeDecodableSuccess<Value: Decodable> = (
+  value: Value?,
+  string: ResponseString?,
+  data: ResponseData?,
+  url: URL?,
+  httpStatusCode: HttpStatusCode?,
+  task: DownloadTask<Value>
+)
 
+@available(iOS 13, *)
+public typealias DownloadSerializeDecodableFailure<Value: Decodable> = (
+  error: Error?,
+  string: ResponseString?,
+  data: ResponseData?,
+  url: URL?,
+  httpStatusCode: HttpStatusCode?,
+  task: DownloadTask<Value>
+)
 
+@available(iOS 13, *)
+public enum DownloadSerializeDecodable<Value: Decodable> {
+  case success(DownloadSerializeDecodableSuccess<Value>)
+  case failure(DownloadSerializeDecodableFailure<Value>)
 }
