@@ -26,7 +26,7 @@ class RGDataRequest {
   ///   - encoding: parameter encoding
   ///   - headers: HTTP headers
   ///   - timeoutInterval: 超时时长
-  convenience init(
+  init(
     urlString: String,
     method: HTTPMethod = .get,
     parameters: Parameters? = nil,
@@ -34,8 +34,9 @@ class RGDataRequest {
     headers: HTTPHeaders? = nil,
     timeoutInterval: TimeInterval = 30.0
   ) {
-    self.init(
-      urlString: urlString,
+    let urlPath = RGURLHandler.urlPathString(by: urlString)
+    self.dataRequest = AF.request(
+      urlPath,
       method: method,
       parameters: parameters,
       encoding: encoding,
