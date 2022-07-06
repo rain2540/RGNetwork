@@ -8,7 +8,6 @@
 
 import Foundation
 import Alamofire
-import MBProgressHUD
 
 
 public typealias ResponseJSON = [String: Any]
@@ -79,35 +78,6 @@ extension RGNetwork {
 
     let proxyInfo = (proxyArray as [AnyObject])[0]
     return proxyInfo
-  }
-
-}
-
-
-// MARK: - VPN
-
-extension RGNetwork {
-
-  /// 是否开启 VPN
-  public static var isVPNOn: Bool {
-    var flag = false
-    let proxySetting = CFNetworkCopySystemProxySettings()?.takeUnretainedValue() as? [AnyHashable: Any] ?? [:]
-    let keys = (proxySetting["__SCOPED__"] as? NSDictionary)?.allKeys as? [String] ?? []
-
-    for key in keys {
-      let checkStrings = ["tap", "tun", "ipsec", "ppp"]
-      let condition = checkStrings.contains(key)
-
-      if condition {
-        dLog("当前开启了 VPN")
-        flag = true
-        break
-      }
-    }
-    if flag == false {
-      dLog("当前未开启 VPN")
-    }
-    return flag
   }
 
 }
