@@ -18,7 +18,7 @@ class RGDownloadRequest {
 
   // MARK: - Lifecycle
 
-  convenience init(
+  init(
     urlString: String,
     method: HTTPMethod = .get,
     parameters: Parameters? = nil,
@@ -27,8 +27,9 @@ class RGDownloadRequest {
     timeoutInterval: TimeInterval = 30.0,
     destination: DownloadRequest.Destination? = nil
   ) {
-    self.init(
-      urlString: urlString,
+    let urlPath = RGURLHandler.urlPathString(by: urlString)
+    self.downloadRequest = AF.download(
+      urlPath,
       method: method,
       parameters: parameters,
       encoding: encoding,
@@ -36,7 +37,7 @@ class RGDownloadRequest {
       requestModifier: { urlRequest in
         urlRequest.timeoutInterval = timeoutInterval
       },
-      destination: destination)
+      to: destination)
   }
 
   init(
