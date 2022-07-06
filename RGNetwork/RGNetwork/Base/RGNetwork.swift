@@ -49,13 +49,6 @@ extension RGNetwork {
     }
   }
 
-  /// 网络代理主机名
-  public static var proxyHostName: String {
-    let hostName = proxyInfos.object(forKey: kCFProxyHostNameKey) as? String ?? "Proxy Host Name is nil"
-    dLog("Proxy Host Name: \(hostName)")
-    return hostName
-  }
-
 }
 
 

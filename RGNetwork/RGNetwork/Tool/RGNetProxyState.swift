@@ -10,6 +10,13 @@ import Foundation
 
 public struct RGNetProxyState {
 
+  /// 网络代理主机名
+  public static var proxyHostName: String {
+    let hostName = proxyInfos.object(forKey: kCFProxyHostNameKey) as? String ?? "Proxy Host Name is nil"
+    dLog("Proxy Host Name: \(hostName)")
+    return hostName
+  }
+
   /// 网络代理端口号
   public static var proxyPortNumber: String {
     let portNumber = proxyInfos.object(forKey: kCFProxyPortNumberKey) as? String ?? "Proxy Port Number is nil"
