@@ -164,8 +164,8 @@ extension DownloadRequest {
     emptyResponseCodes: Set<Int> = DataResponseSerializer.defaultEmptyResponseCodes,
     emptyRequestMethods: Set<HTTPMethod> = DataResponseSerializer.defaultEmptyRequestMethods,
     additionalConfig: RGNetAdditionalConfig = .init(),
-    success: @escaping SuccessDownload,
-    failure: @escaping FailureDownload
+    success: @escaping DownloadSuccess,
+    failure: @escaping DownloadFailure
   ) -> Self {
     if additionalConfig.showIndicator == true {
       RGNetworkIndicator.show()
