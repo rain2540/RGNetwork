@@ -80,13 +80,35 @@ public enum RequestSerializeDecodable<Value: Decodable> {
 
 
 // MARK: - String Extension
+@available(iOS 13, *)
+public typealias DownloadSerializeJSONSuccess = (
+  json: ResponseJSON?,
+  string: ResponseString?,
+  data: ResponseData?,
+  url: URL?,
+  httpStatusCode: HttpStatusCode?,
+  task: DownloadTask<Data>
+)
 
 internal extension String {
+@available(iOS 13, *)
+public typealias DownloadSerializeJSONFailure = (
+  error: Error?,
+  string: ResponseString?,
+  data: ResponseData?,
+  url: URL?,
+  httpStatusCode: HttpStatusCode?,
+  task: DownloadTask<Data>
+)
 
   /// 是否含有 http / https 前缀
   var rg_hasHttpPrefix: Bool {
     return self.hasPrefix("http://") || self.hasPrefix("https://")
-  }
+@available(iOS 13, *)
+public enum DownloadSerializeJSON {
+  case success(DownloadSerializeJSONSuccess)
+  case failure(DownloadSerializeJSONFailure)
+}
 
 
 }
