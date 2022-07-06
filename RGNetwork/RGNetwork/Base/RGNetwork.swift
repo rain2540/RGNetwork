@@ -63,13 +63,6 @@ extension RGNetwork {
     return portNumber
   }
 
-  /// 网络代理类型
-  public static var proxyType: CFString {
-    let type = proxyInfos.object(forKey: kCFProxyTypeKey) ?? kCFProxyTypeNone
-    dLog("Proxy Type: \(type)")
-    return type
-  }
-
 }
 
 

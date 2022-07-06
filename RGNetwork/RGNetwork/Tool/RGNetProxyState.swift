@@ -10,6 +10,12 @@ import Foundation
 
 public struct RGNetProxyState {
 
+  /// 网络代理类型
+  public static var proxyType: CFString {
+    let type = proxyInfos.object(forKey: kCFProxyTypeKey) ?? kCFProxyTypeNone
+    dLog("Proxy Type: \(type)")
+    return type
+  }
 
   /// 网络代理信息
   private static var proxyInfos: AnyObject {
