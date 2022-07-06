@@ -118,7 +118,7 @@ extension DataRequest {
     emptyResponseCodes: Set<Int> = DecodableResponseSerializer<Value>.defaultEmptyResponseCodes,
     emptyRequestMethods: Set<HTTPMethod> = DecodableResponseSerializer<Value>.defaultEmptyRequestMethods,
     additionalConfig: RGNetAdditionalConfig = .init()
-  ) async -> SerializingRequestDecodable<Value> {
+  ) async -> RequestSerializeDecodable<Value> {
     if additionalConfig.showIndicator {
       RGNetworkIndicator.show()
     }
@@ -145,16 +145,16 @@ extension DataRequest {
     let string = String(data: responseData, encoding: .utf8)
     guard let code = httpStatusCode, code >= 200 && code < 300 else {
       RGNetworkIndicator.hide()
-      return (nil, string, response.data, response.error, httpStatusCode, dataTask)
+      return .failure((response.error, string, response.data, httpStatusCode, dataTask))
     }
 
     guard let value = response.value else {
       RGNetworkIndicator.hide()
-      return (nil, string, response.data, nil, httpStatusCode, dataTask)
+      return .success((nil, string, response.data, httpStatusCode, dataTask))
     }
 
     RGNetworkIndicator.hide()
-    return (value, string, response.data, nil, httpStatusCode, dataTask)
+    return .success((value, string, response.data, httpStatusCode, dataTask))
   }
 
 }
