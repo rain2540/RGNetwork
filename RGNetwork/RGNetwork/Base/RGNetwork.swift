@@ -29,6 +29,29 @@ public typealias DownloadDecodableSuccess<T: Decodable> = (T?, ResponseString?, 
 public typealias DownloadDecodableFailure<T: Decodable> = (Error?, ResponseString?, ResponseData?, HttpStatusCode?, DownloadRequest, DownloadResponse<T, AFError>) -> Void
 
 
+@available(iOS 13, *)
+public typealias RequestSerilizeJSONSuccess = (
+  json: ResponseJSON?,
+  string: ResponseString?,
+  data: ResponseData?,
+  httpStatusCode: HttpStatusCode?,
+  task: DataTask<Data>
+)
+
+@available(iOS 13, *)
+public typealias RequestSerilizeJSONFailure = (
+  error: Error?,
+  string: ResponseString?,
+  data: ResponseData?,
+  httpStatusCode: HttpStatusCode?,
+  task: DataTask<Data>
+)
+
+@available(iOS 13, *)
+public enum RequestSerializeJSON {
+  case success(RequestSerilizeJSONSuccess)
+  case failure(RequestSerilizeJSONFailure)
+}
 
 
 
