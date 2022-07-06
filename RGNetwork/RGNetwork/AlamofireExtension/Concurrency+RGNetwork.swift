@@ -67,7 +67,7 @@ extension DataRequest {
     emptyResponseCodes: Set<Int> = DataResponseSerializer.defaultEmptyResponseCodes,
     emptyRequestMethods: Set<HTTPMethod> = DataResponseSerializer.defaultEmptyRequestMethods,
     additionalConfig: RGNetAdditionalConfig = .init()
-  ) async -> SerializingRequestJSON {
+  ) async -> RequestSerializeJSON {
     if additionalConfig.showIndicator {
       RGNetworkIndicator.show()
     }
@@ -87,13 +87,13 @@ extension DataRequest {
     let httpStatusCode = responseData.response?.statusCode
     guard let data = responseData.value else {
       RGNetworkIndicator.hide()
-      return (nil, nil, nil, responseData.error, httpStatusCode, dataTask)
+      return .failure((responseData.error, nil, nil, httpStatusCode, dataTask))
     }
 
     let string = String(data: data, encoding: .utf8)
     guard let code = httpStatusCode, code >= 200 && code < 300 else {
       RGNetworkIndicator.hide()
-      return (nil, string, data, responseData.error, httpStatusCode, dataTask)
+      return .failure((responseData.error, string, data, httpStatusCode, dataTask))
     }
 
     do {
@@ -103,10 +103,10 @@ extension DataRequest {
       ) as? ResponseJSON
 
       RGNetworkIndicator.hide()
-      return (json, string, data, nil, httpStatusCode, dataTask)
+      return .success((json, string, data, httpStatusCode, dataTask))
     } catch {
       RGNetworkIndicator.hide()
-      return (nil, error.localizedDescription, data, nil, httpStatusCode, dataTask)
+      return .success((nil, error.localizedDescription, data, httpStatusCode, dataTask))
     }
   }
 
