@@ -222,7 +222,7 @@ extension DownloadRequest {
     emptyResponseCodes: Set<Int> = DecodableResponseSerializer<Value>.defaultEmptyResponseCodes,
     emptyRequestMethods: Set<HTTPMethod> = DecodableResponseSerializer<Value>.defaultEmptyRequestMethods,
     additionalConfig: RGNetAdditionalConfig = .init()
-  ) async -> SerializingDownloadDecodable<Value> {
+  ) async -> DownloadSerializeDecodable<Value> {
     if additionalConfig.showIndicator {
       RGNetworkIndicator.show()
     }
@@ -249,16 +249,16 @@ extension DownloadRequest {
     let string = String(data: resumeData, encoding: .utf8)
     guard let code = httpStatusCode, code >= 200 && code < 300 else {
       RGNetworkIndicator.hide()
-      return (nil, string, resumeData, nil, response.error, httpStatusCode, downloadTask)
+      return .failure((response.error, string, resumeData, nil, httpStatusCode, downloadTask))
     }
 
     guard let value = response.value else {
       RGNetworkIndicator.hide()
-      return (nil, string, resumeData, response.fileURL, nil, httpStatusCode, downloadTask)
+      return .success((nil, string, resumeData, response.fileURL, httpStatusCode, downloadTask))
     }
 
     RGNetworkIndicator.hide()
-    return (value, string, resumeData, response.fileURL, nil, httpStatusCode, downloadTask)
+    return .success((value, string, resumeData, response.fileURL, httpStatusCode, downloadTask)) 
   }
 
 }
