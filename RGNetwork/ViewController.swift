@@ -206,10 +206,10 @@ final class ViewController: UIViewController {
       switch response {
       case let .success(success):
         guard let json = success.json else {
-        print("get json failed.")
-        return
-      }
-      print(json)
+          print("get json failed.")
+          return
+        }
+        print(json)
 
       case let .failure(failure):
         guard let error = failure.error else {
