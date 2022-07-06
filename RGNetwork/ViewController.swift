@@ -120,10 +120,9 @@ final class ViewController: UIViewController {
 
   private func loadByDataRequest() {
     let request = RGDataRequest(urlString: urlString, parameters: params)
-    do {
-      try request.task(
+    request.dataRequest.responseJSON(
         queue: .global(),
-        showIndicator: true,
+      additionalConfig: .init(showIndicator: true),
         success: { (json, string, data, httpStatusCode, request, response) in
           print("\n/* ***** ***** ***** ***** */\n")
           print("JSON:", json ?? "", separator: "\n")
@@ -134,9 +133,6 @@ final class ViewController: UIViewController {
         failure: { (error, resString, resData, httpStatusCode, request, response)  in
           print("error: \n", error ?? "get nil failed.")
         })
-    } catch {
-      dLog(error)
-    }
   }
 
   private func loadBySessionCallback() {
