@@ -9,54 +9,6 @@
 import Foundation
 import Alamofire
 
-@available(*, deprecated)
-@available(iOS 13, *)
-public typealias SerializingRequestJSON = (
-  json: ResponseJSON?,
-  string: ResponseString?,
-  data: ResponseData?,
-  error: Error?,
-  httpStatusCode: HttpStatusCode?,
-  task: DataTask<Data>
-)
-
-@available(*, deprecated)
-@available(iOS 13, *)
-public typealias SerializingRequestDecodable<Value: Decodable> = (
-  value: Value?,
-  string: ResponseString?,
-  data: ResponseData?,
-  error: Error?,
-  httpStatusCode: HttpStatusCode?,
-  task: DataTask<Value>
-)
-
-@available(*, deprecated)
-@available(iOS 13, *)
-public typealias SerializingDownloadJSON = (
-  json: ResponseJSON?,
-  string: ResponseString?,
-  data: ResponseData?,
-  url: URL?,
-  error: Error?,
-  httpStatusCode: HttpStatusCode?,
-  task: DownloadTask<Data>
-)
-
-@available(*, deprecated)
-@available(iOS 13, *)
-public typealias SerializingDownloadDecodable<Value: Decodable> = (
-  value: Value?,
-  string: ResponseString?,
-  data: ResponseData?,
-  url: URL?,
-  error: Error?,
-  httpStatusCode: HttpStatusCode?,
-  task: DownloadTask<Value>
-)
-
-
-// MARK: -
 
 @available(iOS 13, *)
 extension DataRequest {
@@ -258,7 +210,7 @@ extension DownloadRequest {
     }
 
     RGNetworkIndicator.hide()
-    return .success((value, string, resumeData, response.fileURL, httpStatusCode, downloadTask)) 
+    return .success((value, string, resumeData, response.fileURL, httpStatusCode, downloadTask))
   }
 
 }
