@@ -32,7 +32,21 @@ extension Session {
     return request
   }
 
+  public func upload(
+    multipartFormData: @escaping (MultipartFormData) -> Void,
+    to urlString: String,
+    method: HTTPMethod = .post,
+    headers: HTTPHeaders? = nil,
+    timeoutInterval: TimeInterval = 30.0
+  ) -> UploadRequest {
+    let urlPath = RGURLHandler.urlPathString(by: urlString)
+    let request = upload(
+      multipartFormData: multipartFormData,
       to: urlPath,
+      method: method,
+      headers: headers,
+      requestModifier: { urlRequest in
+        urlRequest.timeoutInterval = timeoutInterval
       })
     return request
   }
