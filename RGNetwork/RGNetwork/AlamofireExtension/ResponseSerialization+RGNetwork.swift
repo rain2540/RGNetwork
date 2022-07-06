@@ -27,8 +27,8 @@ extension DataRequest {
     emptyResponseCodes: Set<Int> = DataResponseSerializer.defaultEmptyResponseCodes,
     emptyRequestMethods: Set<HTTPMethod> = DataResponseSerializer.defaultEmptyRequestMethods,
     additionalConfig: RGNetAdditionalConfig = .init(),
-    success: @escaping SuccessRequest,
-    failure: @escaping FailureRequest
+    success: @escaping RequestSuccess,
+    failure: @escaping RequestFailure
   ) -> Self {
     if additionalConfig.showIndicator == true {
       RGNetworkIndicator.show()
