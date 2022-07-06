@@ -18,21 +18,23 @@ class RGUploadRequest {
 
   // MARK: - Lifecycle
 
-  convenience init(
+  init(
     urlString: String,
     method: HTTPMethod = .post,
     headers: HTTPHeaders? = nil,
     timeoutInterval: TimeInterval = 30.0,
     multipartData: @escaping (MultipartFormData) -> Void
   ) {
-    self.init(
-      urlString: urlString,
+    let urlPath = RGURLHandler.urlPathString(by: urlString)
+    self.uploadRequest = AF.upload(
+      multipartFormData: multipartData,
+      to: urlPath,
       method: method,
       headers: headers,
       requestModifier: { urlRequest in
         urlRequest.timeoutInterval = timeoutInterval
-      },
-      multipartFormData: multipartData)
+      }
+    )
   }
 
   init(
