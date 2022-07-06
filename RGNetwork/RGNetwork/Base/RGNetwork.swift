@@ -79,7 +79,6 @@ public enum RequestSerializeDecodable<Value: Decodable> {
 }
 
 
-// MARK: - String Extension
 @available(iOS 13, *)
 public typealias DownloadSerializeJSONSuccess = (
   json: ResponseJSON?,
@@ -90,7 +89,6 @@ public typealias DownloadSerializeJSONSuccess = (
   task: DownloadTask<Data>
 )
 
-internal extension String {
 @available(iOS 13, *)
 public typealias DownloadSerializeJSONFailure = (
   error: Error?,
@@ -101,9 +99,6 @@ public typealias DownloadSerializeJSONFailure = (
   task: DownloadTask<Data>
 )
 
-  /// 是否含有 http / https 前缀
-  var rg_hasHttpPrefix: Bool {
-    return self.hasPrefix("http://") || self.hasPrefix("https://")
 @available(iOS 13, *)
 public enum DownloadSerializeJSON {
   case success(DownloadSerializeJSONSuccess)
@@ -111,7 +106,6 @@ public enum DownloadSerializeJSON {
 }
 
 
-}
 @available(iOS 13, *)
 public typealias DownloadSerializeDecodableSuccess<Value: Decodable> = (
   value: Value?,
