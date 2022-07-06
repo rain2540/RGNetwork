@@ -10,7 +10,7 @@ import Foundation
 
 internal extension DispatchQueue {
 
-  static func mainAsync(execute: @escaping () -> Void) {
+  static func rg_mainAsync(execute: @escaping () -> Void) {
     if Thread.current.isMainThread {
       execute()
     } else {
