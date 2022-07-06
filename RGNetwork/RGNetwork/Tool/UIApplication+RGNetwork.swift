@@ -10,7 +10,7 @@ import UIKit
 
 internal extension UIApplication {
 
-  var keySceneWindow: UIWindow? {
+  var rg_keySceneWindow: UIWindow? {
     if #available(iOS 13, *) {
       var keyWindow: UIWindow?
       for connectedScene in UIApplication.shared.connectedScenes {

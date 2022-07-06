@@ -19,8 +19,8 @@ public struct RGNetworkIndicator {
     mode: MBProgressHUDMode = .indeterminate,
     text: String = ""
   ) {
-      guard let window = UIApplication.shared.keySceneWindow else { return }
     DispatchQueue.rg_mainAsync {
+      guard let window = UIApplication.shared.rg_keySceneWindow else { return }
       let hud = MBProgressHUD.showAdded(to: window, animated: true)
       hud.mode = mode
       hud.label.text = text
@@ -29,8 +29,8 @@ public struct RGNetworkIndicator {
 
   /// 隐藏 indicator
   public static func hide() {
-      guard let window = UIApplication.shared.keySceneWindow else { return }
     DispatchQueue.rg_mainAsync {
+      guard let window = UIApplication.shared.rg_keySceneWindow else { return }
       MBProgressHUD.hide(for: window, animated: true)
     }
   }
