@@ -30,7 +30,7 @@ public typealias DownloadDecodableFailure<T: Decodable> = (Error?, ResponseStrin
 
 
 @available(iOS 13, *)
-public typealias RequestSerilizeJSONSuccess = (
+public typealias RequestSerializingJSONSuccess = (
   json: ResponseJSON?,
   string: ResponseString?,
   data: ResponseData?,
@@ -39,7 +39,7 @@ public typealias RequestSerilizeJSONSuccess = (
 )
 
 @available(iOS 13, *)
-public typealias RequestSerilizeJSONFailure = (
+public typealias RequestSerializingJSONFailure = (
   error: Error?,
   string: ResponseString?,
   data: ResponseData?,
@@ -49,13 +49,13 @@ public typealias RequestSerilizeJSONFailure = (
 
 @available(iOS 13, *)
 public enum RequestSerializeJSON {
-  case success(RequestSerilizeJSONSuccess)
-  case failure(RequestSerilizeJSONFailure)
+  case success(RequestSerializingJSONSuccess)
+  case failure(RequestSerializingJSONFailure)
 }
 
 
 @available(iOS 13, *)
-public typealias RequestSerializeDecodableSuccess<Value: Decodable> = (
+public typealias RequestSerializingDecodableSuccess<Value: Decodable> = (
   value: Value?,
   string: ResponseString?,
   data: ResponseData?,
@@ -64,7 +64,7 @@ public typealias RequestSerializeDecodableSuccess<Value: Decodable> = (
 )
 
 @available(iOS 13, *)
-public typealias RequestSerializeDecodableFailure<Value: Decodable> = (
+public typealias RequestSerializingDecodableFailure<Value: Decodable> = (
   error: Error?,
   string: ResponseString?,
   data: ResponseData?,
@@ -74,13 +74,13 @@ public typealias RequestSerializeDecodableFailure<Value: Decodable> = (
 
 @available(iOS 13, *)
 public enum RequestSerializeDecodable<Value: Decodable> {
-  case success(RequestSerializeDecodableSuccess<Value>)
-  case failure(RequestSerializeDecodableFailure<Value>)
+  case success(RequestSerializingDecodableSuccess<Value>)
+  case failure(RequestSerializingDecodableFailure<Value>)
 }
 
 
 @available(iOS 13, *)
-public typealias DownloadSerializeJSONSuccess = (
+public typealias DownloadSerializingJSONSuccess = (
   json: ResponseJSON?,
   string: ResponseString?,
   data: ResponseData?,
@@ -90,7 +90,7 @@ public typealias DownloadSerializeJSONSuccess = (
 )
 
 @available(iOS 13, *)
-public typealias DownloadSerializeJSONFailure = (
+public typealias DownloadSerializingJSONFailure = (
   error: Error?,
   string: ResponseString?,
   data: ResponseData?,
@@ -101,13 +101,13 @@ public typealias DownloadSerializeJSONFailure = (
 
 @available(iOS 13, *)
 public enum DownloadSerializeJSON {
-  case success(DownloadSerializeJSONSuccess)
-  case failure(DownloadSerializeJSONFailure)
+  case success(DownloadSerializingJSONSuccess)
+  case failure(DownloadSerializingJSONFailure)
 }
 
 
 @available(iOS 13, *)
-public typealias DownloadSerializeDecodableSuccess<Value: Decodable> = (
+public typealias DownloadSerializingDecodableSuccess<Value: Decodable> = (
   value: Value?,
   string: ResponseString?,
   data: ResponseData?,
@@ -117,7 +117,7 @@ public typealias DownloadSerializeDecodableSuccess<Value: Decodable> = (
 )
 
 @available(iOS 13, *)
-public typealias DownloadSerializeDecodableFailure<Value: Decodable> = (
+public typealias DownloadSerializingDecodableFailure<Value: Decodable> = (
   error: Error?,
   string: ResponseString?,
   data: ResponseData?,
@@ -128,6 +128,6 @@ public typealias DownloadSerializeDecodableFailure<Value: Decodable> = (
 
 @available(iOS 13, *)
 public enum DownloadSerializeDecodable<Value: Decodable> {
-  case success(DownloadSerializeDecodableSuccess<Value>)
-  case failure(DownloadSerializeDecodableFailure<Value>)
+  case success(DownloadSerializingDecodableSuccess<Value>)
+  case failure(DownloadSerializingDecodableFailure<Value>)
 }
