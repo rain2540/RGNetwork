@@ -79,16 +79,18 @@ extension DataRequest {
     return self
   }
 
-  /// 处理 `DataRequest` 响应数据
-  /// - 反序列化为满足 `Decodable` 协议的实体类对象
+  /// Adds a handler using a `DecodableResponseSerializer` to be called once the request has finished.
   /// - Parameters:
-  ///   - type: 实体对象的类别
-  ///   - queue: 执行请求的队列，默认为主队列
-  ///   - showIndicator: 是否显示 Indicator，默认为 `false`
-  ///   - showLog: 是否显示 debug 日志，默认为 `true`
-  ///   - success: 请求成功的操作
-  ///   - failure: 请求失败的操作
-  /// - Returns: `DataRequest` 对象
+  ///   - type: `Decodable` type to decode from response data.
+  ///   - queue: The queue on which the completion handler is dispatched. `.main` by default.
+  ///   - dataPreprocessor: `DataPreprocessor` which processes the received `Data` before calling the `completionHandler`. `PassthroughPreprocessor()` by default.
+  ///   - decoder: `DataDecoder` to use to decode the response. `JSONDecoder()` by default.
+  ///   - emptyResponseCodes: HTTP status codes for which empty responses are always valid. `[204, 205]` by default.
+  ///   - emptyRequestMethods: `HTTPMethod`s for which empty responses are always valid. `[.head]` by default.
+  ///   - additionalConfig: Set additional config using a `RGNetAdditionalConfig`. `.init(showIndicator: false, showLog: true)` by default.
+  ///   - success: A closure to be executed once the request has finished with success.
+  ///   - failure: A closure to be executed once the request has finished with failure.
+  /// - Returns: The request.
   @discardableResult
   public func responseDecodable<T: Decodable>(
     of type: T.Type = T.self,
