@@ -19,7 +19,7 @@ extension DataRequest {
     emptyResponseCodes: Set<Int> = DataResponseSerializer.defaultEmptyResponseCodes,
     emptyRequestMethods: Set<HTTPMethod> = DataResponseSerializer.defaultEmptyRequestMethods,
     additionalConfig: RGNetAdditionalConfig = .init()
-  ) async -> RequestSerializeJSON {
+  ) async -> RequestSerializingJSON {
     if additionalConfig.showIndicator {
       RGNetworkIndicator.show()
     }
@@ -70,7 +70,7 @@ extension DataRequest {
     emptyResponseCodes: Set<Int> = DecodableResponseSerializer<Value>.defaultEmptyResponseCodes,
     emptyRequestMethods: Set<HTTPMethod> = DecodableResponseSerializer<Value>.defaultEmptyRequestMethods,
     additionalConfig: RGNetAdditionalConfig = .init()
-  ) async -> RequestSerializeDecodable<Value> {
+  ) async -> RequestSerializingDecodable<Value> {
     if additionalConfig.showIndicator {
       RGNetworkIndicator.show()
     }
@@ -123,7 +123,7 @@ extension DownloadRequest {
     emptyResponseCodes: Set<Int> = DataResponseSerializer.defaultEmptyResponseCodes,
     emptyRequestMethods: Set<HTTPMethod> = DataResponseSerializer.defaultEmptyRequestMethods,
     additionalConfig: RGNetAdditionalConfig = .init()
-  ) async -> DownloadSerializeJSON {
+  ) async -> DownloadSerializingJSON {
     if additionalConfig.showIndicator {
       RGNetworkIndicator.show()
     }
@@ -174,7 +174,7 @@ extension DownloadRequest {
     emptyResponseCodes: Set<Int> = DecodableResponseSerializer<Value>.defaultEmptyResponseCodes,
     emptyRequestMethods: Set<HTTPMethod> = DecodableResponseSerializer<Value>.defaultEmptyRequestMethods,
     additionalConfig: RGNetAdditionalConfig = .init()
-  ) async -> DownloadSerializeDecodable<Value> {
+  ) async -> DownloadSerializingDecodable<Value> {
     if additionalConfig.showIndicator {
       RGNetworkIndicator.show()
     }
