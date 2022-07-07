@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 
+// MARK: Basic
 
 public typealias ResponseJSON = [String: Any]
 public typealias ResponseString = String
@@ -16,18 +17,31 @@ public typealias ResponseData = Data
 public typealias HttpStatusCode = Int
 
 
+// MARK: - Callback - Data Request - JSON
+
 public typealias RequestSuccess = (ResponseJSON?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponse<Data, AFError>) -> Void
 public typealias RequestFailure = (Error?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponse<Data, AFError>) -> Void
+
+
+// MARK: - Callback - Data Request - Decodable
 
 public typealias RequestDecodableSuccess<T: Decodable> = (T?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponse<T, AFError>) -> Void
 public typealias RequestDecodableFailure<T: Decodable> = (Error?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponse<T, AFError>) -> Void
 
+
+// MARK: - Callback - Download Request - JSON
+
 public typealias DownloadSuccess = (ResponseJSON?, ResponseString?, ResponseData?, URL?, HttpStatusCode?, DownloadRequest, DownloadResponse<Data, AFError>) -> Void
 public typealias DownloadFailure = (Error?, ResponseString?, ResponseData?, HttpStatusCode?, DownloadRequest, DownloadResponse<Data, AFError>) -> Void
+
+
+// MARK: - Callback - Download Request - Decodable
 
 public typealias DownloadDecodableSuccess<T: Decodable> = (T?, ResponseString?, ResponseData?, URL?, HttpStatusCode?, DownloadRequest, DownloadResponse<T, AFError>) -> Void
 public typealias DownloadDecodableFailure<T: Decodable> = (Error?, ResponseString?, ResponseData?, HttpStatusCode?, DownloadRequest, DownloadResponse<T, AFError>) -> Void
 
+
+// MARK: - Concurrency - Data Request - JSON
 
 @available(iOS 13, *)
 public typealias RequestSerializingJSONSuccess = (
@@ -54,6 +68,8 @@ public enum RequestSerializingJSON {
 }
 
 
+// MARK: - Concurrency - Data Request - Decodable
+
 @available(iOS 13, *)
 public typealias RequestSerializingDecodableSuccess<Value: Decodable> = (
   value: Value?,
@@ -78,6 +94,8 @@ public enum RequestSerializingDecodable<Value: Decodable> {
   case failure(RequestSerializingDecodableFailure<Value>)
 }
 
+
+// MARK: - Concurrency - Download Request - JSON
 
 @available(iOS 13, *)
 public typealias DownloadSerializingJSONSuccess = (
@@ -105,6 +123,8 @@ public enum DownloadSerializingJSON {
   case failure(DownloadSerializingJSONFailure)
 }
 
+
+// MARK: - Concurrency - Download Request - Decodable
 
 @available(iOS 13, *)
 public typealias DownloadSerializingDecodableSuccess<Value: Decodable> = (
