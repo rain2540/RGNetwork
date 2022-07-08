@@ -11,7 +11,7 @@ import Alamofire
 
 class RGDownloadRequest {
 
-  var tag: Int = 0
+  public var tag: Int = 0
 
   public let downloadRequest: DownloadRequest
 
