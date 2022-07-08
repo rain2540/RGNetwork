@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-class RGUploadRequest {
+open class RGUploadRequest {
 
   public var tag: Int = 0
 
