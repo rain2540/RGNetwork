@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-class RGDataRequest {
+open class RGDataRequest {
 
   public var tag: Int = 0
 
