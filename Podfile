@@ -14,5 +14,5 @@ target 'RGNetwork' do
     pod 'Alamofire', :git => 'https://gitee.com/rain2540/Alamofire.git', :tag => '5.5.0'
     # pod 'AlamofireNetworkActivityIndicator', :git => 'https://gitee.com/rain2540/AlamofireNetworkActivityIndicator.git', :tag => '3.1.0.1'
     pod 'MBProgressHUD', :git => 'https://gitee.com/rain2540/MBProgressHUD.git', :tag => '1.2.0'
-    
+
 end
