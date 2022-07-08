@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class RGDownloadRequest {
+open class RGDownloadRequest {
 
   public var tag: Int = 0
 
