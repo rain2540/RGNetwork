@@ -29,15 +29,13 @@ open class RGDownloadRequest {
   ) {
     let urlPath = RGURLHandler.urlPathString(by: urlString)
     self.downloadRequest = AF.download(
-      urlPath,
+      urlString: urlPath,
       method: method,
       parameters: parameters,
       encoding: encoding,
       headers: headers,
-      requestModifier: { urlRequest in
-        urlRequest.timeoutInterval = timeoutInterval
-      },
-      to: destination)
+      timeoutInterval: timeoutInterval,
+      destination: destination)
   }
 
   init(
