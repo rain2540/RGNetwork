@@ -36,15 +36,12 @@ open class RGDataRequest {
   ) {
     let urlPath = RGURLHandler.urlPathString(by: urlString)
     self.dataRequest = AF.request(
-      urlPath,
+      urlString: urlPath,
       method: method,
       parameters: parameters,
       encoding: encoding,
       headers: headers,
-      requestModifier: { urlRequest in
-        urlRequest.timeoutInterval = timeoutInterval
-      }
-    )
+      timeoutInterval: timeoutInterval)
   }
 
   init(
