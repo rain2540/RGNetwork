@@ -31,10 +31,7 @@ open class RGUploadRequest {
       to: urlPath,
       method: method,
       headers: headers,
-      requestModifier: { urlRequest in
-        urlRequest.timeoutInterval = timeoutInterval
-      }
-    )
+      timeoutInterval: timeoutInterval)
   }
 
   init(
