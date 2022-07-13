@@ -6,7 +6,7 @@
 //  Copyright © 2021 Smartech. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import Alamofire
 
 open class RGDownloadRequest {
