@@ -135,6 +135,14 @@ extension DataRequest {
 @available(iOS 13, *)
 extension DownloadRequest {
 
+  /// Creates a `DownloadTask` to `await` a `DownloadSerializingJSON` value.
+  /// - Parameters:
+  ///   - shouldAutomaticallyCancel: `Bool` determining whether or not the request should be cancelled when the enclosing async context is cancelled. Only applies to `DownloadTask`'s async properties. `false` by default.
+  ///   - dataPreprocessor: `DataPreprocessor` which processes the received `Data` before completion.
+  ///   - emptyResponseCodes: HTTP response codes for which empty responses are allowed. `[204, 205]` by default.
+  ///   - emptyRequestMethods: `HTTPMethod`s for which empty responses are always valid. `[.head]` by default.
+  ///   - additionalConfig: Set additional config using a `RGNetAdditionalConfig`. `.init(showIndicator: false, showLog: true)` by default.
+  /// - Returns: The `DownloadSerializingJSON`.
   public func serializingJSON(
     automaticallyCancelling shouldAutomaticallyCancel: Bool = false,
     dataPreprocessor: DataPreprocessor = DataResponseSerializer.defaultDataPreprocessor,
