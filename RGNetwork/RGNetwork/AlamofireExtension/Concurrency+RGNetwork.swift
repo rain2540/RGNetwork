@@ -192,6 +192,17 @@ extension DownloadRequest {
     }
   }
 
+  /// Creates a `DownloadTask` to `await` serialization of a `DownloadSerializingDecodable` value.
+  /// - Note: This serializer reads the entire response into memory before parsing.
+  /// - Parameters:
+  ///   - type: `Decodable` type to decode from response data.
+  ///   - shouldAutomaticallyCancel: `Bool` determining whether or not the request should be cancelled when the enclosing async context is cancelled. Only applies to `DownloadTask`'s async properties. `false` by default.
+  ///   - dataPreprocessor: `DataPreprocessor` which processes the received `Data` before calling the serializer. `PassthroughPreprocessor()` by default.
+  ///   - decoder: `DataDecoder` to use to decode the response. `JSONDecoder()` by default.
+  ///   - emptyResponseCodes: HTTP status codes for which empty responses are always valid. `[204, 205]` by default.
+  ///   - emptyRequestMethods: `HTTPMethod`s for which empty responses are always valid. `[.head]` by default.
+  ///   - additionalConfig: Set additional config using a `RGNetAdditionalConfig`. `.init(showIndicator: false, showLog: true)` by default.
+  /// - Returns: The `DownloadSerializingDecodable`.
   public func serializingDecodable<Value: Decodable>(
     of type: Value.Type = Value.self,
     automaticallyCancelling shouldAutomaticallyCancel: Bool = false,
