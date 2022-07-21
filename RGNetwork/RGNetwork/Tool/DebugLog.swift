@@ -14,8 +14,8 @@ internal func dLog(
   terminator: String = "\n",
   file: String = #file,
   method: String = #function,
-  line: Int = #line
-) {
+  line: Int = #line)
+{
 #if DEBUG
   print("\n/* ***** ***** ***** ***** ***** ***** */\n")
   print("\(URL(fileURLWithPath: file).lastPathComponent)[\(line)], \(method): \n")
