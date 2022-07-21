@@ -19,26 +19,84 @@ public typealias HttpStatusCode = Int
 
 // MARK: - Callback - Data Request - JSON
 
-public typealias RequestSuccess = (ResponseJSON?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponse<Data, AFError>) -> Void
-public typealias RequestFailure = (Error?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponse<Data, AFError>) -> Void
+public typealias RequestSuccess = (
+  ResponseJSON?,
+  ResponseString?,
+  ResponseData?,
+  HttpStatusCode?,
+  DataRequest,
+  DataResponse<Data, AFError>
+) -> Void
+public typealias RequestFailure = (
+  Error?,
+  ResponseString?,
+  ResponseData?,
+  HttpStatusCode?,
+  DataRequest,
+  DataResponse<Data, AFError>
+) -> Void
 
 
 // MARK: - Callback - Data Request - Decodable
 
-public typealias RequestDecodableSuccess<T: Decodable> = (T?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponse<T, AFError>) -> Void
-public typealias RequestDecodableFailure<T: Decodable> = (Error?, ResponseString?, ResponseData?, HttpStatusCode?, DataRequest, DataResponse<T, AFError>) -> Void
+public typealias RequestDecodableSuccess<T: Decodable> = (
+  T?,
+  ResponseString?,
+  ResponseData?,
+  HttpStatusCode?,
+  DataRequest,
+  DataResponse<T, AFError>
+) -> Void
+public typealias RequestDecodableFailure<T: Decodable> = (
+  Error?,
+  ResponseString?,
+  ResponseData?,
+  HttpStatusCode?,
+  DataRequest,
+  DataResponse<T, AFError>
+) -> Void
 
 
 // MARK: - Callback - Download Request - JSON
 
-public typealias DownloadSuccess = (ResponseJSON?, ResponseString?, ResponseData?, URL?, HttpStatusCode?, DownloadRequest, DownloadResponse<Data, AFError>) -> Void
-public typealias DownloadFailure = (Error?, ResponseString?, ResponseData?, HttpStatusCode?, DownloadRequest, DownloadResponse<Data, AFError>) -> Void
+public typealias DownloadSuccess = (
+  ResponseJSON?,
+  ResponseString?,
+  ResponseData?,
+  URL?,
+  HttpStatusCode?,
+  DownloadRequest,
+  DownloadResponse<Data, AFError>
+) -> Void
+public typealias DownloadFailure = (
+  Error?,
+  ResponseString?,
+  ResponseData?,
+  HttpStatusCode?,
+  DownloadRequest,
+  DownloadResponse<Data, AFError>
+) -> Void
 
 
 // MARK: - Callback - Download Request - Decodable
 
-public typealias DownloadDecodableSuccess<T: Decodable> = (T?, ResponseString?, ResponseData?, URL?, HttpStatusCode?, DownloadRequest, DownloadResponse<T, AFError>) -> Void
-public typealias DownloadDecodableFailure<T: Decodable> = (Error?, ResponseString?, ResponseData?, HttpStatusCode?, DownloadRequest, DownloadResponse<T, AFError>) -> Void
+public typealias DownloadDecodableSuccess<T: Decodable> = (
+  T?,
+  ResponseString?,
+  ResponseData?,
+  URL?,
+  HttpStatusCode?,
+  DownloadRequest,
+  DownloadResponse<T, AFError>
+) -> Void
+public typealias DownloadDecodableFailure<T: Decodable> = (
+  Error?,
+  ResponseString?,
+  ResponseData?,
+  HttpStatusCode?,
+  DownloadRequest,
+  DownloadResponse<T, AFError>
+) -> Void
 
 
 // MARK: - Concurrency - Data Request - JSON
