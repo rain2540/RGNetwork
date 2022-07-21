@@ -17,8 +17,8 @@ public struct RGNetworkIndicator {
   ///   - text: 显示的文字，默认为空
   public static func show(
     mode: MBProgressHUDMode = .indeterminate,
-    text: String = ""
-  ) {
+    text: String = "")
+  {
     DispatchQueue.rg_mainAsync {
       guard let window = UIApplication.shared.rg_keySceneWindow else { return }
       let hud = MBProgressHUD.showAdded(to: window, animated: true)
