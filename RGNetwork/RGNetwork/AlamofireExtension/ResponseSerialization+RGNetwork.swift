@@ -30,8 +30,9 @@ extension DataRequest {
     emptyRequestMethods: Set<HTTPMethod> = DataResponseSerializer.defaultEmptyRequestMethods,
     additionalConfig: RGNetAdditionalConfig = .init(),
     success: @escaping RequestSuccess,
-    failure: @escaping RequestFailure
-  ) -> Self {
+    failure: @escaping RequestFailure)
+  -> Self
+  {
     if additionalConfig.showIndicator == true {
       RGNetworkIndicator.show()
     }
@@ -101,8 +102,9 @@ extension DataRequest {
     emptyRequestMethods: Set<HTTPMethod> = DecodableResponseSerializer<T>.defaultEmptyRequestMethods,
     additionalConfig: RGNetAdditionalConfig = .init(),
     success: @escaping RequestDecodableSuccess<T>,
-    failure: @escaping RequestDecodableFailure<T>
-  ) -> Self {
+    failure: @escaping RequestDecodableFailure<T>)
+  -> Self
+  {
     if additionalConfig.showIndicator == true {
       RGNetworkIndicator.show()
     }
@@ -171,8 +173,9 @@ extension DownloadRequest {
     emptyRequestMethods: Set<HTTPMethod> = DataResponseSerializer.defaultEmptyRequestMethods,
     additionalConfig: RGNetAdditionalConfig = .init(),
     success: @escaping DownloadSuccess,
-    failure: @escaping DownloadFailure
-  ) -> Self {
+    failure: @escaping DownloadFailure)
+  -> Self
+  {
     if additionalConfig.showIndicator == true {
       RGNetworkIndicator.show()
     }
@@ -242,8 +245,9 @@ extension DownloadRequest {
     emptyRequestMethods: Set<HTTPMethod> = DecodableResponseSerializer<T>.defaultEmptyRequestMethods,
     additionalConfig: RGNetAdditionalConfig = .init(),
     success: @escaping DownloadDecodableSuccess<T>,
-    failure: @escaping DownloadDecodableFailure<T>
-  ) -> Self {
+    failure: @escaping DownloadDecodableFailure<T>)
+  -> Self
+  {
     if additionalConfig.showIndicator == true {
       RGNetworkIndicator.show()
     }
