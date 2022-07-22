@@ -32,8 +32,8 @@ open class RGDataRequest {
     parameters: Parameters? = nil,
     encoding: ParameterEncoding = URLEncoding.default,
     headers: HTTPHeaders? = nil,
-    timeoutInterval: TimeInterval = 30.0
-  ) {
+    timeoutInterval: TimeInterval = 30.0)
+  {
     let urlPath = RGURLHandler.urlPathString(by: urlString)
     self.dataRequest = AF.request(
       urlString: urlPath,
@@ -51,8 +51,8 @@ open class RGDataRequest {
     encoding: ParameterEncoding = URLEncoding.default,
     headers: HTTPHeaders? = nil,
     interceptor: RequestInterceptor? = nil,
-    requestModifier: Session.RequestModifier? = nil
-  ) {
+    requestModifier: Session.RequestModifier? = nil)
+  {
     let urlPath = RGURLHandler.urlPathString(by: urlString)
     self.dataRequest = AF.request(
       urlPath,
