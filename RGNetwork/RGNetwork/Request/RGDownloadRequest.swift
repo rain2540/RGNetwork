@@ -25,8 +25,8 @@ open class RGDownloadRequest {
     encoding: ParameterEncoding = URLEncoding.default,
     headers: HTTPHeaders? = nil,
     timeoutInterval: TimeInterval = 30.0,
-    destination: DownloadRequest.Destination? = nil
-  ) {
+    destination: DownloadRequest.Destination? = nil)
+  {
     let urlPath = RGURLHandler.urlPathString(by: urlString)
     self.downloadRequest = AF.download(
       urlString: urlPath,
@@ -46,8 +46,8 @@ open class RGDownloadRequest {
     headers: HTTPHeaders? = nil,
     interceptor: RequestInterceptor? = nil,
     requestModifier: Session.RequestModifier? = nil,
-    destination: DownloadRequest.Destination? = nil
-  ) {
+    destination: DownloadRequest.Destination? = nil)
+  {
     let urlPath = RGURLHandler.urlPathString(by: urlString)
     self.downloadRequest = AF.download(
       urlPath,
