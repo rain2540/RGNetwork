@@ -23,8 +23,8 @@ open class RGUploadRequest {
     method: HTTPMethod = .post,
     headers: HTTPHeaders? = nil,
     timeoutInterval: TimeInterval = 30.0,
-    multipartData: @escaping (MultipartFormData) -> Void
-  ) {
+    multipartData: @escaping (MultipartFormData) -> Void)
+  {
     let urlPath = RGURLHandler.urlPathString(by: urlString)
     self.uploadRequest = AF.upload(
       multipartFormData: multipartData,
@@ -42,8 +42,8 @@ open class RGUploadRequest {
     interceptor: RequestInterceptor? = nil,
     fileManager: FileManager = .default,
     requestModifier: Session.RequestModifier? = nil,
-    multipartFormData: @escaping (MultipartFormData) -> Void
-  ) {
+    multipartFormData: @escaping (MultipartFormData) -> Void)
+  {
     let urlPath = RGURLHandler.urlPathString(by: urlString)
     self.uploadRequest = AF.upload(
       multipartFormData: multipartFormData,
