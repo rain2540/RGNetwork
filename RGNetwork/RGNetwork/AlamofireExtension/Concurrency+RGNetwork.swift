@@ -26,8 +26,7 @@ extension DataRequest {
     dataPreprocessor: DataPreprocessor = DataResponseSerializer.defaultDataPreprocessor,
     emptyResponseCodes: Set<Int> = DataResponseSerializer.defaultEmptyResponseCodes,
     emptyRequestMethods: Set<HTTPMethod> = DataResponseSerializer.defaultEmptyRequestMethods,
-    additionalConfig: RGNetAdditionalConfig = .init())
-  async -> RequestSerializingJSON
+    additionalConfig: RGNetAdditionalConfig = .init()) async -> RequestSerializingJSON
   {
     if additionalConfig.showIndicator {
       RGNetworkIndicator.show()
@@ -88,8 +87,7 @@ extension DataRequest {
     decoder: DataDecoder = JSONDecoder(),
     emptyResponseCodes: Set<Int> = DecodableResponseSerializer<Value>.defaultEmptyResponseCodes,
     emptyRequestMethods: Set<HTTPMethod> = DecodableResponseSerializer<Value>.defaultEmptyRequestMethods,
-    additionalConfig: RGNetAdditionalConfig = .init())
-  async -> RequestSerializingDecodable<Value>
+    additionalConfig: RGNetAdditionalConfig = .init()) async -> RequestSerializingDecodable<Value>
   {
     if additionalConfig.showIndicator {
       RGNetworkIndicator.show()
@@ -150,8 +148,7 @@ extension DownloadRequest {
     dataPreprocessor: DataPreprocessor = DataResponseSerializer.defaultDataPreprocessor,
     emptyResponseCodes: Set<Int> = DataResponseSerializer.defaultEmptyResponseCodes,
     emptyRequestMethods: Set<HTTPMethod> = DataResponseSerializer.defaultEmptyRequestMethods,
-    additionalConfig: RGNetAdditionalConfig = .init())
-  async -> DownloadSerializingJSON
+    additionalConfig: RGNetAdditionalConfig = .init()) async -> DownloadSerializingJSON
   {
     if additionalConfig.showIndicator {
       RGNetworkIndicator.show()
@@ -213,8 +210,7 @@ extension DownloadRequest {
     decoder: DataDecoder = JSONDecoder(),
     emptyResponseCodes: Set<Int> = DecodableResponseSerializer<Value>.defaultEmptyResponseCodes,
     emptyRequestMethods: Set<HTTPMethod> = DecodableResponseSerializer<Value>.defaultEmptyRequestMethods,
-    additionalConfig: RGNetAdditionalConfig = .init())
-  async -> DownloadSerializingDecodable<Value>
+    additionalConfig: RGNetAdditionalConfig = .init()) async -> DownloadSerializingDecodable<Value>
   {
     if additionalConfig.showIndicator {
       RGNetworkIndicator.show()

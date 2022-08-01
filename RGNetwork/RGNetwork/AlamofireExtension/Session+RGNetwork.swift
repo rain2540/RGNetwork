@@ -17,8 +17,7 @@ extension Session {
     parameters: Parameters? = nil,
     encoding: ParameterEncoding = URLEncoding.default,
     headers: HTTPHeaders? = nil,
-    timeoutInterval: TimeInterval = 30.0)
-  -> DataRequest
+    timeoutInterval: TimeInterval = 30.0) -> DataRequest
   {
     let urlPath = RGURLHandler.urlPathString(by: urlString)
     let request = request(
@@ -38,8 +37,7 @@ extension Session {
     to urlString: String,
     method: HTTPMethod = .post,
     headers: HTTPHeaders? = nil,
-    timeoutInterval: TimeInterval = 30.0)
-  -> UploadRequest
+    timeoutInterval: TimeInterval = 30.0) -> UploadRequest
   {
     let urlPath = RGURLHandler.urlPathString(by: urlString)
     let request = upload(
@@ -60,8 +58,7 @@ extension Session {
     encoding: ParameterEncoding = URLEncoding.default,
     headers: HTTPHeaders? = nil,
     timeoutInterval: TimeInterval = 30.0,
-    destination: DownloadRequest.Destination? = nil)
-  -> DownloadRequest
+    destination: DownloadRequest.Destination? = nil) -> DownloadRequest
   {
     let urlPath = RGURLHandler.urlPathString(by: urlString)
     let request = download(
