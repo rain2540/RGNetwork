@@ -235,16 +235,14 @@ extension ViewController: UITableViewDataSource {
 
   func tableView(
     _ tableView: UITableView,
-    numberOfRowsInSection section: Int)
-  -> Int
+    numberOfRowsInSection section: Int) -> Int
   {
     return requestInfos.count
   }
 
   func tableView(
     _ tableView: UITableView,
-    cellForRowAt indexPath: IndexPath)
-  -> UITableViewCell
+    cellForRowAt indexPath: IndexPath) -> UITableViewCell
   {
     let cell = tableView.dequeueReusableCell(
       withIdentifier: CellIdentifier,
@@ -272,8 +270,7 @@ extension ViewController: UITableViewDelegate {
 
   func tableView(
     _ tableView: UITableView,
-    heightForRowAt indexPath: IndexPath)
-  -> CGFloat
+    heightForRowAt indexPath: IndexPath) -> CGFloat
   {
     return 44.0
   }
