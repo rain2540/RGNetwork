@@ -6,8 +6,8 @@
 //  Copyright © 2017年 Smartech. All rights reserved.
 //
 
-import UIKit
 import Alamofire
+import UIKit
 
 private let CellIdentifier = "DefaultCell"
 
