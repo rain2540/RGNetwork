@@ -1,15 +1,15 @@
 PODS:
-  - Alamofire (5.5.0)
+  - Alamofire (5.6.2)
   - MBProgressHUD (1.2.0)
 
 DEPENDENCIES:
-  - Alamofire (from `https://gitee.com/rain2540/Alamofire.git`, tag `5.5.0`)
+  - Alamofire (from `https://gitee.com/rain2540/Alamofire.git`, tag `5.6.2`)
   - MBProgressHUD (from `https://gitee.com/rain2540/MBProgressHUD.git`, tag `1.2.0`)
 
 EXTERNAL SOURCES:
   Alamofire:
     :git: https://gitee.com/rain2540/Alamofire.git
-    :tag: 5.5.0
+    :tag: 5.6.2
   MBProgressHUD:
     :git: https://gitee.com/rain2540/MBProgressHUD.git
     :tag: 1.2.0
@@ -17,15 +17,15 @@ EXTERNAL SOURCES:
 CHECKOUT OPTIONS:
   Alamofire:
     :git: https://gitee.com/rain2540/Alamofire.git
-    :tag: 5.5.0
+    :tag: 5.6.2
   MBProgressHUD:
     :git: https://gitee.com/rain2540/MBProgressHUD.git
     :tag: 1.2.0
 
 SPEC CHECKSUMS:
-  Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
+  Alamofire: d368e1ff8a298e6dde360e35a3e68e6c610e7204
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
 
-PODFILE CHECKSUM: f94fbee6b2c528684e447d5f49ec7b39f895db9b
+PODFILE CHECKSUM: cd7e73ddc4655de8ffe5396088b18b67298d06c3
 
 COCOAPODS: 1.11.3
