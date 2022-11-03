@@ -6,8 +6,8 @@
 //  Copyright © 2022 Smartech. All rights reserved.
 //
 
-import UIKit
 import MBProgressHUD
+import UIKit
 
 public struct RGNetworkIndicator {
 
