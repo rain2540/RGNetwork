@@ -6,8 +6,8 @@
 //  Copyright © 2016年 Smartech. All rights reserved.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 
 // MARK: Basic
 
