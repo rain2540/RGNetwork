@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 /// 错误类型
 /// - wrongURLFormat : 错误的 URL 格式
 enum RGNetworkError: Error {
