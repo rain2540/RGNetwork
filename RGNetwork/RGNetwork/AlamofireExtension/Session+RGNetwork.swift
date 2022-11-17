@@ -6,8 +6,8 @@
 //  Copyright © 2022 Smartech. All rights reserved.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 
 extension Session {
 
